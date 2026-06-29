@@ -95,7 +95,7 @@
   color: var(--color-off-white-muted);
   line-height: 1.6;
   max-width: 800px; /* Allowed to span slightly wider */
-  margin-bottom: 40px; /* Reduced by 10% (from 48px) */
+  margin-bottom: 24px; /* Reduced margin to bring buttons closer */
 }
 
 /* CTAs Row alignment */
