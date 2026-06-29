@@ -127,3 +127,11 @@ html.lenis body {
   font-weight: 400;
   line-height: var(--line-height-tight);
 }
+
+/* Fixed Header Scroll Offset (ensures text doesn't load behind header) */
+section[id],
+[id="about"],
+[id="services-overview"],
+[id="home"] {
+  scroll-margin-top: 96px; /* 80px header height + 16px safety margin */
+}
