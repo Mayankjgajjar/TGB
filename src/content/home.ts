@@ -69,15 +69,20 @@ export interface TGBLeader {
 
 export interface TGBStandardSection {
   intro: {
-    label: string;
-    title: string;
-    subtitle: string;
-    splitLabel: string;
-    splitTitle: string;
-    splitSubtitle: string;
-    splitSubtitle2: string;
+    eyebrowStory: string;
+    headingStory: string;
+    subheadingStory: string;
+    eyebrowWho: string;
+    headingWho: string;
+    paragraph1: string;
+    paragraph2: string;
+    paragraph3: string;
+    closingStatement: string;
     image: string;
     metrics: { value: string; label: string }[];
+    featuredClientsTitle: string;
+    featuredClients: string[];
+    trustBadges: string[];
   };
   label: string;
   title: string;
@@ -105,20 +110,36 @@ export const homeContent = {
 
   identity: {
     intro: {
-      label: "WHO WE ARE",
-      title: "Building identities that businesses are proud to put their name on. We engineer premium, high-impact\nsignage that commands attention and transforms your physical space into a landmark.",
-      subtitle: "TGB Enterprise is a premier sign board manufacturer in Ahmedabad, specializing in high-impact business signage. We craft premium sign boards designed to elevate your brand visibility and attract more customers.",
-      splitLabel: "ESTABLISHED IN 2012",
-      splitTitle: "We create the physical identity of businesses.",
-      splitSubtitle: "Our expert team delivers 100% design fidelity across our manufacturing lineup, including heavy-duty ACP sign boards, custom LED sign boards, vibrant 3D acrylic letters, and eye-catching storefront neon signs.",
-      splitSubtitle2: "Whether you need a glowing glow sign board, precise glass frosting, or vehicle vinyl wraps, we build durable, visually striking solutions. Partner with Ahmedabad’s trusted local sign makers to boost your presence today!",
-      // Placeholder for a real installation photo. Unsplash URL showing industrial/architectural signage work.
+      eyebrowStory: "OUR STORY",
+      headingStory: "We Build Visibility for Businesses Across India.",
+      subheadingStory: "Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.",
+      eyebrowWho: "WHO WE ARE",
+      headingWho: "More Than Signage.\nA Partner in Building Brand Presence.",
+      paragraph1: "TGB Enterprise is a premium signage manufacturer based in Ahmedabad, Gujarat, delivering custom signage solutions for businesses across India. From retail storefronts and corporate offices to hospitality and commercial spaces, we create signage that combines creativity, craftsmanship, and durability.",
+      paragraph2: "Our expertise spans LED sign boards, ACP sign boards, acrylic signage, 3D letter signages, neon signs, wayfinding systems, and complete branding solutions—designed and manufactured with uncompromising attention to detail.",
+      paragraph3: "What truly sets us apart is our commitment beyond installation. We believe exceptional signage deserves exceptional support, which is why we provide dependable after-sales service and long-term partnerships with every client we serve.",
+      closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
       image: "/assets/images/who_we_are.png",
       metrics: [
-        { value: "12+", label: "Years of Experience" },
-        { value: "100%", label: "In-House Production" },
-        { value: "5 Year", label: "Warranty" },
-        { value: "500+", label: "Projects Delivered" }
+        { value: "100+", label: "Projects Delivered" },
+        { value: "5+", label: "Major Cities Served" },
+        { value: "Pan India", label: "Service Capability" },
+        { value: "100%", label: "Customer Commitment" }
+      ],
+      featuredClientsTitle: "Trusted by Growing Businesses and Established Brands",
+      featuredClients: [
+        "Speranza Legal Associates",
+        "Speranza Tiles",
+        "Grey Eminence",
+        "Infinity AV Solution"
+      ],
+      trustBadges: [
+        "Premium Materials",
+        "Custom Design Solutions",
+        "Professional Manufacturing & Installation",
+        "Reliable After-Sales Support",
+        "Customer-First Approach",
+        "Pan India Service"
       ]
     },
     label: "",

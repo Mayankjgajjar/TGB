@@ -33,17 +33,49 @@
 /* ============================================================
    ZONE 0 — WHO WE ARE (INTRO)
    ============================================================ */
+/* ============================================================
+   ZONE 0 — ABOUT / WHO WE ARE (INTRO)
+   ============================================================ */
 .introSection {
-  margin-bottom: 120px; /* Massive space before TGB Standards */
+  margin-bottom: 140px; /* Generous separation before the next zone */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+}
+
+/* TOP HEADER */
+.introTopHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 900px;
+  margin-bottom: var(--space-16);
+}
+
+.introEyebrow {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper-light);
+  display: inline-block;
 }
 
 .introTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-off-white);
+  letter-spacing: -0.015em;
+}
+
+.introSubheading {
   font-family: var(--font-primary);
-  font-size: 21px;
+  font-size: var(--font-size-md);
   line-height: 1.6;
   color: var(--color-off-white-muted);
-  max-width: 680px;
-  margin-bottom: 24px;
 }
 
 /* Split Layout */
@@ -51,7 +83,7 @@
   display: grid;
   grid-template-columns: 45fr 55fr;
   gap: 80px;
-  align-items: stretch; /* Stretches both columns to equal height */
+  align-items: stretch;
 }
 
 @media (max-width: 960px) {
@@ -59,112 +91,245 @@
     grid-template-columns: 1fr;
     gap: 48px;
   }
-  .introContentCol {
-    padding: 24px;
-  }
 }
 
 /* Left Image Column */
 .introImageCol {
   width: 100%;
-  display: flex;
   height: 100%;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
 }
 
 .introImage {
+  position: absolute;
+  top: -10%;
+  left: 0;
   width: 100%;
-  height: 100%; /* Automatically scales to match content height */
-  min-height: 500px; /* Fallback for mobile */
-  border-radius: 16px;
+  height: 120%; /* Taller to allow parallax translation without gaps */
   background-size: cover;
   background-position: center;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-medium);
+}
+
+.introImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.75) 0%, transparent 50%);
+  pointer-events: none;
+  border-radius: 28px;
 }
 
 /* Right Content Column */
 .introContentCol {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  
-  /* Premium Solid Container */
-  background: #0A0A0A;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.7); /* Dark premium glassmorphic card background */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 48px;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+  padding: var(--space-48);
+  box-shadow: var(--shadow-medium);
+}
+
+@media (max-width: 600px) {
+  .introContentCol {
+    padding: var(--space-24);
+  }
 }
 
 .introTextWrapper {
-  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
 }
 
-.introSplitSubtitle {
+.whoTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-off-white);
+  letter-spacing: -0.01em;
+}
+
+.introPara {
   font-family: var(--font-primary);
-  font-size: 17px;
-  line-height: 1.7;
-  color: #a0a0a0;
-  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244, 241, 234, 0.65);
 }
 
-.introSplitDivider {
-  width: 100%;
-  height: 1px;
-  background: var(--color-steel-dark);
-  margin-bottom: 40px;
+.closingStatement {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--color-off-white);
+  border-left: 2px solid var(--color-copper);
+  padding-left: var(--space-16);
+  margin-top: var(--space-8);
 }
 
-/* Metrics Grid */
-.metricsGrid {
+/* STATISTICS SECTION & GRID */
+.statsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.statsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px; /* Elegant breathing room */
-  margin-top: 16px;
+  gap: var(--space-24);
 }
 
-@media (max-width: 520px) {
-  .metricsGrid {
+@media (max-width: 600px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+}
+
+.statCard {
+  background: #0B0B0B;
+  border: 1px solid #1A1A1A;
+  border-radius: 20px;
+  padding: var(--space-32);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  transition: transform 400ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 400ms ease,
+              box-shadow 400ms ease;
+  cursor: default;
+}
+
+.statCard:hover {
+  transform: translateY(-6px) scale(1.03);
+  border-color: rgba(139, 0, 0, 0.4);
+  box-shadow: 0 12px 32px rgba(139, 0, 0, 0.15); /* Soft Red glow shadow */
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--color-off-white);
+}
+
+.statLabel {
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  color: var(--color-off-white-muted);
+  letter-spacing: 0.5px;
+}
+
+/* FEATURED CLIENTS */
+.clientsSection {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: var(--space-48);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  align-items: center;
+}
+
+.clientsTitle {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--color-off-white);
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.clientsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-24);
+  width: 100%;
+}
+
+.clientItem {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(244, 241, 234, 0.45);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 14px 28px;
+  border-radius: 8px;
+  transition: all 300ms ease;
+  cursor: default;
+}
+
+.clientItem:hover {
+  color: var(--color-off-white);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* TRUST BADGES */
+.trustBadgesSection {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding-top: var(--space-48);
+}
+
+.trustBadgesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-16);
+}
+
+@media (max-width: 600px) {
+  .trustBadgesGrid {
     grid-template-columns: 1fr;
   }
 }
 
-.metricCard {
-  background: #050505; /* Level 1 Solid */
+.badgeCard {
+  background: rgba(255, 255, 255, 0.01);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px; /* Smoother corners */
-  padding: 24px; /* Generous internal breathing space */
+  border-radius: 12px;
+  padding: var(--space-16) var(--space-24);
   display: flex;
-  flex-direction: column;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  align-items: center;
+  gap: var(--space-16);
+  transition: all 300ms ease;
   cursor: default;
 }
 
-.metricCard:hover {
-  transform: scale(1.005);
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #111111; /* Level 3 Solid */
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+.badgeCard:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
-.metricValue {
-  font-family: var(--font-display);
-  font-size: 32px; /* Perfect middle ground */
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 8px; /* Restored spacing */
-  transition: color 0.3s ease;
+.badgeIcon {
+  color: var(--color-copper-light);
+  font-weight: bold;
+  font-size: 15px;
 }
 
-.metricCard:hover .metricValue {
-  color: #FFFFFF; /* Brightens on hover */
-}
-
-.metricLabel {
+.badgeText {
   font-family: var(--font-primary);
-  font-size: 12px;
+  font-size: 13.5px;
   color: var(--color-off-white-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 500;
+  transition: color 300ms ease;
+}
+
+.badgeCard:hover .badgeText {
+  color: var(--color-off-white);
 }
 
 @media (max-width: 768px) {

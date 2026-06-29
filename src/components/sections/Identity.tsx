@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Lightbulb, Sun, Factory, ShieldCheck,
   Zap, Layers, Flame, Type, Bold, Home, Triangle,
@@ -53,17 +53,24 @@ const cardVariant = {
 // ── Component ────────────────────────────────────────────────
 export const Identity: React.FC = () => {
   const identity = homeContent.identity as TGBStandardSection;
-  const { intro, label, title, subtitle, capabilitiesLabel, capabilities, standards } = identity;
+  const { intro, label, title, subtitle, capabilities, standards } = identity;
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' });
+
+  // Parallax Scroll calculations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  const yBg = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <section id="about" className={styles.section} ref={sectionRef}>
       <div className={styles.inner}>
 
         {/* ══════════════════════════════════════════
-            ZONE 0 — WHO WE ARE (INTRODUCTION)
+            ZONE 0 — ABOUT / WHO WE ARE
         ══════════════════════════════════════════ */}
         <motion.div 
           className={styles.introSection}
@@ -71,50 +78,101 @@ export const Identity: React.FC = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {/* Centered Header matching other sections */}
-          <motion.div className={styles.headerBlock} variants={fadeUp}>
-            <div className={styles.titleBlock}>
-              <h2 className={styles.mainTitle}>{intro.label}</h2>
-              <p className={styles.subtitle}>
-                {intro.title.split('\n').map((line, i, arr) => (
-                  <React.Fragment key={i}>
-                    {line}
-                    {i < arr.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </p>
-            </div>
+          {/* TOP HEADER */}
+          <motion.div className={styles.introTopHeader} variants={fadeUp}>
+            <span className={styles.introEyebrow}>{intro.eyebrowStory}</span>
+            <h2 className={styles.introTitle}>{intro.headingStory}</h2>
+            <p className={styles.introSubheading}>{intro.subheadingStory}</p>
           </motion.div>
 
-          {/* Split Layout: Image (Left) + Content (Right) */}
+          {/* TWO-COLUMN SPLIT */}
           <div className={styles.introSplit}>
+            {/* Left Column: Image with parallax effect */}
             <motion.div className={styles.introImageCol} variants={fadeUp}>
-              <div 
+              <motion.div 
                 className={styles.introImage} 
-                style={{ backgroundImage: `url(${intro.image})` }} 
-              />
+                style={{ 
+                  y: yBg,
+                  backgroundImage: `url(${intro.image})` 
+                }}
+              >
+                <div className={styles.introImageOverlay} />
+              </motion.div>
             </motion.div>
-            
+
+            {/* Right Column: Story Text */}
             <motion.div className={styles.introContentCol} variants={fadeUp}>
               <div className={styles.introTextWrapper}>
-                <p className={styles.introSplitSubtitle}>{intro.subtitle}</p>
-                <p className={styles.introSplitSubtitle}>{intro.splitSubtitle}</p>
-                <p className={styles.introSplitSubtitle}>{intro.splitSubtitle2}</p>
-              </div>
-
-              <div className={styles.metricsGrid}>
-                {intro.metrics.map((metric, i) => (
-                  <motion.div 
-                    key={i} 
-                    className={styles.metricCard}
-                    variants={fadeUp}
-                  >
-                    <span className={styles.metricValue}>{metric.value}</span>
-                    <span className={styles.metricLabel}>{metric.label}</span>
-                  </motion.div>
-                ))}
+                <span className={styles.introEyebrow}>{intro.eyebrowWho}</span>
+                <h3 className={styles.whoTitle}>
+                  {intro.headingWho.split('\n').map((line, i, arr) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </h3>
+                <p className={styles.introPara}>{intro.paragraph1}</p>
+                <p className={styles.introPara}>{intro.paragraph2}</p>
+                <p className={styles.introPara}>{intro.paragraph3}</p>
+                <p className={styles.closingStatement}>
+                  {intro.closingStatement.split('\n').map((line, i, arr) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </p>
               </div>
             </motion.div>
+          </div>
+
+          {/* STATISTICS GRID */}
+          <div className={styles.statsSection}>
+            <div className={styles.statsGrid}>
+              {intro.metrics.map((metric, i) => (
+                <motion.div 
+                  key={i} 
+                  className={styles.statCard}
+                  variants={cardVariant}
+                  whileHover={{ y: -6, scale: 1.03 }}
+                >
+                  <span className={styles.statValue}>{metric.value}</span>
+                  <span className={styles.statLabel}>{metric.label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* FEATURED CLIENTS */}
+          <div className={styles.clientsSection}>
+            <h4 className={styles.clientsTitle}>{intro.featuredClientsTitle}</h4>
+            <div className={styles.clientsList}>
+              {intro.featuredClients.map((client, i) => (
+                <span key={i} className={styles.clientItem}>
+                  {client}
+                </span>
+              ))}
+              <span className={styles.clientItem}>
+                And many more...
+              </span>
+            </div>
+          </div>
+
+          {/* TRUST BADGES */}
+          <div className={styles.trustBadgesSection}>
+            <div className={styles.trustBadgesGrid}>
+              {intro.trustBadges.map((badge, i) => (
+                <motion.div 
+                  key={i} 
+                  className={styles.badgeCard}
+                  variants={cardVariant}
+                >
+                  <span className={styles.badgeIcon}>✓</span>
+                  <span className={styles.badgeText}>{badge}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </motion.div>
 
