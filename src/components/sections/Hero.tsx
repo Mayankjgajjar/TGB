@@ -147,6 +147,21 @@ export const Hero: React.FC = () => {
                 View Projects
               </Button>
             </motion.div>
+
+            <motion.div variants={fadeUp} className={styles.ticksRow}>
+              <span className={styles.tickItem}>
+                <span className={styles.tickIcon}>✓</span> Design
+              </span>
+              <span className={styles.tickItem}>
+                <span className={styles.tickIcon}>✓</span> Manufacturing
+              </span>
+              <span className={styles.tickItem}>
+                <span className={styles.tickIcon}>✓</span> Installation
+              </span>
+              <span className={styles.tickItem}>
+                <span className={styles.tickIcon}>✓</span> After-Sales Service
+              </span>
+            </motion.div>
           </motion.div>
         </Container>
       </div>
