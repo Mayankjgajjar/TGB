@@ -165,19 +165,36 @@ export const Identity: React.FC = () => {
             </div>
           </div>
 
-          {/* TRUST BADGES */}
+          {/* WHY BUSINESSES TRUST TGB */}
           <div className={styles.trustBadgesSection}>
-            <div className={styles.trustBadgesGrid}>
-              {intro.trustBadges.map((badge, i) => (
-                <motion.div 
-                  key={i} 
-                  className={styles.badgeCard}
-                  variants={cardVariant}
-                >
-                  <span className={styles.badgeIcon}>✓</span>
-                  <span className={styles.badgeText}>{badge}</span>
-                </motion.div>
-              ))}
+            <div className={styles.trustSectionHeader}>
+              <h4 className={styles.trustTitle}>{identity.trustTitle}</h4>
+              <p className={styles.trustSubtitle}>{identity.trustSubtitle}</p>
+            </div>
+            <div className={styles.featureGrid}>
+              {standards.map((standard) => {
+                const Icon = ICON_MAP[standard.icon] || Zap;
+                return (
+                  <motion.div
+                    key={standard.number}
+                    className={styles.featureCard}
+                    variants={fadeUp}
+                    whileHover={{ y: -6, scale: 1.02 }}
+                  >
+                    <div className={styles.featureIconWrapper}>
+                      <Icon className={styles.featureIcon} strokeWidth={1.25} />
+                    </div>
+                    
+                    <div className={styles.featureCategory}>{standard.category}</div>
+                    <h3 className={styles.featureTitle}>{standard.title}</h3>
+                    <p className={styles.featureDescription}>{standard.description}</p>
+                    
+                    <div className={styles.featureTechLabel}>
+                      {standard.techLabel}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </motion.div>
@@ -238,61 +255,7 @@ export const Identity: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* ══════════════════════════════════════════
-            ZONE 3 — HORIZONTAL EDITORIAL STORY
-        ══════════════════════════════════════════ */}
-        <div>
-          {/* Intro block */}
-          <motion.div
-            className={styles.headerBlock}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-          >
-            <div className={styles.titleBlock}>
-              <h2 className={styles.mainTitle}>
-                {identity.trustTitle.split('\n').map((line, i, arr) => (
-                  <React.Fragment key={i}>
-                    {line}
-                    {i < arr.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </h2>
-              <p className={styles.subtitle}>{identity.trustSubtitle}</p>
-            </div>
-          </motion.div>
 
-          {/* 2x2 Feature Grid */}
-          <motion.div
-            className={styles.featureGrid}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {standards.map((standard) => {
-              const Icon = ICON_MAP[standard.icon] || Zap;
-              return (
-                <motion.div
-                  key={standard.number}
-                  className={styles.featureCard}
-                  variants={fadeUp}
-                >
-                  <div className={styles.featureIconWrapper}>
-                    <Icon className={styles.featureIcon} strokeWidth={1.25} />
-                  </div>
-                  
-                  <div className={styles.featureCategory}>{standard.category}</div>
-                  <h3 className={styles.featureTitle}>{standard.title}</h3>
-                  <p className={styles.featureDescription}>{standard.description}</p>
-                  
-                  <div className={styles.featureTechLabel}>
-                    {standard.techLabel}
-                  </div>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
 
       </div>
 

@@ -342,51 +342,29 @@
   padding-top: var(--space-48);
 }
 
-.trustBadgesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-16);
-}
-
-@media (max-width: 600px) {
-  .trustBadgesGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.badgeCard {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: var(--space-16) var(--space-24);
+.trustSectionHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  margin-bottom: var(--space-48);
   gap: var(--space-16);
-  transition: all 300ms ease;
-  cursor: default;
 }
 
-.badgeCard:hover {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.badgeIcon {
-  color: var(--color-copper-light);
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.badgeText {
-  font-family: var(--font-primary);
-  font-size: 13.5px;
-  color: var(--color-off-white-muted);
-  font-weight: 500;
-  transition: color 300ms ease;
-}
-
-.badgeCard:hover .badgeText {
+.trustTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-weight: 400;
   color: var(--color-off-white);
+  letter-spacing: -0.01em;
+}
+
+.trustSubtitle {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-off-white-muted);
+  max-width: 800px;
 }
 
 @media (max-width: 768px) {
@@ -632,7 +610,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   max-width: 1360px;
-  margin: 0 auto 140px; /* Massive architectural spacing before Leadership */
+  margin: 0 auto; /* Removed the 140px bottom margin */
 }
 
 @media (max-width: 1100px) {
