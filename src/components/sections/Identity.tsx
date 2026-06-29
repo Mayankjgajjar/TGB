@@ -145,15 +145,23 @@ export const Identity: React.FC = () => {
           {/* FEATURED CLIENTS */}
           <div className={styles.clientsSection}>
             <h4 className={styles.clientsTitle}>{intro.featuredClientsTitle}</h4>
-            <div className={styles.clientsList}>
-              {intro.featuredClients.map((client, i) => (
-                <span key={i} className={styles.clientItem}>
-                  {client}
-                </span>
-              ))}
-              <span className={styles.clientItem}>
-                And many more...
-              </span>
+            <div className={styles.sliderContainer}>
+              <div className={styles.marqueeTrack}>
+                {[
+                  ...intro.featuredClients,
+                  "And many more...",
+                  ...intro.featuredClients,
+                  "And many more...",
+                  ...intro.featuredClients,
+                  "And many more...",
+                  ...intro.featuredClients,
+                  "And many more..."
+                ].map((client, i) => (
+                  <span key={i} className={styles.clientItem}>
+                    {client}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
