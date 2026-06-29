@@ -242,61 +242,7 @@ export const Identity: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* ══════════════════════════════════════════
-            ZONE 1 — SECTION HEADER
-        ══════════════════════════════════════════ */}
-        <motion.div
-          className={styles.headerBlock}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >          <motion.div className={styles.titleBlock} variants={fadeUp}>
-            <h2 className={styles.mainTitle}>
-              {title.split('\n').map((line, i, arr) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i < arr.length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h2>
-            <p className={styles.subtitle}>{subtitle}</p>
-          </motion.div>
-        </motion.div>
 
-        {/* ══════════════════════════════════════════
-            ZONE 2 — SERVICE CARDS (4×2 Grid)
-        ══════════════════════════════════════════ */}
-        <div className={styles.capabilitiesSection}>
-
-          <motion.div
-            className={styles.capabilitiesGrid}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {capabilities.map((cap) => {
-              const Icon = ICON_MAP[cap.icon] ?? Zap;
-              return (
-                <motion.div
-                  key={cap.number}
-                  className={styles.serviceCard}
-                  variants={cardVariant}
-                >
-                  <span className={styles.serviceNum}>{cap.number}</span>
-                  
-                  <div className={styles.serviceHeader}>
-                    <div className={styles.serviceIcon}>
-                      <Icon size={17} strokeWidth={1.5} />
-                    </div>
-                    <span className={styles.serviceName}>{cap.name}</span>
-                  </div>
-
-                  <p className={styles.serviceDesc}>{cap.description}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
 
 
 
