@@ -1,0 +1,141 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px; /* Comfortable height */
+  z-index: var(--z-index-navbar);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* Fine, high-precision hairline */
+  background: rgba(5, 5, 5, 0.92); /* Solid matte background per premium refinement */
+  backdrop-filter: none; /* Removed SaaS glass effect */
+  transition: all var(--transition-speed-normal) var(--transition-ease-expo);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Left Brand Logo Cell (36px height fits viewBox ratio perfectly) */
+.logoLink {
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
+
+.logoImage {
+  height: 100%;
+  width: auto;
+}
+
+/* Middle Navigation Links */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.navLink {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(244, 241, 234, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: var(--space-8) var(--space-12);
+  position: relative; /* Anchor for custom underline hairline */
+  transition: color var(--transition-speed-fast) var(--transition-ease-expo);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px; /* Matches horizontal link padding */
+  right: 12px; /* Matches horizontal link padding */
+  height: 1.5px;
+  background-color: var(--color-off-white); /* Solid off-white hover underline */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover {
+  color: var(--color-off-white);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Active Nav State - Permanent white underline line */
+.activeNavLink {
+  color: var(--color-off-white);
+  font-weight: 600;
+}
+
+.activeNavLink::after {
+  transform: scaleX(1) !important;
+  background-color: var(--color-off-white) !important;
+  transition: none !important; /* Disable transition on active toggle to prevent scrollspy sliding */
+}
+
+/* Right Actions */
+.rightActions {
+  display: flex;
+  align-items: center;
+}
+
+.quoteButton {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: #F4F1EA;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  height: 48px;
+  padding: 0 22px; /* Tighter padding to resolve side-space issues */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Precise, tight spacing with dot & text */
+  line-height: 1;
+  box-sizing: border-box;
+  transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover: Premium outline focus state with white border highlights */
+.quoteButton:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  /* Removed floating translation for grounded feel */
+}
+
+.quoteButton:active {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Arrow transition */
+.btnArrow {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
+  margin-left: 2px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.quoteButton:hover .btnArrow {
+  transform: translateX(4px);
+}

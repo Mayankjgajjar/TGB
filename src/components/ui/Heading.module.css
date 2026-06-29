@@ -1,0 +1,42 @@
+.heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.01em;
+}
+
+/* Sizing steps */
+.h1 {
+  font-size: var(--font-size-2xl);
+}
+
+.h2 {
+  font-size: var(--font-size-xl);
+}
+
+.h3 {
+  font-size: var(--font-size-lg);
+}
+
+.h4 {
+  font-size: var(--font-size-md);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.display {
+  font-size: var(--font-size-display);
+}
+
+/* Colors */
+.colorOffWhite { color: var(--color-off-white); }
+.colorCopper { color: var(--color-copper); }
+.colorSteel { color: var(--color-steel); }
+
+@media (min-width: 768px) {
+  .h1 { font-size: var(--font-size-3xl); }
+  .h2 { font-size: var(--font-size-2xl); }
+  .h3 { font-size: var(--font-size-xl); }
+}

@@ -1,0 +1,135 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: var(--radius-subtle);
+  transition: all var(--transition-speed-normal) var(--transition-ease-expo);
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Icon / Detail spacing */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--space-12);
+  transition: transform var(--transition-speed-fast) var(--transition-ease-expo);
+}
+
+.technicalDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-off-white); /* White dot for high contrast on red gradient */
+  margin-right: var(--space-8);
+  animation: techDotBlink 2.2s infinite ease-in-out;
+}
+
+@keyframes techDotBlink {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+/* Sizes */
+.sizeNormal {
+  height: 44px;
+  padding: 0 24px;
+  font-size: 11px;
+}
+
+.sizeLarge {
+  height: 50px;
+  padding: 0 32px;
+  font-size: 12px;
+}
+
+/* Variants */
+.variantPrimary {
+  background: linear-gradient(180deg, #a60000 0%, #8b0000 100%); /* Premium anodized red gradient */
+  color: var(--color-off-white);
+  border: 1px solid #a60000;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.15);
+}
+
+.variantPrimary:hover {
+  background: linear-gradient(180deg, #b90000 0%, #9c0000 100%); /* Lighter metallic red hover reflection */
+  border-color: #b90000;
+  color: var(--color-off-white);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(139, 0, 0, 0.3);
+}
+
+.variantSecondary {
+  background-color: transparent;
+  color: var(--color-off-white);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.variantSecondary:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateY(-1.5px);
+}
+
+.variantTechnical {
+  font-family: var(--font-technical);
+  font-size: var(--font-size-xs);
+  color: var(--color-steel);
+  border: 1px solid var(--color-steel-dark);
+  background-color: var(--color-charcoal-deep);
+}
+
+.variantTechnical:hover {
+  color: var(--color-copper-light);
+  border-color: var(--color-steel);
+  background-color: var(--color-charcoal-surface);
+}
+
+.variantTechnical:hover .iconWrapper {
+  transform: translateX(4px);
+}
+
+/* Disabled State */
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Blueprint corner details for extreme premium feel */
+.blueprintCorner {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-color: var(--color-copper);
+  border-style: solid;
+  opacity: 0;
+  transition: opacity var(--transition-speed-normal) var(--transition-ease-expo);
+}
+
+.cornerTL { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.cornerTR { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.cornerBL { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.cornerBR { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+.variantSecondary:hover .blueprintCorner {
+  opacity: 1;
+}
+.variantTechnical:hover .blueprintCorner {
+  opacity: 1;
+}
