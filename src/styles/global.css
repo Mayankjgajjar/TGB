@@ -1,7 +1,7 @@
 @import './tokens.css';
 @import './reset.css';
 
-/* Global Styles */
+/* Global Styles & Typography resets */
 body {
   background-color: var(--color-charcoal-deep);
   color: var(--color-off-white);
@@ -9,6 +9,31 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   overflow-x: hidden;
+}
+
+/* Typographic Defaults for consistent styling */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-off-white);
+  margin-top: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  letter-spacing: 0.5px;
+}
+
+p {
+  color: var(--color-off-white-muted);
+  line-height: var(--line-height-normal);
 }
 
 /* Scoped to long-form narrative blocks only — avoids word rivers on chips/labels */
