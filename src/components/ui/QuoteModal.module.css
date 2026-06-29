@@ -1,0 +1,199 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(5, 5, 5, 0.85); /* Premium matte backdrop */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-32);
+}
+
+.modalContent {
+  position: relative;
+  width: 100%;
+  max-width: 580px; /* Spacious, wide proportions */
+  background-color: var(--color-charcoal-surface); /* Deep Charcoal #111111 */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-card); /* 16px soft curve */
+  /* Balanced internal paddings */
+  padding: 56px 48px 48px 48px; 
+  box-shadow: var(--shadow-medium);
+  box-sizing: border-box;
+}
+
+/* Close Icon Button */
+.closeBtn {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  color: var(--color-off-white-muted);
+  padding: var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-speed-fast) var(--transition-ease-expo);
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  color: var(--color-off-white);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg);
+}
+
+/* Technical category label (Deep Red) */
+.portalTag {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-copper); /* Deep Red #8B0000 */
+  letter-spacing: 2.5px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Editorial display serif title */
+.title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--color-off-white);
+  letter-spacing: -0.8px;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+/* Narrative copy */
+.description {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--color-off-white-muted);
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+}
+
+/* Action stack layout */
+.actionStack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Base button properties for unified transparent outline option rows */
+.outlineOption {
+  width: 100%;
+  height: 54px;
+  padding: 0 var(--space-24);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  background-color: transparent; /* Always transparent */
+  color: var(--color-off-white);
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Default thin border */
+  border-radius: var(--radius-sharp); /* Soft curved 8px radius */
+  transition: border-color var(--transition-speed-fast) var(--transition-ease-expo),
+              transform var(--transition-speed-fast) var(--transition-ease-expo),
+              box-shadow var(--transition-speed-fast) var(--transition-ease-expo);
+  box-sizing: border-box;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.optionIcon {
+  display: flex;
+  align-items: center;
+  color: var(--color-off-white-muted);
+  transition: color var(--transition-speed-fast) var(--transition-ease-expo);
+}
+
+/* 1. Builder Option Hover - Red highlight border, no background fill */
+.builderOption:hover {
+  border-color: var(--color-copper); /* Deep Red */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.15);
+}
+
+.arrow {
+  color: var(--color-off-white-muted);
+  transition: transform var(--transition-speed-fast) var(--transition-ease-expo), color var(--transition-speed-fast) var(--transition-ease-expo);
+}
+
+.builderOption:hover .arrow {
+  transform: translateX(4px);
+  color: var(--color-off-white);
+}
+
+/* 2. WhatsApp Option Hover - Green highlight border, no background fill */
+.whatsappColor {
+  color: #00a884; /* Soft green */
+}
+
+.whatsappOption:hover {
+  border-color: #00a884; /* WhatsApp green */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 168, 132, 0.1);
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #00a884;
+  box-shadow: 0 0 8px rgba(0, 168, 132, 0.8);
+  transition: transform var(--transition-speed-fast) var(--transition-ease-expo);
+}
+
+.whatsappOption:hover .statusDot {
+  transform: scale(1.2);
+}
+
+/* 3. Hotline Option Hover - White highlight border, no background fill */
+.hotlineOption:hover {
+  border-color: var(--color-off-white); /* Pure white */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.05);
+}
+
+/* Clean, balanced response metadata row */
+.footerInfo {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  font-family: var(--font-technical);
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--color-steel);
+  letter-spacing: 1.5px;
+}
+
+.clockIcon {
+  display: flex;
+  align-items: center;
+  color: var(--color-copper); /* Deep Red clock icon */
+}

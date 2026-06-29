@@ -1,0 +1,76 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding-top: var(--space-64);
+  padding-bottom: var(--space-64);
+}
+
+.dividerTop::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-steel-dark);
+}
+
+.dividerBottom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-steel-dark);
+}
+
+/* Spacer Variations */
+.spacingLarge {
+  padding-top: var(--space-128);
+  padding-bottom: var(--space-128);
+}
+
+.spacingExtraLarge {
+  padding-top: var(--space-160);
+  padding-bottom: var(--space-160);
+}
+
+.spacingSmall {
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-32);
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: var(--space-96);
+    padding-bottom: var(--space-96);
+  }
+  
+  .spacingLarge {
+    padding-top: var(--space-128);
+    padding-bottom: var(--space-128);
+  }
+
+  .spacingExtraLarge {
+    padding-top: var(--space-160);
+    padding-bottom: var(--space-160);
+  }
+}
+
+@media (min-width: 1200px) {
+  .section {
+    padding-top: var(--space-128);
+    padding-bottom: var(--space-128);
+  }
+  
+  .spacingLarge {
+    padding-top: var(--space-160);
+    padding-bottom: var(--space-160);
+  }
+
+  .spacingExtraLarge {
+    padding-top: calc(var(--space-160) * 1.5);
+    padding-bottom: calc(var(--space-160) * 1.5);
+  }
+}

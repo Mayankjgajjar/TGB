@@ -1,0 +1,142 @@
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+}
+
+/* Cinematic Background Overlay System */
+.matteOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Dark cinematic overlay with subtle deep red shadows */
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(139, 0, 0, 0.04) 0%, rgba(5, 5, 5, 0.65) 80%),
+    linear-gradient(180deg, rgba(5, 5, 5, 0.15) 0%, rgba(5, 5, 5, 0.82) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Slideshow Container */
+.slideshowContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+}
+
+/* Slide image container */
+.slideImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.85) contrast(1.05); /* Brighter editorial architectural print feel */
+}
+
+/* Layout Grid - Centered Content with Spacious Negative Space */
+.contentContainer {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  padding-top: 80px; /* Offset for navbar */
+  box-sizing: border-box;
+}
+
+/* Presentation Panel - Centered & Widened to fill visual weight */
+.presentationPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 860px; /* Expansive width */
+  width: 100%;
+}
+
+/* Typographic frame wrapping tag and headline */
+.accentFrame {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Increased gap to spread out content */
+  margin-bottom: 32px; /* Increased margin for more breathing room */
+  text-align: left;
+}
+
+.metaTag {
+  font-family: var(--font-primary);
+  font-size: 12.5px; /* Scaled up from 11px */
+  font-weight: 600;
+  color: var(--color-off-white-muted);
+  letter-spacing: 4px; /* Increased tracking slightly */
+  text-transform: uppercase;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5.5vw, 5.5rem); /* Scaled up for more grandeur */
+  font-weight: 400; 
+  line-height: 1.12; 
+  color: var(--color-off-white);
+  letter-spacing: -0.015em; 
+}
+
+.description {
+  font-family: var(--font-primary);
+  font-size: 24px; /* Enlarged from 21px to fill more space */
+  color: var(--color-off-white-muted);
+  line-height: 1.6;
+  max-width: 800px; /* Allowed to span slightly wider */
+  margin-bottom: 48px; /* Massive gap to push the buttons down */
+}
+
+/* CTAs Row alignment */
+.ctasRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Increased gap between buttons */
+}
+
+@media (min-width: 480px) {
+  .ctasRow {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* WCAG 2.2 SC 2.2.2 — Slideshow Pause/Play Control */
+.slideshowPauseBtn {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(5, 5, 5, 0.6);
+  color: rgba(244, 241, 234, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease;
+}
+
+.slideshowPauseBtn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--color-off-white);
+}
+
+.slideshowPauseBtn:focus-visible {
+  outline: 2px solid var(--color-off-white);
+  outline-offset: 2px;
+}

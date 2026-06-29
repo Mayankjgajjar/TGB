@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" fill="none">
+  <!-- Minimalist Architectural Brand Logo -->
+  <text x="10" y="38" font-family="'DM Sans', sans-serif" font-weight="700" font-size="22" letter-spacing="3" fill="#f4f1eb">TGB</text>
+  <text x="85" y="38" font-family="'JetBrains Mono', monospace" font-weight="300" font-size="11" letter-spacing="5" fill="#7d848d">ENTERPRISE</text>
+  <line x1="75" y1="20" x2="75" y2="40" stroke="#c4835a" stroke-width="1" />
+</svg>

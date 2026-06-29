@@ -1,0 +1,43 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--space-24);
+  width: 100%;
+}
+
+/* Columns Variations */
+@media (min-width: 768px) {
+  .cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cols12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+}
+
+/* Custom Spacings */
+.gapSmall { gap: var(--space-12); }
+.gapLarge { gap: var(--space-48); }
+.gapExtraLarge { gap: var(--space-64); }
+.gapNone { gap: 0; }
+
+/* Structural grid background lines helper */
+.blueprintGrid {
+  position: relative;
+}
+
+.blueprintGrid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: var(--color-steel-dark);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Items alignment */
+.alignCenter { align-items: center; }
+.alignStart { align-items: start; }
+.alignEnd { align-items: end; }
+.alignStretch { align-items: stretch; }

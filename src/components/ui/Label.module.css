@@ -1,0 +1,22 @@
+.label {
+  font-family: var(--font-technical);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.colorSteel { color: var(--color-steel); }
+.colorCopper { color: var(--color-copper); }
+.colorMuted { color: var(--color-off-white-muted); }
+
+/* Technical dots/markers next to labels */
+.marker {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  margin-right: var(--space-8);
+}
