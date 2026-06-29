@@ -187,10 +187,22 @@ export const Identity: React.FC = () => {
                     
                     <div className={styles.featureCategory}>{standard.category}</div>
                     <h3 className={styles.featureTitle}>{standard.title}</h3>
-                         {/* ══════════════════════════════════════════
-            ZONE 4 — LEADERSHIP TEAM (Step 4: The People Behind TGB)
+                    <p className={styles.featureDescription}>{standard.description}</p>
+                    
+                    <div className={styles.featureTechLabel}>
+                      {standard.techLabel}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ══════════════════════════════════════════
+            ZONE 4 — LEADERSHIP TEAM
         ══════════════════════════════════════════ */}
-        <div style={{ marginTop: '100px', marginBottom: '100px' }}>
+        <div>
           <motion.div
             className={styles.headerBlock}
             initial={{ opacity: 0, y: 20 }}
@@ -233,15 +245,14 @@ export const Identity: React.FC = () => {
         </div>
 
         {/* ══════════════════════════════════════════
-            ZONE 1 — SECTION HEADER (Step 5: Signature Services)
+            ZONE 1 — SECTION HEADER
         ══════════════════════════════════════════ */}
         <motion.div
           className={styles.headerBlock}
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-        >
-          <motion.div className={styles.titleBlock} variants={fadeUp}>
+        >          <motion.div className={styles.titleBlock} variants={fadeUp}>
             <h2 className={styles.mainTitle}>
               {title.split('\n').map((line, i, arr) => (
                 <React.Fragment key={i}>
@@ -258,6 +269,7 @@ export const Identity: React.FC = () => {
             ZONE 2 — SERVICE CARDS (4×2 Grid)
         ══════════════════════════════════════════ */}
         <div className={styles.capabilitiesSection}>
+
           <motion.div
             className={styles.capabilitiesGrid}
             variants={containerVariants}
@@ -288,9 +300,13 @@ export const Identity: React.FC = () => {
           </motion.div>
         </div>
 
+
+
       </div>
 
       <ServicesOverview />
+
+
 
     </section>
   );
