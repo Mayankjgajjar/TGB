@@ -43,11 +43,12 @@ export default async function handler(req: any, res: any) {
     return res.status(200).json({
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
 
     return res.status(500).json({
       success: false,
+      error: error.message || error.toString(),
     });
   }
 }

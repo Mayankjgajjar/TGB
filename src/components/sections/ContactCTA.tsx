@@ -133,16 +133,17 @@ export const ContactCTA: React.FC = () => {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to send inquiry.');
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Failed to send inquiry.');
         }
 
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
         setErrors({});
         setTouched({});
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error submitting contact form:', error);
-        alert('We encountered an issue submitting your inquiry. Please try again or contact us directly.');
+        alert(`We encountered an issue submitting your inquiry: ${error.message}`);
       } finally {
         setIsSubmitting(false);
       }
