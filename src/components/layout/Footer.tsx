@@ -44,8 +44,8 @@ export const Footer: React.FC = () => {
             </p>
             <div className={styles.socialLinks}>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>LinkedIn</a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Instagram</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Facebook</a>
+              <a href="https://www.instagram.com/tgbsign" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Instagram</a>
+              <a href="https://www.facebook.com/tgbenterprise" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Facebook</a>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export const Footer: React.FC = () => {
               </p>
               <p className={styles.contactText}>
                 <strong>Email:</strong><br />
-                <a href="mailto:info@tgbenterprise.com" className={styles.contactAnchor}>info@tgbenterprise.com</a>
+                <a href="mailto:tgbenterprise@proton.me" className={styles.contactAnchor}>tgbenterprise@proton.me</a>
               </p>
               <p className={styles.contactText} style={{ opacity: 0.8, fontSize: '12px', fontStyle: 'italic' }}>
                 Serving businesses across India.

@@ -88,7 +88,7 @@ export const Privacy: React.FC = () => {
             <p className={styles.paragraph}>
               <strong>TGB Enterprise</strong><br />
               Shop No. 7/1, First Floor, Shukan Shopping Centre, opp. Chanakya school, Sukan Cross Rd, New India Colony, Nikol, Ahmedabad, Gujarat 382345<br />
-              Email: info@tgbenterprise.com<br />
+              Email: tgbenterprise@proton.me<br />
               Phone: +91 97271 36137
             </p>
           </section>

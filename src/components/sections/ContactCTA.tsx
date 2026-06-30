@@ -356,8 +356,8 @@ export const ContactCTA: React.FC = () => {
                   {/* Phone direct line info */}
                   <div className={styles.phoneDirectLine}>
                     <span>Prefer to talk directly?</span>
-                    <a href="tel:+919824817381" className={styles.phoneLink}>
-                      Call us at +91 98248 17381
+                    <a href="tel:+919727136137" className={styles.phoneLink}>
+                      Call us at +91 97271 36137
                     </a>
                   </div>
                 </motion.form>
@@ -426,7 +426,7 @@ export const ContactCTA: React.FC = () => {
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Phone Inquiry Desk</span>
-                  <a href="tel:+919824817381" className={styles.infoLink}>+91 98248 17381</a>
+                  <a href="tel:+919727136137" className={styles.infoLink}>+91 97271 36137</a>
                 </div>
               </div>
 
@@ -436,8 +436,8 @@ export const ContactCTA: React.FC = () => {
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
-                  <a href="mailto:info@tgbenterprise.com" className={styles.infoLink}>
-                    info@tgbenterprise.com
+                  <a href="mailto:tgbenterprise@proton.me" className={styles.infoLink}>
+                    tgbenterprise@proton.me
                   </a>
                 </div>
               </div>

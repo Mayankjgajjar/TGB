@@ -52,6 +52,7 @@ export const QuoteModal: React.FC = () => {
           
           <motion.div 
             className={styles.modalContent}
+            data-lenis-prevent
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -96,7 +97,7 @@ export const QuoteModal: React.FC = () => {
 
               {/* Action 2: WhatsApp Desk (Outline with Green Hover border) */}
               <a 
-                href="https://wa.me/919909909909?text=Hello%20TGB%20Enterprise%2C%20I%20would%20like%20to%20request%20an%20architectural%20signage%20quote." 
+                href="https://wa.me/919727136137?text=Hello%20TGB%20Enterprise%2C%20I%20would%20like%20to%20request%20an%20architectural%20signage%20quote." 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={`${styles.outlineOption} ${styles.whatsappOption}`}
@@ -110,7 +111,7 @@ export const QuoteModal: React.FC = () => {
 
               {/* Action 3: Hotline Call (Outline with White Hover border) */}
               <a 
-                href="tel:+917940099099" 
+                href="tel:+919727136137" 
                 className={`${styles.outlineOption} ${styles.hotlineOption}`}
               >
                 <div className={styles.optionLabel}>

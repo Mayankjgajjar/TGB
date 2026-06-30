@@ -25,6 +25,8 @@
   padding: 56px 48px 48px 48px; 
   box-shadow: var(--shadow-medium);
   box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 /* Close Icon Button */
