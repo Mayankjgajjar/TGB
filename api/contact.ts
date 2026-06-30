@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 
+// Initialize Resend client with Vercel environment variable
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req: any, res: any) {
