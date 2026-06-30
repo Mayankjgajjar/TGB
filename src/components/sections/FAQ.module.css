@@ -1,0 +1,213 @@
+/* ============================================================
+   FAQ — Section Stylesheet
+   Premium Accordion Grid
+   ============================================================ */
+
+.section {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+  position: relative;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+}
+
+/* ── Section Header ── */
+.headerBlock {
+  margin-bottom: var(--space-48);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.eyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  max-width: 800px;
+  text-align: center;
+}
+
+.subheading {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--color-off-white-muted);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* ── Two-Column Layout ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Accordion Card ── */
+.accordion {
+  background: var(--color-charcoal-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.accordion:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+}
+
+.question {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-off-white);
+  line-height: 1.4;
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+.accordionHeader:hover .question {
+  color: #ffffff;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-steel);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.accordionActive .iconWrapper {
+  transform: rotate(45deg);
+  color: var(--color-copper-light);
+}
+
+.contentWrapper {
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.accordionActive .contentWrapper {
+  opacity: 1;
+}
+
+.contentInner {
+  padding: 0 24px 24px 24px;
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-off-white-muted);
+}
+
+.bottomLinkBlock {
+  margin-top: 48px;
+  text-align: center;
+  font-family: var(--font-technical);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--color-steel);
+}
+
+.bottomLink {
+  color: var(--color-copper-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  margin-left: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.bottomLink:hover {
+  color: var(--color-copper);
+}
+
+/* ── Responsive Viewports ── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 56px 0;
+  }
+  .headerBlock {
+    margin-bottom: 40px;
+  }
+  .accordionHeader {
+    padding: 20px;
+  }
+  .contentInner {
+    padding: 0 20px 20px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1.8rem;
+  }
+  .question {
+    font-size: 14px;
+  }
+  .contentInner {
+    font-size: 13px;
+  }
+}

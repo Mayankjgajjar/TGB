@@ -1,193 +1,222 @@
 .section {
   position: relative;
-  margin-bottom: 140px;
-  padding: 80px 0;
-  /* Removed hard background to preserve global atmospheric continuity */
+  margin-bottom: 0;
+  padding: 64px 0;
+  background: rgba(0, 0, 0, 0.55);
 }
 
 .headerBlock {
-  max-width: 700px;
-  margin-bottom: 64px;
+  margin-bottom: var(--space-48);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.eyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
 }
 
 .mainTitle {
   font-family: var(--font-display);
-  font-size: var(--font-size-2xl);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 300;
   color: var(--color-off-white);
-  line-height: var(--line-height-tight);
-  margin-bottom: var(--space-24);
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
 }
 
 .subtitle {
-  font-size: var(--font-size-lg);
+  font-family: var(--font-primary);
+  font-size: 15px;
   color: var(--color-off-white-muted);
-  font-weight: 300;
-  line-height: var(--line-height-normal);
+  font-weight: 400;
+  line-height: 1.65;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* ══════════════════════════════════════════
-   EDITORIAL GRID
+   SERVICE CARD GRID
 ══════════════════════════════════════════ */
 .editorialGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-24);
+  gap: 24px;
 }
 
+/* ── Individual Service Card ── */
 .serviceCard {
   position: relative;
-  background: #050505; /* Deep fallback */
+  background: #0A0A0A;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  text-decoration: none;
   overflow: hidden;
-  min-height: 460px; /* Increased height to give image and text breathing room */
-}
-
-/* Image Backgrounds */
-.cardImage {
-  position: absolute;
-  inset: 0;
+  cursor: pointer;
+  text-align: left;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  transition: transform 600ms cubic-bezier(0.2, 0, 0, 1), filter 600ms ease;
-  filter: brightness(0.85); /* Slightly brighter base image to show details */
-}
-
-/* Strong Bottom Overlay */
-.cardOverlay {
-  position: absolute;
-  inset: 0;
-  /* Extremely heavy at the bottom where text lives, fully transparent at top for the image */
-  background: linear-gradient(to top, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.95) 40%, rgba(5, 5, 5, 0.2) 75%, transparent 100%);
-  z-index: 2;
-  transition: background 400ms ease;
-}
-
-.serviceCard:hover .cardImage {
-  transform: scale(1.02);
-  filter: brightness(0.7);
-}
-
-.serviceCard:hover .cardOverlay {
-  background: linear-gradient(to top, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.95) 45%, rgba(5, 5, 5, 0.4) 80%, rgba(5, 5, 5, 0.1) 100%);
+  padding: 0;
+  outline: none;
+  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .serviceCard:hover {
-  border-color: rgba(255, 255, 255, 0.15); /* Border emphasis */
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-/* Card Content Layer */
-.cardContent {
+/* ── Image Thumbnail (top of card) ── */
+.cardImageWrapper {
   position: relative;
-  z-index: 10;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
-.serviceNumber {
-  font-family: var(--font-technical);
-  font-size: 11px;
-  color: var(--color-copper);
-  letter-spacing: 2px;
-  margin-bottom: 8px;
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75);
+  transition: transform 600ms cubic-bezier(0.2, 0, 0, 1), filter 500ms ease;
 }
 
-.serviceTitle {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 300;
-  color: var(--color-off-white);
-  line-height: 1.2;
+.serviceCard:hover .cardImage {
+  transform: scale(1.05);
+  filter: brightness(0.9);
 }
 
-.serviceDescription {
-  font-size: 15px;
-  color: var(--color-off-white-muted);
-  line-height: 1.55;
-  max-width: 80%;
-  margin-bottom: 16px;
+.cardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(10, 10, 10, 0.85) 100%
+  );
+  pointer-events: none;
 }
 
-.viewDetails {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-off-white);
-  letter-spacing: 2px;
-  text-transform: uppercase;
+/* Floating category badge over image */
+.cardImageBadge {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  transition: color 400ms ease;
+  gap: 6px;
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 300ms ease;
 }
 
-.serviceCard:hover .viewDetails {
-  color: var(--color-copper);
+.serviceCard:hover .cardImageBadge {
+  color: var(--color-off-white);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* ── Content Panel (below image) ── */
+.cardContent {
+  padding: 24px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* ── Service Title ── */
+.serviceTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-off-white);
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Description ── */
+.serviceDescription {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+/* ── Footer Badge (bottom bordered label) ── */
+.footerBadge {
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 9px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: auto;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.serviceCard:hover .footerBadge {
+  color: var(--color-off-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
   .editorialGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .cardImageWrapper {
+    height: 200px;
   }
 }
 
 @media (max-width: 768px) {
   .editorialGrid {
-    grid-template-columns: 1fr;
-  }
-  .serviceCard {
-    min-height: 320px;
-  }
-  .cardContent {
-    padding: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
   .mainTitle {
     font-size: var(--font-size-xl);
   }
-  .serviceDescription {
-    max-width: 100%;
+  .cardImageWrapper {
+    height: 180px;
   }
 }
 
-/* ── Custom Editorial Card Inner Rows ── */
-.cardHeaderRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.serviceCategory {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-copper-light);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.cardFooterRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: auto;
-  padding-top: var(--space-16);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.footerBadge {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-steel);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+@media (max-width: 480px) {
+  .editorialGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .cardImageWrapper {
+    height: 200px;
+  }
 }
 
 /* ── Bottom CTA Block ── */
@@ -256,4 +285,258 @@
 
 .ctaButton:hover svg {
   transform: translateX(4px);
+}
+
+/* Modal Overlay Base */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Modal Window */
+.modalWindow {
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Hero */
+.modalHero {
+  position: relative;
+  height: 280px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.modalHeroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.modalHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #0d0d0d 0%, transparent 100%);
+}
+
+.modalHeroContent {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  z-index: 10;
+}
+
+.modalSlug {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-copper);
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.modalTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.modalPositioning {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--color-off-white-muted);
+  margin: 0;
+}
+
+/* Close Button */
+.modalCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-off-white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 300ms ease, border-color 300ms ease;
+}
+
+.modalCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Modal Body Grid */
+.modalBody {
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+}
+
+@media (max-width: 800px) {
+  .modalBody {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px;
+  }
+  .modalHeroContent {
+    left: 24px;
+    right: 24px;
+  }
+}
+
+.modalLeftCol, .modalRightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.modalLabel {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-steel);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.modalDescText {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Chips layout */
+.modalChipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.modalChip {
+  font-family: var(--font-technical);
+  font-size: 9px;
+  color: var(--color-off-white);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Process Stages list */
+.modalProcessList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalProcessItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.modalProcessStep {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  color: var(--color-copper);
+  background: rgba(230, 0, 0, 0.08);
+  border: 1px solid rgba(230, 0, 0, 0.2);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.modalProcessInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modalProcessTitle {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-off-white);
+  margin: 0;
+}
+
+.modalProcessDesc {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  color: var(--color-off-white-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Tech Specs list */
+.modalSpecsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalSpecRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 12px;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+}
+
+.modalSpecName {
+  font-family: var(--font-technical);
+  color: var(--color-steel);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modalSpecVal {
+  font-family: var(--font-primary);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: right;
 }

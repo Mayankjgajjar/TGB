@@ -1,0 +1,490 @@
+.section {
+  padding: 64px 0;
+  background: rgba(0, 0, 0, 0.55);
+  width: 100%;
+}
+
+.headerBlock {
+  margin-bottom: var(--space-48);
+  text-align: center;
+  padding: 0 var(--space-24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.eyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
+}
+
+.subheading {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--color-off-white-muted);
+  line-height: 1.65;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gridContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.projectCardWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.projectCard {
+  position: relative;
+  height: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-charcoal-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), border-color 600ms ease, box-shadow 600ms ease;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  outline: none;
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.imageWrapper {
+  position: relative;
+  height: 280px;
+  width: 100%;
+  z-index: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.02);
+  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1), filter 1000ms ease;
+}
+
+.projectCard:hover .cardImage {
+  transform: scale(1.04);
+  filter: brightness(0.92) contrast(1.04);
+}
+
+.cardContent {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+  background: var(--color-charcoal-surface);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-steel);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.projectName {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 300ms ease;
+}
+
+.projectCard:hover .projectName {
+  color: var(--color-off-white);
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.cardCta {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-steel);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 350ms ease;
+}
+
+.ctaArrow {
+  color: var(--color-copper);
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.projectCard:hover .cardCta {
+  color: var(--color-off-white);
+}
+
+.projectCard:hover .ctaArrow {
+  transform: translateX(4px);
+  color: var(--color-copper-light);
+}
+
+.ctaWrapper {
+  max-width: 1200px;
+  margin: 80px auto 0 auto;
+  padding: 0 24px;
+}
+
+.ctaBlock {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 60px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  margin: 0;
+}
+
+.ctaDesc {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--color-off-white-muted);
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #E60000;
+  color: #FFFFFF;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.2, 0, 0, 1);
+  box-shadow: 0 4px 20px rgba(230, 0, 0, 0.15);
+}
+
+.ctaButton:hover {
+  background: #FF1A1A;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(230, 0, 0, 0.3);
+}
+
+.ctaButton svg {
+  transition: transform 300ms ease;
+}
+
+.ctaButton:hover svg {
+  transform: translateX(4px) translateY(-2px);
+}
+
+.statsBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 80px;
+  padding: 40px 0 0 0;
+  width: 100%;
+}
+
+.statsInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.statCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--color-off-white);
+  font-weight: 300;
+}
+
+.statLabel {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-steel);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .gridContainer {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .imageWrapper {
+    height: 200px;
+  }
+  .cardContent {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .imageWrapper {
+    height: 180px;
+  }
+  .cardContent {
+    padding: 16px;
+  }
+  .section {
+    padding: 56px 0;
+  }
+}
+
+/* Gallery Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(16px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Modal Window */
+.modalWindow {
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .modalWindow {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+}
+
+/* Left side: Image Showcase */
+.modalImagePanel {
+  flex: 1.2;
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.modalProjectImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Right side: Project Specs */
+.modalDetailsPanel {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  background: #0c0c0c;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 900px) {
+  .modalDetailsPanel {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 24px;
+    overflow-y: visible;
+  }
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--color-off-white);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 300ms ease;
+}
+
+.modalCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.modalMetaRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.modalCategory {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-copper);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.modalLocation {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-steel);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.modalTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.modalDesc {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modalSpecsBox {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalSpecItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modalSpecLabel {
+  font-family: var(--font-technical);
+  font-size: 9px;
+  color: var(--color-steel);
+  letter-spacing: 1.5px;
+}
+
+.modalSpecValue {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+.modalSpecHighlight {
+  color: var(--color-copper);
+}

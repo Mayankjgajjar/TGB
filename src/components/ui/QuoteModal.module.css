@@ -197,3 +197,20 @@
   align-items: center;
   color: var(--color-copper); /* Deep Red clock icon */
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .modalOverlay {
+    padding: var(--space-16);
+  }
+  .modalContent {
+    padding: 40px 24px 32px 24px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .closeBtn {
+    top: 20px;
+    right: 20px;
+  }
+}

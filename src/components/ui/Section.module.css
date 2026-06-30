@@ -1,8 +1,8 @@
 .section {
   position: relative;
   width: 100%;
-  padding-top: var(--space-64);
-  padding-bottom: var(--space-64);
+  padding-top: var(--space-48);
+  padding-bottom: var(--space-48);
 }
 
 .dividerTop::before {
@@ -27,13 +27,13 @@
 
 /* Spacer Variations */
 .spacingLarge {
-  padding-top: var(--space-128);
-  padding-bottom: var(--space-128);
+  padding-top: var(--space-64);
+  padding-bottom: var(--space-64);
 }
 
 .spacingExtraLarge {
-  padding-top: var(--space-160);
-  padding-bottom: var(--space-160);
+  padding-top: var(--space-96);
+  padding-bottom: var(--space-96);
 }
 
 .spacingSmall {
@@ -43,34 +43,34 @@
 
 @media (min-width: 768px) {
   .section {
-    padding-top: var(--space-96);
-    padding-bottom: var(--space-96);
+    padding-top: var(--space-64);
+    padding-bottom: var(--space-64);
   }
   
   .spacingLarge {
-    padding-top: var(--space-128);
-    padding-bottom: var(--space-128);
+    padding-top: var(--space-96);
+    padding-bottom: var(--space-96);
   }
 
   .spacingExtraLarge {
-    padding-top: var(--space-160);
-    padding-bottom: var(--space-160);
+    padding-top: var(--space-128);
+    padding-bottom: var(--space-128);
   }
 }
 
 @media (min-width: 1200px) {
   .section {
-    padding-top: var(--space-128);
-    padding-bottom: var(--space-128);
+    padding-top: var(--space-80, 80px);
+    padding-bottom: var(--space-80, 80px);
   }
   
   .spacingLarge {
-    padding-top: var(--space-160);
-    padding-bottom: var(--space-160);
+    padding-top: var(--space-96);
+    padding-bottom: var(--space-96);
   }
 
   .spacingExtraLarge {
-    padding-top: calc(var(--space-160) * 1.5);
-    padding-bottom: calc(var(--space-160) * 1.5);
+    padding-top: var(--space-128);
+    padding-bottom: var(--space-128);
   }
 }

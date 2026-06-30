@@ -5,103 +5,102 @@ import { useQuoteModal } from '../../context/QuoteContext';
 import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
+  const { openModal } = useQuoteModal();
   const location = useLocation();
   const navigate = useNavigate();
-  const { openModal } = useQuoteModal();
-  const [activeHash, setActiveHash] = React.useState(location.hash || '#home');
+  const [activeSection, setActiveSection] = React.useState('home');
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   React.useEffect(() => {
-    if (location.pathname === '/') {
-      setActiveHash(location.hash || '#home');
-    } else {
-      setActiveHash('');
-    }
-  }, [location.pathname, location.hash]);
+    const sections = ['home', 'about', 'services', 'projects', 'contact'];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -50% 0px',
+      threshold: 0,
+    };
 
-  // Handle scrolling when hash changes or on mount (especially when coming from other pages)
-  React.useEffect(() => {
-    if (location.pathname === '/' && location.hash) {
-      const id = location.hash.substring(1);
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Give a small delay to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) observer.observe(element);
+      });
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) observer.unobserve(element);
+      });
+    };
+  }, []);
+
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+    } else {
       const element = document.getElementById(id);
       if (element) {
-        const timer = setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-        return () => clearTimeout(timer);
+        const yOffset = -90; // sticky header height offset
+        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        window.history.pushState(null, '', `#${id}`);
+        setActiveSection(id);
       }
-    }
-  }, [location.pathname, location.hash]);
-
-  // Close mobile menu on route change
-  React.useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname, location.hash]);
-
-  const isAnchorActive = (hash: string) => {
-    if (location.pathname !== '/') return false;
-    return activeHash === hash;
-  };
-
-  const scrollTo = (id: string, hash: string) => {
-    setMobileOpen(false);
-    if (location.pathname === '/') {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-      window.history.pushState(null, '', hash);
-      setActiveHash(hash);
-    }
-  };
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string, hash: string) => {
-    e.preventDefault();
-    if (location.pathname === '/') {
-      scrollTo(id, hash);
-    } else {
-      navigate('/' + hash);
     }
   };
 
   const navLinks = (
     <>
       <a
-        href="/#home"
-        onClick={(e) => handleAnchorClick(e, 'home', '#home')}
-        className={`${styles.navLink} ${isAnchorActive('#home') ? styles.activeNavLink : ''}`}
+        href="#home"
+        onClick={(e) => handleAnchorClick(e, 'home')}
+        className={`${styles.navLink} ${activeSection === 'home' ? styles.activeNavLink : ''}`}
       >
         Home
       </a>
       <a
-        href="/#about"
-        onClick={(e) => handleAnchorClick(e, 'about', '#about')}
-        className={`${styles.navLink} ${isAnchorActive('#about') ? styles.activeNavLink : ''}`}
+        href="#about"
+        onClick={(e) => handleAnchorClick(e, 'about')}
+        className={`${styles.navLink} ${activeSection === 'about' ? styles.activeNavLink : ''}`}
       >
         About
       </a>
       <a
-        href="/#services-overview"
-        onClick={(e) => handleAnchorClick(e, 'services-overview', '#services-overview')}
-        className={`${styles.navLink} ${isAnchorActive('#services-overview') ? styles.activeNavLink : ''}`}
+        href="#services"
+        onClick={(e) => handleAnchorClick(e, 'services')}
+        className={`${styles.navLink} ${activeSection === 'services' ? styles.activeNavLink : ''}`}
       >
         Services
       </a>
-      <NavLink
-        to="/projects"
-        onClick={() => setMobileOpen(false)}
-        className={({ isActive }) =>
-          `${styles.navLink} ${isActive && location.hash === '' ? styles.activeNavLink : ''}`
-        }
+      <a
+        href="#projects"
+        onClick={(e) => handleAnchorClick(e, 'projects')}
+        className={`${styles.navLink} ${activeSection === 'projects' ? styles.activeNavLink : ''}`}
       >
         Projects
-      </NavLink>
-      <NavLink
-        to="/contact"
-        onClick={() => setMobileOpen(false)}
-        className={({ isActive }) =>
-          `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`
-        }
+      </a>
+      <a
+        href="#contact"
+        onClick={(e) => handleAnchorClick(e, 'contact')}
+        className={`${styles.navLink} ${activeSection === 'contact' ? styles.activeNavLink : ''}`}
       >
         Contact
-      </NavLink>
+      </a>
     </>
   );
 

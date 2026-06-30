@@ -1,0 +1,224 @@
+/* ============================================================
+   OUR PROCESS — Section Stylesheet
+   Premium · Architectural · Dark Card Grid
+   ============================================================ */
+
+.section {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 var(--space-32);
+}
+
+.headerBlock {
+  margin-bottom: var(--space-48);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.eyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  max-width: 800px;
+  text-align: center;
+}
+
+.subheading {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--color-off-white-muted);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* ── Card Grid — 5 columns ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+/* ── Individual Card ── */
+.card {
+  position: relative;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: default;
+  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #111111;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Icon ── */
+.cardIconWrapper {
+  margin-bottom: 20px;
+  color: var(--color-off-white);
+  opacity: 0.5;
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .cardIconWrapper {
+  opacity: 1;
+}
+
+.cardIcon {
+  width: 36px;
+  height: 36px;
+}
+
+/* ── Stage Eyebrow ── */
+.cardCategory {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* ── Sub-label ── */
+.stepLabel {
+  font-family: var(--font-technical);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* ── Card Title ── */
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.5vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-off-white);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Card Description ── */
+.cardDesc {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 28px 0;
+  flex-grow: 1;
+}
+
+/* ── Card Tag (bottom bordered label) ── */
+.cardTag {
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.card:hover .cardTag {
+  color: var(--color-off-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Bottom Statement ── */
+.bottomStatement {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-off-white-muted);
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* ── Responsive Viewports ── */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 0 40px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .inner {
+    padding: 0 24px;
+  }
+  .headerBlock {
+    margin-bottom: 40px;
+  }
+  .bottomStatement {
+    font-size: 16px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .heading {
+    font-size: 1.8rem;
+  }
+}

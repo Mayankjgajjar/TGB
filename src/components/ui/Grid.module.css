@@ -8,8 +8,14 @@
 /* Columns Variations */
 @media (min-width: 768px) {
   .cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cols3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* 2 columns on tablet viewports */
+  .cols4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* 2 columns on tablet viewports */
+  .cols12 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1024px) {
+  .cols3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* Full 3 columns on desktop viewports */
+  .cols4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } /* Full 4 columns on desktop viewports */
   .cols12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
 }
 

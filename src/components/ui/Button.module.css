@@ -47,13 +47,13 @@
 /* Sizes */
 .sizeNormal {
   height: 44px;
-  padding: 0 24px;
+  padding: 0 21px;
   font-size: 11px;
 }
 
 .sizeLarge {
   height: 50px;
-  padding: 0 32px;
+  padding: 0 28px;
   font-size: 12px;
 }
 

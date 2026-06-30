@@ -1,0 +1,280 @@
+/* ============================================================
+   INDUSTRIES WE SERVE — Section Stylesheet
+   Premium · Architectural · Dark
+   ============================================================ */
+
+.section {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.headerBlock {
+  margin-bottom: var(--space-48);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.eyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  max-width: 800px;
+  text-align: center;
+}
+
+.subheading {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  color: var(--color-off-white-muted);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* ── Card Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Individual Card ── */
+.card {
+  position: relative;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: default;
+  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #111111;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Icon Wrapper ── */
+.cardIconWrapper {
+  margin-bottom: 24px;
+  color: var(--color-off-white);
+  opacity: 0.5;
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .cardIconWrapper {
+  opacity: 1;
+}
+
+.cardIcon {
+  width: 40px;
+  height: 40px;
+}
+
+/* ── Category Eyebrow ── */
+.cardCategory {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* ── Card Title ── */
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.7vw, 1.55rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--color-off-white);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Card Description ── */
+.cardDesc {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 32px 0;
+  flex-grow: 1;
+}
+
+/* ── Card Tag (bottom bordered label) ── */
+.cardTag {
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.card:hover .cardTag {
+  color: var(--color-off-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Geo Statement ── */
+.geoStatement {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--color-steel);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0 auto 56px auto;
+  max-width: 720px;
+  opacity: 0.7;
+}
+
+/* ── Bottom CTA ── */
+.cta {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 52px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.ctaHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 300;
+  color: var(--color-off-white);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.ctaDesc {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--color-off-white-muted);
+  max-width: 560px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-copper);
+  color: #ffffff;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 13px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.2);
+}
+
+.ctaButton:hover {
+  background: var(--color-copper-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(139, 0, 0, 0.35);
+}
+
+.ctaButton svg {
+  transition: transform 0.25s ease;
+}
+
+.ctaButton:hover svg {
+  transform: translateX(4px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .inner {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 0 40px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .card {
+    padding: 24px 20px;
+  }
+  .headerBlock {
+    margin-bottom: 40px;
+  }
+  .cta {
+    padding: 36px 24px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .heading {
+    font-size: 1.8rem;
+  }
+}

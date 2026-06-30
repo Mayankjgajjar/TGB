@@ -1,16 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, type LinkProps } from 'react-router-dom';
 import styles from './Button.module.css';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  to?: string;
-  href?: string;
+type BaseProps = {
   variant?: 'primary' | 'secondary' | 'technical';
   size?: 'normal' | 'large';
   icon?: React.ReactNode;
   showTechnicalDot?: boolean;
   children: React.ReactNode;
-}
+  className?: string;
+};
+
+type ButtonAsButton = BaseProps &
+  Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
+    to?: never;
+    href?: never;
+  };
+
+type ButtonAsRouterLink = BaseProps &
+  Omit<LinkProps, keyof BaseProps | 'to'> & {
+    to: string;
+    href?: never;
+  };
+
+type ButtonAsAnchor = BaseProps &
+  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps | 'href'> & {
+    href: string;
+    to?: never;
+  };
+
+type ButtonProps = ButtonAsButton | ButtonAsRouterLink | ButtonAsAnchor;
 
 export const Button: React.FC<ButtonProps> = ({
   to,
@@ -24,15 +43,14 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const sizeClass = size === 'large' ? styles.sizeLarge : styles.sizeNormal;
-  const variantClass = 
+  const variantClass =
     variant === 'secondary' ? styles.variantSecondary :
     variant === 'technical' ? styles.variantTechnical : styles.variantPrimary;
 
-  const classes = `${styles.button} ${sizeClass} ${variantClass} ${className}`;
+  const classes = `${styles.button} ${sizeClass} ${variantClass} ${className}`.trim();
 
   const renderContent = () => (
     <>
-      {/* Blueprint Corners for secondary/technical buttons */}
       {(variant === 'secondary' || variant === 'technical') && (
         <>
           <span className={`${styles.blueprintCorner} ${styles.cornerTL}`} />
@@ -41,31 +59,33 @@ export const Button: React.FC<ButtonProps> = ({
           <span className={`${styles.blueprintCorner} ${styles.cornerBR}`} />
         </>
       )}
-
       {showTechnicalDot && <span className={styles.technicalDot} />}
       <span>{children}</span>
       {icon && <span className={styles.iconWrapper}>{icon}</span>}
     </>
   );
 
-  if (to) {
+  if (to !== undefined) {
+    const linkProps = props as Omit<LinkProps, 'to'>;
     return (
-      <Link to={to} className={classes}>
+      <Link to={to} className={classes} {...linkProps}>
         {renderContent()}
       </Link>
     );
   }
 
-  if (href) {
+  if (href !== undefined) {
+    const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
-      <a href={href} className={classes}>
+      <a href={href} className={classes} {...anchorProps}>
         {renderContent()}
       </a>
     );
   }
 
+  const buttonProps = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button className={classes} {...props}>
+    <button className={classes} {...buttonProps}>
       {renderContent()}
     </button>
   );

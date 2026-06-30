@@ -6,7 +6,7 @@
 /* ---- SECTION WRAPPER ---- */
 .section {
   background-color: transparent;
-  padding: 64px 0 120px 0; /* Reduced top padding from 120px to 64px */
+  padding: 56px 0;
   position: relative;
   overflow: hidden;
   z-index: 10;
@@ -37,19 +37,20 @@
    ZONE 0 — ABOUT / WHO WE ARE (INTRO)
    ============================================================ */
 .introSection {
-  margin-bottom: 140px; /* Generous separation before the next zone */
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-64);
+  gap: var(--space-32);
 }
 
 /* TOP HEADER */
 .introTopHeader {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: var(--space-16);
-  max-width: 900px;
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-48);
 }
 
 .introEyebrow {
@@ -59,23 +60,28 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--color-copper-light);
-  display: inline-block;
+  display: block;
+  text-align: center;
 }
 
 .introTitle {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
   line-height: 1.15;
   color: var(--color-off-white);
-  letter-spacing: -0.015em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .introSubheading {
   font-family: var(--font-primary);
-  font-size: var(--font-size-md);
+  font-size: 14px;
   line-height: 1.6;
   color: var(--color-off-white-muted);
+  max-width: 800px;
+  text-align: center;
 }
 
 /* Split Layout */
@@ -319,27 +325,21 @@
 .clientItem {
   font-family: var(--font-technical);
   font-size: 11px;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.45);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 14px 28px;
-  border-radius: 8px;
+  color: rgba(244, 241, 234, 0.35);
+  padding: 10px 24px;
   transition: all 300ms ease;
   cursor: default;
 }
 
 .clientItem:hover {
   color: var(--color-off-white);
-  border-color: rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
 }
 
 /* TRUST BADGES */
 .trustBadgesSection {
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  padding-top: var(--space-48);
 }
 
 .trustSectionHeader {
@@ -353,10 +353,12 @@
 
 .trustTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
-  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
   color: var(--color-off-white);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .trustSubtitle {
@@ -365,6 +367,7 @@
   line-height: 1.6;
   color: var(--color-off-white-muted);
   max-width: 800px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -372,7 +375,7 @@
     padding: 0 24px;
   }
   .section {
-    padding: 80px 0 80px;
+    padding: 40px 0;
   }
 }
 
@@ -385,13 +388,13 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 64px; /* Increased from 40px to give breathing room before cards */
-  gap: 24px;
+  margin-bottom: var(--space-48);
+  gap: var(--space-16);
 }
 
 @media (max-width: 768px) {
   .headerBlock {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
     gap: 16px;
   }
 }
@@ -419,10 +422,11 @@
 
 .mainTitle {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 2.5vw, 2.8rem); /* Scaled down */
-  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 300;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--color-off-white);
   max-width: 720px;
   text-align: center;
@@ -433,7 +437,7 @@
   font-size: 13.5px; /* Scaled down slightly */
   line-height: 1.6; /* Slightly tighter line height */
   color: var(--color-off-white-muted);
-  max-width: 900px; /* Massive max-width to ensure it stays 1-2 lines */
+  max-width: 800px; /* Centered max-width standard */
   text-align: center;
 }
 
@@ -443,8 +447,8 @@
 
 .capabilitiesSection {
   position: relative;
-  margin-bottom: 140px; /* Massive architectural spacing between main sections */
-  padding: 80px 0;
+  margin-bottom: 56px;
+  padding: 56px 0;
 }
 
 /* Distinct Architectural Space for Section B */
@@ -750,17 +754,22 @@
   }
 }
 
-/* Vertical card layout: 3:4 Portrait with Image Background */
 .leaderCard {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end; /* Pushes text to the bottom */
-  aspect-ratio: 3 / 4; /* Portrait ratio */
+  height: 540px; /* Reduced from aspect-ratio: 3 / 4 (~700px height on large displays) */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   overflow: hidden;
   transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (max-width: 768px) {
+  .leaderCard {
+    height: 480px;
+  }
 }
 
 .leaderCard:hover {
@@ -1017,12 +1026,13 @@
   border-color: rgba(139, 0, 0, 0.4);
 }
 
-/* ── Stats Grid inside Right Column ── */
+/* ── 2x2 Stats Grid inside Right Column ── */
 .rightColStatsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-16);
   margin-top: var(--space-32);
+  width: 100%;
 }
 
 @media (max-width: 520px) {
@@ -1033,46 +1043,48 @@
 }
 
 .rightColStatCard {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #080808; /* Solid very deep black fallback */
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
   border-radius: 12px;
-  padding: var(--space-20) var(--space-24);
+  padding: 36px 28px; /* Spacious internal padding */
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  transition: all 300ms ease;
+  align-items: flex-start; /* Left-aligned */
+  gap: 12px;
+  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  cursor: default;
 }
 
 .rightColStatCard:hover {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.15); /* Subtle highlight */
+  background: #0E0E0E;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 .rightColStatValue {
-  font-family: var(--font-primary);
-  font-size: 26px;
-  font-weight: 700;
-  color: #E60000; /* Vibrant Red */
-  line-height: 1;
+  font-family: var(--font-display); /* Cormorant Garamond Serif */
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+  font-weight: 300;
+  color: var(--color-off-white); /* Elegant White */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 .rightColStatLabel {
-  font-family: var(--font-technical);
+  font-family: var(--font-technical); /* Monospace labels */
   font-size: 10px;
-  color: var(--color-off-white-muted);
-  letter-spacing: 1px;
+  color: var(--color-steel); /* Muted gray text */
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* ── Centered Closing Statement at bottom ── */
 .closingSection {
-  margin-top: var(--space-64);
-  padding: var(--space-48) 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
 }
 
@@ -1097,4 +1109,35 @@
   top: -40px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+/* ── Section Background Themes ── */
+.identityWrapper {
+  width: 100%;
+}
+
+.aboutSection {
+  position: relative;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+}
+
+.brandsSection {
+  background: transparent;
+  padding: 24px 0 32px 0;
+}
+
+.trustSection {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+}
+
+.leadershipSection {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 64px 0;
+}
+
+.quoteSection {
+  background: transparent;
+  padding: 32px 0;
 }

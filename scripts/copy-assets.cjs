@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const src = 'C:\\Users\\harsh\\.gemini\\antigravity-ide\\brain\\46a98e59-334a-42b4-bb7a-c7487871125e\\hero_facade_1782639246364.png';
+const os = require('os');
+const src = path.join(os.homedir(), '.gemini/antigravity-ide/brain/46a98e59-334a-42b4-bb7a-c7487871125e/hero_facade_1782639246364.png');
 const dest = path.resolve(__dirname, '../public/assets/images/hero-facade.png');
 
 try {

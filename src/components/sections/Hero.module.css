@@ -2,46 +2,19 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 700px;
+  height: 100dvh;
+  min-height: 660px;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
-/* Cinematic Background Overlay System */
 .matteOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* Dark cinematic overlay with subtle deep red shadows */
-  background: 
-    radial-gradient(circle at 50% 50%, rgba(139, 0, 0, 0.04) 0%, rgba(5, 5, 5, 0.65) 80%),
-    linear-gradient(180deg, rgba(5, 5, 5, 0.15) 0%, rgba(5, 5, 5, 0.82) 100%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* Slideshow Container */
-.slideshowContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -2;
-}
-
-/* Slide image container */
-.slideImage {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.85) contrast(1.05); /* Brighter editorial architectural print feel */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Layout Grid - Centered Content with Spacious Negative Space */
@@ -58,7 +31,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 860px; /* Expansive width */
+  max-width: 860px;
   width: 100%;
 }
 
@@ -66,43 +39,43 @@
 .accentFrame {
   display: flex;
   flex-direction: column;
-  gap: 14px; /* Reduced by 10% for tighter spacing */
-  margin-bottom: 28px; /* Reduced by 10% for tighter spacing */
+  gap: 12px;
+  margin-bottom: 24px;
   text-align: left;
 }
 
 .metaTag {
-  font-family: var(--font-primary);
-  font-size: 11px; /* Reduced by 10% for cleaner presentation */
+  font-family: var(--font-technical);
+  font-size: 10px;
   font-weight: 600;
-  color: var(--color-off-white-muted);
-  letter-spacing: 4px; /* Increased tracking slightly */
+  color: var(--color-copper);
+  letter-spacing: 3px;
   text-transform: uppercase;
 }
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(2.9rem, 5vw, 5rem); /* Reduced by 10% for cleaner presentation */
-  font-weight: 400; 
-  line-height: 1.12; 
+  font-size: clamp(2.8rem, 4.8vw, 4.8rem);
+  font-weight: 300; 
+  line-height: 1.1; 
   color: var(--color-off-white);
   letter-spacing: -0.015em; 
 }
 
 .description {
   font-family: var(--font-primary);
-  font-size: 21px; /* Reduced by 10% from 24px */
-  color: var(--color-off-white-muted);
-  line-height: 1.6;
-  max-width: 800px; /* Allowed to span slightly wider */
-  margin-bottom: 24px; /* Reduced margin to bring buttons closer */
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.65;
+  max-width: 560px; /* Aligns to 540-580px width */
+  margin-bottom: 32px;
 }
 
 /* CTAs Row alignment */
 .ctasRow {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Reduced by 10% (from 24px) */
+  gap: 16px;
 }
 
 @media (min-width: 480px) {
@@ -112,55 +85,106 @@
   }
 }
 
-/* WCAG 2.2 SC 2.2.2 — Slideshow Pause/Play Control */
-.slideshowPauseBtn {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  z-index: 10;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(5, 5, 5, 0.6);
-  color: rgba(244, 241, 234, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: border-color 200ms ease, color 200ms ease;
-}
-
-.slideshowPauseBtn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  color: var(--color-off-white);
-}
-
-.slideshowPauseBtn:focus-visible {
-  outline: 2px solid var(--color-off-white);
-  outline-offset: 2px;
-}
-
-/* Service checklist ticks at bottom of Hero content */
+/* Monospace technical checklist ticks at bottom of Hero */
 .ticksRow {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Reduced by 10% (from var(--space-24)) */
-  margin-top: 40px; /* Reduced by 10% (from var(--space-48)) */
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
   font-family: var(--font-technical);
-  font-size: 10px; /* Reduced by 10% from 11px */
-  letter-spacing: 2px;
+  font-size: 9.5px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgba(244, 241, 234, 0.55);
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .tickItem {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
 }
 
-.tickIcon {
+.tickDivider {
   color: var(--color-copper);
-  font-weight: bold;
+  opacity: 0.45;
+  font-weight: 300;
+}
+
+/* Right-Side Atmospheric Blueprint Watermark */
+.blueprintWatermark {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  border: 1px dashed rgba(255, 255, 255, 0.025);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.watermarkLineX {
+  position: absolute;
+  left: -40px;
+  right: -40px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.02) 80%,
+    transparent
+  );
+}
+
+.watermarkLineY {
+  position: absolute;
+  top: -40px;
+  bottom: -40px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.02) 20%,
+    rgba(255, 255, 255, 0.02) 80%,
+    transparent
+  );
+}
+
+.watermarkData {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-technical);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.035); /* Extremely subtle ghost typography */
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.watermarkDataRow {
+  white-space: nowrap;
+}
+
+.watermarkCrosshair {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 960px) {
+  .blueprintWatermark {
+    display: none; /* Hide watermark on tablet/mobile to keep layout clean */
+  }
 }

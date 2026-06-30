@@ -102,7 +102,7 @@ export interface TGBStandardSection {
 export const homeContent = {
   hero: {
     label: "SIGNAGE • FACADES • BRANDING",
-    title: "Built to be Seen.\nMade to be remembered.",
+    title: "Built to be Seen.\nMade to be Remembered.",
     subtitle: "TGB Enterprise is a premium signage manufacturer in Ahmedabad, specializing in custom indoor and outdoor signage solutions for businesses across India. From design and manufacturing to installation and after-sales support, we create signage that elevates brands and leaves a lasting impression.",
     coordinates: "AHMEDABAD, GUJARAT / 23.0225° N, 72.5714° E",
     ctaLabel: "Explore Services"
@@ -111,15 +111,15 @@ export const homeContent = {
   identity: {
     intro: {
       eyebrowStory: "OUR STORY",
-      headingStory: "We Build Visibility\nfor Businesses Across India.",
+      headingStory: "We Build Visibility for Businesses Across India.",
       subheadingStory: "Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.",
       eyebrowWho: "WHO WE ARE",
       headingWho: "More Than Signage.\nA Partner in Building Brand Presence.",
-      paragraph1: "TGB Enterprise is a premium signage manufacturer based in Ahmedabad, Gujarat, delivering custom signage solutions for businesses across India. From retail storefronts and corporate offices to hospitality and commercial spaces, we create signage that combines creativity, craftsmanship, and durability.",
+      paragraph1: "TGB Enterprise is a premium signage manufacturer in Ahmedabad, Gujarat, delivering custom signage solutions for businesses across India. From retail storefronts and corporate offices to hospitality and commercial spaces, we create signage that combines creativity, craftsmanship, and durability.",
       paragraph2: "Our expertise spans LED sign boards, ACP sign boards, acrylic signage, 3D letter signages, neon signs, wayfinding systems, and complete branding solutions—designed and manufactured with uncompromising attention to detail.",
       paragraph3: "What truly sets us apart is our commitment beyond installation. We believe exceptional signage deserves exceptional support, which is why we provide dependable after-sales service and long-term partnerships with every client we serve.",
       closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
-      image: "/assets/images/who_we_are.png",
+      image: "/assets/images/who_we_are.jpg",
       metrics: [
         { value: "100+", label: "Projects Delivered" },
         { value: "5+", label: "Major Cities Served" },
@@ -128,10 +128,10 @@ export const homeContent = {
       ],
       featuredClientsTitle: "Trusted by Growing Businesses and Established Brands",
       featuredClients: [
-        "Speranza Legal Associates",
-        "Speranza Tiles",
         "Grey Eminence",
-        "Infinity AV Solution"
+        "Infinity AV Solution",
+        "Speranza Legal Associates",
+        "Speranza Tiles"
       ],
       trustBadges: [
         "Premium Materials",
@@ -191,34 +191,34 @@ export const homeContent = {
       {
         number: "01",
         icon: "ShieldCheck",
-        category: "ILLUMINATION",
-        title: "Lights That Don't Fade",
-        description: "Premium LED systems engineered to maintain brightness for years and backed by a comprehensive 5-year warranty.",
-        techLabel: "5 YEAR WARRANTY"
+        category: "QUALITY",
+        title: "Built to Last",
+        description: "Premium materials and engineering designed for long-term performance and lasting visual impact.",
+        techLabel: "Premium Quality"
       },
       {
         number: "02",
         icon: "CloudSun",
         category: "MATERIALS",
-        title: "Built For Every Season",
-        description: "UV-resistant cast acrylic, durable ACP and SS304 materials selected to withstand harsh environments.",
-        techLabel: "WEATHER RESISTANT"
+        title: "Materials That Endure",
+        description: "From ACP and acrylic to stainless steel and LED systems, every component is selected for durability and reliability.",
+        techLabel: "Weather Resistant"
       },
       {
         number: "03",
         icon: "Factory",
-        category: "PRODUCTION",
-        title: "Made Entirely In-House",
-        description: "Every component is designed, manufactured and quality checked under one roof to ensure uncompromising quality.",
-        techLabel: "100% IN-HOUSE"
+        category: "EXECUTION",
+        title: "End-to-End Execution",
+        description: "From concept and manufacturing to installation and support, every project is managed with precision and complete quality control.",
+        techLabel: "Complete Solutions"
       },
       {
         number: "04",
         icon: "BadgeCheck",
-        category: "TRUST",
-        title: "Trusted By Brands", /* Shortened from "Trusted Across Gujarat" just in case */
-        description: "Chosen by startups, businesses and leading brands to build identities that represent them with confidence.",
-        techLabel: "ESTABLISHED TRUST" /* Shortened from "MOST TRUSTED BRAND IN GUJARAT" */
+        category: "SUPPORT",
+        title: "Relationships Beyond Delivery",
+        description: "Reliable after-sales service and long-term partnerships are at the heart of everything we do.",
+        techLabel: "Customer First"
       }
     ],
     leadershipLabel: "",
@@ -450,5 +450,78 @@ export const homeContent = {
     title: "Incorporate Identity into Your Architectural Plan",
     description: "Connect with our engineering office in Ahmedabad to discuss structural requirements, load distributions, and material specifications for your project.",
     actionLabel: "Initiate Technical Briefing"
+  },
+
+  featuredProjects: {
+    header: {
+      eyebrow: "OUR WORK",
+      heading: "Selected Projects That Define Visibility.",
+      subheading: "Every project is an opportunity to transform a space and strengthen a brand. As a leading signage manufacturer in Ahmedabad, we design and deliver custom signage projects and premium signage solutions for businesses across India."
+    },
+    items: [
+      {
+        id: "sperenza-legal",
+        category: "Corporate Signage",
+        project: "Sperenza Legal Associates",
+        location: "Ahmedabad, Gujarat",
+        description: "A premium corporate signage solution designed to reflect professionalism, trust, and a strong brand identity. One of our landmark corporate signage projects.",
+        buttonText: "View Project →",
+        imagePath: "/assets/images/projects/sperenza-legal.jpg",
+        client: "Sperenza Legal Associates",
+        dimensions: "1.8m x 1.2m",
+        materials: "Brushed 316 Stainless Steel, LED Halo Systems",
+        engineering: "Custom internal acrylic light guides to achieve a balanced, uniform glow silhouette."
+      },
+      {
+        id: "speranza-tiles",
+        category: "Retail Signage",
+        project: "Speranza Tiles",
+        location: "Ahmedabad, Gujarat",
+        description: "Custom exterior branding and illuminated signage created to enhance visibility and elevate the customer experience. Premium retail signage solutions.",
+        buttonText: "View Project →",
+        imagePath: "/assets/images/projects/speranza-tiles.jpg",
+        client: "Speranza Tiles",
+        dimensions: "4.5m x 1.5m",
+        materials: "Weatherproof ACP Cladding, Dual-Layer Acrylic 3D Letters",
+        engineering: "Reinforced back-frame trussing to ensure wind-load safety compliance on high facades."
+      },
+      {
+        id: "grey-eminence",
+        category: "Corporate Branding",
+        project: "Grey Eminence",
+        location: "Mumbai, Maharashtra",
+        description: "Modern signage and branding solutions crafted to deliver a sophisticated and memorable business presence. Custom signage projects with high architectural standards.",
+        buttonText: "View Project →",
+        imagePath: "/assets/images/projects/grey-eminence.jpg",
+        client: "Grey Eminence Group",
+        dimensions: "2.2m x 0.8m",
+        materials: "Chemically Patinated Copper, Sandstone Monolith",
+        engineering: "Controlled chemical oxidation finish with multiple matte protective coatings."
+      },
+      {
+        id: "infinity-av",
+        category: "Commercial Signage",
+        project: "Infinity AV Solution",
+        location: "Bengaluru, Karnataka",
+        description: "A complete signage solution combining design, precision manufacturing, and professional installation. High-impact commercial signage projects.",
+        buttonText: "View Project →",
+        imagePath: "/assets/images/projects/infinity-av.jpg",
+        client: "Infinity AV Solutions",
+        dimensions: "3.6m x 1.2m",
+        materials: "Anodized Aluminum, Neon Edge Lighting, Dynamic LED Boards",
+        engineering: "Fully integrated addressable LED controllers for smooth dimming animations."
+      }
+    ],
+    cta: {
+      heading: "Have a project in mind?",
+      description: "Let's create signage that transforms your space and makes your brand impossible to ignore.",
+      buttonLabel: "View All Projects →",
+      buttonLink: "/projects"
+    },
+    stats: [
+      { value: "100+", label: "Projects Delivered" },
+      { value: "5+", label: "Cities Served" },
+      { value: "Pan India", label: "Service Capability" }
+    ]
   }
 };

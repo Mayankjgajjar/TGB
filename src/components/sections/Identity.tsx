@@ -66,103 +66,86 @@ export const Identity: React.FC = () => {
   const yBg = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section id="about" className={styles.section} ref={sectionRef}>
-      <div className={styles.inner}>
+    <div className={styles.identityWrapper}>
+      {/* ══════════════════════════════════════════
+          ZONE 0 — ABOUT / WHO WE ARE
+      ══════════════════════════════════════════ */}
+      <section id="about" className={styles.aboutSection} ref={sectionRef}>
+        <div className={styles.inner}>
+          <motion.div 
+            className={styles.introSection}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+          >
+            {/* TOP HEADER */}
+            <motion.div className={styles.introTopHeader} variants={fadeUp}>
+              <span className={styles.introEyebrow}>{intro.eyebrowStory}</span>
+              <h2 className={styles.introTitle}>
+                {intro.headingStory.split('\n').map((line, i, arr) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    {i < arr.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </h2>
+              <p className={styles.introSubheading}>{intro.subheadingStory}</p>
+            </motion.div>
 
-        {/* ══════════════════════════════════════════
-            ZONE 0 — ABOUT / WHO WE ARE
-        ══════════════════════════════════════════ */}
-        <motion.div 
-          className={styles.introSection}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
-          {/* TOP HEADER */}
-          <motion.div className={styles.introTopHeader} variants={fadeUp}>
-            <span className={styles.introEyebrow}>{intro.eyebrowStory}</span>
-            <h2 className={styles.introTitle}>
-              {intro.headingStory.split('\n').map((line, i, arr) => (
-                <React.Fragment key={i}>
-                  {line}
-                  {i < arr.length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </h2>
-            <p className={styles.introSubheading}>{intro.subheadingStory}</p>
-          </motion.div>
-
-          {/* TWO-COLUMN SPLIT */}
-          <div className={styles.introSplit}>
-            {/* Left Column: Image with parallax effect */}
-            <motion.div className={styles.introImageCol} variants={fadeUp}>
-              <motion.div 
-                className={styles.introImage} 
-                style={{ 
-                  y: yBg,
-                  backgroundImage: `url(${intro.image})` 
-                }}
-              >
-                <div className={styles.introImageOverlay} />
+            {/* TWO-COLUMN SPLIT */}
+            <div className={styles.introSplit}>
+              {/* Left Column: Image with parallax effect */}
+              <motion.div className={styles.introImageCol} variants={fadeUp}>
+                <motion.div 
+                  className={styles.introImage} 
+                  style={{ 
+                    y: yBg,
+                    backgroundImage: `url(${intro.image})` 
+                  }}
+                >
+                  <div className={styles.introImageOverlay} />
+                </motion.div>
               </motion.div>
-            </motion.div>
 
-            {/* Right Column: Story Text */}
-            <motion.div className={styles.introContentCol} variants={fadeUp}>
-              <div className={styles.introTextWrapper}>
-                <span className={styles.introEyebrow}>{intro.eyebrowWho}</span>
-                <h3 className={styles.whoTitle}>
-                  {intro.headingWho.split('\n').map((line, i, arr) => (
-                    <React.Fragment key={i}>
-                      {line}
-                      {i < arr.length - 1 && <br />}
-                    </React.Fragment>
+              {/* Right Column: Story Text */}
+              <motion.div className={styles.introContentCol} variants={fadeUp}>
+                <div className={styles.introTextWrapper}>
+                  <span className={styles.introEyebrow}>{intro.eyebrowWho}</span>
+                  <h3 className={styles.whoTitle}>
+                    {intro.headingWho.split('\n').map((line, i, arr) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        {i < arr.length - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </h3>
+                  <p className={styles.introPara}>{intro.paragraph1}</p>
+                  <p className={styles.introPara}>{intro.paragraph2}</p>
+                  <p className={styles.introPara}>{intro.paragraph3}</p>
+                </div>
+
+                {/* 2x2 Stats Grid inside Right Column */}
+                <div className={styles.rightColStatsGrid}>
+                  {intro.metrics.map((metric, i) => (
+                    <div key={i} className={styles.rightColStatCard}>
+                      <span className={styles.rightColStatValue}>{metric.value}</span>
+                      <span className={styles.rightColStatLabel}>{metric.label}</span>
+                    </div>
                   ))}
-                </h3>
-                <p className={styles.introPara}>{intro.paragraph1}</p>
-                <p className={styles.introPara}>{intro.paragraph2}</p>
-                <p className={styles.introPara}>{intro.paragraph3}</p>
-              </div>
-
-              {/* 2x2 Stats Grid inside Right Column */}
-              <div className={styles.rightColStatsGrid}>
-                {intro.metrics.map((metric, i) => (
-                  <div key={i} className={styles.rightColStatCard}>
-                    <span className={styles.rightColStatValue}>{metric.value}</span>
-                    <span className={styles.rightColStatLabel}>{metric.label}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* FEATURED CLIENTS */}
-          <div className={styles.clientsSection}>
-            <h4 className={styles.clientsTitle}>{intro.featuredClientsTitle}</h4>
-            <div className={styles.sliderContainer}>
-              <div className={styles.marqueeTrack}>
-                {[
-                  ...intro.featuredClients,
-                  "And many more...",
-                  ...intro.featuredClients,
-                  "And many more...",
-                  ...intro.featuredClients,
-                  "And many more...",
-                  ...intro.featuredClients,
-                  "And many more..."
-                ].map((client, i) => (
-                  <span key={i} className={styles.clientItem}>
-                    {client}
-                  </span>
-                ))}
-              </div>
+                </div>
+              </motion.div>
             </div>
-          </div>
-
-          {/* WHY BUSINESSES TRUST TGB */}
+          </motion.div>
+        </div>
+      </section>
+      {/* ══════════════════════════════════════════
+          WHY BUSINESSES TRUST TGB
+      ══════════════════════════════════════════ */}
+      <section className={styles.trustSection}>
+        <div className={styles.inner}>
           <div className={styles.trustBadgesSection}>
             <div className={styles.trustSectionHeader}>
-              <h4 className={styles.trustTitle}>{identity.trustTitle}</h4>
+              <h2 className={styles.trustTitle}>{identity.trustTitle}</h2>
               <p className={styles.trustSubtitle}>{identity.trustSubtitle}</p>
             </div>
             <div className={styles.featureGrid}>
@@ -191,12 +174,14 @@ export const Identity: React.FC = () => {
               })}
             </div>
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* ══════════════════════════════════════════
-            ZONE 4 — LEADERSHIP TEAM
-        ══════════════════════════════════════════ */}
-        <div>
+      {/* ══════════════════════════════════════════
+          ZONE 4 — LEADERSHIP TEAM
+      ══════════════════════════════════════════ */}
+      <section className={styles.leadershipSection}>
+        <div className={styles.inner}>
           <motion.div
             className={styles.headerBlock}
             initial={{ opacity: 0, y: 20 }}
@@ -223,6 +208,7 @@ export const Identity: React.FC = () => {
                       src={leader.image} 
                       alt={leader.name} 
                       className={styles.leaderImage} 
+                      loading="lazy"
                     />
                   )}
                   <div className={styles.leaderImageOverlay} />
@@ -237,29 +223,11 @@ export const Identity: React.FC = () => {
             ))}
           </motion.div>
         </div>
+      </section>
 
-        {/* CLOSING STATEMENT */}
-        <motion.div 
-          className={styles.closingSection}
-          variants={fadeUp}
-        >
-          <p className={styles.closingQuote}>
-            "Because great signage isn't simply made to be seen. <br />
-            It's made to represent your brand for years to come."
-          </p>
-        </motion.div>
-
-
-
-
-
-      </div>
-
+      {/* SERVICES OVERVIEW */}
       <ServicesOverview />
-
-
-
-    </section>
+    </div>
   );
 };
 

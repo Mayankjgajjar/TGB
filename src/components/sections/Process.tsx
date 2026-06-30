@@ -1,72 +1,133 @@
 import React from 'react';
-import { homeContent } from '../../content/home';
-import Section from '../ui/Section';
-import Container from '../ui/Container';
-import Heading from '../ui/Heading';
-import Label from '../ui/Label';
-import Grid from '../ui/Grid';
+import { motion } from 'framer-motion';
+import { Search, Pencil, Hammer, Truck, HeartHandshake } from 'lucide-react';
+import { EASE_EXPO } from '../../animations/variants';
+import styles from './Process.module.css';
+
+const steps = [
+  {
+    icon: Search,
+    number: '01',
+    category: 'STAGE 01',
+    label: 'Understanding Your Vision',
+    title: 'Consultation & Discovery',
+    description: 'We begin by understanding your business, objectives, space, and branding requirements to recommend the right custom signage solutions.',
+    tag: 'Discovery Phase',
+  },
+  {
+    icon: Pencil,
+    number: '02',
+    category: 'STAGE 02',
+    label: 'Turning Ideas Into Concepts',
+    title: 'Design & Visualization',
+    description: 'Our team develops layouts and visual representations aligning with brand identity and signage design standards.',
+    tag: 'Design Phase',
+  },
+  {
+    icon: Hammer,
+    number: '03',
+    category: 'STAGE 03',
+    label: 'Built With Precision',
+    title: 'Manufacturing & Fabrication',
+    description: 'Using premium materials, our signage manufacturing process ensures every sign is built to the highest quality and durability standards.',
+    tag: 'Production Phase',
+  },
+  {
+    icon: Truck,
+    number: '04',
+    category: 'STAGE 04',
+    label: 'Seamless Delivery',
+    title: 'Installation & Execution',
+    description: 'Our experienced team ensures professional signage installation with meticulous attention to detail, safety compliance, and robust engineering.',
+    tag: 'Installation Phase',
+  },
+  {
+    icon: HeartHandshake,
+    number: '05',
+    category: 'STAGE 05',
+    label: 'Relationships Beyond Delivery',
+    title: 'After-Sales Support',
+    description: 'Our commitment continues past completion with dedicated maintenance, warrantied assurance, and long-term client support.',
+    tag: 'Support Phase',
+  },
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: EASE_EXPO }
+  }
+};
 
 export const Process: React.FC = () => {
-  const { header, stages } = homeContent.process;
-
   return (
-    <Section id="process" dividerBottom spacing="large">
-      <Container>
-        {/* Section Header */}
-        <div style={{ marginBottom: 'var(--space-64)', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-          <div>
-            <Label showMarker style={{ marginBottom: 'var(--space-12)' }}>{header.label}</Label>
-            <Heading level={2}>{header.title}</Heading>
-          </div>
-          <span style={{ fontFamily: 'var(--font-technical)', fontSize: 'var(--font-size-xs)', color: 'var(--color-steel)' }}>
-            {header.coordinates}
-          </span>
-        </div>
+    <section className={styles.section} id="process">
+      <div className={styles.inner}>
 
-        {/* Process Stages Grid */}
-        <Grid cols={4} gap="large">
-          {stages.map((stage, index) => (
-            <div 
-              key={index} 
-              style={{ 
-                borderTop: '1px solid var(--color-steel-dark)', 
-                paddingTop: 'var(--space-24)', 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: 'var(--space-16)' 
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-technical)', fontSize: 'var(--font-size-xs)', color: 'var(--color-copper)' }}>
-                  {stage.step}
-                </span>
-                <span style={{ fontFamily: 'var(--font-technical)', fontSize: '11px', color: 'var(--color-steel)' }}>
-                  {stage.duration}
-                </span>
-              </div>
-              <Heading level={3} style={{ fontSize: 'var(--font-size-md)', fontFamily: 'var(--font-primary)', fontWeight: '500' }}>
-                {stage.title}
-              </Heading>
-              <p style={{ color: 'var(--color-off-white-muted)', fontSize: 'var(--font-size-sm)', flexGrow: 1 }}>
-                {stage.description}
-              </p>
-              <div style={{ marginTop: 'var(--space-8)' }}>
-                <span style={{ fontFamily: 'var(--font-technical)', fontSize: '10px', color: 'var(--color-steel)', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  Deliverables:
-                </span>
-                <ul style={{ marginTop: '4px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  {stage.deliverables.map((item, dIndex) => (
-                    <li key={dIndex} style={{ fontSize: '11px', color: 'var(--color-steel)' }}>
-                      • {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </Grid>
-      </Container>
-    </Section>
+        {/* ── Section Header ── */}
+        <motion.div
+          className={styles.headerBlock}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE_EXPO }}
+        >
+          <span className={styles.eyebrow}>HOW WE WORK</span>
+          <h2 className={styles.heading}>From Concept to Completion.</h2>
+          <p className={styles.subheading}>
+            Every signage project follows a carefully structured process to ensure precision, quality,
+            and a seamless experience from the first conversation to long-term support.
+          </p>
+        </motion.div>
+
+        {/* ── Cards Grid ── */}
+        <motion.div
+          className={styles.grid}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={idx}
+                className={styles.card}
+                variants={cardVariants}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className={styles.cardIconWrapper}>
+                  <Icon className={styles.cardIcon} strokeWidth={1.25} />
+                </div>
+                <span className={styles.cardCategory}>{step.category}</span>
+                <span className={styles.stepLabel}>{step.label}</span>
+                <h3 className={styles.cardTitle}>{step.title}</h3>
+                <p className={styles.cardDesc}>{step.description}</p>
+                <span className={styles.cardTag}>{step.tag}</span>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* ── Bottom Statement ── */}
+        <p className={styles.bottomStatement}>
+          "Every project is different. Our commitment to quality, craftsmanship, and customer
+          satisfaction remains the same as a trusted signage manufacturer in Ahmedabad."
+        </p>
+
+      </div>
+    </section>
   );
 };
 
