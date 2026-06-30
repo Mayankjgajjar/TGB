@@ -1,5 +1,11 @@
 import { Resend } from 'resend';
 
+declare const process: {
+  env: {
+    [key: string]: string | undefined;
+  };
+};
+
 // Initialize Resend client with Vercel environment variable
 const resend = new Resend(process.env.RESEND_API_KEY);
 
