@@ -97,7 +97,7 @@ export const ContactCTA: React.FC = () => {
   );
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const validationErrors = validateForm(formState);
 
@@ -113,14 +113,39 @@ export const ContactCTA: React.FC = () => {
       }
 
       setIsSubmitting(true);
-      // Simulated async submission — replace with real API call
-      setTimeout(() => {
-        setIsSubmitting(false);
+      
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: formState.firstName,
+            lastName: formState.lastName,
+            phone: formState.phone,
+            email: formState.email,
+            company: formState.company,
+            location: formState.location,
+            signage: formState.signageType,
+            message: formState.message,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send inquiry.');
+        }
+
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
         setErrors({});
         setTouched({});
-      }, 1200);
+      } catch (error) {
+        console.error('Error submitting contact form:', error);
+        alert('We encountered an issue submitting your inquiry. Please try again or contact us directly.');
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     [formState]
   );
@@ -436,8 +461,8 @@ export const ContactCTA: React.FC = () => {
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
-                  <a href="mailto:tgbenterprise@proton.me" className={styles.infoLink}>
-                    tgbenterprise@proton.me
+                  <a href="mailto:tgbsign@proton.me" className={styles.infoLink}>
+                    tgbsign@proton.me
                   </a>
                 </div>
               </div>

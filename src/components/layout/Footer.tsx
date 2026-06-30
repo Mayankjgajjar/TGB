@@ -108,7 +108,7 @@ export const Footer: React.FC = () => {
               </p>
               <p className={styles.contactText}>
                 <strong>Email:</strong><br />
-                <a href="mailto:tgbenterprise@proton.me" className={styles.contactAnchor}>tgbenterprise@proton.me</a>
+                <a href="mailto:tgbsign@proton.me" className={styles.contactAnchor}>tgbsign@proton.me</a>
               </p>
               <p className={styles.contactText} style={{ opacity: 0.8, fontSize: '12px', fontStyle: 'italic' }}>
                 Serving businesses across India.
