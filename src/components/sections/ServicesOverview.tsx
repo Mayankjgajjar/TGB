@@ -152,6 +152,7 @@ export const ServicesOverview: React.FC = () => {
           {HOMEPAGE_SERVICES.map((service, index) => (
             <motion.div
               key={service.slug}
+              className={styles.cardWrapper}
               variants={cardVariants}
               custom={index}
             >

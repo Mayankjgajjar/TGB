@@ -56,6 +56,12 @@
   gap: 24px;
 }
 
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 /* ── Individual Service Card ── */
 .serviceCard {
   position: relative;

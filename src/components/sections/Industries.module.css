@@ -67,6 +67,12 @@
   gap: 20px;
 }
 
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 /* ── Individual Card ── */
 .card {
   position: relative;

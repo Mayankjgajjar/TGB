@@ -136,6 +136,7 @@ export const Industries: React.FC = () => {
           {industries.map((industry, index) => (
             <motion.div
               key={index}
+              className={styles.cardWrapper}
               variants={cardVariants}
               custom={index}
             >
