@@ -103,21 +103,6 @@ const getAltTextForService = (slug: string, name: string): string => {
 
 export const ServicesOverview: React.FC = () => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
-  const [selectedServiceSlug, setSelectedServiceSlug] = useState<string | null>(null);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (selectedServiceSlug) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [selectedServiceSlug]);
-
-  const activeService = selectedServiceSlug ? servicesData[selectedServiceSlug] : null;
 
   const cardVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
@@ -177,144 +162,13 @@ export const ServicesOverview: React.FC = () => {
                 title={service.name}
                 description={service.description}
                 footerPill={service.footerBadge}
-                onClick={() => setSelectedServiceSlug(service.slug)}
+                to={`/services/${service.slug}`}
                 imageAlt={getAltTextForService(service.slug, service.name)}
               />
             </motion.div>
           ))}
         </motion.div>
       </Container>
-
-      {/* SERVICE DETAILS MODAL */}
-      <AnimatePresence>
-        {activeService && (
-          <motion.div 
-            className={styles.modalOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedServiceSlug(null)}
-          >
-            <motion.div 
-              className={styles.modalWindow}
-              data-lenis-prevent
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button className={styles.modalCloseBtn} onClick={() => setSelectedServiceSlug(null)}>
-                <X size={18} />
-              </button>
-
-              {/* Modal Hero */}
-              <div className={styles.modalHero}>
-                <img src={activeService.heroImage} alt={`${getAltTextForService(activeService.slug, activeService.name)} details`} className={styles.modalHeroImage} />
-                <div className={styles.modalHeroOverlay} />
-                <div className={styles.modalHeroContent}>
-                  <span className={styles.modalSlug}>SERVICE DETAILS</span>
-                  <h2 className={styles.modalTitle}>{activeService.name}</h2>
-                  <p className={styles.modalPositioning}>{activeService.positioning}</p>
-                </div>
-              </div>
-
-              {/* Modal Body */}
-              <div className={styles.modalBody}>
-                {/* Left Column */}
-                <div className={styles.modalLeftCol}>
-                  <div>
-                    <span className={styles.modalLabel}>Overview</span>
-                    <p className={styles.modalDescText}>{activeService.overview.description}</p>
-                  </div>
-
-                  <div>
-                    <span className={styles.modalLabel}>Primary Applications</span>
-                    <div className={styles.modalChipGrid}>
-                      {activeService.industriesServed.map((ind, idx) => (
-                        <span key={idx} className={styles.modalChip}>{ind}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className={styles.modalLabel}>Delivery Process</span>
-                    <div className={styles.modalProcessList}>
-                      {activeService.process.map((step, idx) => (
-                        <div key={idx} className={styles.modalProcessItem}>
-                          <span className={styles.modalProcessStep}>{step.step}</span>
-                          <div className={styles.modalProcessInfo}>
-                            <h4 className={styles.modalProcessTitle}>{step.title}</h4>
-                            <p className={styles.modalProcessDesc}>{step.description}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Column */}
-                <div className={styles.modalRightCol}>
-                  <div>
-                    <span className={styles.modalLabel}>Capabilities</span>
-                    <div style={{ marginBottom: '16px' }}>
-                      <div style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>Materials</div>
-                      <div className={styles.modalChipGrid}>
-                        {activeService.capabilities.materials.map((m, idx) => (
-                          <span key={idx} className={styles.modalChip}>{m}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div style={{ marginBottom: '16px' }}>
-                      <div style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>Technology</div>
-                      <div className={styles.modalChipGrid}>
-                        {activeService.capabilities.technology.map((t, idx) => (
-                          <span key={idx} className={styles.modalChip}>{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>Finishes</div>
-                      <div className={styles.modalChipGrid}>
-                        {activeService.capabilities.finishes.map((f, idx) => (
-                          <span key={idx} className={styles.modalChip}>{f}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <span className={styles.modalLabel}>Technical Specifications</span>
-                    <div className={styles.modalSpecsList}>
-                      <div className={styles.modalSpecRow}>
-                        <span className={styles.modalSpecName}>Scale Range</span>
-                        <span className={styles.modalSpecVal}>{activeService.specifications.dimensions}</span>
-                      </div>
-                      <div className={styles.modalSpecRow}>
-                        <span className={styles.modalSpecName}>Weathering</span>
-                        <span className={styles.modalSpecVal}>{activeService.specifications.weatherResistance}</span>
-                      </div>
-                      <div className={styles.modalSpecRow}>
-                        <span className={styles.modalSpecName}>Warranty</span>
-                        <span className={styles.modalSpecVal}>{activeService.specifications.warranty}</span>
-                      </div>
-                      <div className={styles.modalSpecRow}>
-                        <span className={styles.modalSpecName}>Certifications</span>
-                        <span className={styles.modalSpecVal}>{activeService.specifications.certifications}</span>
-                      </div>
-                      <div className={styles.modalSpecRow}>
-                        <span className={styles.modalSpecName}>Maintenance</span>
-                        <span className={styles.modalSpecVal}>{activeService.specifications.maintenance}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

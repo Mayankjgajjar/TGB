@@ -7,6 +7,7 @@ import Home from './pages/Home';
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 
 // Minimal, accessible loading fallback shown while code-split chunks load
 const PageLoader = () => (
@@ -42,6 +43,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <ProjectDetail />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services/:serviceId',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ServiceDetail />
           </Suspense>
         ),
       },
