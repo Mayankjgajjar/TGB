@@ -201,7 +201,12 @@ export const Identity: React.FC = () => {
             animate={isInView ? 'visible' : 'hidden'}
           >
             {identity.leaders.map((leader, i) => (
-              <motion.div key={i} className={styles.leaderCard} variants={fadeUp}>
+              <motion.div
+                key={i}
+                className={styles.leaderCard}
+                variants={fadeUp}
+                whileHover={{ scale: 1.005 }}
+              >
                 <div className={styles.leaderImageContainer}>
                   {leader.image && (
                     <img 

@@ -1,63 +1,77 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { EASE_EXPO } from '../../animations/variants';
 import styles from './Testimonials.module.css';
 
 const testimonials = [
   {
-    client: 'Sperenza Legal Associates',
-    industry: 'Legal Services',
-    review: '"TGB Enterprise delivered exactly what we envisioned. The quality of the signage, attention to detail, and professional installation exceeded our expectations. Their after-sales support truly sets them apart."',
+    client: 'Rajesh Patel',
+    industry: 'Apex Hub',
+    review: '"Exceptional service and top-notch quality! TGB Enterprise designed and installed our LED sign board in Ahmedabad. The finish is premium, and it has drastically improved our storefront visibility."',
     rating: '★★★★★'
   },
   {
-    client: 'Speranza Tiles',
-    industry: 'Retail & Showroom',
-    review: '"From design to execution, the entire process was smooth and professional. The final signage has significantly enhanced our storefront and strengthened our brand presence."',
+    client: 'Amit Shah',
+    industry: 'The Gold Palace',
+    review: '"Highly professional sign board manufacturer Ahmedabad. The 3D gold letter signage they made for our Nikol showroom looks extremely luxurious. Excellent communication and on-time delivery."',
     rating: '★★★★★'
   },
   {
-    client: 'Grey Eminence',
-    industry: 'Corporate',
-    review: '"The team understood our requirements perfectly and delivered a premium signage solution that reflects our brand identity. Their craftsmanship and commitment to quality are exceptional."',
+    client: 'Neha Gupta',
+    industry: 'Glow & Co.',
+    review: '"Superb craftsmanship! The custom neon sign board they designed for our studio is perfect. The team is very skilled and the installation was clean. Highly recommend TGB!"',
     rating: '★★★★★'
   },
   {
-    client: 'Infinity AV Solution',
-    industry: 'Technology & Commercial',
-    review: '"Professional, responsive, and highly dependable. TGB Enterprise handled everything from design to installation with precision and delivered a result we are proud of."',
+    client: 'Sanjay Mehta',
+    industry: 'Infra Projects',
+    review: '"We hired TGB Enterprise for the INFRA CORP facade branding. They did an outstanding job with the ACP board installation. Their structural engineering and wind-load calculations were highly professional."',
+    rating: '★★★★★'
+  },
+  {
+    client: 'Vikram Rathod',
+    industry: 'City Plaza Manager',
+    review: '"Great experience working with Mayank and Ankit. They provide excellent after-sales support and premium materials. Easily the best sign board company in Nikol, Ahmedabad."',
     rating: '★★★★★'
   }
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: EASE_EXPO }
-  }
-};
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 export const Testimonials: React.FC = () => {
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.72,
+        ease: [0.22, 1, 0.36, 1],
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+      },
+    }),
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className={styles.section} id="testimonials">
+    <section ref={ref} className={styles.section} id="testimonials">
       <div className={styles.inner}>
 
         {/* ── Section Header ── */}
         <motion.div
           className={styles.headerBlock}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE_EXPO }}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
         >
           <span className={styles.eyebrow}>CLIENT EXPERIENCES</span>
           <h2 className={styles.heading}>Trusted by Businesses Across India.</h2>
@@ -70,18 +84,16 @@ export const Testimonials: React.FC = () => {
         {/* ── Testimonial Grid ── */}
         <motion.div
           className={styles.grid}
-          variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          animate={isRevealed ? "visible" : "hidden"}
         >
           {testimonials.map((t, idx) => (
             <motion.div
               key={idx}
               className={styles.card}
               variants={cardVariants}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.25 }}
+              custom={idx}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.02, transition: { duration: 0.25 } }}
             >
               <div className={styles.quoteSymbol}>”</div>
               <div className={styles.rating}>{t.rating}</div>
@@ -94,8 +106,6 @@ export const Testimonials: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
-
-
 
       </div>
     </section>

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 // Lazy-load infrequently visited legal pages to keep the main bundle lean
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
+const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 
 // Minimal, accessible loading fallback shown while code-split chunks load
 const PageLoader = () => (
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'projects/:projectId',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProjectDetail />
+          </Suspense>
+        ),
       },
       {
         path: 'privacy',

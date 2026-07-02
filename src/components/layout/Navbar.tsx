@@ -64,6 +64,18 @@ export const Navbar: React.FC = () => {
     }
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState(null, '', '/');
+      setActiveSection('home');
+    }
+  };
+
   const navLinks = (
     <>
       <a
@@ -110,10 +122,10 @@ export const Navbar: React.FC = () => {
         <div className={styles.inner}>
 
           {/* Top Left: Logo */}
-          <NavLink to="/" className={styles.logoLink}>
+          <NavLink to="/" onClick={handleLogoClick} className={styles.logoLink}>
             <img
               src="/assets/logos/tgb-logo.svg"
-              alt="TGB Enterprise Logo"
+              alt="TGB Enterprise - Sign Board Manufacturer in Nikol, Ahmedabad"
               className={styles.logoImage}
             />
           </NavLink>

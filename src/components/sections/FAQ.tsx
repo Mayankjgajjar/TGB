@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus } from 'lucide-react';
-import { EASE_EXPO } from '../../animations/variants';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import { useQuoteModal } from '../../context/QuoteContext';
 import styles from './FAQ.module.css';
 
@@ -48,6 +48,35 @@ export const FAQ: React.FC = () => {
   const { openModal } = useQuoteModal();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
+  // Dynamic FAQPage Structured Data (JSON-LD)
+  React.useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'faq-schema-markup';
+    script.innerHTML = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById('faq-schema-markup');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
@@ -90,17 +119,27 @@ export const FAQ: React.FC = () => {
     );
   };
 
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className={styles.section} id="faq">
+    <section ref={ref} className={styles.section} id="faq">
       <div className={styles.inner}>
 
         {/* ── Section Header ── */}
         <motion.div
           className={styles.headerBlock}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE_EXPO }}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
         >
           <span className={styles.eyebrow}>FREQUENTLY ASKED QUESTIONS</span>
           <h2 className={styles.heading}>Everything You Need to Know.</h2>

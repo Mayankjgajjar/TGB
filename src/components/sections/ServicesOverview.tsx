@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Layers, Box, Building2, Flame, LayoutGrid, ArrowRight, X } from 'lucide-react';
 import Container from '../ui/Container';
 import Label from '../ui/Label';
+import Card from '../ui/Card';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import { servicesData } from '../../content/services';
 import styles from './ServicesOverview.module.css';
 
@@ -80,18 +82,27 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
   }
 ];
 
-// Module-level constant — not recreated on every render
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+const getAltTextForService = (slug: string, name: string): string => {
+  switch (slug) {
+    case "led-sign-boards":
+      return "LED sign board installation Ahmedabad by TGB Enterprise";
+    case "acp-sign-boards":
+      return "ACP signage fabrication TGB Enterprise in Ahmedabad";
+    case "acrylic-letters":
+      return "acrylic 3D letter signage Nikol Ahmedabad";
+    case "ss-letters":
+      return "SS 3D letter signage corporate office Ahmedabad";
+    case "neon-sign-boards":
+      return "neon sign board custom design Ahmedabad";
+    case "pylon-signs":
+      return "glow sign board and architectural pylon signs Ahmedabad";
+    default:
+      return `${name} - Sign Board Manufacturer in Ahmedabad`;
+  }
 };
 
 export const ServicesOverview: React.FC = () => {
-  const sectionRef = React.useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px 0px' });
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
   const [selectedServiceSlug, setSelectedServiceSlug] = useState<string | null>(null);
 
   // Lock body scroll when modal is open
@@ -108,15 +119,37 @@ export const ServicesOverview: React.FC = () => {
 
   const activeService = selectedServiceSlug ? servicesData[selectedServiceSlug] : null;
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.72,
+        ease: [0.22, 1, 0.36, 1],
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+      },
+    }),
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section ref={sectionRef} className={styles.section} id="services">
+    <section ref={ref} className={styles.section} id="services">
       <Container>
         {/* Section Header */}
         <motion.div 
           className={styles.headerBlock}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
         >
           <span className={styles.eyebrow}>OUR EXPERTISE</span>
           <h2 className={styles.mainTitle}>Signage Solutions Built to Elevate Brands.</h2>
@@ -128,39 +161,27 @@ export const ServicesOverview: React.FC = () => {
         {/* Service Card Grid */}
         <motion.div
           className={styles.editorialGrid}
-          variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          animate={isRevealed ? "visible" : "hidden"}
         >
-          {HOMEPAGE_SERVICES.map((service) => {
-            const Icon = service.icon;
-            return (
-              <motion.button
-                key={service.slug}
-                className={styles.serviceCard}
+          {HOMEPAGE_SERVICES.map((service, index) => (
+            <motion.div
+              key={service.slug}
+              variants={cardVariants}
+              custom={index}
+            >
+              <Card
+                image={service.image}
+                icon={service.icon}
+                category={service.category}
+                title={service.name}
+                description={service.description}
+                footerPill={service.footerBadge}
                 onClick={() => setSelectedServiceSlug(service.slug)}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {/* Image Thumbnail */}
-                <div className={styles.cardImageWrapper}>
-                  <img src={service.image} alt={service.name} className={styles.cardImage} loading="lazy" />
-                  <div className={styles.cardImageOverlay} />
-                  <div className={styles.cardImageBadge}>
-                    <Icon size={16} strokeWidth={1.5} />
-                    <span>{service.category}</span>
-                  </div>
-                </div>
-
-                {/* Content Panel */}
-                <div className={styles.cardContent}>
-                  <h3 className={styles.serviceTitle}>{service.name}</h3>
-                  <p className={styles.serviceDescription}>{service.description}</p>
-                  <span className={styles.footerBadge}>{service.footerBadge}</span>
-                </div>
-              </motion.button>
-            );
-          })}
+                imageAlt={getAltTextForService(service.slug, service.name)}
+              />
+            </motion.div>
+          ))}
         </motion.div>
       </Container>
 
@@ -190,7 +211,7 @@ export const ServicesOverview: React.FC = () => {
 
               {/* Modal Hero */}
               <div className={styles.modalHero}>
-                <img src={activeService.heroImage} alt={activeService.name} className={styles.modalHeroImage} />
+                <img src={activeService.heroImage} alt={`${getAltTextForService(activeService.slug, activeService.name)} details`} className={styles.modalHeroImage} />
                 <div className={styles.modalHeroOverlay} />
                 <div className={styles.modalHeroContent}>
                   <span className={styles.modalSlug}>SERVICE DETAILS</span>

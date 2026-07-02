@@ -182,3 +182,16 @@ section[id],
   margin: 0;
   max-width: 560px;
 }
+
+/* ── Accessibility: Focus Indicators (WCAG AA) ── */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex="0"]:focus-visible {
+  outline: 2px solid var(--color-copper-light) !important;
+  outline-offset: 4px !important;
+}
+

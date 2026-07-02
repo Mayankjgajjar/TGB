@@ -1,13 +1,21 @@
 :root {
-  /* Color System - Premium Architectural Palette (Matte Black & Deep Red) */
-  --color-charcoal-deep: #050505;      /* Matte Black */
-  --color-charcoal-surface: #111111;   /* Deep Charcoal */
-  --color-charcoal-panel: #1c1c1c;     /* Dark Grey */
-  --color-off-white: #f4f1ea;          /* White typography */
-  --color-off-white-muted: #b0afab;    /* Muted typography */
-  --color-copper: #8b0000;             /* Deep Red accent */
-  --color-copper-light: #a60000;       /* Hover state Deep Red */
-  --color-copper-dark: #610000;        /* Shadow Deep Red */
+  /* Color System - Exact Brand Identity (Rich Black & Pure Brand Red) */
+  --color-black: #0A0A0A;       /* Rich black, primary background */
+  --color-black-soft: #141414;  /* Card/section backgrounds */
+  --color-red: #e30005;         /* Exact brand red from vector logo */
+  --color-red-hover: #c20004;   /* Hover state brand red */
+  --color-white: #FFFFFF;       /* Headlines */
+  --color-white-muted: #B8B8B8; /* Body text on dark backgrounds */
+
+  /* Legacy Compatibility Mapping (keeps existing pages unified automatically) */
+  --color-charcoal-deep: var(--color-black);
+  --color-charcoal-surface: var(--color-black-soft);
+  --color-charcoal-panel: #1a1a1a;
+  --color-off-white: var(--color-white);
+  --color-off-white-muted: var(--color-white-muted);
+  --color-copper: var(--color-red);
+  --color-copper-light: var(--color-red-hover);
+  --color-copper-dark: #a10003;
   --color-steel: #8e8d89;              /* Neutral gray labels */
   --color-steel-dark: #2a2a2a;         /* Soft borders */
   --color-steel-deep: #161616;         /* Deeper border shades */
@@ -26,10 +34,20 @@
   --space-128: calc(var(--space-unit) * 16);  /* 128px */
   --space-160: calc(var(--space-unit) * 20);  /* 160px */
 
-  /* Typography Scale */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Typography Scale (Redesigned to Clean Modern Industrial Sans-Serif) */
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-primary: var(--font-body);
   --font-technical: 'JetBrains Mono', monospace;
+
+  /* Font Scale Custom Properties */
+  --text-h1: 56px;
+  --text-h2: 36px;
+  --text-body: 16px;
+
+  --lh-h1: 1.1;
+  --lh-h2: 1.25;
+  --lh-body: 1.6;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;          /* 12px (Monospace labels, sub-meta) */
@@ -73,4 +91,16 @@
   --transition-speed-normal: 0.4s;
   --transition-speed-slow: 0.7s;
   --transition-ease-expo: cubic-bezier(0.16, 1, 0.3, 1); /* easeOutExpo */
+
+  /* Standard Layout Spacing Scale */
+  --space-xs: var(--space-8);                 /* 8px */
+  --space-sm: var(--space-16);                /* 16px */
+  --space-md: var(--space-24);                /* 24px */
+  --space-lg: var(--space-48);                /* 48px */
+  --space-xl: var(--space-96);                /* 96px */
+
+  /* Motion System transition tokens */
+  --transition-fast: var(--transition-speed-fast) var(--transition-ease-expo);
+  --transition-base: var(--transition-speed-normal) var(--transition-ease-expo);
+  --transition-slow: var(--transition-speed-slow) var(--transition-ease-expo);
 }

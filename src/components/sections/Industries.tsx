@@ -11,7 +11,8 @@ import {
   GraduationCap,
   LayoutGrid
 } from 'lucide-react';
-import { EASE_EXPO } from '../../animations/variants';
+import Card from '../ui/Card';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './Industries.module.css';
 
 const industries = [
@@ -80,34 +81,41 @@ const industries = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.07 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: EASE_EXPO },
-  },
-};
-
 export const Industries: React.FC = () => {
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.72,
+        ease: [0.22, 1, 0.36, 1],
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+      },
+    }),
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className={styles.section} id="industries">
+    <section ref={ref} className={styles.section} id="industries">
       <div className={styles.inner}>
 
         {/* ── Section Header ── */}
         <motion.div
           className={styles.headerBlock}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE_EXPO }}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
         >
           <span className={styles.eyebrow}>WHO WE SERVE</span>
           <h2 className={styles.heading}>
@@ -122,33 +130,25 @@ export const Industries: React.FC = () => {
         {/* ── Industry Cards Grid ── */}
         <motion.div
           className={styles.grid}
-          variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
+          animate={isRevealed ? "visible" : "hidden"}
         >
-          {industries.map((industry, index) => {
-            const Icon = industry.icon;
-            return (
-              <motion.div
-                key={index}
-                className={styles.card}
-                variants={cardVariants}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <div className={styles.cardIconWrapper}>
-                  <Icon className={styles.cardIcon} strokeWidth={1.25} />
-                </div>
-                <span className={styles.cardCategory}>{industry.category}</span>
-                <h3 className={styles.cardTitle}>{industry.title}</h3>
-                <p className={styles.cardDesc}>{industry.description}</p>
-                <span className={styles.cardTag}>{industry.tag}</span>
-              </motion.div>
-            );
-          })}
+          {industries.map((industry, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              custom={index}
+            >
+              <Card
+                icon={industry.icon}
+                category={industry.category}
+                title={industry.title}
+                description={industry.description}
+                footerPill={industry.tag}
+              />
+            </motion.div>
+          ))}
         </motion.div>
-
 
       </div>
     </section>

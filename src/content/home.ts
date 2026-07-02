@@ -103,7 +103,7 @@ export const homeContent = {
   hero: {
     label: "SIGNAGE • FACADES • BRANDING",
     title: "Built to be Seen.\nMade to be Remembered.",
-    subtitle: "TGB Enterprise is a premium signage manufacturer in Ahmedabad, specializing in custom indoor and outdoor signage solutions for businesses across India. From design and manufacturing to installation and after-sales support, we create signage that elevates brands and leaves a lasting impression.",
+    subtitle: "TGB Enterprise is a premium sign board manufacturer in Ahmedabad. Specializing in custom indoor and outdoor LED sign boards, we manage design, fabrication, installation, and dedicated after-sales support across Gujarat and India.",
     coordinates: "AHMEDABAD, GUJARAT / 23.0225° N, 72.5714° E",
     ctaLabel: "Explore Services"
   },
@@ -111,27 +111,27 @@ export const homeContent = {
   identity: {
     intro: {
       eyebrowStory: "OUR STORY",
-      headingStory: "We Build Visibility for Businesses Across India.",
+      headingStory: "We Build Visibility for Businesses Across Gujarat and India.",
       subheadingStory: "Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.",
       eyebrowWho: "WHO WE ARE",
       headingWho: "More Than Signage.\nA Partner in Building Brand Presence.",
-      paragraph1: "TGB Enterprise is a premium signage manufacturer in Ahmedabad, Gujarat, delivering custom signage solutions for businesses across India. From retail storefronts and corporate offices to hospitality and commercial spaces, we create signage that combines creativity, craftsmanship, and durability.",
-      paragraph2: "Our expertise spans LED sign boards, ACP sign boards, acrylic signage, 3D letter signages, neon signs, wayfinding systems, and complete branding solutions—designed and manufactured with uncompromising attention to detail.",
-      paragraph3: "What truly sets us apart is our commitment beyond installation. We believe exceptional signage deserves exceptional support, which is why we provide dependable after-sales service and long-term partnerships with every client we serve.",
+      paragraph1: "As a trusted sign board manufacturer in Ahmedabad, we deliver premium custom signage solutions. We design, manufacture, and install durable, high-impact signage that commands attention and elevates your brand.",
+      paragraph2: "Our custom capabilities span heavy-duty outdoor LED display boards, architectural ACP facade cladding panels, 3D acrylic letters, and custom indoor flex-neon signage—all built to standard specs and high tolerances.",
+      paragraph3: "Operating from our Nikol Ahmedabad workshop, we manage both local and national projects. Our commitment extends far beyond delivery—providing long-term maintenance, warranty assurance, and dependable after-sales service.",
       closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
       image: "/assets/images/who_we_are.jpg",
       metrics: [
         { value: "100+", label: "Projects Delivered" },
         { value: "5+", label: "Major Cities Served" },
-        { value: "Pan India", label: "Service Capability" },
+        { value: "Pan India", label: "Service Footprint" },
         { value: "100%", label: "Customer Commitment" }
       ],
       featuredClientsTitle: "Trusted by Growing Businesses and Established Brands",
       featuredClients: [
-        "Grey Eminence",
-        "Infinity AV Solution",
-        "Speranza Legal Associates",
-        "Speranza Tiles"
+        "INFRA CORP India",
+        "The Gold Palace",
+        "Glow & Co.",
+        "Apex Commercial Hub"
       ],
       trustBadges: [
         "Premium Materials",
@@ -456,60 +456,60 @@ export const homeContent = {
     header: {
       eyebrow: "OUR WORK",
       heading: "Selected Projects That Define Visibility.",
-      subheading: "Every project is an opportunity to transform a space and strengthen a brand. As a leading signage manufacturer in Ahmedabad, we design and deliver custom signage projects and premium signage solutions for businesses across India."
+      subheading: "Every project is an opportunity to transform a space and strengthen a brand. As a leading sign board manufacturer Ahmedabad, we design and deliver custom signage Nikol Ahmedabad projects and premium signage solutions. Proudly serving Ahmedabad and businesses across Gujarat and India."
     },
     items: [
       {
-        id: "sperenza-legal",
-        category: "Corporate Signage",
-        project: "Sperenza Legal Associates",
+        id: "infra-corp-installation",
+        category: "ACP Facade & Corporate Signage",
+        project: "INFRA CORP Headquarters",
         location: "Ahmedabad, Gujarat",
-        description: "A premium corporate signage solution designed to reflect professionalism, trust, and a strong brand identity. One of our landmark corporate signage projects.",
+        description: "A monumental exterior building facade cladding and high-impact corporate branding system. This landmark ACP board and corporate signage installation was fabricated to withstand wind loads while displaying a crisp, professional brand identity.",
         buttonText: "View Project →",
-        imagePath: "/assets/images/projects/sperenza-legal.jpg",
-        client: "Sperenza Legal Associates",
-        dimensions: "1.8m x 1.2m",
-        materials: "Brushed 316 Stainless Steel, LED Halo Systems",
-        engineering: "Custom internal acrylic light guides to achieve a balanced, uniform glow silhouette."
+        imagePath: "/assets/images/projects/infra-corp.png",
+        client: "INFRA CORP India",
+        dimensions: "12.0m x 3.5m",
+        materials: "Weatherproof ACP Cladding, Premium SS 316 Letters, LED Backlit Systems",
+        engineering: "Reinforced architectural steel sub-frame engineered to resist local wind gusts up to 150 km/h."
       },
       {
-        id: "speranza-tiles",
-        category: "Retail Signage",
-        project: "Speranza Tiles",
+        id: "gold-letter-signage",
+        category: "3D Acrylic & Gold Letter Signage",
+        project: "The Gold Palace Showroom",
+        location: "Nikol, Ahmedabad",
+        description: "Elegant 3D acrylic letters with custom gold-titanium finish for a luxury retail storefront. Featuring warm-white halo LED lighting that adds depth and prestige to the storefront entrance.",
+        buttonText: "View Project →",
+        imagePath: "/assets/images/projects/gold-palace.png",
+        client: "The Gold Palace",
+        dimensions: "4.8m x 1.2m",
+        materials: "Gold Titanium Stainless Steel, High-Density Acrylic, Warm LED Halo Modules",
+        engineering: "Blind-pin offset anchoring set into stone facade with neoprene vibration isolation sleeves."
+      },
+      {
+        id: "custom-neon-signage",
+        category: "Custom Neon Signage",
+        project: "Glow & Co. Creative Studio",
         location: "Ahmedabad, Gujarat",
-        description: "Custom exterior branding and illuminated signage created to enhance visibility and elevate the customer experience. Premium retail signage solutions.",
+        description: "Vibrant custom neon sign board custom design Ahmedabad styled for creative indoor visibility. Precision flex-neon layout designed to showcase brand typography with high visual impact.",
         buttonText: "View Project →",
-        imagePath: "/assets/images/projects/speranza-tiles.jpg",
-        client: "Speranza Tiles",
-        dimensions: "4.5m x 1.5m",
-        materials: "Weatherproof ACP Cladding, Dual-Layer Acrylic 3D Letters",
-        engineering: "Reinforced back-frame trussing to ensure wind-load safety compliance on high facades."
+        imagePath: "/assets/images/projects/creative-neon.png",
+        client: "Glow & Co.",
+        dimensions: "2.2m x 1.0m",
+        materials: "Flexible Silicone Neon, Clear Acrylic Backing, Dynamic LED Controllers",
+        engineering: "Addressable LED wiring hidden within a double-layer CNC-routed backing panel."
       },
       {
-        id: "grey-eminence",
-        category: "Corporate Branding",
-        project: "Grey Eminence",
-        location: "Mumbai, Maharashtra",
-        description: "Modern signage and branding solutions crafted to deliver a sophisticated and memorable business presence. Custom signage projects with high architectural standards.",
+        id: "acp-board-installation",
+        category: "LED Glow Sign Board",
+        project: "Apex Commercial Hub",
+        location: "Ahmedabad, Gujarat",
+        description: "A premium ACP sign board Ahmedabad installation featuring laser-cut acrylic 3D letters and under-lit lighting. Engineered for 24/7 visibility and absolute durability under intense weather conditions.",
         buttonText: "View Project →",
-        imagePath: "/assets/images/projects/grey-eminence.jpg",
-        client: "Grey Eminence Group",
-        dimensions: "2.2m x 0.8m",
-        materials: "Chemically Patinated Copper, Sandstone Monolith",
-        engineering: "Controlled chemical oxidation finish with multiple matte protective coatings."
-      },
-      {
-        id: "infinity-av",
-        category: "Commercial Signage",
-        project: "Infinity AV Solution",
-        location: "Bengaluru, Karnataka",
-        description: "A complete signage solution combining design, precision manufacturing, and professional installation. High-impact commercial signage projects.",
-        buttonText: "View Project →",
-        imagePath: "/assets/images/projects/infinity-av.jpg",
-        client: "Infinity AV Solutions",
-        dimensions: "3.6m x 1.2m",
-        materials: "Anodized Aluminum, Neon Edge Lighting, Dynamic LED Boards",
-        engineering: "Fully integrated addressable LED controllers for smooth dimming animations."
+        imagePath: "/assets/images/projects/apex-acp.png",
+        client: "Apex Properties",
+        dimensions: "6.0m x 1.8m",
+        materials: "Architectural Grade ACP, Laser Profile Acrylic, High-Output LED Modules",
+        engineering: "Sub-surface wiring routing with dual-redundant power supplies and automatic dusk-to-dawn sensors."
       }
     ],
     cta: {
@@ -521,7 +521,7 @@ export const homeContent = {
     stats: [
       { value: "100+", label: "Projects Delivered" },
       { value: "5+", label: "Cities Served" },
-      { value: "Pan India", label: "Service Capability" }
+      { value: "Pan India", label: "Service Footprint" }
     ]
   }
 };

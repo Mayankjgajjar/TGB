@@ -6,6 +6,8 @@ import Button from '../ui/Button';
 import Container from '../ui/Container';
 import { homeContent } from '../../content/home';
 import { useQuoteModal } from '../../context/QuoteContext';
+import useScrollReveal from '../../hooks/useScrollReveal';
+import LedWallBackground from '../ui/LedWallBackground';
 import styles from './Hero.module.css';
 
 // Hoisted outside component — recreating on every render is wasteful
@@ -31,6 +33,7 @@ const fadeUp = {
 export const Hero: React.FC = () => {
   const { openModal } = useQuoteModal();
   const { label, title, subtitle, ctaLabel } = homeContent.hero;
+  const { ref, isRevealed } = useScrollReveal();
 
   const handleScrollTo = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -47,9 +50,9 @@ export const Hero: React.FC = () => {
   );
 
   return (
-    <section id="home" className={styles.heroSection} aria-label="Hero">
-      {/* Cinematic Shadow Overlay */}
-      <div className={styles.matteOverlay} />
+    <section id="home" ref={ref} className={styles.heroSection} aria-label="Hero">
+      {/* Animated LED display sign wall background */}
+      <LedWallBackground />
 
       {/* Hero Content */}
       <div className={styles.contentContainer}>
@@ -57,7 +60,7 @@ export const Hero: React.FC = () => {
           <motion.div
             className={styles.presentationPanel}
             initial="hidden"
-            animate="visible"
+            animate={isRevealed ? "visible" : "hidden"}
             variants={textContainer}
           >
             <div className={styles.accentFrame}>

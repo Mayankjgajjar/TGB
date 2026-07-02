@@ -642,11 +642,10 @@
   flex-direction: column;
   overflow: hidden;
   cursor: default;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: border-color 400ms cubic-bezier(0.2, 0, 0, 1), background-color 400ms cubic-bezier(0.2, 0, 0, 1), box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .featureCard:hover {
-  transform: scale(1.005);
   border-color: rgba(255, 255, 255, 0.2); /* Subtle highlight */
   background: #111111; /* Level 3 Solid */
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
@@ -763,7 +762,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   overflow: hidden;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: border-color 400ms cubic-bezier(0.2, 0, 0, 1), background-color 400ms cubic-bezier(0.2, 0, 0, 1), box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 @media (max-width: 768px) {
@@ -773,7 +772,6 @@
 }
 
 .leaderCard:hover {
-  transform: scale(1.005);
   border-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
 }

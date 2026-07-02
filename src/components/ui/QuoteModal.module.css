@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all var(--transition-speed-fast) var(--transition-ease-expo);
+  transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
   z-index: 10;
 }
 

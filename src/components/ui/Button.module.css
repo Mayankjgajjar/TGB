@@ -9,7 +9,7 @@
   text-transform: uppercase;
   letter-spacing: 1.2px;
   border-radius: var(--radius-subtle);
-  transition: all var(--transition-speed-normal) var(--transition-ease-expo);
+  transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
   white-space: nowrap;
   cursor: pointer;
   overflow: hidden;

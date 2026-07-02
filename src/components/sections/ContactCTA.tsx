@@ -65,12 +65,18 @@ const EMPTY_FORM: FormFields = {
 
 // ── Component ──────────────────────────────────────────────────────────────
 
+import useScrollReveal from '../../hooks/useScrollReveal';
+import LedWallBackground from '../ui/LedWallBackground';
+
 export const ContactCTA: React.FC = () => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -99,6 +105,7 @@ export const ContactCTA: React.FC = () => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+      setSubmitError(null);
       const validationErrors = validateForm(formState);
 
       if (Object.keys(validationErrors).length > 0) {
@@ -134,7 +141,7 @@ export const ContactCTA: React.FC = () => {
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || 'Failed to send inquiry.');
+          throw new Error(errorData.error || 'Failed to submit inquiry.');
         }
 
         setIsSubmitted(true);
@@ -143,7 +150,7 @@ export const ContactCTA: React.FC = () => {
         setTouched({});
       } catch (error: any) {
         console.error('Error submitting contact form:', error);
-        alert(`We encountered an issue submitting your inquiry: ${error.message}`);
+        setSubmitError(error.message || 'We encountered an issue submitting your inquiry. Please try again.');
       } finally {
         setIsSubmitting(false);
       }
@@ -153,25 +160,41 @@ export const ContactCTA: React.FC = () => {
 
   const handleReset = useCallback(() => {
     setIsSubmitted(false);
+    setSubmitError(null);
   }, []);
 
   /** Helper to get input className with error state */
   const inputClass = (field: keyof FormFields) =>
     `${styles.textInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
 
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className={styles.section} id="contact">
+    <section ref={ref} className={styles.section} id="contact">
+      <LedWallBackground />
       <div className={styles.container}>
 
         {/* ── Center Header Section ── */}
-        <div className={styles.sectionHeader}>
+        <motion.div 
+          className={styles.sectionHeader}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
+        >
           <span className={styles.eyebrow}>GET IN TOUCH</span>
           <h2 className={styles.title}>Let's Create Signage That Defines Your Brand.</h2>
           <p className={styles.subheading}>
             Whether you're launching a new business, rebranding a storefront, or developing a commercial space,
             TGB Enterprise is ready to transform your vision into a signage solution that leaves a lasting impression.
           </p>
-        </div>
+        </motion.div>
 
         {/* ── Two-Column Layout ── */}
         <div className={styles.splitGrid}>
@@ -316,16 +339,27 @@ export const ContactCTA: React.FC = () => {
                     </div>
                     <div className={styles.inputGroup}>
                       <label htmlFor="location" className={styles.fieldLabel}>Project Location</label>
-                      <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        autoComplete="address-level2"
-                        value={formState.location}
-                        onChange={handleInputChange}
-                        placeholder="e.g. Ahmedabad, Mumbai"
-                        className={styles.textInput}
-                      />
+                      <div className={styles.selectWrapper}>
+                        <select
+                          id="location"
+                          name="location"
+                          value={formState.location}
+                          onChange={handleInputChange}
+                          onBlur={handleBlur}
+                          className={styles.selectInput}
+                        >
+                          <option value="">Select project location</option>
+                          <option value="Ahmedabad">Ahmedabad</option>
+                          <option value="Surat">Surat</option>
+                          <option value="Rajkot">Rajkot</option>
+                          <option value="Vadodara">Vadodara</option>
+                          <option value="Gandhinagar">Gandhinagar</option>
+                          <option value="Mumbai">Mumbai</option>
+                          <option value="Bengaluru">Bengaluru</option>
+                          <option value="Delhi">Delhi</option>
+                          <option value="Other">Other (Gujarat &amp; Pan India)</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
 
@@ -368,6 +402,12 @@ export const ContactCTA: React.FC = () => {
                     />
                   </div>
 
+                  {submitError && (
+                    <div className={styles.formErrorBanner} role="alert">
+                      {submitError}
+                    </div>
+                  )}
+
                   {/* Submit button */}
                   <button
                     type="submit"
@@ -396,7 +436,7 @@ export const ContactCTA: React.FC = () => {
             <div className={styles.studioHeader}>
               <h3 className={styles.studioTitle}>Visit Our Studio</h3>
               <p className={styles.studioSubtitle}>
-                Proudly designing, manufacturing, and installing premium signage solutions for businesses across India.
+                Proudly serving Ahmedabad and businesses across Gujarat and India.
               </p>
             </div>
 
@@ -486,7 +526,7 @@ export const ContactCTA: React.FC = () => {
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Service Area Coverage</span>
                   <span className={styles.infoValue}>
-                    Ahmedabad, Surat, Rajkot, Mumbai, Bengaluru, Delhi, and businesses across India.
+                    Proudly serving Ahmedabad and businesses across Gujarat and India.
                   </span>
                 </div>
               </div>

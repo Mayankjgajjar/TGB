@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Search, Pencil, Hammer, Truck, HeartHandshake } from 'lucide-react';
-import { EASE_EXPO } from '../../animations/variants';
+import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './Process.module.css';
 
 const steps = [
@@ -52,34 +52,41 @@ const steps = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: EASE_EXPO }
-  }
-};
-
 export const Process: React.FC = () => {
+  const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.72,
+        ease: [0.22, 1, 0.36, 1],
+        delay: shouldReduceMotion ? 0 : index * 0.08,
+      },
+    }),
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
+  };
+
   return (
-    <section className={styles.section} id="process">
+    <section ref={ref} className={styles.section} id="process">
       <div className={styles.inner}>
 
         {/* ── Section Header ── */}
         <motion.div
           className={styles.headerBlock}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE_EXPO }}
+          initial="hidden"
+          animate={isRevealed ? "visible" : "hidden"}
+          variants={headerVariants}
         >
           <span className={styles.eyebrow}>HOW WE WORK</span>
           <h2 className={styles.heading}>From Concept to Completion.</h2>
@@ -92,10 +99,8 @@ export const Process: React.FC = () => {
         {/* ── Cards Grid ── */}
         <motion.div
           className={styles.grid}
-          variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          animate={isRevealed ? "visible" : "hidden"}
         >
           {steps.map((step, idx) => {
             const Icon = step.icon;
@@ -104,8 +109,8 @@ export const Process: React.FC = () => {
                 key={idx}
                 className={styles.card}
                 variants={cardVariants}
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                custom={idx}
+                whileHover={shouldReduceMotion ? {} : { y: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
               >
                 <div className={styles.cardIconWrapper}>
                   <Icon className={styles.cardIcon} strokeWidth={1.25} />

@@ -1,0 +1,217 @@
+.card {
+  position: relative;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-card, 16px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  outline: none;
+  transition: border-color var(--transition-base), background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+/* Base interactive styling */
+a.card,
+button.card {
+  cursor: pointer;
+}
+
+a.card:hover,
+button.card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: #111111;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Card variants by content structure */
+.hasImage {
+  padding: 0;
+}
+
+.noImage {
+  padding: var(--space-md) var(--space-md);
+}
+
+/* Image Thumbnail section */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8) contrast(1.02);
+  transition: transform var(--transition-slow), filter var(--transition-base);
+}
+
+.card:hover .image {
+  transform: scale(1.04);
+  filter: brightness(0.92) contrast(1.04);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* Floating category badge over image */
+.imageBadge {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(10, 10, 10, 0.65);
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  transition: color var(--transition-base), border-color var(--transition-base);
+}
+
+.card:hover .imageBadge {
+  color: var(--color-off-white);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Content Panel below Image */
+.cardContent {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--space-xs);
+  box-sizing: border-box;
+}
+
+/* Icon (for icon cards) */
+.iconWrapper {
+  margin-bottom: var(--space-xs);
+  color: var(--color-off-white);
+  opacity: 0.5;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover .iconWrapper {
+  opacity: 1;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* Category Eyebrow text */
+.categoryEyebrow {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+/* Title text */
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--color-off-white);
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: color var(--transition-base);
+}
+
+.card:hover .title {
+  color: var(--color-off-white);
+}
+
+/* Description body */
+.description {
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-off-white-muted);
+  margin: 0 0 var(--space-sm) 0;
+  flex-grow: 1;
+}
+
+/* Footer Badge Pill */
+.footerPill {
+  font-family: var(--font-technical);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: auto;
+  align-self: flex-start;
+  transition: border-color var(--transition-base), color var(--transition-base);
+}
+
+.card:hover .footerPill {
+  border-color: var(--color-copper);
+  color: var(--color-off-white);
+}
+
+/* Link Style CTA */
+.footerLink {
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  color: var(--color-steel);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--transition-base);
+}
+
+.card:hover .footerLink {
+  color: var(--color-copper-light);
+}
+
+.arrow {
+  transition: transform var(--transition-base);
+  display: inline-block;
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+}

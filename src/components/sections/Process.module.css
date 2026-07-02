@@ -77,7 +77,7 @@
   flex-direction: column;
   overflow: hidden;
   cursor: default;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: border-color 400ms cubic-bezier(0.2, 0, 0, 1), background-color 400ms cubic-bezier(0.2, 0, 0, 1), box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .card:hover {
@@ -99,8 +99,8 @@
 }
 
 .cardIcon {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
 }
 
 /* ── Stage Eyebrow ── */
