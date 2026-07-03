@@ -66,7 +66,6 @@ const EMPTY_FORM: FormFields = {
 // ── Component ──────────────────────────────────────────────────────────────
 
 import useScrollReveal from '../../hooks/useScrollReveal';
-import LedWallBackground from '../ui/LedWallBackground';
 
 export const ContactCTA: React.FC = () => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
@@ -178,7 +177,6 @@ export const ContactCTA: React.FC = () => {
 
   return (
     <section ref={ref} className={styles.section} id="contact">
-      <LedWallBackground />
       <div className={styles.container}>
 
         {/* ── Center Header Section ── */}

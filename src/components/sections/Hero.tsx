@@ -7,7 +7,6 @@ import Container from '../ui/Container';
 import { homeContent } from '../../content/home';
 import { useQuoteModal } from '../../context/QuoteContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import LedWallBackground from '../ui/LedWallBackground';
 import styles from './Hero.module.css';
 
 // Hoisted outside component — recreating on every render is wasteful
@@ -51,9 +50,6 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="home" ref={ref} className={styles.heroSection} aria-label="Hero">
-      {/* Animated LED display sign wall background */}
-      <LedWallBackground />
-
       {/* Hero Content */}
       <div className={styles.contentContainer}>
         <Container>

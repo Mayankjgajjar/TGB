@@ -58,6 +58,7 @@ export const Footer: React.FC = () => {
               <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Services</a></li>
               <li><a href="#projects" onClick={(e) => handleAnchorClick(e, 'projects')} className={styles.navLink}>Projects</a></li>
               <li><a href="#contact" onClick={(e) => handleAnchorClick(e, 'contact')} className={styles.navLink}>Contact</a></li>
+              <li><Link to="/claim-warranty" className={styles.navLink}>Claim Warranty</Link></li>
             </ul>
           </div>
 
