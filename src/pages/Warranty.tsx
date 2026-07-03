@@ -9,6 +9,7 @@ interface FormFields {
   email: string;
   phone: string;
   invoiceNumber: string;
+  warrantyNumber: string;
   purchaseDate: string;
   signageType: string;
   issueDetails: string;
@@ -21,6 +22,7 @@ const EMPTY_FORM: FormFields = {
   email: '',
   phone: '',
   invoiceNumber: '',
+  warrantyNumber: '',
   purchaseDate: '',
   signageType: '',
   issueDetails: '',
@@ -43,6 +45,7 @@ const validateForm = (fields: FormFields): FormErrors => {
   }
 
   if (!fields.invoiceNumber.trim()) errors.invoiceNumber = 'Invoice / Order number is required.';
+  if (!fields.warrantyNumber.trim()) errors.warrantyNumber = 'Warranty number is required.';
   if (!fields.purchaseDate.trim()) errors.purchaseDate = 'Purchase date is required.';
   if (!fields.signageType) errors.signageType = 'Please select a signage type.';
   if (!fields.issueDetails.trim()) errors.issueDetails = 'Please provide details about the issue.';
@@ -294,7 +297,7 @@ export const Warranty: React.FC = () => {
                 </div>
               </div>
 
-              {/* Invoice Number & Purchase Date Row */}
+              {/* Invoice Number & Warranty Number Row */}
               <div className={styles.formRow}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="invoiceNumber" className={styles.fieldLabel}>Invoice / Order Number *</label>
@@ -318,6 +321,30 @@ export const Warranty: React.FC = () => {
                 </div>
 
                 <div className={styles.inputGroup}>
+                  <label htmlFor="warrantyNumber" className={styles.fieldLabel}>Warranty Number *</label>
+                  <input
+                    type="text"
+                    id="warrantyNumber"
+                    name="warrantyNumber"
+                    value={formState.warrantyNumber}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="e.g. WR-TGB-9874"
+                    className={inputClass('warrantyNumber')}
+                    aria-invalid={touched.warrantyNumber && !!errors.warrantyNumber}
+                    aria-describedby={errors.warrantyNumber ? 'warrantyNumber-error' : undefined}
+                  />
+                  {touched.warrantyNumber && errors.warrantyNumber && (
+                    <span id="warrantyNumber-error" className={styles.fieldError} role="alert">
+                      {errors.warrantyNumber}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Purchase Date & Signage Type Row */}
+              <div className={styles.formRow}>
+                <div className={styles.inputGroup}>
                   <label htmlFor="purchaseDate" className={styles.fieldLabel}>Purchase Date *</label>
                   <input
                     type="date"
@@ -336,37 +363,36 @@ export const Warranty: React.FC = () => {
                     </span>
                   )}
                 </div>
-              </div>
 
-              {/* Signage Type */}
-              <div className={styles.inputGroup}>
-                <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage *</label>
-                <div className={styles.selectWrapper}>
-                  <select
-                    id="signageType"
-                    name="signageType"
-                    value={formState.signageType}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={selectClass()}
-                    aria-invalid={touched.signageType && !!errors.signageType}
-                    aria-describedby={errors.signageType ? 'signageType-error' : undefined}
-                  >
-                    <option value="">Select signage type</option>
-                    <option value="LED Sign Board">LED Sign Board</option>
-                    <option value="ACP Sign Board">ACP Sign Board</option>
-                    <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
-                    <option value="Neon Signage">Neon Signage</option>
-                    <option value="Corporate Signage">Corporate Signage</option>
-                    <option value="Indoor/Outdoor Systems">Indoor & Outdoor Signage Systems</option>
-                    <option value="Other">Other</option>
-                  </select>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage *</label>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      id="signageType"
+                      name="signageType"
+                      value={formState.signageType}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={selectClass()}
+                      aria-invalid={touched.signageType && !!errors.signageType}
+                      aria-describedby={errors.signageType ? 'signageType-error' : undefined}
+                    >
+                      <option value="">Select signage type</option>
+                      <option value="LED Sign Board">LED Sign Board</option>
+                      <option value="ACP Sign Board">ACP Sign Board</option>
+                      <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
+                      <option value="Neon Signage">Neon Signage</option>
+                      <option value="Corporate Signage">Corporate Signage</option>
+                      <option value="Indoor/Outdoor Systems">Indoor & Outdoor Signage Systems</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  {touched.signageType && errors.signageType && (
+                    <span id="signageType-error" className={styles.fieldError} role="alert">
+                      {errors.signageType}
+                    </span>
+                  )}
                 </div>
-                {touched.signageType && errors.signageType && (
-                  <span id="signageType-error" className={styles.fieldError} role="alert">
-                    {errors.signageType}
-                  </span>
-                )}
               </div>
 
               {/* Issue Details */}

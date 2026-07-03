@@ -21,6 +21,7 @@ export default async function handler(req: any, res: any) {
       email,
       phone,
       invoiceNumber,
+      warrantyNumber,
       purchaseDate,
       signageType,
       issueDetails,
@@ -49,6 +50,7 @@ export default async function handler(req: any, res: any) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
+        <p><strong>Warranty Number:</strong> ${warrantyNumber}</p>
         <p><strong>Purchase Date:</strong> ${purchaseDate}</p>
         <p><strong>Signage Type:</strong> ${signageType}</p>
         <p><strong>Issue Details:</strong></p>
