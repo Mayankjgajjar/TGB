@@ -16,7 +16,7 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const {
+        const {
       customerName,
       email,
       phone,
@@ -24,12 +24,25 @@ export default async function handler(req: any, res: any) {
       purchaseDate,
       signageType,
       issueDetails,
+      imageFileName,
+      imageContent,
     } = req.body;
+
+    const attachments = [];
+    if (imageContent && imageFileName) {
+      // Extract the raw base64 data by stripping out the data URL prefix
+      const base64Data = imageContent.replace(/^data:image\/\w+;base64,/, '');
+      attachments.push({
+        filename: imageFileName,
+        content: Buffer.from(base64Data, 'base64'),
+      });
+    }
 
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'tgbsign@proton.me',
       subject: 'New Warranty Claim Submission',
+      attachments,
       html: `
         <h2>New Warranty Claim Submission</h2>
         <p><strong>Customer Name:</strong> ${customerName}</p>
@@ -40,6 +53,7 @@ export default async function handler(req: any, res: any) {
         <p><strong>Signage Type:</strong> ${signageType}</p>
         <p><strong>Issue Details:</strong></p>
         <p>${issueDetails}</p>
+        ${imageFileName ? `<p><strong>Attached Photo:</strong> ${imageFileName} (Attached to email)</p>` : ''}
       `,
     });
 

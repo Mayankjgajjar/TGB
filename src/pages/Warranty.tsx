@@ -58,6 +58,43 @@ export const Warranty: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // File Upload State
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+
+  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Check size limit (4MB)
+    if (file.size > 4 * 1024 * 1024) {
+      setFileError('File is too large. Please select an image under 4MB.');
+      return;
+    }
+
+    // Check file type
+    if (!file.type.startsWith('image/')) {
+      setFileError('Invalid file type. Please upload an image file (JPG, PNG, WebP).');
+      return;
+    }
+
+    setFileError(null);
+    setSelectedFile(file);
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFileBase64(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }, []);
+
+  const handleRemoveFile = useCallback(() => {
+    setSelectedFile(null);
+    setFileBase64(null);
+    setFileError(null);
+  }, []);
+
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { name, value } = e.target;
@@ -86,6 +123,12 @@ export const Warranty: React.FC = () => {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setSubmitError(null);
+      
+      if (fileError) {
+        setSubmitError('Please resolve the file attachment error before submitting.');
+        return;
+      }
+
       const validationErrors = validateForm(formState);
 
       if (Object.keys(validationErrors).length > 0) {
@@ -106,7 +149,11 @@ export const Warranty: React.FC = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formState),
+          body: JSON.stringify({
+            ...formState,
+            imageFileName: selectedFile ? selectedFile.name : null,
+            imageContent: fileBase64,
+          }),
         });
 
         if (!response.ok) {
@@ -116,6 +163,9 @@ export const Warranty: React.FC = () => {
 
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
+        setSelectedFile(null);
+        setFileBase64(null);
+        setFileError(null);
         setErrors({});
         setTouched({});
       } catch (error: any) {
@@ -125,12 +175,15 @@ export const Warranty: React.FC = () => {
         setIsSubmitting(false);
       }
     },
-    [formState]
+    [formState, fileError, selectedFile, fileBase64]
   );
 
   const handleReset = useCallback(() => {
     setIsSubmitted(false);
     setSubmitError(null);
+    setSelectedFile(null);
+    setFileBase64(null);
+    setFileError(null);
   }, []);
 
   const inputClass = (field: keyof FormFields) =>
@@ -336,6 +389,49 @@ export const Warranty: React.FC = () => {
                   </span>
                 )}
               </div>
+
+              {/* Proof of purchase or issue photo */}
+              <div className={styles.fileInputGroup}>
+                <label className={styles.fieldLabel}>Upload Photo of the Issue (Optional)</label>
+                {selectedFile ? (
+                  <div className={styles.previewContainer}>
+                    {fileBase64 && (
+                      <img src={fileBase64} alt="Preview of issue" className={styles.previewImage} />
+                    )}
+                    <div className={styles.previewInfo}>
+                      <span className={styles.previewName}>{selectedFile.name}</span>
+                      <span className={styles.previewSize}>
+                        {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className={styles.removeFileBtn}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className={styles.fileInputWrapper}>
+                    <div className={styles.uploadIcon}>↑</div>
+                    <span className={styles.uploadText}>Select or drag a photo here</span>
+                    <span className={styles.uploadLimit}>Max file size: 4MB (JPG, PNG, WebP)</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className={styles.hiddenFileInput}
+                    />
+                  </div>
+                )}
+                {fileError && (
+                  <span className={styles.fieldError} role="alert">
+                    {fileError}
+                  </span>
+                )}
+              </div>
+
 
               <button
                 type="submit"
