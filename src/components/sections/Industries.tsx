@@ -14,6 +14,7 @@ import {
 import Card from '../ui/Card';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './Industries.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 const industries = [
   {
@@ -117,7 +118,7 @@ export const Industries: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>WHO WE SERVE</span>
+          <SectionEyebrow>WHO WE SERVE</SectionEyebrow>
           <h2 className={styles.heading}>
             Signage Solutions for Every Industry.
           </h2>

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Search, Pencil, Hammer, Truck, HeartHandshake } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './Process.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 const steps = [
   {
@@ -88,7 +89,7 @@ export const Process: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>HOW WE WORK</span>
+          <SectionEyebrow>HOW WE WORK</SectionEyebrow>
           <h2 className={styles.heading}>From Concept to Completion.</h2>
           <p className={styles.subheading}>
             Every signage project follows a carefully structured process to ensure precision, quality,

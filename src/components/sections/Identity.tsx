@@ -9,6 +9,7 @@ import {
 import { homeContent, type TGBStandardSection } from '../../content/home';
 import ServicesOverview from './ServicesOverview';
 import styles from './Identity.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 // Icon registry — covers service cards + trust cards
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -80,7 +81,7 @@ export const Identity: React.FC = () => {
           >
             {/* TOP HEADER */}
             <motion.div className={styles.introTopHeader} variants={fadeUp}>
-              <span className={styles.introEyebrow}>{intro.eyebrowStory}</span>
+              <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
               <h2 className={styles.introTitle}>
                 {intro.headingStory.split('\n').map((line, i, arr) => (
                   <React.Fragment key={i}>
@@ -110,7 +111,7 @@ export const Identity: React.FC = () => {
               {/* Right Column: Story Text */}
               <motion.div className={styles.introContentCol} variants={fadeUp}>
                 <div className={styles.introTextWrapper}>
-                  <span className={styles.introEyebrow}>{intro.eyebrowWho}</span>
+                  <SectionEyebrow>{intro.eyebrowWho}</SectionEyebrow>
                   <h3 className={styles.whoTitle}>
                     {intro.headingWho.split('\n').map((line, i, arr) => (
                       <React.Fragment key={i}>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Phone, Mail, Clock, MapPin, Building, Globe } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
 import styles from './ContactCTA.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -186,7 +187,7 @@ export const ContactCTA: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>GET IN TOUCH</span>
+          <SectionEyebrow>GET IN TOUCH</SectionEyebrow>
           <h2 className={styles.title}>Let's Create Signage That Defines Your Brand.</h2>
           <p className={styles.subheading}>
             Whether you're launching a new business, rebranding a storefront, or developing a commercial space,
@@ -470,7 +471,7 @@ export const ContactCTA: React.FC = () => {
                 className={styles.infoLinkItem}
               >
                 <div className={styles.infoIconWrapper}>
-                  <Building size={16} strokeWidth={1.5} />
+                  <Building size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Office &amp; Studio</span>
@@ -486,7 +487,7 @@ export const ContactCTA: React.FC = () => {
 
               <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
-                  <Phone size={16} strokeWidth={1.5} />
+                  <Phone size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Phone Inquiry Desk</span>
@@ -496,7 +497,7 @@ export const ContactCTA: React.FC = () => {
 
               <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
-                  <Mail size={16} strokeWidth={1.5} />
+                  <Mail size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
@@ -508,7 +509,7 @@ export const ContactCTA: React.FC = () => {
 
               <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
-                  <Clock size={16} strokeWidth={1.5} />
+                  <Clock size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Business Hours</span>
@@ -519,7 +520,7 @@ export const ContactCTA: React.FC = () => {
 
               <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
-                  <Globe size={16} strokeWidth={1.5} />
+                  <Globe size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Service Area Coverage</span>

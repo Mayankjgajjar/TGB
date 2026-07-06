@@ -381,10 +381,27 @@
 }
 
 .infoIconWrapper {
-  color: var(--color-copper);
-  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(227, 0, 5, 0.08);
+  border: 1px solid rgba(227, 0, 5, 0.25);
+  border-radius: 50%;
+  color: var(--color-red);
   margin-top: 2px;
   flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.infoLinkItem:hover .infoIconWrapper,
+.infoItem:hover .infoIconWrapper {
+  background-color: rgba(227, 0, 5, 0.16);
+  border-color: rgba(227, 0, 5, 0.5);
+  color: var(--color-white);
+  box-shadow: 0 0 12px rgba(227, 0, 5, 0.3);
+  transform: scale(1.05);
 }
 
 .infoContent {

@@ -1,11 +1,10 @@
 import React, { useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
 import Button from '../ui/Button';
 import Container from '../ui/Container';
 import { homeContent } from '../../content/home';
-import { useQuoteModal } from '../../context/QuoteContext';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './Hero.module.css';
 
@@ -30,8 +29,7 @@ const fadeUp = {
 };
 
 export const Hero: React.FC = () => {
-  const { openModal } = useQuoteModal();
-  const { label, title, subtitle, ctaLabel } = homeContent.hero;
+  const { title, ctaLabel } = homeContent.hero;
   const { ref, isRevealed } = useScrollReveal();
 
   const handleScrollTo = useCallback(
@@ -50,7 +48,8 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="home" ref={ref} className={styles.heroSection} aria-label="Hero">
-      {/* Hero Content */}
+
+      {/* Hero Content Container */}
       <div className={styles.contentContainer}>
         <Container>
           <motion.div
@@ -59,24 +58,18 @@ export const Hero: React.FC = () => {
             animate={isRevealed ? "visible" : "hidden"}
             variants={textContainer}
           >
-            <div className={styles.accentFrame}>
-              <motion.span variants={fadeUp} className={styles.metaTag}>
-                {label}
-              </motion.span>
+            <motion.h1 variants={fadeUp} className={styles.headline}>
+              {title.split('\n').map((line, idx, arr) => (
+                <React.Fragment key={idx}>
+                  {line}
+                  {idx < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))}
+            </motion.h1>
 
-              <motion.h1 variants={fadeUp} className={styles.headline}>
-                {title.split('\n').map((line, idx, arr) => (
-                  <React.Fragment key={idx}>
-                    {line}
-                    {idx < arr.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </motion.h1>
-            </div>
-
-            <motion.p variants={fadeUp} className={styles.description}>
-              {subtitle}
-            </motion.p>
+            <motion.span variants={fadeUp} className={styles.tagline}>
+              Ahmedabad's Trusted Signage Manufacturer.
+            </motion.span>
 
             <motion.div variants={fadeUp} className={styles.ctasRow}>
               <Button
@@ -98,18 +91,17 @@ export const Hero: React.FC = () => {
                 View Projects
               </Button>
             </motion.div>
-
-            <motion.div variants={fadeUp} className={styles.ticksRow}>
-              <span className={styles.tickItem}>DESIGN</span>
-              <span className={styles.tickDivider}>/</span>
-              <span className={styles.tickItem}>MANUFACTURING</span>
-              <span className={styles.tickDivider}>/</span>
-              <span className={styles.tickItem}>INSTALLATION</span>
-              <span className={styles.tickDivider}>/</span>
-              <span className={styles.tickItem}>AFTER-SALES SERVICE</span>
-            </motion.div>
           </motion.div>
         </Container>
+      </div>
+
+      {/* Scroll Down Indicator */}
+      <div 
+        className={styles.scrollDownIndicator} 
+        onClick={(e) => handleScrollTo(e, 'about')}
+      >
+        <span className={styles.scrollText}>Scroll</span>
+        <ChevronDown size={14} className={styles.scrollChevron} />
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { Plus } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import { useQuoteModal } from '../../context/QuoteContext';
 import styles from './FAQ.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 const faqs = [
   {
@@ -141,7 +142,7 @@ export const FAQ: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>FREQUENTLY ASKED QUESTIONS</span>
+          <SectionEyebrow>FREQUENTLY ASKED QUESTIONS</SectionEyebrow>
           <h2 className={styles.heading}>Everything You Need to Know.</h2>
           <p className={styles.subheading}>
             Have questions about our signage solutions, process, or services? Here are answers 

@@ -97,7 +97,7 @@ export const QuoteModal: React.FC = () => {
 
               {/* Action 2: WhatsApp Desk (Outline with Green Hover border) */}
               <a 
-                href="https://wa.me/919727136137?text=Hello%20TGB%20Enterprise%2C%20I%20would%20like%20to%20request%20an%20architectural%20signage%20quote." 
+                href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote." 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className={`${styles.outlineOption} ${styles.whatsappOption}`}

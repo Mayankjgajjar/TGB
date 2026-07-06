@@ -3,15 +3,7 @@
 
 /* Global Styles & Typography resets */
 body {
-  background-color: #070707;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
-    url('/assets/textures/dark_architectural_texture.png');
-  background-size: 160px 160px, 160px 160px, cover;
-  background-repeat: repeat, repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
-  background-position: center;
+  background-color: transparent;
   color: var(--color-off-white);
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
@@ -24,14 +16,28 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
 }
 
-h1, h2, h3 {
+h1, h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700; /* Bold/confident display headlines */
   line-height: var(--line-height-tight);
   letter-spacing: -0.015em;
 }
 
-h4, h5, h6 {
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500; /* Medium for secondary titles */
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-family: var(--font-primary);
+  font-weight: 500; /* Medium body subheaders */
+  line-height: var(--line-height-snug);
+  letter-spacing: 0.2px;
+}
+
+h5, h6 {
   font-family: var(--font-primary);
   font-weight: 600;
   line-height: var(--line-height-snug);
@@ -143,7 +149,7 @@ section[id],
 [id="about"],
 [id="services-overview"],
 [id="home"] {
-  scroll-margin-top: 96px; /* 80px header height + 16px safety margin */
+  scroll-margin-top: 80px; /* Floating navbar height + safety margin */
 }
 
 /* ============================================================
@@ -153,10 +159,10 @@ section[id],
 
 /* Eyebrow label above each section heading */
 .sectionEyebrow {
-  font-family: var(--font-technical);
-  font-size: 10px;
+  font-family: var(--font-display);
+  font-size: 14px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-copper);
   display: block;

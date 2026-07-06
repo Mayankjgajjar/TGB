@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import { motion } from 'framer-motion';
@@ -159,6 +159,8 @@ export const AppLayout: React.FC = () => {
     };
   }, []);
 
+
+
   // Reset scroll to top or hash element on route change
   useEffect(() => {
     if (location.hash) {
@@ -180,6 +182,22 @@ export const AppLayout: React.FC = () => {
   return (
     <QuoteProvider>
       <div className={styles.layoutContainer}>
+        {/* Global Looping Video Background */}
+        <div className={styles.globalVideoBg}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/assets/images/hero-poster.png"
+            className={styles.globalVideoElement}
+          >
+            <source src="/assets/videos/sign_wall.mp4" type="video/mp4" />
+          </video>
+          <div className={styles.globalVideoOverlay} />
+        </div>
+
         <Navbar />
         <main className={styles.mainContent}>
           <Outlet />
@@ -189,7 +207,7 @@ export const AppLayout: React.FC = () => {
         
         {/* Floating WhatsApp Action Button */}
         <motion.a
-          href="https://wa.me/919727136137?text=Hello%20TGB%20Enterprise,%20I%20would%20like%20to%20inquire%20about%20your%20signage%20solutions."
+          href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote."
           target="_blank"
           rel="noopener noreferrer"
           className={styles.whatsappButton}

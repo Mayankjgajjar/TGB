@@ -5,187 +5,130 @@
   height: 100dvh;
   min-height: 660px;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* Align content toward bottom/lower-middle */
+  justify-content: center;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.55);
 }
 
-.matteOverlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Layout Grid - Centered Content with Spacious Negative Space */
+/* Content Layout */
 .contentContainer {
   width: 100%;
   position: relative;
   z-index: 3;
-  padding-top: 80px; /* Offset for navbar */
+  padding-bottom: clamp(60px, 12vh, 130px); /* Lower-middle positioning */
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
-/* Presentation Panel - Centered & Widened to fill visual weight */
 .presentationPanel {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  max-width: 860px;
+  align-items: center; /* Center horizontally */
+  text-align: center;   /* Center text */
+  max-width: 900px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--space-24);
+  box-sizing: border-box;
 }
 
-/* Typographic frame wrapping tag and headline */
-.accentFrame {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-  text-align: left;
-}
-
-.metaTag {
+.tagline {
   font-family: var(--font-technical);
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--color-copper);
-  letter-spacing: 3px;
+  font-size: clamp(10px, 2.5vw, 12px);
+  font-weight: 700;
+  color: var(--color-red);
+  letter-spacing: 1.5px;
   text-transform: uppercase;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: var(--space-24); /* Even spacing rhythm from subtitle to buttons */
+  display: block;
+  max-width: 480px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(2.8rem, 4.8vw, 4.8rem);
-  font-weight: 300; 
-  line-height: 1.1; 
-  color: var(--color-off-white);
-  letter-spacing: -0.015em; 
+  font-size: clamp(2.0rem, 4.2vw, 4.2rem); /* Scaled down slightly on mobile to prevent awkward wrapping */
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+  margin-top: 0;
+  margin-bottom: var(--space-24); /* Even spacing rhythm from headline to subtitle */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
-.description {
-  font-family: var(--font-primary);
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.65;
-  max-width: 560px; /* Aligns to 540-580px width */
-  margin-bottom: 32px;
-}
-
-/* CTAs Row alignment */
+/* CTA Buttons Row */
 .ctasRow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--space-16);
+  width: 100%;
+  max-width: 320px;
+  justify-content: center;
 }
 
 @media (min-width: 480px) {
   .ctasRow {
     flex-direction: row;
     align-items: center;
+    width: auto;
+    max-content: none;
+    max-width: none;
   }
 }
 
-/* Monospace technical checklist ticks at bottom of Hero */
-.ticksRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin-top: 48px;
-  font-family: var(--font-technical);
-  font-size: 9.5px;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.tickItem {
-  display: inline-flex;
-  align-items: center;
-}
-
-.tickDivider {
-  color: var(--color-copper);
-  opacity: 0.45;
-  font-weight: 300;
-}
-
-/* Right-Side Atmospheric Blueprint Watermark */
-.blueprintWatermark {
+/* Scroll Down Indicator */
+.scrollDownIndicator {
   position: absolute;
-  right: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 320px;
-  height: 320px;
-  border: 1px dashed rgba(255, 255, 255, 0.025);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.watermarkLineX {
-  position: absolute;
-  left: -40px;
-  right: -40px;
-  top: 50%;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0.02) 80%,
-    transparent
-  );
-}
-
-.watermarkLineY {
-  position: absolute;
-  top: -40px;
-  bottom: -40px;
+  bottom: var(--space-24);
   left: 50%;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0.02) 80%,
-    transparent
-  );
-}
-
-.watermarkData {
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.45);
   font-family: var(--font-technical);
   font-size: 9px;
-  letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.035); /* Extremely subtle ghost typography */
+  letter-spacing: 2px;
   text-transform: uppercase;
-  text-align: left;
+  cursor: pointer;
+  z-index: 3;
+  transition: color var(--transition-base);
 }
 
-.watermarkDataRow {
-  white-space: nowrap;
+.scrollDownIndicator:hover {
+  color: var(--color-white);
 }
 
-.watermarkCrosshair {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.scrollChevron {
+  animation: bounce 2s infinite ease-in-out;
 }
 
-@media (max-width: 960px) {
-  .blueprintWatermark {
-    display: none; /* Hide watermark on tablet/mobile to keep layout clean */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollChevron {
+    animation: none;
+  }
+}
+

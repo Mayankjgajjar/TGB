@@ -5,6 +5,7 @@ import Card from '../ui/Card';
 import { homeContent } from '../../content/home';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './FeaturedProjects.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 
 export const FeaturedProjects: React.FC = () => {
@@ -42,7 +43,7 @@ export const FeaturedProjects: React.FC = () => {
         animate={isRevealed ? "visible" : "hidden"}
         variants={headerVariants}
       >
-        <span className={styles.eyebrow}>{header.eyebrow}</span>
+        <SectionEyebrow>{header.eyebrow}</SectionEyebrow>
         <h2 className={styles.title}>{header.heading}</h2>
         <p className={styles.subheading}>{header.subheading}</p>
       </motion.div>

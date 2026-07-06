@@ -7,6 +7,7 @@ import Card from '../ui/Card';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import { servicesData } from '../../content/services';
 import styles from './ServicesOverview.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 interface HomepageServiceItem {
   slug: string;
@@ -136,7 +137,7 @@ export const ServicesOverview: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>OUR EXPERTISE</span>
+          <SectionEyebrow>OUR EXPERTISE</SectionEyebrow>
           <h2 className={styles.mainTitle}>Signage Solutions Built to Elevate Brands.</h2>
           <p className={styles.subtitle}>
             From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore.

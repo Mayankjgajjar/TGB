@@ -1,11 +1,11 @@
 :root {
   /* Color System - Exact Brand Identity (Rich Black & Pure Brand Red) */
-  --color-black: #0A0A0A;       /* Rich black, primary background */
-  --color-black-soft: #141414;  /* Card/section backgrounds */
-  --color-red: #e30005;         /* Exact brand red from vector logo */
-  --color-red-hover: #c20004;   /* Hover state brand red */
-  --color-white: #FFFFFF;       /* Headlines */
-  --color-white-muted: #B8B8B8; /* Body text on dark backgrounds */
+  --color-black: #0A0A0A;
+  --color-black-soft: #141414;
+  --color-red: #E30005;
+  --color-red-hover: #C10004; /* slightly darker for hover states */
+  --color-white: #FFFFFF;
+  --color-white-muted: #B8B8B8;
 
   /* Legacy Compatibility Mapping (keeps existing pages unified automatically) */
   --color-charcoal-deep: var(--color-black);
@@ -35,10 +35,10 @@
   --space-160: calc(var(--space-unit) * 20);  /* 160px */
 
   /* Typography Scale (Redesigned to Clean Modern Industrial Sans-Serif) */
-  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Montserrat', sans-serif;
+  --font-body: 'Google Sans', 'Google Sans Text', 'Roboto', sans-serif;
   --font-primary: var(--font-body);
-  --font-technical: 'JetBrains Mono', monospace;
+  --font-technical: var(--font-display);
 
   /* Font Scale Custom Properties */
   --text-h1: 56px;
@@ -63,7 +63,7 @@
   /* Line Heights */
   --line-height-tight: 1.1;
   --line-height-snug: 1.3;
-  --line-height-normal: 1.55;
+  --line-height-normal: 1.65;
 
   /* Layout Widths */
   --container-max-width: 1440px;

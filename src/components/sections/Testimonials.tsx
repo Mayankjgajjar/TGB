@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Testimonials.module.css';
+import SectionEyebrow from '../ui/SectionEyebrow';
 
 const testimonials = [
   {
@@ -73,7 +74,7 @@ export const Testimonials: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <span className={styles.eyebrow}>CLIENT EXPERIENCES</span>
+          <SectionEyebrow>CLIENT EXPERIENCES</SectionEyebrow>
           <h2 className={styles.heading}>Trusted by Businesses Across India.</h2>
           <p className={styles.subheading}>
             Every project is built on collaboration, craftsmanship, and long-term relationships. 

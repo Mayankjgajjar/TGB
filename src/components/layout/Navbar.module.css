@@ -3,14 +3,25 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 80px; /* Comfortable height */
+  height: auto;
+  margin: 16px 24px 0;
+  padding: 14px 28px;
   z-index: var(--z-index-navbar);
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07); /* Fine, high-precision hairline */
-  background: var(--color-charcoal-deep); /* Completely solid black per design feedback */
-  backdrop-filter: none; /* Removed SaaS glass effect */
-  transition: all var(--transition-speed-normal) var(--transition-ease-expo);
+  background-color: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateY(0);
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              background-color var(--transition-speed-normal) var(--transition-ease-expo),
+              border-color var(--transition-speed-normal) var(--transition-ease-expo);
+}
+
+.headerHidden {
+  transform: translateY(calc(-100% - 20px)); /* Slide fully out of view including margin */
 }
 
 .inner {
@@ -133,7 +144,7 @@
   display: inline-block;
   transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
   margin-left: 2px;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 
 .quoteButton:hover .btnArrow {
@@ -181,64 +192,119 @@
 .mobileDrawer {
   display: none;
   position: fixed;
-  top: 80px; /* below navbar */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(5, 5, 5, 0.98);
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  transform: translateX(100%);
-  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  top: 76px; /* 12px margin + ~52px height + 12px gap */
+  left: 12px;
+  right: 12px;
+  background: rgba(10, 10, 10, 0.85); /* Premium glass background */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
   z-index: calc(var(--z-index-navbar) - 1);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .mobileDrawerOpen {
-  transform: translateX(0);
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobileNavLinks {
   display: flex;
   flex-direction: column;
-  padding: var(--space-32) var(--space-24);
-  gap: var(--space-8);
+  padding: var(--space-24) 0; /* Horizontal padding handled by Container */
+  gap: var(--space-4);
 }
 
 /* Override navLink to stack vertically in mobile drawer */
 .mobileNavLinks .navLink {
   display: block;
-  font-size: 16px;
-  padding: var(--space-16) 0;
+  font-size: 15px;
+  padding: var(--space-12) var(--space-8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   letter-spacing: 2px;
+  color: rgba(244, 241, 234, 0.6);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Subtle left indicator dot on hover/active instead of thick full-width underline */
+.mobileNavLinks .navLink::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-copper);
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobileNavLinks .navLink:hover,
+.mobileNavLinks .navLink:active {
+  color: var(--color-white) !important;
+  padding-left: var(--space-16);
+}
+
+.mobileNavLinks .navLink:hover::before,
+.mobileNavLinks .navLink:active::before {
+  transform: translateY(-50%) scale(1);
+}
+
+/* Active page in mobile drawer highlighted with TGB brand red color */
+.mobileNavLinks .activeNavLink {
+  color: var(--color-red) !important;
+  font-weight: 600;
+  padding-left: var(--space-16);
+}
+
+.mobileNavLinks .activeNavLink::before {
+  transform: translateY(-50%) scale(1);
+  background-color: var(--color-red) !important;
 }
 
 .mobileConsultBtn {
-  margin-top: var(--space-24);
+  margin-top: var(--space-24); /* Added spacing for breathing room */
+  margin-bottom: var(--space-8);
   width: 100%;
-  padding: var(--space-16) var(--space-24);
-  background: var(--color-off-white);
-  color: #050505;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-red);
+  color: #ffffff;
   border: none;
-  font-family: var(--font-technical);
+  border-radius: 8px;
+  font-family: var(--font-primary);
   font-size: 12px;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
-  text-align: left;
   transition: background-color 300ms ease;
 }
 
-.mobileConsultBtn:hover {
-  background: var(--color-off-white-muted);
+.mobileConsultBtn:hover,
+.mobileConsultBtn:active {
+  background-color: var(--color-red-hover);
 }
 
 /* Dim backdrop */
 .mobileBackdrop {
   position: fixed;
   inset: 0;
-  top: 80px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: calc(var(--z-index-navbar) - 2);
 }
 
@@ -246,6 +312,12 @@
    RESPONSIVE BREAKPOINTS
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
+  .header {
+    margin: 12px 12px 0;
+    padding: 12px 16px;
+    border-radius: 14px;
+  }
+
   /* Show hamburger, hide desktop nav and desktop CTA button */
   .hamburger {
     display: flex;
@@ -262,5 +334,13 @@
   /* Enable mobile drawer */
   .mobileDrawer {
     display: block;
+  }
+}
+
+/* Reduce blur radius on lower-end mobile for performance */
+@media (max-width: 480px) {
+  .header {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
