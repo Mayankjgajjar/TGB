@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
@@ -31,19 +32,24 @@ const fadeUp = {
 export const Hero: React.FC = () => {
   const { title, ctaLabel } = homeContent.hero;
   const { ref, isRevealed } = useScrollReveal();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleScrollTo = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       e.preventDefault();
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -130; // sticky header height offset + breathing space
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        window.history.pushState(null, '', `#${id}`);
+      if (location.pathname === '/' && location.hash === `#${id}`) {
+        const element = document.getElementById(id);
+        if (element) {
+          const yOffset = -130;
+          const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      } else {
+        navigate(`/#${id}`);
       }
     },
-    []
+    [navigate, location.pathname, location.hash]
   );
 
   return (

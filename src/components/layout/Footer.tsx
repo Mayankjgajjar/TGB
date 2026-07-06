@@ -11,16 +11,15 @@ export const Footer: React.FC = () => {
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate(`/#${id}`);
-    } else {
+    if (location.pathname === '/' && location.hash === `#${id}`) {
       const element = document.getElementById(id);
       if (element) {
-        const yOffset = -130; // sticky header height offset + breathing space
+        const yOffset = -130;
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
-        window.history.pushState(null, '', `#${id}`);
       }
+    } else {
+      navigate(`/#${id}`);
     }
   };
 

@@ -84,20 +84,19 @@ export const Navbar: React.FC = () => {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     setMobileOpen(false);
-    // Release focus from the clicked nav link so scroll-hide can engage
     (e.currentTarget as HTMLElement).blur();
-    if (location.pathname !== '/') {
-      navigate(`/#${id}`);
-    } else {
+    
+    if (location.pathname === '/' && location.hash === `#${id}`) {
       const element = document.getElementById(id);
       if (element) {
-        const yOffset = -130; // sticky header height offset + breathing space
+        const yOffset = -130;
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
-        window.history.pushState(null, '', `#${id}`);
-        setActiveSection(id);
       }
+    } else {
+      navigate(`/#${id}`);
     }
+    setActiveSection(id);
   };
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

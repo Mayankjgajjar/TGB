@@ -165,15 +165,23 @@ export const AppLayout: React.FC = () => {
   useEffect(() => {
     if (location.hash) {
       const id = location.hash.replace('#', '');
-      const timer = setTimeout(() => {
+      
+      let attempts = 0;
+      const interval = setInterval(() => {
         const element = document.getElementById(id);
+        attempts++;
+        
         if (element) {
+          clearInterval(interval);
           const yOffset = -130; // sticky header height offset + breathing space
           const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
+        } else if (attempts >= 15) {
+          clearInterval(interval);
         }
-      }, 100);
-      return () => clearTimeout(timer);
+      }, 50);
+      
+      return () => clearInterval(interval);
     } else {
       window.scrollTo(0, 0);
     }
