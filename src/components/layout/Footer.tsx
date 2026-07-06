@@ -65,12 +65,12 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className={styles.colTitle}>Our Services</h4>
             <ul className={styles.linksList}>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>LED Sign Boards</a></li>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>ACP Sign Boards</a></li>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Acrylic & 3D Letter Signages</a></li>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Corporate Signages</a></li>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Neon & Custom Signages</a></li>
-              <li><a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Indoor & Outdoor Signage Systems</a></li>
+              <li><Link to="/services/led-sign-boards" className={styles.navLink}>LED Sign Boards</Link></li>
+              <li><Link to="/services/acp-sign-boards" className={styles.navLink}>ACP Sign Boards</Link></li>
+              <li><Link to="/services/acrylic-letters" className={styles.navLink}>Acrylic & 3D Letter Signages</Link></li>
+              <li><Link to="/services/ss-letters" className={styles.navLink}>SS Letters</Link></li>
+              <li><Link to="/services/neon-sign-boards" className={styles.navLink}>Neon & Custom Signages</Link></li>
+              <li><Link to="/services/pylon-signs" className={styles.navLink}>Pylon Signs</Link></li>
             </ul>
             <a href="#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.viewAllLink}>
               View All Services →
