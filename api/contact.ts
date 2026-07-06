@@ -42,7 +42,7 @@ export default async function handler(req: any, res: any) {
     } = req.body;
 
     await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'TGB Sign <info@tgbsign.com>',
       to: 'tgbsign@proton.me', // change if needed
       subject: 'New Website Inquiry',
       html: `

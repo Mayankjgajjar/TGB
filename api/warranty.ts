@@ -53,7 +53,7 @@ export default async function handler(req: any, res: any) {
     }
 
     await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'TGB Sign <info@tgbsign.com>',
       to: 'tgbsign@proton.me',
       subject: 'New Warranty Claim Submission',
       attachments,
