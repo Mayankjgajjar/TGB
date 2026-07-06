@@ -8,10 +8,23 @@ declare const process: {
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+import { isRateLimited } from './rateLimit';
+
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       message: 'Method not allowed',
+    });
+  }
+
+  // Extract client IP address from Vercel edge headers
+  const ipHeader = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress || '127.0.0.1';
+  const clientIp = (typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader).trim();
+
+  if (await isRateLimited(clientIp)) {
+    return res.status(429).json({
+      success: false,
+      message: 'Too many requests. Please try again later.',
     });
   }
 
