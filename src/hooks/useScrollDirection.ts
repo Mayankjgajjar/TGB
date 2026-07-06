@@ -15,6 +15,14 @@ export function useScrollDirection(threshold = 8) {
   const update = useCallback(() => {
     const scrollY = window.scrollY;
 
+    // Prevent scroll hiding on programmatic smooth scrolling (such as clicking nav links)
+    if ((window as any).isProgrammaticScroll) {
+      setDirection(null);
+      lastScrollY.current = scrollY;
+      ticking.current = false;
+      return;
+    }
+
     // Always treat "at top" as up (visible)
     if (scrollY <= 10) {
       setDirection(null);

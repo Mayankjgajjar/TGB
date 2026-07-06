@@ -414,7 +414,7 @@ export const ContactCTA: React.FC = () => {
                     className={styles.submitButton}
                     aria-busy={isSubmitting}
                   >
-                    <span>{isSubmitting ? 'Submitting...' : 'Start Your Project'}</span>
+                    <span>{isSubmitting ? 'Submitting...' : 'Request A Consultation'}</span>
                     <ArrowRight size={16} className={styles.submitArrow} />
                   </button>
 

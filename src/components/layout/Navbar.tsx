@@ -93,7 +93,11 @@ export const Navbar: React.FC = () => {
       if (element) {
         const yOffset = -90; // sticky header height offset
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        (window as any).isProgrammaticScroll = true;
         window.scrollTo({ top: y, behavior: 'smooth' });
+        setTimeout(() => {
+          (window as any).isProgrammaticScroll = false;
+        }, 1000);
         window.history.pushState(null, '', `#${id}`);
         setActiveSection(id);
       }

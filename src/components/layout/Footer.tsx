@@ -18,7 +18,11 @@ export const Footer: React.FC = () => {
       if (element) {
         const yOffset = -90; // sticky header height offset
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+        (window as any).isProgrammaticScroll = true;
         window.scrollTo({ top: y, behavior: 'smooth' });
+        setTimeout(() => {
+          (window as any).isProgrammaticScroll = false;
+        }, 1000);
         window.history.pushState(null, '', `#${id}`);
       }
     }
@@ -32,9 +36,9 @@ export const Footer: React.FC = () => {
           {/* ── Column 01: Brand Information ── */}
           <div className={styles.brandCol}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <img 
-                src="/assets/logos/tgb-logo.svg" 
-                alt="TGB Enterprise - Premium Signage & Branding Solutions in Ahmedabad" 
+              <img
+                src="/assets/logos/tgb-logo.svg"
+                alt="TGB Enterprise - Premium Signage & Branding Solutions in Ahmedabad"
                 style={{ height: '32px', width: 'auto', alignSelf: 'start' }}
               />
               <span className={styles.brandTagline}>Built to be Seen.</span>
@@ -115,7 +119,8 @@ export const Footer: React.FC = () => {
                 Proudly serving Ahmedabad and businesses across Gujarat and India.
               </p>
               <button onClick={openModal} className={styles.startProjectBtn}>
-                Start Your Project →
+                REQUEST A CONSULTATION
+                →
               </button>
             </div>
           </div>
@@ -125,8 +130,8 @@ export const Footer: React.FC = () => {
         {/* ── Bottom Section (SEO Statement, Quote, and Copyright Links) ── */}
         <div className={styles.bottomSection}>
 
-          
-          
+
+
           <div className={styles.bottomBar}>
             <div className={styles.copyright}>
               © 2025 TGB Enterprise. All Rights Reserved.
