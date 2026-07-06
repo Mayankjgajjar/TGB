@@ -6,10 +6,7 @@ declare const process: {
   };
 };
 
-// Initialize Resend client with Vercel environment variable
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-import { isRateLimited } from './rateLimit';
+import { isRateLimited } from './rateLimit.js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
@@ -29,7 +26,16 @@ export default async function handler(req: any, res: any) {
     });
   }
 
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return res.status(500).json({
+      success: false,
+      error: 'Resend API Key (RESEND_API_KEY) is missing or undefined in Vercel environment variables.',
+    });
+  }
+
   try {
+    const resend = new Resend(apiKey);
     const {
       firstName,
       lastName,
