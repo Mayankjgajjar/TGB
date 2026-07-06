@@ -5,6 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/assets/logos/logo-emblem.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
+    <!-- Sentry Runtime Error Tracking -->
+    <script src="https://js.sentry-cdn.com/ea60100d84ea383ebce25c862bc2b55f.min.js" crossorigin="anonymous"></script>
+    <script>
+      if (window.Sentry) {
+        Sentry.init({
+          dsn: "https://ea60100d84ea383ebce25c862bc2b55f@o4506823485764024.ingest.sentry.io/4506823487860736",
+          tracesSampleRate: 0.1,
+        });
+      }
+    </script>
+
     <title>TGB Enterprise | Architectural Identity Systems</title>
     <meta name="description" content="TGB Enterprise designs, fabricates, and installs premium architectural identity systems for commercial landmarks. We engineer how buildings are recognized." />
 
