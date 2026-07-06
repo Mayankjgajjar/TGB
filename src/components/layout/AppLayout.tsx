@@ -168,13 +168,9 @@ export const AppLayout: React.FC = () => {
       const timer = setTimeout(() => {
         const element = document.getElementById(id);
         if (element) {
-          const yOffset = -90; // sticky header height offset
+          const yOffset = -130; // sticky header height offset + breathing space
           const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-          (window as any).isProgrammaticScroll = true;
           window.scrollTo({ top: y, behavior: 'smooth' });
-          setTimeout(() => {
-            (window as any).isProgrammaticScroll = false;
-          }, 1000);
         }
       }, 100);
       return () => clearTimeout(timer);
