@@ -31,6 +31,15 @@ export function useScrollDirection(threshold = 8) {
       return;
     }
 
+    // Force hide when reaching the absolute bottom of the page
+    const isAtBottom = window.innerHeight + scrollY >= document.documentElement.scrollHeight - 20;
+    if (isAtBottom) {
+      setDirection('down');
+      lastScrollY.current = scrollY;
+      ticking.current = false;
+      return;
+    }
+
     const delta = scrollY - lastScrollY.current;
 
     if (Math.abs(delta) >= threshold) {
