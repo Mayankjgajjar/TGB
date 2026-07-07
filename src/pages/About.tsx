@@ -30,7 +30,7 @@ export const About: React.FC = () => {
       />
 
       {/* Full Identity block (About, Who We Are, Trust standards, and Leadership — hiding services grid) */}
-      <Identity showServices={false} />
+      <Identity showServices={false} showHeader={false} />
 
       {/* Industries We Serve */}
       <Suspense fallback={<SectionFallback />}>
