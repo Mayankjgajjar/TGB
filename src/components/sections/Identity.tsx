@@ -52,7 +52,17 @@ const cardVariant = {
 };
 
 // ── Component ────────────────────────────────────────────────
-export const Identity: React.FC = () => {
+export const Identity: React.FC<{
+  showAbout?: boolean;
+  showTrust?: boolean;
+  showLeadership?: boolean;
+  showServices?: boolean;
+}> = ({
+  showAbout = true,
+  showTrust = true,
+  showLeadership = true,
+  showServices = true,
+}) => {
   const identity = homeContent.identity as TGBStandardSection;
   const { intro, label, title, subtitle, capabilities, standards } = identity;
 
@@ -71,168 +81,174 @@ export const Identity: React.FC = () => {
       {/* ══════════════════════════════════════════
           ZONE 0 — ABOUT / WHO WE ARE
       ══════════════════════════════════════════ */}
-      <section id="about" className={styles.aboutSection} ref={sectionRef}>
-        <div className={styles.inner}>
-          <motion.div 
-            className={styles.introSection}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {/* TOP HEADER */}
-            <motion.div className={styles.introTopHeader} variants={fadeUp}>
-              <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
-              <h2 className={styles.introTitle}>
-                {intro.headingStory.split('\n').map((line, i, arr) => (
-                  <React.Fragment key={i}>
-                    {line}
-                    {i < arr.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </h2>
-              <p className={styles.introSubheading}>{intro.subheadingStory}</p>
-            </motion.div>
-
-            {/* TWO-COLUMN SPLIT */}
-            <div className={styles.introSplit}>
-              {/* Left Column: Image with parallax effect */}
-              <motion.div className={styles.introImageCol} variants={fadeUp}>
-                <motion.div 
-                  className={styles.introImage} 
-                  style={{ 
-                    y: yBg,
-                    backgroundImage: `url(${intro.image})` 
-                  }}
-                >
-                  <div className={styles.introImageOverlay} />
-                </motion.div>
-              </motion.div>
-
-              {/* Right Column: Story Text */}
-              <motion.div className={styles.introContentCol} variants={fadeUp}>
-                <div className={styles.introTextWrapper}>
-                  <SectionEyebrow>{intro.eyebrowWho}</SectionEyebrow>
-                  <h3 className={styles.whoTitle}>
-                    {intro.headingWho.split('\n').map((line, i, arr) => (
-                      <React.Fragment key={i}>
-                        {line}
-                        {i < arr.length - 1 && <br />}
-                      </React.Fragment>
-                    ))}
-                  </h3>
-                  <p className={styles.introPara}>{intro.paragraph1}</p>
-                  <p className={styles.introPara}>{intro.paragraph2}</p>
-                  <p className={styles.introPara}>{intro.paragraph3}</p>
-                </div>
-
-                {/* 2x2 Stats Grid inside Right Column */}
-                <div className={styles.rightColStatsGrid}>
-                  {intro.metrics.map((metric, i) => (
-                    <div key={i} className={styles.rightColStatCard}>
-                      <span className={styles.rightColStatValue}>{metric.value}</span>
-                      <span className={styles.rightColStatLabel}>{metric.label}</span>
-                    </div>
+      {showAbout && (
+        <section id="about" className={styles.aboutSection} ref={sectionRef}>
+          <div className={styles.inner}>
+            <motion.div 
+              className={styles.introSection}
+              variants={containerVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+            >
+              {/* TOP HEADER */}
+              <motion.div className={styles.introTopHeader} variants={fadeUp}>
+                <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
+                <h2 className={styles.introTitle}>
+                  {intro.headingStory.split('\n').map((line, i, arr) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </React.Fragment>
                   ))}
-                </div>
+                </h2>
+                <p className={styles.introSubheading}>{intro.subheadingStory}</p>
               </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+
+              {/* TWO-COLUMN SPLIT */}
+              <div className={styles.introSplit}>
+                {/* Left Column: Image with parallax effect */}
+                <motion.div className={styles.introImageCol} variants={fadeUp}>
+                  <motion.div 
+                    className={styles.introImage} 
+                    style={{ 
+                      y: yBg,
+                      backgroundImage: `url(${intro.image})` 
+                    }}
+                  >
+                    <div className={styles.introImageOverlay} />
+                  </motion.div>
+                </motion.div>
+
+                {/* Right Column: Story Text */}
+                <motion.div className={styles.introContentCol} variants={fadeUp}>
+                  <div className={styles.introTextWrapper}>
+                    <SectionEyebrow>{intro.eyebrowWho}</SectionEyebrow>
+                    <h3 className={styles.whoTitle}>
+                      {intro.headingWho.split('\n').map((line, i, arr) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i < arr.length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
+                    </h3>
+                    <p className={styles.introPara}>{intro.paragraph1}</p>
+                    <p className={styles.introPara}>{intro.paragraph2}</p>
+                    <p className={styles.introPara}>{intro.paragraph3}</p>
+                  </div>
+
+                  {/* 2x2 Stats Grid inside Right Column */}
+                  <div className={styles.rightColStatsGrid}>
+                    {intro.metrics.map((metric, i) => (
+                      <div key={i} className={styles.rightColStatCard}>
+                        <span className={styles.rightColStatValue}>{metric.value}</span>
+                        <span className={styles.rightColStatLabel}>{metric.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
       {/* ══════════════════════════════════════════
           WHY BUSINESSES TRUST TGB
       ══════════════════════════════════════════ */}
-      <section className={styles.trustSection}>
-        <div className={styles.inner}>
-          <div className={styles.trustBadgesSection}>
-            <div className={styles.trustSectionHeader}>
-              <h2 className={styles.trustTitle}>{identity.trustTitle}</h2>
-              <p className={styles.trustSubtitle}>{identity.trustSubtitle}</p>
-            </div>
-            <div className={styles.featureGrid}>
-              {standards.map((standard) => {
-                const Icon = ICON_MAP[standard.icon] || Zap;
-                return (
-                  <motion.div
-                    key={standard.number}
-                    className={styles.featureCard}
-                    variants={fadeUp}
-                    whileHover={{ y: -6, scale: 1.02 }}
-                  >
-                    <div className={styles.featureIconWrapper}>
-                      <Icon className={styles.featureIcon} strokeWidth={1.25} />
-                    </div>
-                    
-                    <div className={styles.featureCategory}>{standard.category}</div>
-                    <h3 className={styles.featureTitle}>{standard.title}</h3>
-                    <p className={styles.featureDescription}>{standard.description}</p>
-                    
-                    <div className={styles.featureTechLabel}>
-                      {standard.techLabel}
-                    </div>
-                  </motion.div>
-                );
-              })}
+      {showTrust && (
+        <section className={styles.trustSection}>
+          <div className={styles.inner}>
+            <div className={styles.trustBadgesSection}>
+              <div className={styles.trustSectionHeader}>
+                <h2 className={styles.trustTitle}>{identity.trustTitle}</h2>
+                <p className={styles.trustSubtitle}>{identity.trustSubtitle}</p>
+              </div>
+              <div className={styles.featureGrid}>
+                {standards.map((standard) => {
+                  const Icon = ICON_MAP[standard.icon] || Zap;
+                  return (
+                    <motion.div
+                      key={standard.number}
+                      className={styles.featureCard}
+                      variants={fadeUp}
+                      whileHover={{ y: -6, scale: 1.02 }}
+                    >
+                      <div className={styles.featureIconWrapper}>
+                        <Icon className={styles.featureIcon} strokeWidth={1.25} />
+                      </div>
+                      
+                      <div className={styles.featureCategory}>{standard.category}</div>
+                      <h3 className={styles.featureTitle}>{standard.title}</h3>
+                      <p className={styles.featureDescription}>{standard.description}</p>
+                      
+                      <div className={styles.featureTechLabel}>
+                        {standard.techLabel}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ══════════════════════════════════════════
           ZONE 4 — LEADERSHIP TEAM
       ══════════════════════════════════════════ */}
-      <section className={styles.leadershipSection}>
-        <div className={styles.inner}>
-          <motion.div
-            className={styles.headerBlock}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          >
-            <div className={styles.titleBlock}>
-              <h2 className={styles.mainTitle}>{identity.leadershipTitle}</h2>
-              <p className={styles.subtitle}>{identity.leadershipSubtitle}</p>
-            </div>
-          </motion.div>
+      {showLeadership && (
+        <section className={styles.leadershipSection}>
+          <div className={styles.inner}>
+            <motion.div
+              className={styles.headerBlock}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            >
+              <div className={styles.titleBlock}>
+                <h2 className={styles.mainTitle}>{identity.leadershipTitle}</h2>
+                <p className={styles.subtitle}>{identity.leadershipSubtitle}</p>
+              </div>
+            </motion.div>
 
-          <motion.div
-            className={styles.leadershipGrid}
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {identity.leaders.map((leader, i) => (
-              <motion.div
-                key={i}
-                className={styles.leaderCard}
-                variants={fadeUp}
-                whileHover={{ scale: 1.005 }}
-              >
-                <div className={styles.leaderImageContainer}>
-                  {leader.image && (
-                    <img 
-                      src={leader.image} 
-                      alt={leader.name} 
-                      className={styles.leaderImage} 
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={styles.leaderImageOverlay} />
-                </div>
-                <div className={styles.leaderInfo}>
-                  <h3 className={styles.leaderName}>{leader.name}</h3>
-                  <span className={styles.leaderRole}>{leader.role}</span>
-                  <p className={styles.leaderDesc}>{leader.description}</p>
-                </div>
-                <div className={styles.leaderAccentLine} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            <motion.div
+              className={styles.leadershipGrid}
+              variants={containerVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+            >
+              {identity.leaders.map((leader, i) => (
+                <motion.div
+                  key={i}
+                  className={styles.leaderCard}
+                  variants={fadeUp}
+                  whileHover={{ scale: 1.005 }}
+                >
+                  <div className={styles.leaderImageContainer}>
+                    {leader.image && (
+                      <img 
+                        src={leader.image} 
+                        alt={leader.name} 
+                        className={styles.leaderImage} 
+                        loading="lazy"
+                      />
+                    )}
+                    <div className={styles.leaderImageOverlay} />
+                  </div>
+                  <div className={styles.leaderInfo}>
+                    <h3 className={styles.leaderName}>{leader.name}</h3>
+                    <span className={styles.leaderRole}>{leader.role}</span>
+                    <p className={styles.leaderDesc}>{leader.description}</p>
+                  </div>
+                  <div className={styles.leaderAccentLine} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* SERVICES OVERVIEW */}
-      <ServicesOverview />
+      {showServices && <ServicesOverview />}
     </div>
   );
 };

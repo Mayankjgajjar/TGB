@@ -4,12 +4,11 @@ import { pageTransition } from '../animations/variants';
 
 // ── Eager sections (above-the-fold) ──────────────────────────────────────────
 import Hero from '../components/sections/Hero';
-import HomeAboutPreview from '../components/sections/HomeAboutPreview';
+import Identity from '../components/sections/Identity';
 import FeaturedProjects from '../components/sections/FeaturedProjects';
 import ContactCTA from '../components/sections/ContactCTA';
 
 // ── Lazy sections (below-the-fold) ───────────────────────────────────────────
-const ServicesOverview = lazy(() => import('../components/sections/ServicesOverview'));
 const Industries = lazy(() => import('../components/sections/Industries'));
 const Testimonials = lazy(() => import('../components/sections/Testimonials'));
 
@@ -29,15 +28,15 @@ export const Home: React.FC = () => {
       {/* Full-screen video hero with primary CTAs */}
       <Hero />
 
-      {/* Company introduction + 4 key stats → links to /about */}
-      <HomeAboutPreview />
+      {/* About Preview + Why Choose TGB (hiding Leadership and Services from Homepage) */}
+      <Identity 
+        showAbout={true} 
+        showTrust={true} 
+        showLeadership={false} 
+        showServices={false} 
+      />
 
-      {/* Service teaser grid — 6 cards linking to /services/:slug */}
-      <Suspense fallback={<SectionFallback />}>
-        <ServicesOverview />
-      </Suspense>
-
-      {/* Featured case studies — 4 project cards → links to /projects */}
+      {/* Featured case studies — 4 project cards */}
       <FeaturedProjects />
 
       {/* Industries overview — who we serve */}
@@ -50,7 +49,7 @@ export const Home: React.FC = () => {
         <Testimonials />
       </Suspense>
 
-      {/* Lead generation form */}
+      {/* Lead generation form and contact details */}
       <ContactCTA />
     </motion.div>
   );

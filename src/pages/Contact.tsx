@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import PageHero from '../components/sections/PageHero';
-import ContactInfoPanel from '../components/sections/ContactInfoPanel';
 import ContactCTA from '../components/sections/ContactCTA';
 
 const FAQ = lazy(() => import('../components/sections/FAQ'));
@@ -27,10 +26,7 @@ export const Contact: React.FC = () => {
         ]}
       />
 
-      {/* Workshop address, phone, email, WhatsApp, business hours, map & service areas */}
-      <ContactInfoPanel />
-
-      {/* Main inquiry submission form with Turnstile validation */}
+      {/* Main inquiry submission form with Turnstile validation, address, map and hours panel */}
       <ContactCTA />
 
       {/* FAQs regarding consultations, site audits, and delivery timelines */}

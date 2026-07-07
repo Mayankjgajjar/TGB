@@ -63,78 +63,6 @@ const validateForm = (fields: FormFields): FormErrors => {
   return errors;
 };
 
-// ── Inline styles matching the page architecture standards ──
-const sectionWrap: React.CSSProperties = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px',
-};
-
-const sectionBlock: React.CSSProperties = {
-  padding: '80px 0',
-};
-
-const eyebrowStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-technical, monospace)',
-  fontSize: '0.625rem',
-  letterSpacing: '0.18em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--color-accent, #c8a96e)',
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '8px',
-  marginBottom: '16px',
-};
-
-const h2Style: React.CSSProperties = {
-  fontFamily: 'var(--font-display, Montserrat, sans-serif)',
-  fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-  fontWeight: 700,
-  color: '#ffffff',
-  margin: '0 0 16px',
-  letterSpacing: '-0.02em',
-};
-
-const bodyStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-body, Roboto, sans-serif)',
-  fontSize: '1rem',
-  lineHeight: 1.75,
-  color: 'rgba(255,255,255,0.6)',
-  margin: '0 0 16px',
-};
-
-const cardGridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-  gap: '2px',
-  marginTop: '40px',
-};
-
-const cardStyle: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.06)',
-  padding: '32px 28px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '12px',
-};
-
-const cardTitleStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-display, Montserrat, sans-serif)',
-  fontSize: '1.125rem',
-  fontWeight: 700,
-  color: '#ffffff',
-  margin: 0,
-};
-
-const cardDescStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-body, Roboto, sans-serif)',
-  fontSize: '0.875rem',
-  lineHeight: 1.6,
-  color: 'rgba(255,255,255,0.45)',
-  margin: 0,
-};
-
 export const Warranty: React.FC = () => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -310,55 +238,7 @@ export const Warranty: React.FC = () => {
         ]}
       />
 
-      {/* ── Warranty Overview & coverage details ── */}
-      <section style={{ ...sectionBlock, paddingBottom: '0' }} aria-label="Warranty Guidelines">
-        <div style={sectionWrap}>
-          <div style={{ maxWidth: '800px' }}>
-            <span style={eyebrowStyle}>Quality Commitment</span>
-            <h2 style={h2Style}>Understand Your TGB Product Guarantee.</h2>
-            <p style={bodyStyle}>
-              At TGB Enterprise, we adhere strictly to premium raw materials and automated computer-aided manufacturing to make certain that every signage product complies with municipal stability and electrical standards. We stand firmly behind the durability of our installations.
-            </p>
-          </div>
-
-          <div style={cardGridStyle}>
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>01 / COVERAGE</span>
-              <h3 style={cardTitleStyle}>5-Year LED &amp; Driver Support</h3>
-              <p style={cardDescStyle}>
-                Covers module illumination failure, color shifts, and Mean Well transformer issues. Replacement parts are provided directly by our workshop.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>02 / STRUCTURE</span>
-              <h3 style={cardTitleStyle}>10-Year Framework Warranty</h3>
-              <p style={cardDescStyle}>
-                Guarantees GI structural components, laser-cut steel backing, mounting pins, and weld joints against structural crack formation or corrosion.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>03 / EXCLUSIONS</span>
-              <h3 style={cardTitleStyle}>Key Exclusions</h3>
-              <p style={cardDescStyle}>
-                Does not cover damages caused by severe power grid spikes (without spike protection), physical vandalism, external remodeling, or cyclones.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>04 / STEPS</span>
-              <h3 style={cardTitleStyle}>Technical Site Audit SLA</h3>
-              <p style={cardDescStyle}>
-                Once a valid claim is submitted online, our estimators review specifications and schedule a site diagnostic check within 3 business days in Ahmedabad.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Form Section ── */}
-      <section style={sectionBlock}>
+      <div className={styles.warrantyPage} style={{ paddingTop: 0 }}>
         <Container>
           <div className={styles.contentWrapper}>
             {isSubmitted ? (
@@ -647,7 +527,7 @@ export const Warranty: React.FC = () => {
             )}
           </div>
         </Container>
-      </section>
+      </div>
 
       {/* Internal Navigation links at bottom */}
       <div style={{ textAlign: 'center', paddingBottom: '80px', display: 'flex', gap: '20px', justifyContent: 'center' }}>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import Card from '../components/ui/Card';
@@ -9,80 +10,23 @@ import ContactCTA from '../components/sections/ContactCTA';
 import { projectsContent } from '../content/projects';
 import styles from './ProjectArchive.module.css';
 
-// ── Inline styling definitions keeping styling identical to other pages ──
-const sectionWrap: React.CSSProperties = {
-  maxWidth: '1200px',
-  margin: '0 auto',
-  padding: '0 24px',
-};
+const Process = lazy(() => import('../components/sections/Process'));
 
-const sectionBlock: React.CSSProperties = {
-  padding: '80px 0',
-};
-
-const eyebrowStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-technical, monospace)',
-  fontSize: '0.625rem',
-  letterSpacing: '0.18em',
-  textTransform: 'uppercase' as const,
-  color: 'var(--color-accent, #c8a96e)',
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '8px',
-  marginBottom: '16px',
-};
-
-const h2Style: React.CSSProperties = {
-  fontFamily: 'var(--font-display, Montserrat, sans-serif)',
-  fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
-  fontWeight: 700,
-  color: '#ffffff',
-  margin: '0 0 16px',
-  letterSpacing: '-0.02em',
-};
-
-const bodyStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-body, Roboto, sans-serif)',
-  fontSize: '1rem',
-  lineHeight: 1.75,
-  color: 'rgba(255,255,255,0.6)',
-  margin: '0 0 16px',
-};
-
-const cardGridStyle: React.CSSProperties = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-  gap: '2px',
-  marginTop: '40px',
-};
-
-const cardStyle: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.03)',
-  border: '1px solid rgba(255,255,255,0.06)',
-  padding: '32px 28px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '12px',
-};
-
-const cardTitleStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-display, Montserrat, sans-serif)',
-  fontSize: '1.125rem',
-  fontWeight: 700,
-  color: '#ffffff',
-  margin: 0,
-};
-
-const cardDescStyle: React.CSSProperties = {
-  fontFamily: 'var(--font-body, Roboto, sans-serif)',
-  fontSize: '0.875rem',
-  lineHeight: 1.6,
-  color: 'rgba(255,255,255,0.45)',
-  margin: 0,
-};
+const SectionFallback = () => <div style={{ minHeight: '400px' }} aria-hidden="true" />;
 
 export const ProjectArchive: React.FC = () => {
   const { header, items } = projectsContent;
+
+  useEffect(() => {
+    document.title = 'All Projects | TGB Enterprise – Sign Board Manufacturer in Ahmedabad';
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        'content',
+        'Browse the full portfolio of completed signage projects by TGB Enterprise. LED boards, ACP facades, neon signs, and 3D letters across Ahmedabad and Gujarat.'
+      );
+    }
+  }, []);
 
   const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -114,24 +58,7 @@ export const ProjectArchive: React.FC = () => {
         ]}
       />
 
-      {/* ── Portfolio Introduction ── */}
-      <section style={{ ...sectionBlock, paddingBottom: '0' }} aria-label="Portfolio Introduction">
-        <div style={sectionWrap}>
-          <div style={{ maxWidth: '800px' }}>
-            <span style={eyebrowStyle}>Select Works Overview</span>
-            <h2 style={h2Style}>Landmark Signage Projects Across Gujarat and India.</h2>
-            <p style={bodyStyle}>
-              Browse through our case studies of custom-engineered sign board fabrications and facade installations. We work closely with architects, developers, and brands to construct signs that align precisely with structural wind-load requirements, building blueprints, and brand identity guidelines.
-            </p>
-            <p style={bodyStyle}>
-              From monumental ACP claddings to warm LED halo-lit retail showrooms in Nikol, Ahmedabad, each project is a testament to our engineering standards and material integrity.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Main Portfolio Grid ── */}
-      <div className={styles.page} style={{ paddingTop: '40px', minHeight: 'auto' }}>
+      <div className={styles.page} style={{ paddingBottom: 0 }}>
         <Container>
           {/* Project count badge */}
           <div className={styles.metaBar} style={{ justifyContent: 'flex-start', marginBottom: '32px' }}>
@@ -175,46 +102,12 @@ export const ProjectArchive: React.FC = () => {
         </Container>
       </div>
 
-      {/* ── Our Approach & Why Choose TGB ── */}
-      <section style={sectionBlock} aria-label="Our Approach to Signage Execution">
-        <div style={sectionWrap}>
-          <div>
-            <span style={eyebrowStyle}>Project Execution</span>
-            <h2 style={h2Style}>How We Deliver Premium Brand Facades.</h2>
-            <p style={{ ...bodyStyle, maxWidth: '600px' }}>
-              We apply strict quality standards at every milestone of our workflow to guarantee durability, safety, and brand alignment.
-            </p>
-          </div>
+      {/* Our Approach (lazy-loaded Process component) */}
+      <Suspense fallback={<SectionFallback />}>
+        <Process />
+      </Suspense>
 
-          <div style={cardGridStyle}>
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>01 / ENGINEERING</span>
-              <h3 style={cardTitleStyle}>Structural Calculations</h3>
-              <p style={cardDescStyle}>
-                We perform wind-load resistance and weight calculations before producing any large-scale exterior signs or pylon frameworks.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>02 / DETAIL PRECISION</span>
-              <h3 style={cardTitleStyle}>Exact Technical Proofing</h3>
-              <p style={cardDescStyle}>
-                Before material cutting, we build digital visualizations and physical dimension mockups to avoid any facade spatial conflicts.
-              </p>
-            </div>
-
-            <div style={cardStyle}>
-              <span style={{ ...eyebrowStyle, color: 'rgba(255,255,255,0.45)' }}>03 / TIMEFRAMES</span>
-              <h3 style={cardTitleStyle}>Scheduled Installation</h3>
-              <p style={cardDescStyle}>
-                Our certified technicians manage delivery, mounting, and grid wiring, ensuring safety code compliance on-site.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final Page-end CTA */}
+      {/* Final CTA */}
       <ContactCTA />
     </motion.div>
   );
