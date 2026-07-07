@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { X, Clock, ArrowRight, MessageSquare, Phone, Compass } from 'lucide-react';
 import { useQuoteModal } from '../../context/QuoteContext';
 import { trackQuoteModalOpen, trackQuoteSubmit } from '../../lib/analytics';
@@ -85,8 +86,8 @@ export const QuoteModal: React.FC = () => {
             <div className={styles.actionStack}>
               
               {/* Action 1: Launch Builder (Outline with Red Hover border) */}
-              <a 
-                href="/#contact-cta" 
+              <Link 
+                to="/#contact" 
                 onClick={() => {
                   closeModal();
                   trackQuoteSubmit('builder');
@@ -98,7 +99,7 @@ export const QuoteModal: React.FC = () => {
                   <span>Launch Builder Workspace</span>
                 </div>
                 <ArrowRight size={16} className={styles.arrow} />
-              </a>
+              </Link>
 
               {/* Action 2: WhatsApp Desk (Outline with Green Hover border) */}
               <a 

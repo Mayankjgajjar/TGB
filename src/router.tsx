@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
 
@@ -89,6 +89,27 @@ export const router = createBrowserRouter([
             <Warranty />
           </Suspense>
         ),
+      },
+      // Legacy Redirects
+      {
+        path: 'about',
+        element: <Navigate to="/#about" replace />,
+      },
+      {
+        path: 'home',
+        element: <Navigate to="/#home" replace />,
+      },
+      {
+        path: 'industries',
+        element: <Navigate to="/#industries" replace />,
+      },
+      {
+        path: 'process',
+        element: <Navigate to="/#process" replace />,
+      },
+      {
+        path: 'contact',
+        element: <Navigate to="/#contact" replace />,
       },
       // Catch-all: must be LAST
       {

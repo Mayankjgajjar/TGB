@@ -36,20 +36,21 @@ export const Hero: React.FC = () => {
   const location = useLocation();
 
   const handleScrollTo = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    (e: React.MouseEvent<HTMLElement>, id: string) => {
       e.preventDefault();
-      if (location.pathname === '/' && location.hash === `#${id}`) {
+      if (location.pathname === '/') {
         const element = document.getElementById(id);
         if (element) {
           const yOffset = -130;
           const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
           window.scrollTo({ top: y, behavior: 'smooth' });
+          window.history.pushState(null, '', `/#${id}`);
         }
       } else {
         navigate(`/#${id}`);
       }
     },
-    [navigate, location.pathname, location.hash]
+    [navigate, location.pathname]
   );
 
   return (
@@ -79,7 +80,7 @@ export const Hero: React.FC = () => {
 
             <motion.div variants={fadeUp} className={styles.ctasRow}>
               <Button
-                href="#services"
+                to="/#services"
                 onClick={(e) => handleScrollTo(e, 'services')}
                 variant="primary"
                 size="large"
@@ -88,7 +89,7 @@ export const Hero: React.FC = () => {
                 {ctaLabel}
               </Button>
               <Button
-                href="#projects"
+                to="/#projects"
                 onClick={(e) => handleScrollTo(e, 'projects')}
                 variant="secondary"
                 size="large"

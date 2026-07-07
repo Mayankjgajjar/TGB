@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { QuoteProvider } from '../../context/QuoteContext';
 import QuoteModal from '../ui/QuoteModal';
+import ScrollToHash from './ScrollToHash';
 import { trackWhatsAppFABClick } from '../../lib/analytics';
 import styles from './AppLayout.module.css';
 
@@ -24,6 +25,7 @@ const whatsappVariants = {
 
 export const AppLayout: React.FC = () => {
   const location = useLocation();
+  const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
 
   // LocalBusiness Structured Data (JSON-LD)
   useEffect(() => {
@@ -146,6 +148,7 @@ export const AppLayout: React.FC = () => {
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
+    setLenisInstance(lenis);
 
     let animationFrameId: number;
     function raf(time: number) {
@@ -159,34 +162,6 @@ export const AppLayout: React.FC = () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
-
-
-
-  // Reset scroll to top or hash element on route change
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      
-      let attempts = 0;
-      const interval = setInterval(() => {
-        const element = document.getElementById(id);
-        attempts++;
-        
-        if (element) {
-          clearInterval(interval);
-          const yOffset = -130; // sticky header height offset + breathing space
-          const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        } else if (attempts >= 15) {
-          clearInterval(interval);
-        }
-      }, 50);
-      
-      return () => clearInterval(interval);
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [location.pathname, location.hash]);
 
   return (
     <QuoteProvider>
@@ -217,6 +192,7 @@ export const AppLayout: React.FC = () => {
         </main>
         <Footer />
         <QuoteModal />
+        <ScrollToHash lenis={lenisInstance} />
         
         {/* Floating WhatsApp Action Button */}
         <motion.a

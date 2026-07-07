@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import Container from '../ui/Container';
 import { useQuoteModal } from '../../context/QuoteContext';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
@@ -81,17 +81,18 @@ export const Navbar: React.FC = () => {
     };
   }, []);
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLElement>, id: string) => {
     e.preventDefault();
     setMobileOpen(false);
     (e.currentTarget as HTMLElement).blur();
     
-    if (location.pathname === '/' && location.hash === `#${id}`) {
+    if (location.pathname === '/') {
       const element = document.getElementById(id);
       if (element) {
         const yOffset = -130;
         const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
         window.scrollTo({ top: y, behavior: 'smooth' });
+        window.history.pushState(null, '', `/#${id}`);
       }
     } else {
       navigate(`/#${id}`);
@@ -114,41 +115,41 @@ export const Navbar: React.FC = () => {
   const isHomePage = location.pathname === '/';
   const navLinks = (
     <>
-      <a
-        href="#home"
+      <Link
+        to="/#home"
         onClick={(e) => handleAnchorClick(e, 'home')}
         className={`${styles.navLink} ${(isHomePage && activeSection === 'home') ? styles.activeNavLink : ''}`}
       >
         Home
-      </a>
-      <a
-        href="#about"
+      </Link>
+      <Link
+        to="/#about"
         onClick={(e) => handleAnchorClick(e, 'about')}
         className={`${styles.navLink} ${(isHomePage && activeSection === 'about') ? styles.activeNavLink : ''}`}
       >
         About
-      </a>
-      <a
-        href="#services"
+      </Link>
+      <Link
+        to="/#services"
         onClick={(e) => handleAnchorClick(e, 'services')}
         className={`${styles.navLink} ${(isHomePage && activeSection === 'services') ? styles.activeNavLink : ''}`}
       >
         Services
-      </a>
-      <a
-        href="#projects"
+      </Link>
+      <Link
+        to="/#projects"
         onClick={(e) => handleAnchorClick(e, 'projects')}
         className={`${styles.navLink} ${(isHomePage && activeSection === 'projects') ? styles.activeNavLink : ''}`}
       >
         Projects
-      </a>
-      <a
-        href="#contact"
+      </Link>
+      <Link
+        to="/#contact"
         onClick={(e) => handleAnchorClick(e, 'contact')}
         className={`${styles.navLink} ${(isHomePage && activeSection === 'contact') ? styles.activeNavLink : ''}`}
       >
         Contact
-      </a>
+      </Link>
     </>
   );
 
