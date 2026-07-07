@@ -87,7 +87,7 @@ export const QuoteModal: React.FC = () => {
               
               {/* Action 1: Launch Builder (Outline with Red Hover border) */}
               <Link 
-                to="/#contact" 
+                to="/contact" 
                 onClick={() => {
                   closeModal();
                   trackQuoteSubmit('builder');
@@ -96,7 +96,7 @@ export const QuoteModal: React.FC = () => {
               >
                 <div className={styles.optionLabel}>
                   <span className={styles.optionIcon}><Compass size={16} /></span>
-                  <span>Launch Builder Workspace</span>
+                  <span>Start Consultation</span>
                 </div>
                 <ArrowRight size={16} className={styles.arrow} />
               </Link>

@@ -53,8 +53,52 @@ const steps = [
   },
 ];
 
-export const Process: React.FC = () => {
+import { ICON_MAP } from '../../content/about';
+
+interface ProcessProps {
+  title?: string;
+  subtitle?: string;
+  introParagraph?: string;
+  stages?: {
+    step: string;
+    title: string;
+    duration: string;
+    description: string;
+    deliverables: string[];
+  }[];
+  asDiv?: boolean;
+}
+
+export const Process: React.FC<ProcessProps> = ({
+  title,
+  subtitle,
+  introParagraph,
+  stages,
+  asDiv = false,
+}) => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const activeTitle = title || 'From Concept to Completion.';
+  const activeSubtitle = subtitle || 'Every signage project follows a carefully structured process to ensure precision, quality, and a seamless experience from the first conversation to long-term support.';
+  const activeIntro = introParagraph;
+
+  // Map input stages to steps visual structure if provided
+  const activeSteps = stages
+    ? stages.map((stage) => {
+        const iconList = [Search, Pencil, Hammer, Truck, HeartHandshake];
+        const stepNum = parseInt(stage.step, 10);
+        const icon = iconList[stepNum - 1] || Search;
+        return {
+          icon,
+          number: stage.step,
+          category: `STAGE ${stage.step}`,
+          label: stage.duration,
+          title: stage.title,
+          description: stage.description,
+          tag: stage.deliverables && stage.deliverables.length > 0 ? stage.deliverables[0] : 'Execution Phase',
+        };
+      })
+    : steps;
 
   const cardVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
@@ -78,60 +122,92 @@ export const Process: React.FC = () => {
     },
   };
 
+  const content = (
+    <>
+      {/* ── Section Header ── */}
+      <motion.div
+        className={styles.headerBlock}
+        initial="hidden"
+        animate={isRevealed ? "visible" : "hidden"}
+        variants={headerVariants}
+      >
+        <SectionEyebrow>HOW WE WORK</SectionEyebrow>
+        <h2 className={styles.heading}>{activeTitle}</h2>
+        <p className={styles.subheading}>
+          {activeSubtitle}
+        </p>
+      </motion.div>
+
+      {/* ── Optional Standards Intro Paragraph ── */}
+      {activeIntro && (
+        <motion.div
+          className={styles.introParagraphWrapper}
+          initial={{ opacity: 0, y: 15 }}
+          animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+          transition={{ duration: 0.65, delay: 0.15 }}
+          style={{
+            maxWidth: '800px',
+            margin: '-16px auto 48px auto',
+            textAlign: 'center',
+            fontFamily: 'var(--font-primary)',
+            fontSize: '15px',
+            lineHeight: '1.75',
+            color: 'rgba(255, 255, 255, 0.65)',
+          }}
+        >
+          {activeIntro}
+        </motion.div>
+      )}
+
+      {/* ── Cards Grid ── */}
+      <motion.div
+        className={styles.grid}
+        initial="hidden"
+        animate={isRevealed ? "visible" : "hidden"}
+      >
+        {activeSteps.map((step, idx) => {
+          const Icon = step.icon;
+          return (
+            <motion.div
+              key={idx}
+              className={styles.card}
+              variants={cardVariants}
+              custom={idx}
+              whileHover={shouldReduceMotion ? {} : { y: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
+            >
+              <div className={styles.cardIconWrapper}>
+                <Icon className={styles.cardIcon} strokeWidth={1.25} />
+              </div>
+              <span className={styles.cardCategory}>{step.category}</span>
+              <span className={styles.stepLabel}>{step.label}</span>
+              <h3 className={styles.cardTitle}>{step.title}</h3>
+              <p className={styles.cardDesc}>{step.description}</p>
+              <span className={styles.cardTag}>{step.tag}</span>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+
+      {/* ── Bottom Statement ── */}
+      <p className={styles.bottomStatement}>
+        "Every project is different. Our commitment to quality, craftsmanship, and customer
+        satisfaction remains the same as a trusted signage manufacturer."
+      </p>
+    </>
+  );
+
+  if (asDiv) {
+    return (
+      <div ref={ref} id="process" style={{ width: '100%', position: 'relative' }}>
+        {content}
+      </div>
+    );
+  }
+
   return (
     <section ref={ref} className={styles.section} id="process">
       <div className={styles.inner}>
-
-        {/* ── Section Header ── */}
-        <motion.div
-          className={styles.headerBlock}
-          initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
-          variants={headerVariants}
-        >
-          <SectionEyebrow>HOW WE WORK</SectionEyebrow>
-          <h2 className={styles.heading}>From Concept to Completion.</h2>
-          <p className={styles.subheading}>
-            Every signage project follows a carefully structured process to ensure precision, quality,
-            and a seamless experience from the first conversation to long-term support.
-          </p>
-        </motion.div>
-
-        {/* ── Cards Grid ── */}
-        <motion.div
-          className={styles.grid}
-          initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
-        >
-          {steps.map((step, idx) => {
-            const Icon = step.icon;
-            return (
-              <motion.div
-                key={idx}
-                className={styles.card}
-                variants={cardVariants}
-                custom={idx}
-                whileHover={shouldReduceMotion ? {} : { y: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
-              >
-                <div className={styles.cardIconWrapper}>
-                  <Icon className={styles.cardIcon} strokeWidth={1.25} />
-                </div>
-                <span className={styles.cardCategory}>{step.category}</span>
-                <span className={styles.stepLabel}>{step.label}</span>
-                <h3 className={styles.cardTitle}>{step.title}</h3>
-                <p className={styles.cardDesc}>{step.description}</p>
-                <span className={styles.cardTag}>{step.tag}</span>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-
-        {/* ── Bottom Statement ── */}
-        <p className={styles.bottomStatement}>
-          "Every project is different. Our commitment to quality, craftsmanship, and customer
-          satisfaction remains the same as a trusted signage manufacturer in Ahmedabad."
-        </p>
-
+        {content}
       </div>
     </section>
   );

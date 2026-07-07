@@ -1,0 +1,57 @@
+/* ============================================================
+   ABOUT US PAGE LAYOUT OVERRIDES
+   Optimized Grid Column Handling, Spacing, and Card Sizing
+   ============================================================ */
+
+/* Responsive columns for custom 2-column layouts (e.g. Mission & Vision) */
+.gridCols2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .gridCols2 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-32);
+  }
+}
+
+/* Responsive columns for custom 3-column layouts (e.g. Core Values, Quality Commitment) */
+.gridCols3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .gridCols3 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-24);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridCols3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-24);
+  }
+}
+
+/* Card sizing and display optimizations */
+.narrativeBlock {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.narrativeText {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(244, 241, 234, 0.65);
+}

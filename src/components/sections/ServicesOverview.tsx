@@ -107,11 +107,13 @@ export const ServicesOverview: React.FC<{
   eyebrow?: string;
   title?: string;
   subtitle?: string;
+  introParagraph?: string;
   breadcrumbs?: { label: string; to?: string }[];
 }> = ({
   eyebrow,
   title,
   subtitle,
+  introParagraph,
   breadcrumbs,
 }) => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
@@ -162,11 +164,24 @@ export const ServicesOverview: React.FC<{
               ))}
             </div>
           )}
-          <SectionEyebrow>{eyebrow || "OUR EXPERTISE"}</SectionEyebrow>
+           <SectionEyebrow>{eyebrow || "OUR EXPERTISE"}</SectionEyebrow>
           <h2 className={styles.mainTitle}>{title || "Signage Solutions Built to Elevate Brands."}</h2>
           <p className={styles.subtitle}>
             {subtitle || "From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore."}
           </p>
+          {introParagraph && (
+            <p className={styles.introParagraph} style={{
+              maxWidth: '800px',
+              margin: '24px auto 0 auto',
+              fontSize: '15px',
+              lineHeight: '1.75',
+              color: 'rgba(255, 255, 255, 0.65)',
+              textAlign: 'center',
+              fontFamily: 'var(--font-primary)'
+            }}>
+              {introParagraph}
+            </p>
+          )}
         </motion.div>
 
         {/* Service Card Grid */}

@@ -82,8 +82,32 @@ const industries = [
   },
 ];
 
-export const Industries: React.FC = () => {
+import { ICON_MAP } from '../../content/about';
+
+interface IndustriesProps {
+  title?: string;
+  subtitle?: string;
+  items?: {
+    icon: any;
+    category: string;
+    title: string;
+    description: string;
+    tag: string;
+  }[];
+  asDiv?: boolean;
+}
+
+export const Industries: React.FC<IndustriesProps> = ({
+  title,
+  subtitle,
+  items,
+  asDiv = false,
+}) => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
+
+  const activeTitle = title || 'Signage Solutions for Every Industry.';
+  const activeSubtitle = subtitle || 'From retail storefronts to large commercial developments, we create signage solutions tailored to the unique needs of every industry we serve.';
+  const activeItems = items || industries;
 
   const cardVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
@@ -107,34 +131,33 @@ export const Industries: React.FC = () => {
     },
   };
 
-  return (
-    <section ref={ref} className={styles.section} id="industries">
-      <div className={styles.inner}>
+  const content = (
+    <>
+      {/* ── Section Header ── */}
+      <motion.div
+        className={styles.headerBlock}
+        initial="hidden"
+        animate={isRevealed ? "visible" : "hidden"}
+        variants={headerVariants}
+      >
+        <SectionEyebrow>WHO WE SERVE</SectionEyebrow>
+        <h2 className={styles.heading}>
+          {activeTitle}
+        </h2>
+        <p className={styles.subheading}>
+          {activeSubtitle}
+        </p>
+      </motion.div>
 
-        {/* ── Section Header ── */}
-        <motion.div
-          className={styles.headerBlock}
-          initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
-          variants={headerVariants}
-        >
-          <SectionEyebrow>WHO WE SERVE</SectionEyebrow>
-          <h2 className={styles.heading}>
-            Signage Solutions for Every Industry.
-          </h2>
-          <p className={styles.subheading}>
-            From retail storefronts to large commercial developments, we create signage solutions
-            tailored to the unique needs of every industry we serve.
-          </p>
-        </motion.div>
-
-        {/* ── Industry Cards Grid ── */}
-        <motion.div
-          className={styles.grid}
-          initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
-        >
-          {industries.map((industry, index) => (
+      {/* ── Industry Cards Grid ── */}
+      <motion.div
+        className={styles.grid}
+        initial="hidden"
+        animate={isRevealed ? "visible" : "hidden"}
+      >
+        {activeItems.map((industry, index) => {
+          const Icon = typeof industry.icon === 'string' ? (ICON_MAP[industry.icon] || LayoutGrid) : industry.icon;
+          return (
             <motion.div
               key={index}
               className={styles.cardWrapper}
@@ -142,19 +165,35 @@ export const Industries: React.FC = () => {
               custom={index}
             >
               <Card
-                icon={industry.icon}
+                icon={Icon}
                 category={industry.category}
                 title={industry.title}
                 description={industry.description}
                 footerPill={industry.tag}
               />
             </motion.div>
-          ))}
-        </motion.div>
+          );
+        })}
+      </motion.div>
+    </>
+  );
 
+  if (asDiv) {
+    return (
+      <div ref={ref} id="industries" style={{ width: '100%', position: 'relative' }}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <section ref={ref} className={styles.section} id="industries">
+      <div className={styles.inner}>
+        {content}
       </div>
     </section>
   );
 };
 
 export default Industries;
+

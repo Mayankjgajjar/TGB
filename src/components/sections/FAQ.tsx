@@ -45,16 +45,30 @@ const faqs = [
   }
 ];
 
-export const FAQ: React.FC = () => {
+interface FAQProps {
+  title?: string;
+  subtitle?: string;
+  items?: { question: string; answer: string }[];
+}
+
+export const FAQ: React.FC<FAQProps> = ({
+  title,
+  subtitle,
+  items,
+}) => {
   const { openModal } = useQuoteModal();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const activeFaqs = items || faqs;
+  const activeTitle = title || 'Everything You Need to Know.';
+  const activeSubtitle = subtitle || 'Have questions about our signage solutions, process, or services? Here are answers to the most common questions we receive.';
 
   // Dynamic FAQPage Structured Data (JSON-LD)
   React.useEffect(() => {
     const faqSchema = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": faqs.map(faq => ({
+      "mainEntity": activeFaqs.map(faq => ({
         "@type": "Question",
         "name": faq.question,
         "acceptedAnswer": {
@@ -76,15 +90,15 @@ export const FAQ: React.FC = () => {
         existingScript.remove();
       }
     };
-  }, []);
+  }, [activeFaqs]);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   // Distribute items into left and right columns for balanced rendering on desktop
-  const leftColFaqs = faqs.filter((_, idx) => idx % 2 === 0);
-  const rightColFaqs = faqs.filter((_, idx) => idx % 2 !== 0);
+  const leftColFaqs = activeFaqs.filter((_, idx) => idx % 2 === 0);
+  const rightColFaqs = activeFaqs.filter((_, idx) => idx % 2 !== 0);
 
   const renderFaqItem = (faq: typeof faqs[0], originalIndex: number) => {
     const isOpen = openIndex === originalIndex;
@@ -150,10 +164,9 @@ export const FAQ: React.FC = () => {
           variants={headerVariants}
         >
           <SectionEyebrow>FREQUENTLY ASKED QUESTIONS</SectionEyebrow>
-          <h2 className={styles.heading}>Everything You Need to Know.</h2>
+          <h2 className={styles.heading}>{activeTitle}</h2>
           <p className={styles.subheading}>
-            Have questions about our signage solutions, process, or services? Here are answers 
-            to the most common questions we receive.
+            {activeSubtitle}
           </p>
         </motion.div>
 
@@ -161,20 +174,20 @@ export const FAQ: React.FC = () => {
         <div className={styles.grid}>
           <div className={styles.column}>
             {leftColFaqs.map((faq) => {
-              const originalIndex = faqs.indexOf(faq);
+              const originalIndex = activeFaqs.indexOf(faq);
               return renderFaqItem(faq, originalIndex);
             })}
           </div>
 
           <div className={styles.column}>
             {rightColFaqs.map((faq) => {
-              const originalIndex = faqs.indexOf(faq);
+              const originalIndex = activeFaqs.indexOf(faq);
               return renderFaqItem(faq, originalIndex);
             })}
           </div>
         </div>
 
-        {/* ── Bottom Clean CTA (No heavy card, just elegant link) ── */}
+        {/* ── Bottom Clean CTA ── */}
         <div className={styles.bottomLinkBlock}>
           Still have questions? Our team is here to help.
           <button onClick={openModal} className={styles.bottomLink}>
