@@ -26,6 +26,10 @@ const warrantySchema = z.object({
   imageFileName: z.string().optional(),
   imageContent: z.string().optional(),
   turnstileToken: z.string().min(1, 'CAPTCHA token is required.'),
+  consentGiven: z.literal(true, {
+    errorMap: () => ({ message: 'Consent is required to submit your claim.' }),
+  }),
+  consentTimestamp: z.string().min(1, 'Consent timestamp is required.'),
 });
 
 // ── Turnstile Verification ────────────────────────────────────────────────────
@@ -100,6 +104,8 @@ export default async function handler(req: any, res: any) {
     imageFileName,
     imageContent,
     turnstileToken,
+    consentGiven,
+    consentTimestamp,
   } = parsed.data;
 
   // 3. Turnstile verification
@@ -147,6 +153,8 @@ export default async function handler(req: any, res: any) {
         <p><strong>Warranty Number:</strong> ${warrantyNumber}</p>
         <p><strong>Purchase Date:</strong> ${purchaseDate}</p>
         <p><strong>Signage Type:</strong> ${signageType}</p>
+        <p><strong>Consent Given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
+        <p><strong>Consent Timestamp:</strong> ${consentTimestamp}</p>
         <p><strong>Issue Details:</strong></p>
         <p>${issueDetails}</p>
         ${imageFileName ? `<p><strong>Attached Photo:</strong> ${imageFileName} (see attachment)</p>` : ''}

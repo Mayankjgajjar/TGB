@@ -30,6 +30,10 @@ const contactSchema = z.object({
     .min(10, 'Message must be at least 10 characters.')
     .max(2000, 'Message must be under 2000 characters.'),
   turnstileToken: z.string().min(1, 'CAPTCHA token is required.'),
+  consentGiven: z.literal(true, {
+    errorMap: () => ({ message: 'Consent is required to submit your enquiry.' }),
+  }),
+  consentTimestamp: z.string().min(1, 'Consent timestamp is required.'),
 });
 
 // ── Turnstile Verification ────────────────────────────────────────────────────
@@ -102,6 +106,8 @@ export default async function handler(req: any, res: any) {
     signage,
     message,
     turnstileToken,
+    consentGiven,
+    consentTimestamp,
   } = parsed.data;
 
   // 3. Turnstile verification
@@ -140,6 +146,8 @@ export default async function handler(req: any, res: any) {
           <p><strong>Company:</strong> ${company || 'Not provided'}</p>
           <p><strong>Location:</strong> ${location || 'Not provided'}</p>
           <p><strong>Type of Signage:</strong> ${signage || 'Not specified'}</p>
+          <p><strong>Consent Given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
+          <p><strong>Consent Timestamp:</strong> ${consentTimestamp}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
         `,

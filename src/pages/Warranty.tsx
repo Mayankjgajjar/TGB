@@ -4,6 +4,7 @@ import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import Turnstile from '../components/ui/Turnstile';
 import { trackWarrantyFormSubmit } from '../lib/analytics';
+import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
 
 interface FormFields {
@@ -15,6 +16,7 @@ interface FormFields {
   purchaseDate: string;
   signageType: string;
   issueDetails: string;
+  consent: boolean;
 }
 
 type FormErrors = Partial<Record<keyof FormFields, string>>;
@@ -28,6 +30,7 @@ const EMPTY_FORM: FormFields = {
   purchaseDate: '',
   signageType: '',
   issueDetails: '',
+  consent: false,
 };
 
 const validateForm = (fields: FormFields): FormErrors => {
@@ -52,6 +55,10 @@ const validateForm = (fields: FormFields): FormErrors => {
   if (!fields.signageType) errors.signageType = 'Please select a signage type.';
   if (!fields.issueDetails.trim()) errors.issueDetails = 'Please provide details about the issue.';
   
+  if (!fields.consent) {
+    errors.consent = 'Consent is required to submit your claim.';
+  }
+
   return errors;
 };
 
@@ -103,9 +110,10 @@ export const Warranty: React.FC = () => {
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const { name, value } = e.target;
+      const { name, value, type } = e.target;
+      const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
       const field = name as keyof FormFields;
-      setFormState((prev) => ({ ...prev, [field]: value }));
+      setFormState((prev) => ({ ...prev, [field]: val }));
       
       // Clear error as user corrects the field
       if (errors[field]) {
@@ -165,6 +173,8 @@ export const Warranty: React.FC = () => {
             imageFileName: selectedFile ? selectedFile.name : null,
             imageContent: fileBase64,
             turnstileToken,
+            consentGiven: formState.consent,
+            consentTimestamp: new Date().toISOString(),
           }),
         });
 
@@ -470,6 +480,30 @@ export const Warranty: React.FC = () => {
                 )}
               </div>
 
+
+              {/* Consent Checkbox */}
+              <div className={styles.checkboxGroup}>
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={formState.consent}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`${styles.checkboxInput} ${touched.consent && errors.consent ? styles.checkboxError : ''}`}
+                  aria-invalid={touched.consent && !!errors.consent}
+                  aria-describedby={errors.consent ? 'consent-error' : undefined}
+                />
+                <label htmlFor="consent" className={styles.checkboxLabel}>
+                  I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
+                  <Link to="/privacy">Privacy Policy</Link>.
+                </label>
+              </div>
+              {touched.consent && errors.consent && (
+                <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
+                  {errors.consent}
+                </span>
+              )}
 
               {/* Turnstile Captcha */}
               <Turnstile onVerify={setTurnstileToken} />

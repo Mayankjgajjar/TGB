@@ -6,6 +6,7 @@ import styles from './ContactCTA.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { trackContactFormSubmit } from '../../lib/analytics';
 import Turnstile from '../ui/Turnstile';
+import { Link } from 'react-router-dom';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -18,6 +19,7 @@ interface FormFields {
   location: string;
   signageType: string;
   message: string;
+  consent: boolean;
 }
 
 type FormErrors = Partial<Record<keyof FormFields, string>>;
@@ -52,6 +54,10 @@ function validateForm(fields: FormFields): FormErrors {
     errors.email = 'Enter a valid email address.';
   }
 
+  if (!fields.consent) {
+    errors.consent = 'Consent is required to submit your enquiry.';
+  }
+
   return errors;
 }
 
@@ -64,6 +70,7 @@ const EMPTY_FORM: FormFields = {
   location: '',
   signageType: '',
   message: '',
+  consent: false,
 };
 
 // ── Component ──────────────────────────────────────────────────────────────
@@ -83,9 +90,10 @@ export const ContactCTA: React.FC = () => {
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const { name, value } = e.target;
+      const { name, value, type } = e.target;
+      const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
       const field = name as keyof FormFields;
-      setFormState((prev) => ({ ...prev, [field]: value }));
+      setFormState((prev) => ({ ...prev, [field]: val }));
       // Clear error as user corrects the field
       if (errors[field]) {
         setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -145,6 +153,8 @@ export const ContactCTA: React.FC = () => {
             signage: formState.signageType,
             message: formState.message,
             turnstileToken,
+            consentGiven: formState.consent,
+            consentTimestamp: new Date().toISOString(),
           }),
         });
 
@@ -166,7 +176,7 @@ export const ContactCTA: React.FC = () => {
         setIsSubmitting(false);
       }
     },
-    [formState]
+    [formState, turnstileToken]
   );
 
   const handleReset = useCallback(() => {
@@ -412,6 +422,30 @@ export const ContactCTA: React.FC = () => {
                       className={styles.textareaInput}
                     />
                   </div>
+
+                  {/* Consent Checkbox */}
+                  <div className={styles.checkboxGroup}>
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      name="consent"
+                      checked={formState.consent}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={`${styles.checkboxInput} ${touched.consent && errors.consent ? styles.checkboxError : ''}`}
+                      aria-invalid={touched.consent && !!errors.consent}
+                      aria-describedby={errors.consent ? 'consent-error' : undefined}
+                    />
+                    <label htmlFor="consent" className={styles.checkboxLabel}>
+                      I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
+                      <Link to="/privacy">Privacy Policy</Link>.
+                    </label>
+                  </div>
+                  {touched.consent && errors.consent && (
+                    <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
+                      {errors.consent}
+                    </span>
+                  )}
 
                   {/* Turnstile Captcha */}
                   <Turnstile onVerify={setTurnstileToken} />
