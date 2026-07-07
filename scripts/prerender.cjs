@@ -1,0 +1,318 @@
+/**
+ * scripts/prerender.cjs
+ *
+ * Runs post-build to statically prerender all indexable routes.
+ * This generates physical directory-based index.html files (e.g. dist/privacy/index.html)
+ * pre-populated with unique title tags, meta descriptions, canonical URLs,
+ * OG/Twitter cards, and semantic H1/H2 content blocks.
+ *
+ * This guarantees that crawlers without JavaScript execution see complete,
+ * valid HTML, resolving search-console duplicate titles and H1 errors.
+ *
+ * Run: node scripts/prerender.cjs
+ * Triggered automatically at the end of Vite production build.
+ */
+
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const CANONICAL_ORIGIN = 'https://www.tgbsign.com';
+const DIST_DIR = path.join(__dirname, '..', 'dist');
+const INDEX_HTML_PATH = path.join(DIST_DIR, 'index.html');
+
+if (!fs.existsSync(INDEX_HTML_PATH)) {
+  console.error('[prerender] Error: dist/index.html not found! Run vite build first.');
+  process.exit(1);
+}
+
+const templateHtml = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
+
+// Helper to escape HTML characters
+function escapeHtml(str) {
+  if (!str) return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+// File paths
+const projectsFile = path.join(__dirname, '..', 'src', 'content', 'projects.ts');
+const servicesFile = path.join(__dirname, '..', 'src', 'content', 'services.ts');
+
+// ── 1. Parse Project Data ───────────────────────────────────────────────────
+const projectsSrc = fs.readFileSync(projectsFile, 'utf-8');
+const projectItems = [];
+const parts = projectsSrc.split(/\bid:\s*["']/);
+for (let i = 1; i < parts.length; i++) {
+  const part = parts[i];
+  const id = part.split(/["']/)[0];
+  const nameMatch = /name:\s*["']([^"']+)["']/.exec(part);
+  const categoryMatch = /category:\s*["']([^"']+)["']/.exec(part);
+  const imagePathMatch = /imagePath:\s*["']([^"']+)["']/.exec(part);
+  const descriptionMatch = /description:\s*["']([^"']+)["']/.exec(part);
+  const locationMatch = /location:\s*["']([^"']+)["']/.exec(part);
+  const clientMatch = /client:\s*["']([^"']+)["']/.exec(part);
+  const yearMatch = /year:\s*["']([^"']+)["']/.exec(part);
+  const highlightMatch = /engineeringHighlight:\s*["']([^"']+)["']/.exec(part);
+
+  if (id && nameMatch && imagePathMatch) {
+    projectItems.push({
+      id,
+      name: nameMatch[1],
+      category: categoryMatch ? categoryMatch[1] : '',
+      imagePath: imagePathMatch[1],
+      description: descriptionMatch ? descriptionMatch[1] : '',
+      location: locationMatch ? locationMatch[1] : '',
+      client: clientMatch ? clientMatch[1] : '',
+      year: yearMatch ? yearMatch[1] : '',
+      engineeringHighlight: highlightMatch ? highlightMatch[1] : ''
+    });
+  }
+}
+
+// ── 2. Parse Service Data ───────────────────────────────────────────────────
+const servicesSrc = fs.readFileSync(servicesFile, 'utf-8');
+const serviceItems = [];
+const serviceBlockPattern = /["']([^"']+)["']:\s*\{\s*slug:\s*["']([^"']+)["'][\s\S]*?seoMetadata/g;
+let sMatch;
+while ((sMatch = serviceBlockPattern.exec(servicesSrc)) !== null) {
+  const block = sMatch[0];
+  const slug = sMatch[2];
+  const nameMatch = /name:\s*["']([^"']+)["']/.exec(block);
+  const heroImageMatch = /heroImage:\s*["']([^"']+)["']/.exec(block);
+  const positioningMatch = /positioning:\s*["']([^"']+)["']/.exec(block);
+  const descriptionMatch = /description:\s*["']([^"']+)["']/.exec(block);
+  const whyItMattersMatch = /whyItMatters:\s*["']([^"']+)["']/.exec(block);
+  
+  if (slug && nameMatch && heroImageMatch) {
+    serviceItems.push({
+      slug,
+      name: nameMatch[1],
+      heroImage: heroImageMatch[1],
+      positioning: positioningMatch ? positioningMatch[1] : '',
+      description: descriptionMatch ? descriptionMatch[1] : '',
+      whyItMatters: whyItMattersMatch ? whyItMattersMatch[1] : ''
+    });
+  }
+}
+
+// ── 3. Define Pages to Prerender ─────────────────────────────────────────────
+const pages = [];
+
+// A. Home Page
+pages.push({
+  route: '/',
+  title: 'TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad',
+  description: 'TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.',
+  h1: 'TGB Enterprise',
+  h2: 'Architectural Identity Systems',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Premium Signboard & Facade Manufacturer in Ahmedabad</h2>
+      <p>TGB Enterprise designs, manufactures, and installs premium architectural identity systems for commercial landmarks. Operating from our fabrication shop in Nikol, Ahmedabad, we offer custom-engineered LED sign boards, ACP cladding panels, 3D acrylic letters, and stainless steel signs across Gujarat and broader India. We bridge architectural blueprints and structural engineering standards to construct brands that are built to be seen.</p>
+    </section>
+    <section>
+      <h2>Our Core Signage Solutions</h2>
+      <ul>
+        <li><strong>LED Sign Boards:</strong> High-brightness, IP67 weather-sealed LED modules powered by Meanwell transformers for 24/7 exterior brand visibility.</li>
+        <li><strong>ACP Sign Boards:</strong> rigid facade cladding panels CNC-routed for seamless storefront design and structural wind-load performance.</li>
+        <li><strong>Acrylic &amp; 3D Letters:</strong> Precision laser-cut acrylic character boards with warm or cool backlit halo illumination.</li>
+        <li><strong>SS Letters:</strong> Gold titanium and mirror-finish stainless steel channel letters with structural corrosion resistance.</li>
+        <li><strong>Neon &amp; Custom Signages:</strong> Artistic flexible neon boards for cafe, restaurant, and creative office branding.</li>
+        <li><strong>Pylon Signs:</strong> Large-scale double-sided monolith boards built on structural steel sub-frames.</li>
+      </ul>
+    </section>
+  `
+});
+
+// B. Project Archive Page
+pages.push({
+  route: '/projects',
+  title: 'Our Completed Projects Portfolio | TGB Enterprise Ahmedabad',
+  description: 'View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.',
+  h1: 'Identity Landmarks',
+  h2: 'Project Archive &amp; Select Works',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Architectural Signage Case Studies</h2>
+      <p>Explore TGB Enterprise's portfolio of custom-engineered storefront signs, building facade claddings, and lobby letter boards completed for corporate headquarters, jewelry showrooms, and commercial hubs in Nikol, Ahmedabad, and other major cities of Gujarat.</p>
+      <ul>
+        ${projectItems.map(p => `
+          <li>
+            <h3>${escapeHtml(p.name)}</h3>
+            <p><strong>Category:</strong> ${escapeHtml(p.category)} in ${escapeHtml(p.location)} (Client: ${escapeHtml(p.client)} - Year ${escapeHtml(p.year)}). ${escapeHtml(p.description)}</p>
+          </li>
+        `).join('\n')}
+      </ul>
+    </section>
+  `
+});
+
+// C. Claim Warranty Page
+pages.push({
+  route: '/claim-warranty',
+  title: 'Product Warranty Registration & Claim | TGB Enterprise Sign Boards',
+  description: 'Register or submit a warranty claim for your TGB Enterprise sign boards. Follow our easy guide to file a claim for LED, ACP, and 3D letters.',
+  h1: 'Warranty Claim',
+  h2: 'Submit Warranty Request Online',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Warranty Claim Terms &amp; Support Guidelines</h2>
+      <p>Every TGB Enterprise signboard undergoes strict QA before dispatch from our Ahmedabad facility. We offer a 5-year warranty on premium LED modules and transformers, and a 10-year structural warranty on steel frameworks. Use this warranty dashboard to file claims for components experiencing technical issues.</p>
+      <p>Submit your customer name, email address, phone, invoice details, and photos of the signage issue. Our technical support team in Nikol will review the records and respond within 24-48 business hours to coordinate structural repairs or replacements.</p>
+    </section>
+  `
+});
+
+// D. Privacy Page
+pages.push({
+  route: '/privacy',
+  title: 'Privacy Policy | TGB Enterprise – Sign Board Manufacturer in Ahmedabad',
+  description: 'Privacy Policy for TGB Enterprise, sign board manufacturer in Ahmedabad. Learn how we handle your personal data and respect your online privacy.',
+  h1: 'Privacy Policy',
+  h2: 'Indian DPDP Act 2023 Data Protection Compliance',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Personal Information Collection and Security</h2>
+      <p>In accordance with India's Digital Personal Data Protection (DPDP) Act, 2023, TGB Enterprise collects personal identity details (name, email, phone) exclusively to process design quotations and verify product warranties. We secure your design specifications and contact information against unauthorized access. We do not rent, sell, or distribute client databases to unverified third-party marketers.</p>
+    </section>
+  `
+});
+
+// E. Terms Page
+pages.push({
+  route: '/terms',
+  title: 'Terms & Conditions | TGB Enterprise – Sign Board Manufacturer in Ahmedabad',
+  description: 'Terms and conditions for using the website and services of TGB Enterprise, premium sign board manufacturer in Ahmedabad. Read our terms of service.',
+  h1: 'Terms &amp; Conditions',
+  h2: 'Fabrication Milestones &amp; Structural Approvals',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Blueprint Approvals, Site Readiness, and Billings</h2>
+      <p>These Terms govern TGB Enterprise's signage fabrication and mounting services. Design proofs and CAD drawings must be formally signed off before production starts. Standard billing requires 50% deposit advance, 30% upon completion of fabrication, and 20% on installation. Clients are responsible for obtaining building manager permissions and providing secure power inputs near the signage mounting site.</p>
+    </section>
+  `
+});
+
+// F. Dynamic Service Pages
+serviceItems.forEach(s => {
+  pages.push({
+    route: `/services/${s.slug}`,
+    title: `Premium ${s.name} | TGB Enterprise – Nikol, Ahmedabad`,
+    description: `High-impact, custom-engineered ${s.name.toLowerCase()} design & installation by TGB Enterprise in Ahmedabad. Spec sheet, IP67 weather rating, and 5-Year warranty.`,
+    h1: s.name,
+    h2: s.positioning || 'Precision Engineered Signage Solutions',
+    image: s.heroImage.startsWith('http') ? s.heroImage : `${CANONICAL_ORIGIN}${s.heroImage}`,
+    content: `
+      <section>
+        <h2>${escapeHtml(s.name)} Overview</h2>
+        <p>${escapeHtml(s.description)}</p>
+        <p>${escapeHtml(s.whyItMatters)}</p>
+      </section>
+      <section>
+        <h2>Signage Fabrication &amp; Engineering Standards</h2>
+        <p>At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict structural and electrical safety codes. Every ${escapeHtml(s.name)} is fabricated using state-of-the-art computer-controlled routers (CNC) and high-precision laser profiling machines to ensure exact alignment with design blueprints. We utilize premium architectural-grade materials (such as aluminum, structural acrylics, and stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or warping under severe weather conditions.</p>
+        <p>Our LED assemblies are powered by industry-leading transformers (Meanwell) and energy-efficient IP67 weather-sealed modules, providing consistent luminous intensity with no visible hot-spots. Our certified installation crew manages structural mounting, anchor point calculation, and grid wiring, ensuring safety compliance for high-rise commercial facades and local retail zones across Ahmedabad, Gujarat, and broader India.</p>
+      </section>
+    `
+  });
+});
+
+// G. Dynamic Project Pages
+projectItems.forEach(p => {
+  pages.push({
+    route: `/projects/${p.id}`,
+    title: `${p.name} case study | TGB Enterprise`,
+    description: `Case study details for ${p.name} - ${p.category} completed in ${p.location}. See structural design and engineering highlight specs.`,
+    h1: p.name,
+    h2: p.category,
+    image: p.imagePath.startsWith('http') ? p.imagePath : `${CANONICAL_ORIGIN}${p.imagePath}`,
+    content: `
+      <section>
+        <h2>Project Overview: ${escapeHtml(p.name)}</h2>
+        <p><strong>Client:</strong> ${escapeHtml(p.client)} | <strong>Location:</strong> ${escapeHtml(p.location)} | <strong>Year:</strong> ${escapeHtml(p.year)}</p>
+        <p>${escapeHtml(p.description)}</p>
+      </section>
+      <section>
+        <h2>Engineering Specification &amp; Quality Execution</h2>
+        <p>The fabrication of the ${escapeHtml(p.name)} installation showcases TGB Enterprise's structural engineering guidelines. By selecting premium raw materials and utilizing precision automated tooling, our Nikol-based fabrication shop achieved seamless joints and high-tolerance alignment. The structural sub-frames are hot-dip galvanized to resist corrosion in high-humidity local climates, while the illuminated modules are fully weather-sealed to guarantee longevity.</p>
+        <p>During the deployment phase, our technical team executed site alignment surveys and wind-load calculations to ensure the signage stands robustly. This project case study demonstrates our capacity to translate architect-level blueprints into durable physical landmarks, providing Ahmedabad and Gujarat businesses with unmatched brand permanence.</p>
+        <p><strong>Engineering Highlight:</strong> ${escapeHtml(p.engineeringHighlight)}</p>
+      </section>
+    `
+  });
+});
+
+// ── 4. Execute Prerendering ──────────────────────────────────────────────────
+console.log(`[prerender] Starting static HTML generation for ${pages.length} routes...`);
+
+pages.forEach(p => {
+  const canonicalUrl = `${CANONICAL_ORIGIN}${p.route === '/' ? '' : p.route}`;
+
+  // Assemble dynamic SEO headers
+  const seoHeaders = `
+  <title>${p.title}</title>
+  <meta name="description" content="${p.description}" />
+  <link rel="canonical" href="${canonicalUrl}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="${p.title}" />
+  <meta property="og:description" content="${p.description}" />
+  <meta property="og:image" content="${p.image}" />
+  <meta property="og:url" content="${canonicalUrl}" />
+  <meta property="og:site_name" content="TGB Enterprise" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${p.title}" />
+  <meta name="twitter:description" content="${p.description}" />
+  <meta name="twitter:image" content="${p.image}" />
+  `;
+
+  // Parse and replace header blocks
+  let html = templateHtml;
+
+  // 1. Replace existing title
+  html = html.replace(/<title>.*?<\/title>/, '');
+
+  // 2. Replace existing description meta
+  html = html.replace(/<meta\s+name="description"\s+content=".*?"\s*\/?>/, '');
+
+  // 3. Inject new SEO tags right after charset/meta tags
+  html = html.replace('<head>', `<head>${seoHeaders}`);
+
+  // 4. Inject static content into root div (invisible to users but visible to simple bots)
+  const prerenderedBody = `
+    <header style="display:none">
+      <h1>${p.h1}</h1>
+      <h2>${p.h2}</h2>
+    </header>
+    <main style="display:none">
+      ${p.content}
+    </main>
+  `;
+  html = html.replace('<div id="root"></div>', `<div id="root">${prerenderedBody}</div>`);
+
+  // 5. Determine save directory & path
+  let dirPath = DIST_DIR;
+  if (p.route !== '/') {
+    dirPath = path.join(DIST_DIR, p.route);
+  }
+  const savePath = path.join(dirPath, 'index.html');
+
+  // Create folder recursively
+  fs.mkdirSync(dirPath, { recursive: true });
+
+  // Write file
+  fs.writeFileSync(savePath, html, 'utf-8');
+  console.log(`  ✓ Prerendered: ${p.route} ➔ ${path.relative(DIST_DIR, savePath)} (${html.length} bytes)`);
+});
+
+console.log('[prerender] ✓ Successfully statically prerendered all SEO routes!');

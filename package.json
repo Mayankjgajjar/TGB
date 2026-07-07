@@ -7,7 +7,7 @@
     "predev": "node scripts/copy-assets.cjs",
     "dev": "vite",
     "generate:sitemap": "node scripts/generate-sitemap.cjs",
-    "build": "node scripts/copy-assets.cjs && node scripts/generate-sitemap.cjs && tsc && vite build",
+    "build": "node scripts/copy-assets.cjs && node scripts/generate-sitemap.cjs && tsc && vite build && node scripts/prerender.cjs",
     "preview": "vite preview"
   },
   "dependencies": {
