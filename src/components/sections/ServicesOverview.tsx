@@ -29,7 +29,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "LED Sign Boards",
     description: "High-impact illuminated signage solutions designed to maximize visibility and create memorable brand experiences, day and night.",
     footerBadge: "Indoor & Outdoor Applications",
-    image: "/assets/services/led_board.jpg",
+    image: "/assets/services/led-sign.png",
   },
   {
     slug: "acp-sign-boards",
@@ -39,7 +39,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "ACP Sign Boards",
     description: "Durable and premium ACP signage systems engineered for commercial buildings, retail spaces, and corporate environments.",
     footerBadge: "Weather Resistant",
-    image: "/assets/services/acp_board.jpg",
+    image: "/assets/services/acp-sign.png",
   },
   {
     slug: "acrylic-letters",
@@ -49,7 +49,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "Acrylic & 3D Letter Signages",
     description: "Elegant dimensional signage solutions that add depth, sophistication, and a premium identity to your brand.",
     footerBadge: "Custom Fabrication",
-    image: "/assets/services/acrylic_3d.jpg",
+    image: "/assets/services/acrylic-letters.png",
   },
   {
     slug: "ss-letters",
@@ -59,7 +59,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "Corporate Signages",
     description: "Professional signage systems designed to reflect your company's identity and create a lasting impression.",
     footerBadge: "Brand-Focused Solutions",
-    image: "/assets/services/corporate_sign.jpg",
+    image: "/assets/services/ss-letters.png",
   },
   {
     slug: "neon-sign-boards",
@@ -69,7 +69,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "Neon & Custom Signages",
     description: "Distinctive and creative signage solutions tailored to your brand's personality and business requirements.",
     footerBadge: "Made to Stand Out",
-    image: "/assets/services/neon_custom.jpg",
+    image: "/assets/services/neon-sign.png",
   },
   {
     slug: "pylon-signs",
@@ -79,7 +79,7 @@ const HOMEPAGE_SERVICES: HomepageServiceItem[] = [
     name: "Indoor & Outdoor Signage Systems",
     description: "Comprehensive signage solutions covering wayfinding, directional, retail, and commercial branding applications.",
     footerBadge: "End-to-End Execution",
-    image: "/assets/services/indoor_outdoor.jpg",
+    image: "/assets/services/pylon-sign.png",
   }
 ];
 
