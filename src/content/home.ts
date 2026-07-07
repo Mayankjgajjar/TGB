@@ -115,16 +115,16 @@ export const homeContent = {
       subheadingStory: "Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.",
       eyebrowWho: "WHO WE ARE",
       headingWho: "More Than Signage.\nA Partner in Building Brand Presence.",
-      paragraph1: "TGB Enterprise was established in Ahmedabad with a singular vision: to elevate how commercial landmarks are recognized and remembered. We do not just build sign boards; we engineer premium architectural identity systems that serve as the visual baseline for a brand's presence. From retail showrooms to corporate hubs, our solutions bridge structural engineering with high-fidelity graphic design. Every sign we design, fabricate, and install is built to stand as a visual landmark that defines its space and commands attention.",
-      paragraph2: "Our end-to-end capabilities are managed entirely from our modern fabrication workshop in Nikol, Ahmedabad. By handling all design, laser cutting, CNC profiling, frame welding, and LED grid wiring in-house, we enforce strict tolerances and quality control. We work with premium raw materials: marine-grade 316 stainless steel, heavy-duty aluminum composite panels (ACP), cast acrylics, and certified IP67 weather-sealed LED systems. This complete manufacturing ownership ensures that our custom sign boards resist local monsoon conditions, high temperatures, and structural wind-loads without fading or degradation.",
-      paragraph3: "Our operational commitment extends far beyond the day of installation. TGB Enterprise provides comprehensive technical support, reliable after-sales maintenance, and long-term warranty validation. We believe that a commercial signboard is a long-term capital asset, which is why we build relationships based on technical transparency, honest quoting, and strict material certification. Partnering with architects, developers, and retailers across Gujarat and India, we continue to engineer identity systems that perform flawlessly for years to come.",
+      paragraph1: "As a trusted sign board manufacturer in Ahmedabad, we deliver premium custom signage solutions. We design, manufacture, and install durable, high-impact signage that commands attention and elevates your brand.",
+      paragraph2: "Our custom capabilities span heavy-duty outdoor LED display boards, architectural ACP facade cladding panels, 3D acrylic letters, and custom indoor flex-neon signage—all built to standard specs and high tolerances.",
+      paragraph3: "Operating from our Nikol Ahmedabad workshop, we manage both local and national projects. Our commitment extends far beyond delivery—providing long-term maintenance, warranty assurance, and dependable after-sales service.",
       closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
       image: "/assets/images/who-we-are.jpg",
       metrics: [
-        { value: "10+ Years", label: "Industry Craftsmanship" },
-        { value: "500+", label: "Completed Installations" },
-        { value: "Pan India", label: "National Delivery" },
-        { value: "100%", label: "In-House Fabrication" }
+        { value: "100+", label: "Projects Delivered" },
+        { value: "5+", label: "Major Cities Served" },
+        { value: "Pan India", label: "Service Footprint" },
+        { value: "100%", label: "Customer Commitment" }
       ],
       featuredClientsTitle: "Trusted by Growing Businesses and Established Brands",
       featuredClients: [
@@ -193,7 +193,7 @@ export const homeContent = {
         icon: "ShieldCheck",
         category: "QUALITY",
         title: "Built to Last",
-        description: "We design every signboard for years of structural performance. Using robust engineering calculations, we reinforce sub-frames to withstand extreme wind velocities up to 150 km/h, preventing facade deformation. We balance dead weight, material thickness, and anchor-point calculations for maximum stability.",
+        description: "Premium materials and engineering designed for long-term performance and lasting visual impact.",
         techLabel: "Premium Quality"
       },
       {
@@ -201,7 +201,7 @@ export const homeContent = {
         icon: "CloudSun",
         category: "MATERIALS",
         title: "Materials That Endure",
-        description: "Our components are sourced from certified manufacturers. From PVDF-coated ACP cladding panels to cast acrylic diffusers and Samsung-powered LED modules, every piece is selected to resist high UV index, heavy monsoon humidity, and thermal expansion under local climates.",
+        description: "From ACP and acrylic to stainless steel and LED systems, every component is selected for durability and reliability.",
         techLabel: "Weather Resistant"
       },
       {
@@ -209,7 +209,7 @@ export const homeContent = {
         icon: "Factory",
         category: "EXECUTION",
         title: "End-to-End Execution",
-        description: "We oversee every phase of production in our Nikol workshop. From initial consultation and architectural drafting to laser-joint profiling, structural welding, and installation, our dedicated project management ensures absolute control over timing and craftsmanship quality.",
+        description: "From concept and manufacturing to installation and support, every project is managed with precision and complete quality control.",
         techLabel: "Complete Solutions"
       },
       {
@@ -217,7 +217,7 @@ export const homeContent = {
         icon: "BadgeCheck",
         category: "SUPPORT",
         title: "Relationships Beyond Delivery",
-        description: "Our partnership does not end when the installation crew leaves the site. We back our products with a robust warranty claim system and technical support SLA, providing regular inspections and component replacements to protect your brand's visual asset.",
+        description: "Reliable after-sales service and long-term partnerships are at the heart of everything we do.",
         techLabel: "Customer First"
       }
     ],
@@ -228,19 +228,19 @@ export const homeContent = {
       {
         name: "Divyesh Gajjar",
         role: "MARKETING HEAD",
-        description: "Leads business development, client relationship management, and commercial estimates. Divyesh works directly with builders, corporate clients, and retail managers to align structural signage requirements with brand objectives and local compliance codes.",
+        description: "Leads client relationships, business development and brand strategy, ensuring every project reflects the values and vision of the businesses we serve.",
         image: "/assets/images/divyesh-gajjar.jpeg"
       },
       {
         name: "Ankit Gajjar",
         role: "TECHNICAL HEAD",
-        description: "Directs our fabrication shop and technical installation crews. Ankit manages automated CNC profiling, structural steel welding quality control, LED luminous intensity tests, and anchor-point safety calculations on-site.",
+        description: "Oversees engineering, fabrication and execution, ensuring every product meets the highest standards of quality and durability.",
         image: "/assets/images/ankit-gajjar.jpeg"
       },
       {
         name: "Mayank Gajjar",
         role: "DESIGNING HEAD",
-        description: "Heads our creative department and digital mockup design. Mayank translates architectural layout blueprints and brand guidelines into accurate 3D signage renders, selecting correct color temperatures, spacing, and material finishes.",
+        description: "Leads the creative direction and visualization process, transforming ideas into signage and branding systems that leave lasting impressions.",
         image: "/assets/images/mayank-gajjar.jpeg"
       }
     ]

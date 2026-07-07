@@ -57,13 +57,11 @@ export const Identity: React.FC<{
   showTrust?: boolean;
   showLeadership?: boolean;
   showServices?: boolean;
-  showHeader?: boolean;
 }> = ({
   showAbout = true,
   showTrust = true,
   showLeadership = true,
   showServices = true,
-  showHeader = true,
 }) => {
   const identity = homeContent.identity as TGBStandardSection;
   const { intro, label, title, subtitle, capabilities, standards } = identity;
@@ -93,20 +91,18 @@ export const Identity: React.FC<{
               animate={isInView ? 'visible' : 'hidden'}
             >
               {/* TOP HEADER */}
-              {showHeader && (
-                <motion.div className={styles.introTopHeader} variants={fadeUp}>
-                  <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
-                  <h2 className={styles.introTitle}>
-                    {intro.headingStory.split('\n').map((line, i, arr) => (
-                      <React.Fragment key={i}>
-                        {line}
-                        {i < arr.length - 1 && <br />}
-                      </React.Fragment>
-                    ))}
-                  </h2>
-                  <p className={styles.introSubheading}>{intro.subheadingStory}</p>
-                </motion.div>
-              )}
+              <motion.div className={styles.introTopHeader} variants={fadeUp}>
+                <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
+                <h2 className={styles.introTitle}>
+                  {intro.headingStory.split('\n').map((line, i, arr) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      {i < arr.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
+                </h2>
+                <p className={styles.introSubheading}>{intro.subheadingStory}</p>
+              </motion.div>
 
               {/* TWO-COLUMN SPLIT */}
               <div className={styles.introSplit}>
