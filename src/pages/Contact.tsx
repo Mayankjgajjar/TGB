@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
-import PageHero from '../components/sections/PageHero';
 import ContactCTA from '../components/sections/ContactCTA';
 
 const FAQ = lazy(() => import('../components/sections/FAQ'));
@@ -16,7 +15,8 @@ export const Contact: React.FC = () => {
       exit="exit"
       variants={pageTransition}
     >
-      <PageHero
+      {/* Contact form and details with Page Hero content integrated directly inside the top header of ContactCTA */}
+      <ContactCTA 
         eyebrow="GET IN TOUCH"
         title="Start Your Signage Project Today."
         subtitle="Ready to elevate your brand? Contact our team for a free consultation and customised quotation tailored to your requirements."
@@ -25,9 +25,6 @@ export const Contact: React.FC = () => {
           { label: 'Contact' },
         ]}
       />
-
-      {/* Main inquiry submission form with Turnstile validation, address, map and hours panel */}
-      <ContactCTA />
 
       {/* FAQs regarding consultations, site audits, and delivery timelines */}
       <Suspense fallback={<SectionFallback />}>

@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
-import PageHero from '../components/sections/PageHero';
 import Identity from '../components/sections/Identity';
 import ContactCTA from '../components/sections/ContactCTA';
 
@@ -19,18 +18,18 @@ export const About: React.FC = () => {
       exit="exit"
       variants={pageTransition}
     >
-      <PageHero
+      {/* Full Identity block (About, Who We Are, Trust standards, and Leadership — hiding services grid) */}
+      {/* Page Hero content is integrated directly inside the top header of Identity to prevent separate stacked heroes */}
+      <Identity 
+        showServices={false} 
         eyebrow="OUR STORY"
-        title="Built on Precision. Driven by Craft."
+        title="Built on Precision.\nDriven by Craft."
         subtitle="TGB Enterprise is Ahmedabad's trusted sign board manufacturer, delivering premium custom signage solutions that help brands create lasting impressions across India."
         breadcrumbs={[
           { label: 'Home', to: '/' },
           { label: 'About Us' },
         ]}
       />
-
-      {/* Full Identity block (About, Who We Are, Trust standards, and Leadership — hiding services grid) */}
-      <Identity showServices={false} />
 
       {/* Industries We Serve */}
       <Suspense fallback={<SectionFallback />}>

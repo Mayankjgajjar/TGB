@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import Turnstile from '../components/ui/Turnstile';
-import PageHero from '../components/sections/PageHero';
 import { trackWarrantyFormSubmit } from '../lib/analytics';
 import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
@@ -227,310 +226,309 @@ export const Warranty: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
+      className={styles.warrantyPage}
     >
-      <PageHero
-        eyebrow="PRODUCT ASSURANCE"
-        title="Warranty Support & Claims"
-        subtitle="Submit technical claims or register product purchase details. Our Nikol-based support team will verify information and resolve your issue within 24-48 business hours."
-        breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Warranty Support' },
-        ]}
-      />
+      <Container>
+        <div className={styles.contentWrapper}>
+          {/* Integrated breadcrumbs inside form card to prevent double stacked heroes */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
+            <span style={{ opacity: 0.4 }}>›</span>
+            <span style={{ color: 'var(--color-off-white)' }}>Warranty Support</span>
+          </div>
 
-      <div className={styles.warrantyPage} style={{ paddingTop: 0 }}>
-        <Container>
-          <div className={styles.contentWrapper}>
-            {isSubmitted ? (
-              <div className={styles.successMessage}>
-                <div style={{ color: 'var(--color-copper)', fontSize: '48px', marginBottom: '8px' }}>✓</div>
-                <h2 className={styles.successTitle}>Claim Submitted</h2>
-                <p className={styles.successDesc}>
-                  Thank you for submitting your warranty claim. Our technical support team will review your request and the purchase records and contact you within 24–48 business hours.
-                </p>
-                <button onClick={handleReset} className={styles.resetButton}>
-                  Submit Another Request
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
-                {submitError && (
-                  <div className={styles.errorBanner} role="alert">
-                    {submitError}
-                  </div>
-                )}
+          <h1 className={styles.title}>Warranty Claim</h1>
+          <span className={styles.subtitle}>Submit Warranty Request</span>
 
-                {/* Customer Name */}
-                <div className={styles.inputGroup}>
-                  <label htmlFor="customerName" className={styles.fieldLabel}>Full Name *</label>
-                  <input
-                    type="text"
-                    id="customerName"
-                    name="customerName"
-                    value={formState.customerName}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter your full name"
-                    className={inputClass('customerName')}
-                    aria-invalid={touched.customerName && !!errors.customerName}
-                    aria-describedby={errors.customerName ? 'customerName-error' : undefined}
-                  />
-                  {touched.customerName && errors.customerName && (
-                    <span id="customerName-error" className={styles.fieldError} role="alert">
-                      {errors.customerName}
-                    </span>
-                  )}
+          {isSubmitted ? (
+            <div className={styles.successMessage}>
+              <div style={{ color: 'var(--color-copper)', fontSize: '48px', marginBottom: '8px' }}>✓</div>
+              <h2 className={styles.successTitle}>Claim Submitted</h2>
+              <p className={styles.successDesc}>
+                Thank you for submitting your warranty claim. Our technical support team will review your request and the purchase records and contact you within 24–48 business hours.
+              </p>
+              <button onClick={handleReset} className={styles.resetButton}>
+                Submit Another Request
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
+              {submitError && (
+                <div className={styles.errorBanner} role="alert">
+                  {submitError}
                 </div>
+              )}
 
-                {/* Email & Phone Row */}
-                <div className={styles.formRow}>
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="email" className={styles.fieldLabel}>Email Address *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formState.email}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      placeholder="name@company.com"
-                      className={inputClass('email')}
-                      aria-invalid={touched.email && !!errors.email}
-                      aria-describedby={errors.email ? 'email-error' : undefined}
-                    />
-                    {touched.email && errors.email && (
-                      <span id="email-error" className={styles.fieldError} role="alert">
-                        {errors.email}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="phone" className={styles.fieldLabel}>Phone Number *</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formState.phone}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      placeholder="Enter phone number"
-                      className={inputClass('phone')}
-                      aria-invalid={touched.phone && !!errors.phone}
-                      aria-describedby={errors.phone ? 'phone-error' : undefined}
-                    />
-                    {touched.phone && errors.phone && (
-                      <span id="phone-error" className={styles.fieldError} role="alert">
-                        {errors.phone}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Invoice Number & Warranty Number Row */}
-                <div className={styles.formRow}>
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="invoiceNumber" className={styles.fieldLabel}>Invoice / Order Number *</label>
-                    <input
-                      type="text"
-                      id="invoiceNumber"
-                      name="invoiceNumber"
-                      value={formState.invoiceNumber}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      placeholder="e.g. TGB-2025-1045"
-                      className={inputClass('invoiceNumber')}
-                      aria-invalid={touched.invoiceNumber && !!errors.invoiceNumber}
-                      aria-describedby={errors.invoiceNumber ? 'invoiceNumber-error' : undefined}
-                    />
-                    {touched.invoiceNumber && errors.invoiceNumber && (
-                      <span id="invoiceNumber-error" className={styles.fieldError} role="alert">
-                        {errors.invoiceNumber}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="warrantyNumber" className={styles.fieldLabel}>Warranty Number *</label>
-                    <input
-                      type="text"
-                      id="warrantyNumber"
-                      name="warrantyNumber"
-                      value={formState.warrantyNumber}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      placeholder="e.g. WR-TGB-9874"
-                      className={inputClass('warrantyNumber')}
-                      aria-invalid={touched.warrantyNumber && !!errors.warrantyNumber}
-                      aria-describedby={errors.warrantyNumber ? 'warrantyNumber-error' : undefined}
-                    />
-                    {touched.warrantyNumber && errors.warrantyNumber && (
-                      <span id="warrantyNumber-error" className={styles.fieldError} role="alert">
-                        {errors.warrantyNumber}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Purchase Date & Signage Type Row */}
-                <div className={styles.formRow}>
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="purchaseDate" className={styles.fieldLabel}>Purchase Date *</label>
-                    <input
-                      type="date"
-                      id="purchaseDate"
-                      name="purchaseDate"
-                      value={formState.purchaseDate}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      className={inputClass('purchaseDate')}
-                      aria-invalid={touched.purchaseDate && !!errors.purchaseDate}
-                      aria-describedby={errors.purchaseDate ? 'purchaseDate-error' : undefined}
-                    />
-                    {touched.purchaseDate && errors.purchaseDate && (
-                      <span id="purchaseDate-error" className={styles.fieldError} role="alert">
-                        {errors.purchaseDate}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage *</label>
-                    <div className={styles.selectWrapper}>
-                      <select
-                        id="signageType"
-                        name="signageType"
-                        value={formState.signageType}
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        className={selectClass()}
-                        aria-invalid={touched.signageType && !!errors.signageType}
-                        aria-describedby={errors.signageType ? 'signageType-error' : undefined}
-                      >
-                        <option value="">Select signage type</option>
-                        <option value="LED Sign Board">LED Sign Board</option>
-                        <option value="ACP Sign Board">ACP Sign Board</option>
-                        <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
-                        <option value="Neon Signage">Neon Signage</option>
-                        <option value="Corporate Signage">Corporate Signage</option>
-                        <option value="Indoor/Outdoor Systems">Indoor & Outdoor Signage Systems</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                    {touched.signageType && errors.signageType && (
-                      <span id="signageType-error" className={styles.fieldError} role="alert">
-                        {errors.signageType}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Issue Details */}
-                <div className={styles.inputGroup}>
-                  <label htmlFor="issueDetails" className={styles.fieldLabel}>Describe the Issue *</label>
-                  <textarea
-                    id="issueDetails"
-                    name="issueDetails"
-                    value={formState.issueDetails}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="Please describe the issue with your signage in detail..."
-                    className={textareaClass()}
-                    aria-invalid={touched.issueDetails && !!errors.issueDetails}
-                    aria-describedby={errors.issueDetails ? 'issueDetails-error' : undefined}
-                  />
-                  {touched.issueDetails && errors.issueDetails && (
-                    <span id="issueDetails-error" className={styles.fieldError} role="alert">
-                      {errors.issueDetails}
-                    </span>
-                  )}
-                </div>
-
-                {/* Proof of purchase or issue photo */}
-                <div className={styles.fileInputGroup}>
-                  <label className={styles.fieldLabel}>Upload Photo of the Issue (Optional)</label>
-                  {selectedFile ? (
-                    <div className={styles.previewContainer}>
-                      {fileBase64 && (
-                        <img src={fileBase64} alt="Preview of issue" className={styles.previewImage} />
-                      )}
-                      <div className={styles.previewInfo}>
-                        <span className={styles.previewName}>{selectedFile.name}</span>
-                        <span className={styles.previewSize}>
-                          {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
-                        </span>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={handleRemoveFile}
-                        className={styles.removeFileBtn}
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  ) : (
-                    <div className={styles.fileInputWrapper}>
-                      <div className={styles.uploadIcon}>↑</div>
-                      <span className={styles.uploadText}>Select or drag a photo here</span>
-                      <span className={styles.uploadLimit}>Max file size: 4MB (JPG, PNG, WebP)</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className={styles.hiddenFileInput}
-                      />
-                    </div>
-                  )}
-                  {fileError && (
-                    <span className={styles.fieldError} role="alert">
-                      {fileError}
-                    </span>
-                  )}
-                </div>
-
-                {/* Consent Checkbox */}
-                <div className={styles.checkboxGroup}>
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    name="consent"
-                    checked={formState.consent}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={`${styles.checkboxInput} ${touched.consent && errors.consent ? styles.checkboxError : ''}`}
-                    aria-invalid={touched.consent && !!errors.consent}
-                    aria-describedby={errors.consent ? 'consent-error' : undefined}
-                  />
-                  <label htmlFor="consent" className={styles.checkboxLabel}>
-                    I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
-                    <Link to="/privacy">Privacy Policy</Link>.
-                  </label>
-                </div>
-                {touched.consent && errors.consent && (
-                  <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
-                    {errors.consent}
+              {/* Customer Name */}
+              <div className={styles.inputGroup}>
+                <label htmlFor="customerName" className={styles.fieldLabel}>Full Name *</label>
+                <input
+                  type="text"
+                  id="customerName"
+                  name="customerName"
+                  value={formState.customerName}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="Enter your full name"
+                  className={inputClass('customerName')}
+                  aria-invalid={touched.customerName && !!errors.customerName}
+                  aria-describedby={errors.customerName ? 'customerName-error' : undefined}
+                />
+                {touched.customerName && errors.customerName && (
+                  <span id="customerName-error" className={styles.fieldError} role="alert">
+                    {errors.customerName}
                   </span>
                 )}
+              </div>
 
-                {/* Turnstile Captcha */}
-                <Turnstile onVerify={setTurnstileToken} />
+              {/* Email & Phone Row */}
+              <div className={styles.formRow}>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="email" className={styles.fieldLabel}>Email Address *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formState.email}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="name@company.com"
+                    className={inputClass('email')}
+                    aria-invalid={touched.email && !!errors.email}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                  />
+                  {touched.email && errors.email && (
+                    <span id="email-error" className={styles.fieldError} role="alert">
+                      {errors.email}
+                    </span>
+                  )}
+                </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={styles.submitButton}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Claim'}
-                  {!isSubmitting && <span className={styles.submitArrow}>→</span>}
-                </button>
-              </form>
-            )}
-          </div>
-        </Container>
-      </div>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="phone" className={styles.fieldLabel}>Phone Number *</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formState.phone}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="Enter phone number"
+                    className={inputClass('phone')}
+                    aria-invalid={touched.phone && !!errors.phone}
+                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                  />
+                  {touched.phone && errors.phone && (
+                    <span id="phone-error" className={styles.fieldError} role="alert">
+                      {errors.phone}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Invoice Number & Warranty Number Row */}
+              <div className={styles.formRow}>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="invoiceNumber" className={styles.fieldLabel}>Invoice / Order Number *</label>
+                  <input
+                    type="text"
+                    id="invoiceNumber"
+                    name="invoiceNumber"
+                    value={formState.invoiceNumber}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="e.g. TGB-2025-1045"
+                    className={inputClass('invoiceNumber')}
+                    aria-invalid={touched.invoiceNumber && !!errors.invoiceNumber}
+                    aria-describedby={errors.invoiceNumber ? 'invoiceNumber-error' : undefined}
+                  />
+                  {touched.invoiceNumber && errors.invoiceNumber && (
+                    <span id="invoiceNumber-error" className={styles.fieldError} role="alert">
+                      {errors.invoiceNumber}
+                    </span>
+                  )}
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label htmlFor="warrantyNumber" className={styles.fieldLabel}>Warranty Number *</label>
+                  <input
+                    type="text"
+                    id="warrantyNumber"
+                    name="warrantyNumber"
+                    value={formState.warrantyNumber}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="e.g. WR-TGB-9874"
+                    className={inputClass('warrantyNumber')}
+                    aria-invalid={touched.warrantyNumber && !!errors.warrantyNumber}
+                    aria-describedby={errors.warrantyNumber ? 'warrantyNumber-error' : undefined}
+                  />
+                  {touched.warrantyNumber && errors.warrantyNumber && (
+                    <span id="warrantyNumber-error" className={styles.fieldError} role="alert">
+                      {errors.warrantyNumber}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Purchase Date & Signage Type Row */}
+              <div className={styles.formRow}>
+                <div className={styles.inputGroup}>
+                  <label htmlFor="purchaseDate" className={styles.fieldLabel}>Purchase Date *</label>
+                  <input
+                    type="date"
+                    id="purchaseDate"
+                    name="purchaseDate"
+                    value={formState.purchaseDate}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    className={inputClass('purchaseDate')}
+                    aria-invalid={touched.purchaseDate && !!errors.purchaseDate}
+                    aria-describedby={errors.purchaseDate ? 'purchaseDate-error' : undefined}
+                  />
+                  {touched.purchaseDate && errors.purchaseDate && (
+                    <span id="purchaseDate-error" className={styles.fieldError} role="alert">
+                      {errors.purchaseDate}
+                    </span>
+                  )}
+                </div>
+
+                <div className={styles.inputGroup}>
+                  <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage *</label>
+                  <div className={styles.selectWrapper}>
+                    <select
+                      id="signageType"
+                      name="signageType"
+                      value={formState.signageType}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      className={selectClass()}
+                      aria-invalid={touched.signageType && !!errors.signageType}
+                      aria-describedby={errors.signageType ? 'signageType-error' : undefined}
+                    >
+                      <option value="">Select signage type</option>
+                      <option value="LED Sign Board">LED Sign Board</option>
+                      <option value="ACP Sign Board">ACP Sign Board</option>
+                      <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
+                      <option value="Neon Signage">Neon Signage</option>
+                      <option value="Corporate Signage">Corporate Signage</option>
+                      <option value="Indoor/Outdoor Systems">Indoor & Outdoor Signage Systems</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  {touched.signageType && errors.signageType && (
+                    <span id="signageType-error" className={styles.fieldError} role="alert">
+                      {errors.signageType}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Issue Details */}
+              <div className={styles.inputGroup}>
+                <label htmlFor="issueDetails" className={styles.fieldLabel}>Describe the Issue *</label>
+                <textarea
+                  id="issueDetails"
+                  name="issueDetails"
+                  value={formState.issueDetails}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="Please describe the issue with your signage in detail..."
+                  className={textareaClass()}
+                  aria-invalid={touched.issueDetails && !!errors.issueDetails}
+                  aria-describedby={errors.issueDetails ? 'issueDetails-error' : undefined}
+                />
+                {touched.issueDetails && errors.issueDetails && (
+                  <span id="issueDetails-error" className={styles.fieldError} role="alert">
+                    {errors.issueDetails}
+                  </span>
+                )}
+              </div>
+
+              {/* Proof of purchase or issue photo */}
+              <div className={styles.fileInputGroup}>
+                <label className={styles.fieldLabel}>Upload Photo of the Issue (Optional)</label>
+                {selectedFile ? (
+                  <div className={styles.previewContainer}>
+                    {fileBase64 && (
+                      <img src={fileBase64} alt="Preview of issue" className={styles.previewImage} />
+                    )}
+                    <div className={styles.previewInfo}>
+                      <span className={styles.previewName}>{selectedFile.name}</span>
+                      <span className={styles.previewSize}>
+                        {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className={styles.removeFileBtn}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div className={styles.fileInputWrapper}>
+                    <div className={styles.uploadIcon}>↑</div>
+                    <span className={styles.uploadText}>Select or drag a photo here</span>
+                    <span className={styles.uploadLimit}>Max file size: 4MB (JPG, PNG, WebP)</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className={styles.hiddenFileInput}
+                    />
+                  </div>
+                )}
+                {fileError && (
+                  <span className={styles.fieldError} role="alert">
+                    {fileError}
+                  </span>
+                )}
+              </div>
+
+              {/* Consent Checkbox */}
+              <div className={styles.checkboxGroup}>
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={formState.consent}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  className={`${styles.checkboxInput} ${touched.consent && errors.consent ? styles.checkboxError : ''}`}
+                  aria-invalid={touched.consent && !!errors.consent}
+                  aria-describedby={errors.consent ? 'consent-error' : undefined}
+                />
+                <label htmlFor="consent" className={styles.checkboxLabel}>
+                  I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
+                  <Link to="/privacy">Privacy Policy</Link>.
+                </label>
+              </div>
+              {touched.consent && errors.consent && (
+                <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
+                  {errors.consent}
+                </span>
+              )}
+
+              {/* Turnstile Captcha */}
+              <Turnstile onVerify={setTurnstileToken} />
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={styles.submitButton}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Claim'}
+                {!isSubmitting && <span className={styles.submitArrow}>→</span>}
+              </button>
+            </form>
+          )}
+        </div>
+      </Container>
 
       {/* Internal Navigation links at bottom */}
-      <div style={{ textAlign: 'center', paddingBottom: '80px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
+      <div style={{ textAlign: 'center', paddingBottom: '80px', display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '48px' }}>
         <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>← Back to Home</Link>
         <Link to="/contact" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Contact Support</Link>
         <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Privacy Policy</Link>

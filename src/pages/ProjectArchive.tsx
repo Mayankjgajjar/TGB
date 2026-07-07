@@ -1,11 +1,10 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import Card from '../components/ui/Card';
-import PageHero from '../components/sections/PageHero';
+import SectionEyebrow from '../components/ui/SectionEyebrow';
 import ContactCTA from '../components/sections/ContactCTA';
 import { projectsContent } from '../content/projects';
 import styles from './ProjectArchive.module.css';
@@ -48,20 +47,22 @@ export const ProjectArchive: React.FC = () => {
       exit="exit"
       variants={pageTransition}
     >
-      <PageHero
-        eyebrow={header.label}
-        title={header.title}
-        subtitle={header.subtitle}
-        breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Projects' },
-        ]}
-      />
-
       <div className={styles.page} style={{ paddingBottom: 0 }}>
         <Container>
+          {/* Page header with integrated breadcrumbs to prevent double stacked heroes */}
+          <header className={styles.pageHeader}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+              <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
+              <span style={{ opacity: 0.4 }}>›</span>
+              <span style={{ color: 'var(--color-off-white)' }}>Projects</span>
+            </div>
+            <SectionEyebrow>{header.label}</SectionEyebrow>
+            <h1 className={styles.title}>{header.title}</h1>
+            <p className={styles.subtitle}>{header.subtitle}</p>
+          </header>
+
           {/* Project count badge */}
-          <div className={styles.metaBar} style={{ justifyContent: 'flex-start', marginBottom: '32px' }}>
+          <div className={styles.metaBar} style={{ justifyContent: 'center', marginBottom: '48px' }}>
             <span className={styles.countBadge}>{items.length} Case Studies</span>
             <span className={styles.metaDivider} aria-hidden="true">—</span>
             <span className={styles.metaNote}>Ahmedabad & national projects</span>

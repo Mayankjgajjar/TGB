@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Lightbulb, Sun, Factory, ShieldCheck,
@@ -57,14 +58,22 @@ export const Identity: React.FC<{
   showTrust?: boolean;
   showLeadership?: boolean;
   showServices?: boolean;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  breadcrumbs?: { label: string; to?: string }[];
 }> = ({
   showAbout = true,
   showTrust = true,
   showLeadership = true,
   showServices = true,
+  eyebrow,
+  title,
+  subtitle,
+  breadcrumbs,
 }) => {
   const identity = homeContent.identity as TGBStandardSection;
-  const { intro, label, title, subtitle, capabilities, standards } = identity;
+  const { intro, label, title: idTitle, subtitle: idSubtitle, capabilities, standards } = identity;
 
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' });
@@ -92,16 +101,30 @@ export const Identity: React.FC<{
             >
               {/* TOP HEADER */}
               <motion.div className={styles.introTopHeader} variants={fadeUp}>
-                <SectionEyebrow>{intro.eyebrowStory}</SectionEyebrow>
+                {breadcrumbs && (
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+                    {breadcrumbs.map((crumb, idx) => (
+                      <React.Fragment key={idx}>
+                        {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
+                        {crumb.to ? (
+                          <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>{crumb.label}</Link>
+                        ) : (
+                          <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
+                <SectionEyebrow>{eyebrow || intro.eyebrowStory}</SectionEyebrow>
                 <h2 className={styles.introTitle}>
-                  {intro.headingStory.split('\n').map((line, i, arr) => (
+                  {(title || intro.headingStory).split('\n').map((line, i, arr) => (
                     <React.Fragment key={i}>
                       {line}
                       {i < arr.length - 1 && <br />}
                     </React.Fragment>
                   ))}
                 </h2>
-                <p className={styles.introSubheading}>{intro.subheadingStory}</p>
+                <p className={styles.introSubheading}>{subtitle || intro.subheadingStory}</p>
               </motion.div>
 
               {/* TWO-COLUMN SPLIT */}

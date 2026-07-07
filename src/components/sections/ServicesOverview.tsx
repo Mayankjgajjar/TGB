@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Zap, Layers, Box, Building2, Flame, LayoutGrid, ArrowRight, X } from 'lucide-react';
 import Container from '../ui/Container';
@@ -102,7 +103,17 @@ const getAltTextForService = (slug: string, name: string): string => {
   }
 };
 
-export const ServicesOverview: React.FC = () => {
+export const ServicesOverview: React.FC<{
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  breadcrumbs?: { label: string; to?: string }[];
+}> = ({
+  eyebrow,
+  title,
+  subtitle,
+  breadcrumbs,
+}) => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   const cardVariants = {
@@ -137,10 +148,24 @@ export const ServicesOverview: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <SectionEyebrow>OUR EXPERTISE</SectionEyebrow>
-          <h2 className={styles.mainTitle}>Signage Solutions Built to Elevate Brands.</h2>
+          {breadcrumbs && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+              {breadcrumbs.map((crumb, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
+                  {crumb.to ? (
+                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>{crumb.label}</Link>
+                  ) : (
+                    <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+          <SectionEyebrow>{eyebrow || "OUR EXPERTISE"}</SectionEyebrow>
+          <h2 className={styles.mainTitle}>{title || "Signage Solutions Built to Elevate Brands."}</h2>
           <p className={styles.subtitle}>
-            From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore.
+            {subtitle || "From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore."}
           </p>
         </motion.div>
 

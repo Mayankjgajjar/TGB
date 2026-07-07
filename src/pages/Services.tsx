@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
-import PageHero from '../components/sections/PageHero';
 import ServicesOverview from '../components/sections/ServicesOverview';
 import ContactCTA from '../components/sections/ContactCTA';
 
@@ -19,7 +18,8 @@ export const Services: React.FC = () => {
       exit="exit"
       variants={pageTransition}
     >
-      <PageHero
+      {/* Services grid with Page Hero content integrated directly inside the top header of ServicesOverview */}
+      <ServicesOverview 
         eyebrow="OUR EXPERTISE"
         title="Premium Signage Solutions for Every Business."
         subtitle="From iconic storefronts to corporate environments, we design, manufacture, and install signage solutions that make businesses impossible to ignore."
@@ -28,9 +28,6 @@ export const Services: React.FC = () => {
           { label: 'Services' },
         ]}
       />
-
-      {/* Full 6-card service grid */}
-      <ServicesOverview />
 
       {/* Industries we serve */}
       <Suspense fallback={<SectionFallback />}>

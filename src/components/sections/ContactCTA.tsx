@@ -77,7 +77,17 @@ const EMPTY_FORM: FormFields = {
 
 import useScrollReveal from '../../hooks/useScrollReveal';
 
-export const ContactCTA: React.FC = () => {
+export const ContactCTA: React.FC<{
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  breadcrumbs?: { label: string; to?: string }[];
+}> = ({
+  eyebrow,
+  title,
+  subtitle,
+  breadcrumbs,
+}) => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
@@ -209,11 +219,24 @@ export const ContactCTA: React.FC = () => {
           animate={isRevealed ? "visible" : "hidden"}
           variants={headerVariants}
         >
-          <SectionEyebrow>GET IN TOUCH</SectionEyebrow>
-          <h2 className={styles.title}>Let's Create Signage That Defines Your Brand.</h2>
+          {breadcrumbs && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+              {breadcrumbs.map((crumb, idx) => (
+                <React.Fragment key={idx}>
+                  {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
+                  {crumb.to ? (
+                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>{crumb.label}</Link>
+                  ) : (
+                    <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          )}
+          <SectionEyebrow>{eyebrow || "GET IN TOUCH"}</SectionEyebrow>
+          <h2 className={styles.title}>{title || "Let's Create Signage That Defines Your Brand."}</h2>
           <p className={styles.subheading}>
-            Whether you're launching a new business, rebranding a storefront, or developing a commercial space,
-            TGB Enterprise is ready to transform your vision into a signage solution that leaves a lasting impression.
+            {subtitle || "Whether you're launching a new business, rebranding a storefront, or developing a commercial space, TGB Enterprise is ready to transform your vision into a signage solution that leaves a lasting impression."}
           </p>
         </motion.div>
 
