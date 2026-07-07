@@ -85,7 +85,7 @@ export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onErro
     }
   }, [onVerify, onExpire, onError]);
 
-  return <div ref={containerRef} style={{ minHeight: '65px', marginTop: '16px', marginBottom: '16px' }} />;
+  return <div ref={containerRef} style={{ minHeight: 'auto', marginTop: '4px', marginBottom: '8px' }} />;
 };
 
 declare global {
