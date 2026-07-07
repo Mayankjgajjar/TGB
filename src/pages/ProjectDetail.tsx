@@ -4,20 +4,20 @@ import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
-import { homeContent } from '../content/home';
+import { projectsContent } from '../content/projects';
 import styles from './ProjectDetail.module.css';
 
 export const ProjectDetail: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
-  const project = homeContent.featuredProjects.items.find(
+  const project = projectsContent.items.find(
     (item) => item.id === projectId
   );
 
   useEffect(() => {
     if (project) {
-      document.title = `${project.project} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
+      document.title = `${project.name} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
       const metaDesc = document.querySelector('meta[name="description"]');
-      const descContent = `View details for the completed project ${project.project} in ${project.location} by TGB Enterprise, premium sign board manufacturer in Ahmedabad. Check out specs and materials.`;
+      const descContent = `View details for the completed project ${project.name} in ${project.location} by TGB Enterprise, premium sign board manufacturer in Ahmedabad. Check out specs and materials.`;
       if (metaDesc) {
         metaDesc.setAttribute('content', descContent);
       }
@@ -28,7 +28,7 @@ export const ProjectDetail: React.FC = () => {
     return (
       <div className={styles.page}>
         <Container>
-          <Link to="/#projects" className={styles.backLink}>
+          <Link to="/projects" className={styles.backLink}>
             <ArrowLeft size={14} /> Back to Projects
           </Link>
           <div style={{ textAlign: 'center', padding: '96px 0', color: 'var(--color-off-white-muted)' }}>
@@ -42,6 +42,9 @@ export const ProjectDetail: React.FC = () => {
     );
   }
 
+  const dimensionString = `${project.dimensions.width} × ${project.dimensions.height}${project.dimensions.depth ? ` × ${project.dimensions.depth}` : ''}`;
+  const materialsString = project.materials.join(', ');
+
   return (
     <motion.div
       initial="initial"
@@ -51,19 +54,21 @@ export const ProjectDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        {/* Navigation Link back to homepage projects section */}
-        <Link to="/#projects" className={styles.backLink}>
+        {/* Navigation Link back to projects archive */}
+        <Link to="/projects" className={styles.backLink}>
           <ArrowLeft size={14} /> Back to Projects
         </Link>
 
         {/* Project Header block */}
         <header className={styles.header}>
           <span className={styles.category}>{project.category}</span>
-          <h1 className={styles.title}>{project.project}</h1>
+          <h1 className={styles.title}>{project.name}</h1>
           <div className={styles.metaRow}>
             <span>{project.location}</span>
             <span className={styles.metaDivider}>•</span>
             <span>Client: {project.client}</span>
+            <span className={styles.metaDivider}>•</span>
+            <span>{project.year}</span>
           </div>
         </header>
 
@@ -71,7 +76,7 @@ export const ProjectDetail: React.FC = () => {
         <div className={styles.imageWrapper}>
           <img 
             src={project.imagePath} 
-            alt={`${project.category} installation for ${project.project} - TGB Enterprise Ahmedabad`}
+            alt={`${project.category} installation for ${project.name} - TGB Enterprise Ahmedabad`}
             className={styles.image}
           />
           <div className={styles.imageOverlay} />
@@ -86,7 +91,7 @@ export const ProjectDetail: React.FC = () => {
               {project.description}
             </p>
             <p className={styles.description}>
-              This installation exemplifies TGB Enterprise's dedication to architectural sign board manufacturer Ahmedabad guidelines, ensuring premium brand expression and heavy-duty structural permanence.
+              This installation exemplifies TGB Enterprise's dedication to architectural signage standards, ensuring premium brand expression and heavy-duty structural permanence.
             </p>
           </div>
 
@@ -94,18 +99,18 @@ export const ProjectDetail: React.FC = () => {
           <div className={styles.specsCol}>
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Dimensions</span>
-              <span className={styles.specValue}>{project.dimensions}</span>
+              <span className={styles.specValue}>{dimensionString}</span>
             </div>
 
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Materials Used</span>
-              <span className={styles.specValue}>{project.materials}</span>
+              <span className={styles.specValue}>{materialsString}</span>
             </div>
 
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Engineering Standard</span>
               <span className={`${styles.specValue} ${styles.specHighlight}`}>
-                {project.engineering}
+                {project.engineeringHighlight}
               </span>
             </div>
           </div>

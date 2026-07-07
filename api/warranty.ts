@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { z } from 'zod';
 
 declare const process: {
   env: {
@@ -8,16 +9,66 @@ declare const process: {
 
 import { isRateLimited } from './rateLimit.js';
 
-export default async function handler(req: any, res: any) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      message: 'Method not allowed',
-    });
+// ── Zod Schema ────────────────────────────────────────────────────────────────
+
+const warrantySchema = z.object({
+  customerName: z.string().min(2, 'Full name must be at least 2 characters.'),
+  email: z.string().email('Enter a valid email address.'),
+  phone: z.string().min(7, 'Enter a valid phone number.'),
+  invoiceNumber: z.string().min(1, 'Invoice number is required.'),
+  warrantyNumber: z.string().min(1, 'Warranty number is required.'),
+  purchaseDate: z.string().min(1, 'Purchase date is required.'),
+  signageType: z.string().min(1, 'Signage type is required.'),
+  issueDetails: z
+    .string()
+    .min(10, 'Issue description must be at least 10 characters.')
+    .max(2000, 'Issue description must be under 2000 characters.'),
+  imageFileName: z.string().optional(),
+  imageContent: z.string().optional(),
+  turnstileToken: z.string().min(1, 'CAPTCHA token is required.'),
+});
+
+// ── Turnstile Verification ────────────────────────────────────────────────────
+
+async function verifyTurnstile(token: string, remoteIp: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) {
+    console.warn('[warranty] TURNSTILE_SECRET_KEY not set — skipping verification in dev mode.');
+    return true;
   }
 
-  // Extract client IP address from Vercel edge headers
-  const ipHeader = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress || '127.0.0.1';
-  const clientIp = (typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader).trim();
+  const formData = new URLSearchParams();
+  formData.append('secret', secret);
+  formData.append('response', token);
+  formData.append('remoteip', remoteIp);
+
+  const response = await fetch(
+    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+    {
+      method: 'POST',
+      body: formData,
+    }
+  );
+  const data = await response.json() as { success: boolean };
+  return data.success === true;
+}
+
+// ── Handler ───────────────────────────────────────────────────────────────────
+
+export default async function handler(req: any, res: any) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
+
+  // 1. Rate limiting
+  const ipHeader =
+    req.headers['x-forwarded-for'] ||
+    req.headers['x-real-ip'] ||
+    req.socket.remoteAddress ||
+    '127.0.0.1';
+  const clientIp = (
+    typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader
+  ).trim();
 
   if (await isRateLimited(clientIp)) {
     return res.status(429).json({
@@ -26,32 +77,55 @@ export default async function handler(req: any, res: any) {
     });
   }
 
+  // 2. Zod validation
+  const parsed = warrantySchema.safeParse(req.body);
+  if (!parsed.success) {
+    const errors: Record<string, string> = {};
+    parsed.error.errors.forEach((e) => {
+      const field = e.path[0] as string;
+      errors[field] = e.message;
+    });
+    return res.status(400).json({ success: false, errors });
+  }
+
+  const {
+    customerName,
+    email,
+    phone,
+    invoiceNumber,
+    warrantyNumber,
+    purchaseDate,
+    signageType,
+    issueDetails,
+    imageFileName,
+    imageContent,
+    turnstileToken,
+  } = parsed.data;
+
+  // 3. Turnstile verification
+  const turnstileValid = await verifyTurnstile(turnstileToken, clientIp);
+  if (!turnstileValid) {
+    return res.status(400).json({
+      success: false,
+      message: 'CAPTCHA verification failed. Please refresh and try again.',
+    });
+  }
+
+  // 4. Resend API key check
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
       success: false,
-      error: 'Resend API Key (RESEND_API_KEY) is missing or undefined in Vercel environment variables.',
+      error: 'Resend API Key (RESEND_API_KEY) is missing from environment variables.',
     });
   }
 
+  // 5. Send email
   try {
     const resend = new Resend(apiKey);
-    const {
-      customerName,
-      email,
-      phone,
-      invoiceNumber,
-      warrantyNumber,
-      purchaseDate,
-      signageType,
-      issueDetails,
-      imageFileName,
-      imageContent,
-    } = req.body;
 
-    const attachments = [];
+    const attachments: { filename: string; content: Buffer }[] = [];
     if (imageContent && imageFileName) {
-      // Extract the raw base64 data by stripping out the data URL prefix
       const base64Data = imageContent.replace(/^data:image\/\w+;base64,/, '');
       attachments.push({
         filename: imageFileName,
@@ -75,15 +149,13 @@ export default async function handler(req: any, res: any) {
         <p><strong>Signage Type:</strong> ${signageType}</p>
         <p><strong>Issue Details:</strong></p>
         <p>${issueDetails}</p>
-        ${imageFileName ? `<p><strong>Attached Photo:</strong> ${imageFileName} (Attached to email)</p>` : ''}
+        ${imageFileName ? `<p><strong>Attached Photo:</strong> ${imageFileName} (see attachment)</p>` : ''}
       `,
     });
 
-    return res.status(200).json({
-      success: true,
-    });
+    return res.status(200).json({ success: true });
   } catch (error: any) {
-    console.error(error);
+    console.error('[warranty] Resend error:', error);
     return res.status(500).json({
       success: false,
       error: error.message || error.toString(),

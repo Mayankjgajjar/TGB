@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import styles from './Legal.module.css';
@@ -88,6 +89,16 @@ export const Terms: React.FC = () => {
               TGB Enterprise reserves the right to modify these Terms and Conditions at any time. Any changes will be posted directly on this page with the updated date at the top. We encourage clients to review this page periodically.
             </p>
           </section>
+
+          {/* Cross-link to Privacy page */}
+          <div className={styles.crossLink}>
+            <p className={styles.paragraph}>
+              See also:{' '}
+              <Link to="/privacy" className={styles.link}>
+                Privacy Policy
+              </Link>
+            </p>
+          </div>
         </div>
       </Container>
     </motion.div>

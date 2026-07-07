@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import styles from './Legal.module.css';
@@ -92,6 +93,16 @@ export const Privacy: React.FC = () => {
               Phone: +91 97271 36137
             </p>
           </section>
+
+          {/* Cross-link to Terms page */}
+          <div className={styles.crossLink}>
+            <p className={styles.paragraph}>
+              See also:{' '}
+              <Link to="/terms" className={styles.link}>
+                Terms &amp; Conditions
+              </Link>
+            </p>
+          </div>
         </div>
       </Container>
     </motion.div>

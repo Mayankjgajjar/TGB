@@ -198,8 +198,11 @@ export const ServiceDetail: React.FC = () => {
             {/* Pricing Estimates */}
             <div className={styles.specItem}>
               <span className={styles.priceLabel}>Estimated Pricing</span>
-              <div style={{ marginTop: '8px' }}>
+              <div style={{ marginTop: '8px', display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
                 <span className={styles.priceAmount}>{service.pricing.startingFrom}</span>
+                <span style={{ fontSize: '12px', color: 'var(--color-steel)', fontFamily: 'var(--font-technical)' }}>
+                  ({service.pricing.taxNote})
+                </span>
               </div>
               <ul className={styles.priceNotes}>
                 {service.pricing.customQuotationNotes.map((note, idx) => (

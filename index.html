@@ -3,8 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/logos/logo-emblem.svg" />
+    <link rel="apple-touch-icon" href="/assets/logos/tgb-logo.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#E30005" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
+    <!-- Canonical URL — must match the chosen primary domain -->
+    <link rel="canonical" href="https://www.tgbsign.com/" />
+
     <!-- Sentry Runtime Error Tracking -->
     <script src="https://js.sentry-cdn.com/ea60100d84ea383ebce25c862bc2b55f.min.js" crossorigin="anonymous"></script>
     <script>
@@ -14,6 +20,16 @@
           tracesSampleRate: 0.1,
         });
       }
+    </script>
+
+    <!-- Google Analytics 4 -->
+    <!-- ⚠️ REPLACE G-XXXXXXXXXX WITH REAL MEASUREMENT ID BEFORE MERGING TO MAIN -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
     </script>
 
     <title>TGB Enterprise | Architectural Identity Systems</title>
@@ -26,3 +42,4 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+

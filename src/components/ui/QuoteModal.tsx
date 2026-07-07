@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Clock, ArrowRight, MessageSquare, Phone, Compass } from 'lucide-react';
 import { useQuoteModal } from '../../context/QuoteContext';
+import { trackQuoteModalOpen, trackQuoteSubmit } from '../../lib/analytics';
 import styles from './QuoteModal.module.css';
 
 export const QuoteModal: React.FC = () => {
@@ -14,6 +15,7 @@ export const QuoteModal: React.FC = () => {
       document.body.style.overflow = 'hidden';
       // Auto-focus the close button when modal opens
       setTimeout(() => closeBtnRef.current?.focus(), 50);
+      trackQuoteModalOpen();
     } else {
       document.body.style.overflow = '';
     }
@@ -85,7 +87,10 @@ export const QuoteModal: React.FC = () => {
               {/* Action 1: Launch Builder (Outline with Red Hover border) */}
               <a 
                 href="/#contact-cta" 
-                onClick={closeModal}
+                onClick={() => {
+                  closeModal();
+                  trackQuoteSubmit('builder');
+                }}
                 className={`${styles.outlineOption} ${styles.builderOption}`}
               >
                 <div className={styles.optionLabel}>
@@ -100,6 +105,7 @@ export const QuoteModal: React.FC = () => {
                 href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote." 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={() => trackQuoteSubmit('whatsapp')}
                 className={`${styles.outlineOption} ${styles.whatsappOption}`}
               >
                 <div className={styles.optionLabel}>
@@ -112,6 +118,7 @@ export const QuoteModal: React.FC = () => {
               {/* Action 3: Hotline Call (Outline with White Hover border) */}
               <a 
                 href="tel:+919727136137" 
+                onClick={() => trackQuoteSubmit('hotline')}
                 className={`${styles.outlineOption} ${styles.hotlineOption}`}
               >
                 <div className={styles.optionLabel}>

@@ -4,6 +4,8 @@ import { ArrowRight, Phone, Mail, Clock, MapPin, Building, Globe } from 'lucide-
 import { EASE_EXPO } from '../../animations/variants';
 import styles from './ContactCTA.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import { trackContactFormSubmit } from '../../lib/analytics';
+import Turnstile from '../ui/Turnstile';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -75,6 +77,7 @@ export const ContactCTA: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
 
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
@@ -119,6 +122,11 @@ export const ContactCTA: React.FC = () => {
         return;
       }
 
+      if (!turnstileToken) {
+        setSubmitError('Please complete the CAPTCHA verification.');
+        return;
+      }
+
       setIsSubmitting(true);
       
       try {
@@ -136,6 +144,7 @@ export const ContactCTA: React.FC = () => {
             location: formState.location,
             signage: formState.signageType,
             message: formState.message,
+            turnstileToken,
           }),
         });
 
@@ -146,8 +155,10 @@ export const ContactCTA: React.FC = () => {
 
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
+        setTurnstileToken('');
         setErrors({});
         setTouched({});
+        trackContactFormSubmit();
       } catch (error: any) {
         console.error('Error submitting contact form:', error);
         setSubmitError(error.message || 'We encountered an issue submitting your inquiry. Please try again.');
@@ -161,6 +172,7 @@ export const ContactCTA: React.FC = () => {
   const handleReset = useCallback(() => {
     setIsSubmitted(false);
     setSubmitError(null);
+    setTurnstileToken('');
   }, []);
 
   /** Helper to get input className with error state */
@@ -400,6 +412,9 @@ export const ContactCTA: React.FC = () => {
                       className={styles.textareaInput}
                     />
                   </div>
+
+                  {/* Turnstile Captcha */}
+                  <Turnstile onVerify={setTurnstileToken} />
 
                   {submitError && (
                     <div className={styles.formErrorBanner} role="alert">

@@ -3,12 +3,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
 
-// Lazy-load infrequently visited legal pages to keep the main bundle lean
+// Lazy-load infrequently visited pages to keep the main bundle lean
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
+const ProjectArchive = lazy(() => import('./pages/ProjectArchive'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Minimal, accessible loading fallback shown while code-split chunks load
 const PageLoader = () => (
@@ -38,6 +40,15 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      // /projects archive (must be registered BEFORE /projects/:projectId)
+      {
+        path: 'projects',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProjectArchive />
+          </Suspense>
+        ),
       },
       {
         path: 'projects/:projectId',
@@ -76,6 +87,15 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <Warranty />
+          </Suspense>
+        ),
+      },
+      // Catch-all: must be LAST
+      {
+        path: '*',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <NotFound />
           </Suspense>
         ),
       },

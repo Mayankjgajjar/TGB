@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { QuoteProvider } from '../../context/QuoteContext';
 import QuoteModal from '../ui/QuoteModal';
+import { trackWhatsAppFABClick } from '../../lib/analytics';
 import styles from './AppLayout.module.css';
 
 const whatsappVariants = {
@@ -30,9 +31,9 @@ export const AppLayout: React.FC = () => {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "TGB Enterprise",
-      "image": "https://tgbsign.com/assets/logos/tgb-logo.svg",
-      "@id": "https://tgbsign.com/#localbusiness",
-      "url": "https://tgbsign.com",
+      "image": "https://www.tgbsign.com/assets/logos/tgb-logo.svg",
+      "@id": "https://www.tgbsign.com/#localbusiness",
+      "url": "https://www.tgbsign.com",
       "telephone": "+919727136137",
       "priceRange": "$$",
       "address": {
@@ -189,6 +190,10 @@ export const AppLayout: React.FC = () => {
 
   return (
     <QuoteProvider>
+      {/* Skip to main content — visually hidden until focused */}
+      <a href="#main-content" className={styles.skipLink}>
+        Skip to main content
+      </a>
       <div className={styles.layoutContainer}>
         {/* Global Looping Video Background */}
         <div className={styles.globalVideoBg}>
@@ -207,7 +212,7 @@ export const AppLayout: React.FC = () => {
         </div>
 
         <Navbar />
-        <main className={styles.mainContent}>
+        <main id="main-content" className={styles.mainContent}>
           <Outlet />
         </main>
         <Footer />
@@ -220,6 +225,7 @@ export const AppLayout: React.FC = () => {
           rel="noopener noreferrer"
           className={styles.whatsappButton}
           aria-label="Contact us on WhatsApp"
+          onClick={() => trackWhatsAppFABClick()}
           variants={whatsappVariants}
           initial="hidden"
           animate="visible"

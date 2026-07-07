@@ -1,0 +1,17 @@
+{
+  "name": "TGB Enterprise",
+  "short_name": "TGB",
+  "description": "Premium signage manufacturer in Ahmedabad. LED, ACP, Neon, Acrylic, SS Letters, and Pylon Signs.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#E30005",
+  "icons": [
+    {
+      "src": "/assets/logos/tgb-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -88,6 +88,8 @@ export const FAQ: React.FC = () => {
 
   const renderFaqItem = (faq: typeof faqs[0], originalIndex: number) => {
     const isOpen = openIndex === originalIndex;
+    const panelId = `faq-panel-${originalIndex}`;
+    const btnId = `faq-btn-${originalIndex}`;
 
     return (
       <div 
@@ -95,9 +97,11 @@ export const FAQ: React.FC = () => {
         className={`${styles.accordion} ${isOpen ? styles.accordionActive : ''}`}
       >
         <button 
+          id={btnId}
           className={styles.accordionHeader} 
           onClick={() => toggleFAQ(originalIndex)}
           aria-expanded={isOpen}
+          aria-controls={panelId}
         >
           <h3 className={styles.question}>{faq.question}</h3>
           <div className={styles.iconWrapper}>
@@ -106,6 +110,9 @@ export const FAQ: React.FC = () => {
         </button>
 
         <div 
+          id={panelId}
+          role="region"
+          aria-labelledby={btnId}
           className={styles.contentWrapper}
           style={{ 
             maxHeight: isOpen ? '240px' : '0',

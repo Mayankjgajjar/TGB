@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
+import Turnstile from '../components/ui/Turnstile';
+import { trackWarrantyFormSubmit } from '../lib/analytics';
 import styles from './Warranty.module.css';
 
 interface FormFields {
@@ -60,6 +62,7 @@ export const Warranty: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string>('');
 
   // File Upload State
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -144,6 +147,11 @@ export const Warranty: React.FC = () => {
         return;
       }
 
+      if (!turnstileToken) {
+        setSubmitError('Please complete the CAPTCHA verification.');
+        return;
+      }
+
       setIsSubmitting(true);
 
       try {
@@ -156,6 +164,7 @@ export const Warranty: React.FC = () => {
             ...formState,
             imageFileName: selectedFile ? selectedFile.name : null,
             imageContent: fileBase64,
+            turnstileToken,
           }),
         });
 
@@ -169,8 +178,10 @@ export const Warranty: React.FC = () => {
         setSelectedFile(null);
         setFileBase64(null);
         setFileError(null);
+        setTurnstileToken('');
         setErrors({});
         setTouched({});
+        trackWarrantyFormSubmit();
       } catch (error: any) {
         console.error('Error submitting warranty form:', error);
         setSubmitError(error.message || 'We encountered an issue submitting your claim. Please try again.');
@@ -178,7 +189,7 @@ export const Warranty: React.FC = () => {
         setIsSubmitting(false);
       }
     },
-    [formState, fileError, selectedFile, fileBase64]
+    [formState, fileError, selectedFile, fileBase64, turnstileToken]
   );
 
   const handleReset = useCallback(() => {
@@ -187,6 +198,7 @@ export const Warranty: React.FC = () => {
     setSelectedFile(null);
     setFileBase64(null);
     setFileError(null);
+    setTurnstileToken('');
   }, []);
 
   const inputClass = (field: keyof FormFields) =>
@@ -458,6 +470,9 @@ export const Warranty: React.FC = () => {
                 )}
               </div>
 
+
+              {/* Turnstile Captcha */}
+              <Turnstile onVerify={setTurnstileToken} />
 
               <button
                 type="submit"

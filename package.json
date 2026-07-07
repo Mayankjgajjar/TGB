@@ -6,7 +6,8 @@
   "scripts": {
     "predev": "node scripts/copy-assets.cjs",
     "dev": "vite",
-    "build": "node scripts/copy-assets.cjs && tsc && vite build",
+    "generate:sitemap": "node scripts/generate-sitemap.cjs",
+    "build": "node scripts/copy-assets.cjs && node scripts/generate-sitemap.cjs && tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -18,7 +19,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
-    "resend": "^6.16.0"
+    "resend": "^6.16.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/react": "^19.0.2",

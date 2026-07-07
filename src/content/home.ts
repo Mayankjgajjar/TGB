@@ -119,7 +119,7 @@ export const homeContent = {
       paragraph2: "Our custom capabilities span heavy-duty outdoor LED display boards, architectural ACP facade cladding panels, 3D acrylic letters, and custom indoor flex-neon signage—all built to standard specs and high tolerances.",
       paragraph3: "Operating from our Nikol Ahmedabad workshop, we manage both local and national projects. Our commitment extends far beyond delivery—providing long-term maintenance, warranty assurance, and dependable after-sales service.",
       closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
-      image: "/assets/images/who_we_are.jpg",
+      image: "/assets/images/who-we-are.jpg",
       metrics: [
         { value: "100+", label: "Projects Delivered" },
         { value: "5+", label: "Major Cities Served" },
@@ -229,19 +229,19 @@ export const homeContent = {
         name: "Divyesh Gajjar",
         role: "MARKETING HEAD",
         description: "Leads client relationships, business development and brand strategy, ensuring every project reflects the values and vision of the businesses we serve.",
-        image: "/assets/images/Divyesh%20Gajjar.jpeg"
+        image: "/assets/images/divyesh-gajjar.jpeg"
       },
       {
         name: "Ankit Gajjar",
         role: "TECHNICAL HEAD",
         description: "Oversees engineering, fabrication and execution, ensuring every product meets the highest standards of quality and durability.",
-        image: "/assets/images/Ankit%20Gajjar.jpeg"
+        image: "/assets/images/ankit-gajjar.jpeg"
       },
       {
         name: "Mayank Gajjar",
         role: "DESIGNING HEAD",
         description: "Leads the creative direction and visualization process, transforming ideas into signage and branding systems that leave lasting impressions.",
-        image: "/assets/images/Mayank%20Gajjar.jpeg"
+        image: "/assets/images/mayank-gajjar.jpeg"
       }
     ]
   } as TGBStandardSection,

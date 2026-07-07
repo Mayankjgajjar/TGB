@@ -42,7 +42,6 @@ export const Footer: React.FC = () => {
               TGB Enterprise is a premium sign board manufacturer in Ahmedabad, delivering custom signage solutions. Proudly serving Ahmedabad and businesses across Gujarat and India, we help brands create lasting impressions.
             </p>
             <div className={styles.socialLinks}>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>LinkedIn</a>
               <a href="https://www.instagram.com/tgbsign" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Instagram</a>
               <a href="https://www.facebook.com/tgbenterprise" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>Facebook</a>
             </div>

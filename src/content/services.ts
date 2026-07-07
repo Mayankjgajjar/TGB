@@ -31,6 +31,8 @@ export interface ServiceDetail {
   };
   pricing: {
     startingFrom: string;
+    /** GST status note — confirm with owner whether pricing is incl. or excl. GST */
+    taxNote: string;
     customQuotationNotes: string[];
   };
   process: ServiceProcess[];
@@ -57,7 +59,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "LED Sign Boards",
     icon: "Zap",
     shortDescription: "High-brightness LED systems built for visibility day and night, with long-lasting performance.",
-    heroImage: "/assets/services/led_sign.png",
+    heroImage: "/assets/services/led-sign.png",
     positioning: "Engineered for 24/7 brand visibility. Precision illumination meets architectural permanence.",
     overview: {
       description: "Our LED sign boards are designed to deliver uncompromising brightness and perfect light distribution. We utilize high-efficiency LED modules enclosed in weather-sealed housing, ensuring your brand remains impossible to miss even in the harshest conditions.",
@@ -79,6 +81,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹15,000",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Overall dimensions and depth requirements",
         "Number of LED modules required for uniform luminosity",
@@ -107,7 +110,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "ACP Sign Boards",
     icon: "Layers",
     shortDescription: "Aluminium composite panel signage — lightweight, weatherproof, and sharp-finished.",
-    heroImage: "/assets/services/acp_sign.png",
+    heroImage: "/assets/services/acp-sign.png",
     positioning: "The architectural standard for exterior cladding and structural signage.",
     overview: {
       description: "Aluminium Composite Panels (ACP) offer the perfect balance of rigidity, weight, and weather resistance. We CNC-rout ACP to create seamless, flat facades that act as the perfect canvas for 3D letters or routed illumination.",
@@ -129,6 +132,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹350 / Sq.Ft.",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Total square footage and panel yield",
         "Brand of ACP (Aludecor, Viva, Eurobond)",
@@ -156,7 +160,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "Neon Sign Boards",
     icon: "Flame",
     shortDescription: "Premium flex-neon and glass-neon displays designed to make your brand impossible to miss.",
-    heroImage: "/assets/services/neon_sign.png",
+    heroImage: "/assets/services/neon-sign.png",
     positioning: "Vibrant, unignorable atmosphere. Engineered for maximum visual impact.",
     overview: {
       description: "Combining the nostalgic aesthetic of neon with modern, ultra-durable LED silicone flex technology. We craft neon signs that are unbreakable, highly energy-efficient, and capable of rendering complex typography and logos with perfect luminance.",
@@ -178,6 +182,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹6,000",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Total running length of the neon flex",
         "Complexity of the vector design / typography",
@@ -205,7 +210,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "Acrylic Letters",
     icon: "Type",
     shortDescription: "Precision-cut acrylic lettering with backlit and front-lit options for clean brand presence.",
-    heroImage: "/assets/services/acrylic_letters.png",
+    heroImage: "/assets/services/acrylic-letters.png",
     positioning: "Sharp, clean, and endlessly versatile. The standard for premium corporate identity.",
     overview: {
       description: "Acrylic letters offer incredible versatility in depth, color, and illumination. We laser-cut and hand-finish premium cast acrylic to create solid 3D letters, halo-lit logos, and front-illuminated channel letters with razor-sharp edges.",
@@ -227,6 +232,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹150 / Inch",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Thickness (depth) of the acrylic",
         "Illumination style (Front, Halo, Edge)",
@@ -254,7 +260,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "SS Letters",
     icon: "Bold",
     shortDescription: "Stainless steel letters crafted for architectural permanence and a premium metallic finish.",
-    heroImage: "/assets/services/ss_letters.png",
+    heroImage: "/assets/services/ss-letters.png",
     positioning: "Uncompromising permanence. Heavyweight industrial elegance for luxury brands.",
     overview: {
       description: "Stainless Steel (SS) letters are the pinnacle of architectural signage. We utilize 304 and 316-grade steel, precision laser-cut and welded by master craftsmen to create seamless, heavy-duty 3D letters that project absolute authority and luxury.",
@@ -276,6 +282,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹250 / Inch",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Grade of steel (304 vs 316)",
         "Finish required (Mirror vs Brushed vs PVD Gold)",
@@ -303,7 +310,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     name: "Pylon Signs",
     icon: "Triangle",
     shortDescription: "Freestanding pylon structures for commercial complexes, malls, and roadside brand identity.",
-    heroImage: "/assets/services/pylon_sign.png",
+    heroImage: "/assets/services/pylon-sign.png",
     positioning: "Monumental scale. Engineered landmarks that dominate the roadside landscape.",
     overview: {
       description: "Pylon and monument signs are colossal, freestanding architectural structures designed for maximum visibility from highways and main roads. We engineer the heavy MS steel substructures, pour the concrete foundations, and clad them in premium ACP and LED displays.",
@@ -325,6 +332,7 @@ export const servicesData: Record<string, ServiceDetail> = {
     },
     pricing: {
       startingFrom: "₹1,50,000",
+      taxNote: "Excl. GST — exact pricing on consultation",
       customQuotationNotes: [
         "Overall height and width of the structure",
         "Soil conditions and concrete foundation requirements",
