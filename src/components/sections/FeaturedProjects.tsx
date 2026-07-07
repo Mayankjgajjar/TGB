@@ -9,7 +9,6 @@ import styles from './FeaturedProjects.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { ArrowRight } from 'lucide-react';
 
-
 export const FeaturedProjects: React.FC = () => {
   const { header } = homeContent.featuredProjects;
   // Read projects from the canonical single source of truth
@@ -41,10 +40,10 @@ export const FeaturedProjects: React.FC = () => {
   return (
     <section ref={ref} className={styles.section}>
       {/* SECTION HEADER */}
-      <motion.div 
+      <motion.div
         className={styles.headerBlock}
         initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
+        animate={isRevealed ? 'visible' : 'hidden'}
         variants={headerVariants}
       >
         <SectionEyebrow>{header.eyebrow}</SectionEyebrow>
@@ -54,14 +53,14 @@ export const FeaturedProjects: React.FC = () => {
 
       {/* 4-column PROJECT GRID */}
       <div className={styles.gridContainer}>
-        <motion.div 
+        <motion.div
           className={styles.grid}
           initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
+          animate={isRevealed ? 'visible' : 'hidden'}
         >
           {items.map((project, idx) => (
-            <motion.div 
-              key={project.id} 
+            <motion.div
+              key={project.id}
               className={styles.projectCardWrapper}
               variants={fadeUp}
               custom={idx}
@@ -82,7 +81,7 @@ export const FeaturedProjects: React.FC = () => {
       {/* View All Projects CTA */}
       <div style={{ textAlign: 'center', marginTop: '40px', paddingBottom: '16px' }}>
         <Link
-          to="/projects"
+          to="/gallery"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -97,8 +96,8 @@ export const FeaturedProjects: React.FC = () => {
             transition: 'color 0.2s ease',
             padding: '12px 0',
           }}
-          onMouseEnter={e => (e.currentTarget.style.color = '#c8a96e')}
-          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#c8a96e')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
         >
           View All Projects
           <ArrowRight size={14} />

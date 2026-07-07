@@ -12,7 +12,8 @@ const steps = [
     category: 'STAGE 01',
     label: 'Understanding Your Vision',
     title: 'Consultation & Discovery',
-    description: 'We begin by understanding your business, objectives, space, and branding requirements to recommend the right custom signage solutions.',
+    description:
+      'We begin by understanding your business, objectives, space, and branding requirements to recommend the right custom signage solutions.',
     tag: 'Discovery Phase',
   },
   {
@@ -21,7 +22,8 @@ const steps = [
     category: 'STAGE 02',
     label: 'Turning Ideas Into Concepts',
     title: 'Design & Visualization',
-    description: 'Our team develops layouts and visual representations aligning with brand identity and signage design standards.',
+    description:
+      'Our team develops layouts and visual representations aligning with brand identity and signage design standards.',
     tag: 'Design Phase',
   },
   {
@@ -30,7 +32,8 @@ const steps = [
     category: 'STAGE 03',
     label: 'Built With Precision',
     title: 'Manufacturing & Fabrication',
-    description: 'Using premium materials, our signage manufacturing process ensures every sign is built to the highest quality and durability standards.',
+    description:
+      'Using premium materials, our signage manufacturing process ensures every sign is built to the highest quality and durability standards.',
     tag: 'Production Phase',
   },
   {
@@ -39,7 +42,8 @@ const steps = [
     category: 'STAGE 04',
     label: 'Seamless Delivery',
     title: 'Installation & Execution',
-    description: 'Our experienced team ensures professional signage installation with meticulous attention to detail, safety compliance, and robust engineering.',
+    description:
+      'Our experienced team ensures professional signage installation with meticulous attention to detail, safety compliance, and robust engineering.',
     tag: 'Installation Phase',
   },
   {
@@ -48,7 +52,8 @@ const steps = [
     category: 'STAGE 05',
     label: 'Relationships Beyond Delivery',
     title: 'After-Sales Support',
-    description: 'Our commitment continues past completion with dedicated maintenance, warrantied assurance, and long-term client support.',
+    description:
+      'Our commitment continues past completion with dedicated maintenance, warrantied assurance, and long-term client support.',
     tag: 'Support Phase',
   },
 ];
@@ -79,7 +84,9 @@ export const Process: React.FC<ProcessProps> = ({
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   const activeTitle = title || 'From Concept to Completion.';
-  const activeSubtitle = subtitle || 'Every signage project follows a carefully structured process to ensure precision, quality, and a seamless experience from the first conversation to long-term support.';
+  const activeSubtitle =
+    subtitle ||
+    'Every signage project follows a carefully structured process to ensure precision, quality, and a seamless experience from the first conversation to long-term support.';
   const activeIntro = introParagraph;
 
   // Map input stages to steps visual structure if provided
@@ -95,7 +102,10 @@ export const Process: React.FC<ProcessProps> = ({
           label: stage.duration,
           title: stage.title,
           description: stage.description,
-          tag: stage.deliverables && stage.deliverables.length > 0 ? stage.deliverables[0] : 'Execution Phase',
+          tag:
+            stage.deliverables && stage.deliverables.length > 0
+              ? stage.deliverables[0]
+              : 'Execution Phase',
         };
       })
     : steps;
@@ -128,14 +138,12 @@ export const Process: React.FC<ProcessProps> = ({
       <motion.div
         className={styles.headerBlock}
         initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
+        animate={isRevealed ? 'visible' : 'hidden'}
         variants={headerVariants}
       >
         <SectionEyebrow>HOW WE WORK</SectionEyebrow>
-        <h2 className={styles.heading}>{activeTitle}</h2>
-        <p className={styles.subheading}>
-          {activeSubtitle}
-        </p>
+        <h2 className={styles.mainTitle}>{activeTitle}</h2>
+        <p className={styles.subtitle}>{activeSubtitle}</p>
       </motion.div>
 
       {/* ── Optional Standards Intro Paragraph ── */}
@@ -163,7 +171,7 @@ export const Process: React.FC<ProcessProps> = ({
       <motion.div
         className={styles.grid}
         initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
+        animate={isRevealed ? 'visible' : 'hidden'}
       >
         {activeSteps.map((step, idx) => {
           const Icon = step.icon;
@@ -173,7 +181,11 @@ export const Process: React.FC<ProcessProps> = ({
               className={styles.card}
               variants={cardVariants}
               custom={idx}
-              whileHover={shouldReduceMotion ? {} : { y: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }}
+              whileHover={
+                shouldReduceMotion
+                  ? {}
+                  : { y: -4, transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] } }
+              }
             >
               <div className={styles.cardIconWrapper}>
                 <Icon className={styles.cardIcon} strokeWidth={1.25} />
@@ -206,9 +218,7 @@ export const Process: React.FC<ProcessProps> = ({
 
   return (
     <section ref={ref} className={styles.section} id="process">
-      <div className={styles.inner}>
-        {content}
-      </div>
+      <div className={styles.inner}>{content}</div>
     </section>
   );
 };

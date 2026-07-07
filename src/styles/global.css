@@ -1,5 +1,5 @@
-@import './tokens.css';
-@import './reset.css';
+@import url('./tokens.css');
+@import url('./reset.css');
 
 /* Global Styles & Typography resets */
 body {
@@ -10,13 +10,20 @@ body {
   line-height: var(--line-height-normal);
   overflow-x: hidden;
 }
+
 /* Typographic Defaults for consistent styling */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--color-off-white);
   margin-top: 0;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: var(--font-display);
   font-weight: 700; /* Bold/confident display headlines */
   line-height: var(--line-height-tight);
@@ -37,7 +44,8 @@ h4 {
   letter-spacing: 0.2px;
 }
 
-h5, h6 {
+h5,
+h6 {
   font-family: var(--font-primary);
   font-weight: 600;
   line-height: var(--line-height-snug);
@@ -146,9 +154,9 @@ html.lenis body {
 
 /* Fixed Header Scroll Offset (ensures text doesn't load behind header) */
 section[id],
-[id="about"],
-[id="services-overview"],
-[id="home"] {
+[id='about'],
+[id='services-overview'],
+[id='home'] {
   scroll-margin-top: 130px; /* Floating navbar height + safety margin + breathing space */
 }
 
@@ -195,9 +203,8 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
-[role="button"]:focus-visible,
-[tabindex="0"]:focus-visible {
+[role='button']:focus-visible,
+[tabindex='0']:focus-visible {
   outline: 2px solid var(--color-copper-light) !important;
   outline-offset: 4px !important;
 }
-

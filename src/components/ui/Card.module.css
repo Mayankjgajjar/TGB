@@ -1,7 +1,7 @@
 .card {
   position: relative;
-  background: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: var(--radius-card, 16px);
   display: flex;
   flex-direction: column;
@@ -12,7 +12,11 @@
   box-sizing: border-box;
   text-align: left;
   outline: none;
-  transition: border-color var(--transition-base), background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
 }
 
 /* Base interactive styling */
@@ -23,8 +27,8 @@ button.card {
 
 a.card:hover,
 button.card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background-color: #111111;
+  border-color: rgb(255 255 255 / 20%);
+  background-color: #111;
   transform: translateY(-4px);
   box-shadow: var(--shadow-medium);
 }
@@ -45,7 +49,7 @@ button.card:hover {
   height: 240px;
   overflow: hidden;
   flex-shrink: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
   z-index: 0;
 }
 
@@ -54,7 +58,9 @@ button.card:hover {
   height: 100%;
   object-fit: cover;
   filter: brightness(0.8) contrast(1.02);
-  transition: transform var(--transition-slow), filter var(--transition-base);
+  transition:
+    transform var(--transition-slow),
+    filter var(--transition-base);
 }
 
 .card:hover .image {
@@ -65,11 +71,7 @@ button.card:hover {
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(10, 10, 10, 0.9) 100%
-  );
+  background: linear-gradient(to bottom, transparent 40%, rgb(10 10 10 / 90%) 100%);
   pointer-events: none;
 }
 
@@ -86,18 +88,20 @@ button.card:hover {
   font-weight: 500;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
-  background: rgba(10, 10, 10, 0.65);
+  color: rgb(255 255 255 / 75%);
+  background: rgb(10 10 10 / 65%);
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(255 255 255 / 10%);
   backdrop-filter: blur(8px);
-  transition: color var(--transition-base), border-color var(--transition-base);
+  transition:
+    color var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .card:hover .imageBadge {
   color: var(--color-off-white);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgb(255 255 255 / 20%);
 }
 
 /* Content Panel below Image */
@@ -134,7 +138,7 @@ button.card:hover {
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
   margin-bottom: var(--space-4);
   display: block;
 }
@@ -172,9 +176,9 @@ button.card:hover {
   font-weight: 500;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(255 255 255 / 35%);
   padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 4px;
   display: inline-flex;
   justify-content: center;
@@ -182,7 +186,9 @@ button.card:hover {
   text-align: center;
   margin-top: auto;
   align-self: flex-start;
-  transition: border-color var(--transition-base), color var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base);
 }
 
 .card:hover .footerPill {

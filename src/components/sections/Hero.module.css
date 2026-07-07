@@ -8,7 +8,7 @@
   align-items: flex-end; /* Align content toward bottom/lower-middle */
   justify-content: center;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
 }
 
 /* Content Layout */
@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Center horizontally */
-  text-align: center;   /* Center text */
+  text-align: center; /* Center text */
   max-width: 900px;
   width: 100%;
   margin-left: auto;
@@ -55,14 +55,19 @@
 
 .headline {
   font-family: var(--font-display);
-  font-size: clamp(2.0rem, 4.2vw, 4.2rem); /* Scaled down slightly on mobile to prevent awkward wrapping */
+  font-size: clamp(
+    2rem,
+    4.2vw,
+    4.2rem
+  ); /* Scaled down slightly on mobile to prevent awkward wrapping */
+
   font-weight: 300;
   line-height: 1.15;
   color: var(--color-white);
   letter-spacing: -0.01em;
   margin-top: 0;
   margin-bottom: var(--space-24); /* Even spacing rhythm from headline to subtitle */
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 8px rgb(0 0 0 / 40%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transform: translate3d(0, 0, 0);
@@ -79,7 +84,7 @@
   justify-content: center;
 }
 
-@media (min-width: 480px) {
+@media (width >= 480px) {
   .ctasRow {
     flex-direction: row;
     align-items: center;
@@ -99,7 +104,7 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
   font-family: var(--font-technical);
   font-size: 9px;
   letter-spacing: 2px;
@@ -118,9 +123,11 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(5px);
   }
@@ -131,4 +138,3 @@
     animation: none;
   }
 }
-

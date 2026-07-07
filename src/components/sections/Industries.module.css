@@ -4,13 +4,11 @@
    ============================================================ */
 
 .section {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
   padding: 64px 0;
   position: relative;
   overflow: hidden;
 }
-
-
 
 .inner {
   max-width: 1280px;
@@ -37,7 +35,7 @@
   display: block;
 }
 
-.heading {
+.mainTitle {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 300;
@@ -50,7 +48,7 @@
   text-align: center;
 }
 
-.subheading {
+.subtitle {
   font-family: var(--font-primary);
   font-size: 15px;
   color: var(--color-off-white-muted);
@@ -76,21 +74,24 @@
 /* ── Individual Card ── */
 .card {
   position: relative;
-  background: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 12px;
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: default;
-  transition: border-color 400ms cubic-bezier(0.2, 0, 0, 1), background-color 400ms cubic-bezier(0.2, 0, 0, 1), box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition:
+    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 400ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #111111;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgb(255 255 255 / 20%);
+  background: #111;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
 }
 
 /* ── Icon Wrapper ── */
@@ -117,7 +118,7 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
   margin-bottom: 8px;
   display: block;
 }
@@ -129,7 +130,7 @@
   font-weight: 400;
   line-height: 1.15;
   color: var(--color-off-white);
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
   letter-spacing: -0.01em;
 }
 
@@ -138,8 +139,8 @@
   font-family: var(--font-primary);
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0 0 32px 0;
+  color: rgb(255 255 255 / 45%);
+  margin: 0 0 32px;
   flex-grow: 1;
 }
 
@@ -150,9 +151,9 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -166,7 +167,7 @@
 
 .card:hover .cardTag {
   color: var(--color-off-white);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgb(255 255 255 / 30%);
 }
 
 /* ── Geo Statement ── */
@@ -177,15 +178,15 @@
   color: var(--color-steel);
   text-align: center;
   line-height: 1.6;
-  margin: 0 auto 56px auto;
+  margin: 0 auto 56px;
   max-width: 720px;
   opacity: 0.7;
 }
 
 /* ── Bottom CTA ── */
 .cta {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgb(255 255 255 / 2%);
+  border: 1px solid rgb(255 255 255 / 7%);
   border-radius: 20px;
   padding: 52px 48px;
   text-align: center;
@@ -218,7 +219,7 @@
   align-items: center;
   gap: 8px;
   background: var(--color-copper);
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 500;
@@ -226,14 +227,17 @@
   border-radius: 8px;
   text-decoration: none;
   letter-spacing: 0.2px;
-  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 20px rgba(139, 0, 0, 0.2);
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 4px 20px rgb(139 0 0 / 20%);
 }
 
 .ctaButton:hover {
   background: var(--color-copper-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(139, 0, 0, 0.35);
+  box-shadow: 0 8px 28px rgb(139 0 0 / 35%);
 }
 
 .ctaButton svg {
@@ -245,41 +249,47 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
+
   .inner {
     padding: 0 24px;
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .section {
     padding: 48px 0 40px;
   }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
   .card {
     padding: 24px 20px;
   }
+
   .headerBlock {
     margin-bottom: 40px;
   }
+
   .cta {
     padding: 36px 24px;
     border-radius: 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
+
   .heading {
     font-size: 1.8rem;
   }

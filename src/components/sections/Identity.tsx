@@ -2,10 +2,20 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
-  Lightbulb, Sun, Factory, ShieldCheck,
-  Zap, Layers, Flame, Type, Bold, Home, Triangle,
-  CloudSun, BadgeCheck,
-  LucideIcon
+  Lightbulb,
+  Sun,
+  Factory,
+  ShieldCheck,
+  Zap,
+  Layers,
+  Flame,
+  Type,
+  Bold,
+  Home,
+  Triangle,
+  CloudSun,
+  BadgeCheck,
+  LucideIcon,
 } from 'lucide-react';
 import { homeContent, type TGBStandardSection } from '../../content/home';
 import ServicesOverview from './ServicesOverview';
@@ -15,9 +25,20 @@ import SectionEyebrow from '../ui/SectionEyebrow';
 // Icon registry — covers service cards + trust cards
 const ICON_MAP: Record<string, LucideIcon> = {
   // Service icons
-  Zap, Layers, Flame, Type, Bold, Sun, Home, Triangle,
+  Zap,
+  Layers,
+  Flame,
+  Type,
+  Bold,
+  Sun,
+  Home,
+  Triangle,
   // Trust card icons
-  Lightbulb, Factory, ShieldCheck, CloudSun, BadgeCheck,
+  Lightbulb,
+  Factory,
+  ShieldCheck,
+  CloudSun,
+  BadgeCheck,
 };
 
 // ── Animation Variants ──────────────────────────────────────
@@ -31,7 +52,8 @@ const containerVariants = {
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: {
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -39,7 +61,8 @@ const fadeUp = {
 const capabilityVariant = {
   hidden: { opacity: 0, x: -8 },
   visible: {
-    opacity: 1, x: 0,
+    opacity: 1,
+    x: 0,
     transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -47,7 +70,8 @@ const capabilityVariant = {
 const cardVariant = {
   hidden: { opacity: 0, y: 20 },
   visible: {
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { duration: 0.68, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -67,12 +91,27 @@ export const CompanyIntro: React.FC<{
   return (
     <motion.div className={styles.introTopHeader} variants={fadeUp}>
       {breadcrumbs && (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            marginBottom: '24px',
+            fontFamily: 'var(--font-technical)',
+            fontSize: '11px',
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            color: 'var(--color-steel)',
+          }}
+        >
           {breadcrumbs.map((crumb, idx) => (
             <React.Fragment key={idx}>
               {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
               {crumb.to ? (
-                <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>{crumb.label}</Link>
+                <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>
+                  {crumb.label}
+                </Link>
               ) : (
                 <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
               )}
@@ -104,19 +143,24 @@ export const WhoWeAreSplit: React.FC<{
   // Parallax Scroll calculations
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ['start end', 'end start'],
   });
-  const yBg = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const yBg = useTransform(scrollYProgress, [0, 1], ['-10%', '10%']);
 
   return (
     <div className={styles.introSplit} ref={sectionRef}>
       {/* Left Column: Image with parallax effect */}
-      <motion.div className={styles.introImageCol} variants={fadeUp} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-        <motion.div 
-          className={styles.introImage} 
-          style={{ 
+      <motion.div
+        className={styles.introImageCol}
+        variants={fadeUp}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
+        <motion.div
+          className={styles.introImage}
+          style={{
             y: yBg,
-            backgroundImage: `url(${intro.image})` 
+            backgroundImage: `url(${intro.image})`,
           }}
         >
           <div className={styles.introImageOverlay} />
@@ -124,7 +168,12 @@ export const WhoWeAreSplit: React.FC<{
       </motion.div>
 
       {/* Right Column: Story Text */}
-      <motion.div className={styles.introContentCol} variants={fadeUp} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
+      <motion.div
+        className={styles.introContentCol}
+        variants={fadeUp}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+      >
         <div className={styles.introTextWrapper}>
           <SectionEyebrow>{intro.eyebrowWho}</SectionEyebrow>
           <h2 className={styles.whoTitle}>
@@ -172,16 +221,16 @@ export const WhyTrustGrid: React.FC<{
 
   const content = (
     <div className={styles.trustBadgesSection}>
-      <motion.div 
-        className={styles.trustSectionHeader}
+      <motion.div
+        className={styles.headerBlock}
         variants={fadeUp}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
       >
-        <h2 className={styles.trustTitle}>{activeTitle}</h2>
-        <p className={styles.trustSubtitle}>{activeSubtitle}</p>
+        <h2 className={styles.mainTitle}>{activeTitle}</h2>
+        <p className={styles.subtitle}>{activeSubtitle}</p>
       </motion.div>
-      <motion.div 
+      <motion.div
         className={styles.featureGrid}
         variants={containerVariants}
         initial="hidden"
@@ -191,7 +240,7 @@ export const WhyTrustGrid: React.FC<{
           const Icon = ICON_MAP[standard.icon] || Zap;
           return (
             <motion.div
-              key={standard.number}
+              key={standard.number ?? standard.title}
               className={styles.featureCard}
               variants={fadeUp}
               whileHover={{ y: -6, scale: 1.02 }}
@@ -199,14 +248,12 @@ export const WhyTrustGrid: React.FC<{
               <div className={styles.featureIconWrapper}>
                 <Icon className={styles.featureIcon} strokeWidth={1.25} />
               </div>
-              
+
               <div className={styles.featureCategory}>{standard.category}</div>
               <h3 className={styles.featureTitle}>{standard.title}</h3>
               <p className={styles.featureDescription}>{standard.description}</p>
-              
-              <div className={styles.featureTechLabel}>
-                {standard.techLabel}
-              </div>
+
+              <div className={styles.featureTechLabel}>{standard.techLabel}</div>
             </motion.div>
           );
         })}
@@ -224,9 +271,7 @@ export const WhyTrustGrid: React.FC<{
 
   return (
     <section className={styles.trustSection} ref={sectionRef}>
-      <div className={styles.inner}>
-        {content}
-      </div>
+      <div className={styles.inner}>{content}</div>
     </section>
   );
 };
@@ -253,10 +298,8 @@ export const LeadershipGrid: React.FC<{
         animate={isInView ? 'visible' : 'hidden'}
         variants={fadeUp}
       >
-        <div className={styles.titleBlock}>
-          <h2 className={styles.mainTitle}>{activeTitle}</h2>
-          <p className={styles.subtitle}>{activeSubtitle}</p>
-        </div>
+        <h2 className={styles.mainTitle}>{activeTitle}</h2>
+        <p className={styles.subtitle}>{activeSubtitle}</p>
       </motion.div>
 
       <motion.div
@@ -274,10 +317,10 @@ export const LeadershipGrid: React.FC<{
           >
             <div className={styles.leaderImageContainer}>
               {leader.image && (
-                <img 
-                  src={leader.image} 
-                  alt={leader.name} 
-                  className={styles.leaderImage} 
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  className={styles.leaderImage}
                   loading="lazy"
                 />
               )}
@@ -305,9 +348,7 @@ export const LeadershipGrid: React.FC<{
 
   return (
     <section className={styles.leadershipSection} ref={sectionRef}>
-      <div className={styles.inner}>
-        {content}
-      </div>
+      <div className={styles.inner}>{content}</div>
     </section>
   );
 };
@@ -341,15 +382,13 @@ export const Identity: React.FC<{
         <section id="about" className={styles.aboutSection}>
           <div className={styles.inner}>
             <div className={styles.introSection}>
-              <CompanyIntro 
-                breadcrumbs={breadcrumbs} 
-                eyebrow={eyebrow} 
-                title={title} 
-                subtitle={subtitle} 
+              <CompanyIntro
+                breadcrumbs={breadcrumbs}
+                eyebrow={eyebrow}
+                title={title}
+                subtitle={subtitle}
               />
-              <WhoWeAreSplit 
-                intro={intro} 
-              />
+              <WhoWeAreSplit intro={intro} />
             </div>
           </div>
         </section>
@@ -362,5 +401,3 @@ export const Identity: React.FC<{
 };
 
 export default Identity;
-
-

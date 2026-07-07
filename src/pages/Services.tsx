@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import ServicesOverview from '../components/sections/ServicesOverview';
@@ -10,10 +10,9 @@ import SectionEyebrow from '../components/ui/SectionEyebrow';
 import { servicesHubContent, ICON_MAP } from '../content/servicesHub';
 import servicesOverviewStyles from '../components/sections/ServicesOverview.module.css';
 
-const Industries = lazy(() => import('../components/sections/Industries'));
-const FAQ = lazy(() => import('../components/sections/FAQ'));
-
-const SectionFallback = () => <div style={{ minHeight: '400px' }} aria-hidden="true" />;
+import Industries from '../components/sections/Industries';
+import FAQ from '../components/sections/FAQ';
+import ContactCTA from '../components/sections/ContactCTA';
 
 export const Services: React.FC = () => {
   // Ensure page starts at top on transition
@@ -27,17 +26,14 @@ export const Services: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
+      style={{ paddingTop: 'var(--space-xl)' }}
     >
       {/* 1. Page Introduction & 2. Service Categories (Grid) */}
-      <ServicesOverview 
+      <ServicesOverview
         eyebrow={servicesHubContent.introduction.eyebrow}
         title={servicesHubContent.introduction.title}
         subtitle={servicesHubContent.introduction.subtitle}
         introParagraph={servicesHubContent.introduction.extendedIntro}
-        breadcrumbs={[
-          { label: 'Home', to: '/' },
-          { label: 'Services' },
-        ]}
       />
 
       {/* 3. Which Service Is Right for You? (Concise Recommendation Cards) */}
@@ -45,10 +41,14 @@ export const Services: React.FC = () => {
         <Container>
           <div className={servicesOverviewStyles.headerBlock} style={{ marginBottom: '48px' }}>
             <SectionEyebrow>{servicesHubContent.recommendations.header.eyebrow}</SectionEyebrow>
-            <h2 className={servicesOverviewStyles.mainTitle}>{servicesHubContent.recommendations.header.title}</h2>
-            <p className={servicesOverviewStyles.subtitle}>{servicesHubContent.recommendations.header.subtitle}</p>
+            <h2 className={servicesOverviewStyles.mainTitle}>
+              {servicesHubContent.recommendations.header.title}
+            </h2>
+            <p className={servicesOverviewStyles.subtitle}>
+              {servicesHubContent.recommendations.header.subtitle}
+            </p>
           </div>
-          
+
           <Grid cols={3} gap="normal">
             {servicesHubContent.recommendations.items.map((item, idx) => (
               <Card
@@ -66,22 +66,24 @@ export const Services: React.FC = () => {
       </Section>
 
       {/* 4. Industries We Serve (With Custom Copy) */}
-      <Suspense fallback={<SectionFallback />}>
-        <Industries 
-          title="Signage Engineering Tailored for Your Industry."
-          subtitle={servicesHubContent.industriesIntro}
-        />
-      </Suspense>
+      <Industries
+        title="Signage Engineering Tailored for Your Industry."
+        subtitle={servicesHubContent.industriesIntro}
+      />
 
       {/* 5. Why Choose TGB Enterprise (Service Delivery Standards) */}
       <Section spacing="large" id="why-choose-us" style={{ background: 'rgba(10, 10, 10, 0.4)' }}>
         <Container>
           <div className={servicesOverviewStyles.headerBlock} style={{ marginBottom: '48px' }}>
             <SectionEyebrow>{servicesHubContent.whyChooseUs.header.eyebrow}</SectionEyebrow>
-            <h2 className={servicesOverviewStyles.mainTitle}>{servicesHubContent.whyChooseUs.header.title}</h2>
-            <p className={servicesOverviewStyles.subtitle}>{servicesHubContent.whyChooseUs.header.subtitle}</p>
+            <h2 className={servicesOverviewStyles.mainTitle}>
+              {servicesHubContent.whyChooseUs.header.title}
+            </h2>
+            <p className={servicesOverviewStyles.subtitle}>
+              {servicesHubContent.whyChooseUs.header.subtitle}
+            </p>
           </div>
-          
+
           <Grid cols={3} gap="normal">
             {servicesHubContent.whyChooseUs.items.map((item, idx) => (
               <Card
@@ -96,13 +98,14 @@ export const Services: React.FC = () => {
       </Section>
 
       {/* 6. Frequently Asked Questions (Service-Selection FAQs) */}
-      <Suspense fallback={<SectionFallback />}>
-        <FAQ 
-          title={servicesHubContent.faq.header.title}
-          subtitle={servicesHubContent.faq.header.subtitle}
-          items={servicesHubContent.faq.items}
-        />
-      </Suspense>
+      <FAQ
+        title={servicesHubContent.faq.header.title}
+        subtitle={servicesHubContent.faq.header.subtitle}
+        items={servicesHubContent.faq.items}
+      />
+
+      {/* 7. Contact CTA */}
+      <ContactCTA />
     </motion.div>
   );
 };

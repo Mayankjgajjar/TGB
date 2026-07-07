@@ -16,9 +16,12 @@ export const Label: React.FC<LabelProps> = ({
   className = '',
   as: Component = 'span',
 }) => {
-  const colorClass = 
-    color === 'copper' ? styles.colorCopper :
-    color === 'muted' ? styles.colorMuted : styles.colorSteel;
+  const colorClass =
+    color === 'copper'
+      ? styles.colorCopper
+      : color === 'muted'
+        ? styles.colorMuted
+        : styles.colorSteel;
 
   const classes = `${styles.label} ${colorClass} ${className}`;
 

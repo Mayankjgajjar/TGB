@@ -10,7 +10,7 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
-const ProjectArchive = lazy(() => import('./pages/ProjectArchive'));
+const Gallery = lazy(() => import('./pages/Gallery'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -69,14 +69,18 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // ── Project routes (archive before dynamic slug) ─────────────────────────
+      // ── Gallery & Project routes ─────────────────────────────────────────────
       {
-        path: 'projects',
+        path: 'gallery',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <ProjectArchive />
+            <Gallery />
           </Suspense>
         ),
+      },
+      {
+        path: 'projects',
+        element: <Navigate to="/gallery" replace />,
       },
       {
         path: 'projects/:projectId',

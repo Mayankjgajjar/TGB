@@ -20,18 +20,24 @@ export const Section: React.FC<SectionProps> = ({
   spacing = 'normal',
   as: Component = 'section',
 }) => {
-  const spacingClass = 
-    spacing === 'small' ? styles.spacingSmall :
-    spacing === 'large' ? styles.spacingLarge :
-    spacing === 'xlarge' ? styles.spacingExtraLarge : '';
+  const spacingClass =
+    spacing === 'small'
+      ? styles.spacingSmall
+      : spacing === 'large'
+        ? styles.spacingLarge
+        : spacing === 'xlarge'
+          ? styles.spacingExtraLarge
+          : '';
 
   const classes = [
     styles.section,
     spacingClass,
     dividerTop ? styles.dividerTop : '',
     dividerBottom ? styles.dividerBottom : '',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <Component id={id} className={classes}>

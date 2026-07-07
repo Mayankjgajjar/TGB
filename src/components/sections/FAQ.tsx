@@ -9,40 +9,49 @@ import SectionEyebrow from '../ui/SectionEyebrow';
 const faqs = [
   {
     question: 'What types of signages do you manufacture?',
-    answer: 'We manufacture a wide range of custom signage solutions including LED sign boards, ACP sign boards, acrylic signages, 3D letter signages, neon signages, corporate signages, retail signages, wayfinding systems, safety signages, and custom indoor and outdoor signage solutions.'
+    answer:
+      'We manufacture a wide range of custom signage solutions including LED sign boards, ACP sign boards, acrylic signages, 3D letter signages, neon signages, corporate signages, retail signages, wayfinding systems, safety signages, and custom indoor and outdoor signage solutions.',
   },
   {
     question: 'Do you provide design and installation services?',
-    answer: 'Yes. TGB Enterprise offers complete end-to-end custom signage solutions including consultation, design and visualization, high-precision manufacturing, professional signage installation, and dedicated after-sales support.'
+    answer:
+      'Yes. TGB Enterprise offers complete end-to-end custom signage solutions including consultation, design and visualization, high-precision manufacturing, professional signage installation, and dedicated after-sales support.',
   },
   {
     question: 'Do you only work in Ahmedabad?',
-    answer: 'No. While we are based in Ahmedabad, Gujarat, we design, manufacture, and deliver professional signage installation solutions for businesses across India, including key projects in Surat, Rajkot, Mumbai, Bengaluru, Delhi, and other major cities.'
+    answer:
+      'No. While we are based in Ahmedabad, Gujarat, we design, manufacture, and deliver professional signage installation solutions for businesses across India, including key projects in Surat, Rajkot, Mumbai, Bengaluru, Delhi, and other major cities.',
   },
   {
     question: 'Can you create completely customized signages?',
-    answer: 'Absolutely. Every business has unique architectural and branding requirements. We specialize in engineering and fabricating custom signage solutions tailored to your exact brand guidelines and dimensions.'
+    answer:
+      'Absolutely. Every business has unique architectural and branding requirements. We specialize in engineering and fabricating custom signage solutions tailored to your exact brand guidelines and dimensions.',
   },
   {
     question: 'What materials do you use for your signages?',
-    answer: 'We select premium materials based on application, including architectural ACP cladding, high-grade acrylic, stainless steel, structural aluminum, energy-efficient LED modules, and weatherproof vinyl to guarantee long-term outdoor performance.'
+    answer:
+      'We select premium materials based on application, including architectural ACP cladding, high-grade acrylic, stainless steel, structural aluminum, energy-efficient LED modules, and weatherproof vinyl to guarantee long-term outdoor performance.',
   },
   {
     question: 'How long does a signage project take?',
-    answer: 'Timelines vary based on scale, engineering complexity, and installation scope. After assessing your requirements, our design and estimating team will provide a clear project schedule and deliver regular execution updates.'
+    answer:
+      'Timelines vary based on scale, engineering complexity, and installation scope. After assessing your requirements, our design and estimating team will provide a clear project schedule and deliver regular execution updates.',
   },
   {
     question: 'Do you provide after-sales service?',
-    answer: 'Yes. Dependable after-sales service is a core pillar of TGB Enterprise. Our responsibility extends past installation to provide active support, electrical checkups, and maintenance assistance whenever clients need us.'
+    answer:
+      'Yes. Dependable after-sales service is a core pillar of TGB Enterprise. Our responsibility extends past installation to provide active support, electrical checkups, and maintenance assistance whenever clients need us.',
   },
   {
     question: 'Which industries do you serve?',
-    answer: 'We deliver custom signage solutions to diverse sectors including retail showrooms, corporate offices, restaurants, hotels, healthcare spaces, educational campuses, real estate sites, and heavy industrial facilities.'
+    answer:
+      'We deliver custom signage solutions to diverse sectors including retail showrooms, corporate offices, restaurants, hotels, healthcare spaces, educational campuses, real estate sites, and heavy industrial facilities.',
   },
   {
     question: 'How can I get a quotation for my project?',
-    answer: 'You can reach out via our website, phone, or email to share project files or design drafts. Our estimators will schedule a call to understand details and render a comprehensive quotation tailored to your requirements.'
-  }
+    answer:
+      'You can reach out via our website, phone, or email to share project files or design drafts. Our estimators will schedule a call to understand details and render a comprehensive quotation tailored to your requirements.',
+  },
 ];
 
 interface FAQProps {
@@ -51,31 +60,29 @@ interface FAQProps {
   items?: { question: string; answer: string }[];
 }
 
-export const FAQ: React.FC<FAQProps> = ({
-  title,
-  subtitle,
-  items,
-}) => {
+export const FAQ: React.FC<FAQProps> = ({ title, subtitle, items }) => {
   const { openModal } = useQuoteModal();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const activeFaqs = items || faqs;
   const activeTitle = title || 'Everything You Need to Know.';
-  const activeSubtitle = subtitle || 'Have questions about our signage solutions, process, or services? Here are answers to the most common questions we receive.';
+  const activeSubtitle =
+    subtitle ||
+    'Have questions about our signage solutions, process, or services? Here are answers to the most common questions we receive.';
 
   // Dynamic FAQPage Structured Data (JSON-LD)
   React.useEffect(() => {
     const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": activeFaqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
-        }
-      }))
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: activeFaqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
     };
 
     const script = document.createElement('script');
@@ -100,19 +107,19 @@ export const FAQ: React.FC<FAQProps> = ({
   const leftColFaqs = activeFaqs.filter((_, idx) => idx % 2 === 0);
   const rightColFaqs = activeFaqs.filter((_, idx) => idx % 2 !== 0);
 
-  const renderFaqItem = (faq: typeof faqs[0], originalIndex: number) => {
+  const renderFaqItem = (faq: (typeof faqs)[0], originalIndex: number) => {
     const isOpen = openIndex === originalIndex;
     const panelId = `faq-panel-${originalIndex}`;
     const btnId = `faq-btn-${originalIndex}`;
 
     return (
-      <div 
-        key={originalIndex} 
+      <div
+        key={originalIndex}
         className={`${styles.accordion} ${isOpen ? styles.accordionActive : ''}`}
       >
-        <button 
+        <button
           id={btnId}
-          className={styles.accordionHeader} 
+          className={styles.accordionHeader}
           onClick={() => toggleFAQ(originalIndex)}
           aria-expanded={isOpen}
           aria-controls={panelId}
@@ -123,19 +130,17 @@ export const FAQ: React.FC<FAQProps> = ({
           </div>
         </button>
 
-        <div 
+        <div
           id={panelId}
           role="region"
           aria-labelledby={btnId}
           className={styles.contentWrapper}
-          style={{ 
+          style={{
             maxHeight: isOpen ? '240px' : '0',
-            transition: 'max-height 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease'
+            transition: 'max-height 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease',
           }}
         >
-          <div className={styles.contentInner}>
-            {faq.answer}
-          </div>
+          <div className={styles.contentInner}>{faq.answer}</div>
         </div>
       </div>
     );
@@ -155,19 +160,16 @@ export const FAQ: React.FC<FAQProps> = ({
   return (
     <section ref={ref} className={styles.section} id="faq">
       <div className={styles.inner}>
-
         {/* ── Section Header ── */}
         <motion.div
           className={styles.headerBlock}
           initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
+          animate={isRevealed ? 'visible' : 'hidden'}
           variants={headerVariants}
         >
           <SectionEyebrow>FREQUENTLY ASKED QUESTIONS</SectionEyebrow>
-          <h2 className={styles.heading}>{activeTitle}</h2>
-          <p className={styles.subheading}>
-            {activeSubtitle}
-          </p>
+          <h2 className={styles.mainTitle}>{activeTitle}</h2>
+          <p className={styles.subtitle}>{activeSubtitle}</p>
         </motion.div>
 
         {/* ── Accordion Grid ── */}
@@ -194,7 +196,6 @@ export const FAQ: React.FC<FAQProps> = ({
             Let's Discuss Your Project →
           </button>
         </div>
-
       </div>
     </section>
   );

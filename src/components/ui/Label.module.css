@@ -8,15 +8,23 @@
   align-items: center;
 }
 
-.colorSteel { color: var(--color-steel); }
-.colorCopper { color: var(--color-copper); }
-.colorMuted { color: var(--color-off-white-muted); }
+.colorSteel {
+  color: var(--color-steel);
+}
+
+.colorCopper {
+  color: var(--color-copper);
+}
+
+.colorMuted {
+  color: var(--color-off-white-muted);
+}
 
 /* Technical dots/markers next to labels */
 .marker {
   display: inline-block;
   width: 6px;
   height: 6px;
-  background-color: currentColor;
+  background-color: currentcolor;
   margin-right: var(--space-8);
 }

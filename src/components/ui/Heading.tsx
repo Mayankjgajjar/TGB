@@ -24,23 +24,27 @@ export const Heading: React.FC<HeadingProps> = ({
 
   const Component = getTag();
 
-  const levelClass = 
-    level === 'display' ? styles.display :
-    level === 1 ? styles.h1 :
-    level === 2 ? styles.h2 :
-    level === 3 ? styles.h3 : styles.h4;
+  const levelClass =
+    level === 'display'
+      ? styles.display
+      : level === 1
+        ? styles.h1
+        : level === 2
+          ? styles.h2
+          : level === 3
+            ? styles.h3
+            : styles.h4;
 
-  const colorClass = 
-    color === 'copper' ? styles.colorCopper :
-    color === 'steel' ? styles.colorSteel : styles.colorOffWhite;
+  const colorClass =
+    color === 'copper'
+      ? styles.colorCopper
+      : color === 'steel'
+        ? styles.colorSteel
+        : styles.colorOffWhite;
 
   const classes = `${styles.heading} ${levelClass} ${colorClass} ${className}`;
 
-  return (
-    <Component className={classes}>
-      {children}
-    </Component>
-  );
+  return <Component className={classes}>{children}</Component>;
 };
 
 export default Heading;

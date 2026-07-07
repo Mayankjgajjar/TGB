@@ -1,11 +1,11 @@
 :root {
   /* Color System - Exact Brand Identity (Rich Black & Pure Brand Red) */
-  --color-black: #0A0A0A;
+  --color-black: #0a0a0a;
   --color-black-soft: #141414;
-  --color-red: #E30005;
-  --color-red-hover: #C10004; /* slightly darker for hover states */
-  --color-white: #FFFFFF;
-  --color-white-muted: #B8B8B8;
+  --color-red: #e30005;
+  --color-red-hover: #c10004; /* slightly darker for hover states */
+  --color-white: #fff;
+  --color-white-muted: #b8b8b8;
 
   /* Legacy Compatibility Mapping (keeps existing pages unified automatically) */
   --color-charcoal-deep: var(--color-black);
@@ -16,23 +16,23 @@
   --color-copper: var(--color-red);
   --color-copper-light: var(--color-red-hover);
   --color-copper-dark: #a10003;
-  --color-steel: #8e8d89;              /* Neutral gray labels */
-  --color-steel-dark: #2a2a2a;         /* Soft borders */
-  --color-steel-deep: #161616;         /* Deeper border shades */
+  --color-steel: #8e8d89; /* Neutral gray labels */
+  --color-steel-dark: #2a2a2a; /* Soft borders */
+  --color-steel-deep: #161616; /* Deeper border shades */
 
   /* Spacing Grid (Based on modular architectural scale) */
   --space-unit: 8px;
-  --space-4: calc(var(--space-unit) * 0.5);   /* 4px */
-  --space-8: var(--space-unit);               /* 8px */
-  --space-12: calc(var(--space-unit) * 1.5);  /* 12px */
-  --space-16: calc(var(--space-unit) * 2);    /* 16px */
-  --space-24: calc(var(--space-unit) * 3);    /* 24px */
-  --space-32: calc(var(--space-unit) * 4);    /* 32px */
-  --space-48: calc(var(--space-unit) * 6);    /* 48px */
-  --space-64: calc(var(--space-unit) * 8);    /* 64px */
-  --space-96: calc(var(--space-unit) * 12);   /* 96px */
-  --space-128: calc(var(--space-unit) * 16);  /* 128px */
-  --space-160: calc(var(--space-unit) * 20);  /* 160px */
+  --space-4: calc(var(--space-unit) * 0.5); /* 4px */
+  --space-8: var(--space-unit); /* 8px */
+  --space-12: calc(var(--space-unit) * 1.5); /* 12px */
+  --space-16: calc(var(--space-unit) * 2); /* 16px */
+  --space-24: calc(var(--space-unit) * 3); /* 24px */
+  --space-32: calc(var(--space-unit) * 4); /* 32px */
+  --space-48: calc(var(--space-unit) * 6); /* 48px */
+  --space-64: calc(var(--space-unit) * 8); /* 64px */
+  --space-96: calc(var(--space-unit) * 12); /* 96px */
+  --space-128: calc(var(--space-unit) * 16); /* 128px */
+  --space-160: calc(var(--space-unit) * 20); /* 160px */
 
   /* Typography Scale (Redesigned to Clean Modern Industrial Sans-Serif) */
   --font-display: 'Montserrat', sans-serif;
@@ -44,20 +44,19 @@
   --text-h1: 56px;
   --text-h2: 36px;
   --text-body: 16px;
-
   --lh-h1: 1.1;
   --lh-h2: 1.25;
   --lh-body: 1.6;
 
   /* Font Sizes */
-  --font-size-xs: 0.75rem;          /* 12px (Monospace labels, sub-meta) */
-  --font-size-sm: 0.875rem;         /* 14px (Secondary body, small captions) */
-  --font-size-base: 1rem;           /* 16px (Primary body copy) */
-  --font-size-md: 1.25rem;          /* 20px (Lead paragraphs, sub-headings) */
-  --font-size-lg: 1.75rem;          /* 28px (H3 or small titles) */
-  --font-size-xl: 2.5rem;           /* 40px (H2 and main editorial section headers) */
-  --font-size-2xl: 3.5rem;          /* 56px (Large Display headers) */
-  --font-size-3xl: 5rem;            /* 80px (Special layouts & statement text) */
+  --font-size-xs: 0.75rem; /* 12px (Monospace labels, sub-meta) */
+  --font-size-sm: 0.875rem; /* 14px (Secondary body, small captions) */
+  --font-size-base: 1rem; /* 16px (Primary body copy) */
+  --font-size-md: 1.25rem; /* 20px (Lead paragraphs, sub-headings) */
+  --font-size-lg: 1.75rem; /* 28px (H3 or small titles) */
+  --font-size-xl: 2.5rem; /* 40px (H2 and main editorial section headers) */
+  --font-size-2xl: 3.5rem; /* 56px (Large Display headers) */
+  --font-size-3xl: 5rem; /* 80px (Special layouts & statement text) */
   --font-size-display: clamp(4rem, 8vw, 8rem); /* Hero display headers */
 
   /* Line Heights */
@@ -75,9 +74,9 @@
   --radius-card: 16px;
 
   /* Shadows (Minimal depth, dark focus) */
-  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-medium: 0 12px 32px rgba(0, 0, 0, 0.6);
-  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  --shadow-subtle: 0 4px 12px rgb(0 0 0 / 40%);
+  --shadow-medium: 0 12px 32px rgb(0 0 0 / 60%);
+  --shadow-inset: inset 0 2px 4px rgb(0 0 0 / 80%);
 
   /* Z-Index Hierarchy */
   --z-index-base: 1;
@@ -93,11 +92,11 @@
   --transition-ease-expo: cubic-bezier(0.16, 1, 0.3, 1); /* easeOutExpo */
 
   /* Standard Layout Spacing Scale */
-  --space-xs: var(--space-8);                 /* 8px */
-  --space-sm: var(--space-16);                /* 16px */
-  --space-md: var(--space-24);                /* 24px */
-  --space-lg: var(--space-48);                /* 48px */
-  --space-xl: var(--space-96);                /* 96px */
+  --space-xs: var(--space-8); /* 8px */
+  --space-sm: var(--space-16); /* 16px */
+  --space-md: var(--space-24); /* 24px */
+  --space-lg: var(--space-48); /* 48px */
+  --space-xl: var(--space-96); /* 96px */
 
   /* Motion System transition tokens */
   --transition-fast: var(--transition-speed-fast) var(--transition-ease-expo);

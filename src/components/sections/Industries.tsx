@@ -9,7 +9,7 @@ import {
   Landmark,
   Factory,
   GraduationCap,
-  LayoutGrid
+  LayoutGrid,
 } from 'lucide-react';
 import Card from '../ui/Card';
 import useScrollReveal from '../../hooks/useScrollReveal';
@@ -21,63 +21,72 @@ const industries = [
     icon: ShoppingBag,
     category: 'RETAIL',
     title: 'Retail & Showrooms',
-    description: 'Creating high-impact storefronts and brand experiences that attract customers and drive visibility.',
+    description:
+      'Creating high-impact storefronts and brand experiences that attract customers and drive visibility.',
     tag: 'Retail Signage Solutions',
   },
   {
     icon: Building2,
     category: 'CORPORATE',
     title: 'Corporate Offices',
-    description: 'Professional signage systems that strengthen brand identity and elevate workspaces.',
+    description:
+      'Professional signage systems that strengthen brand identity and elevate workspaces.',
     tag: 'Corporate Signage',
   },
   {
     icon: UtensilsCrossed,
     category: 'F&B',
     title: 'Restaurants & Cafés',
-    description: 'Distinctive signage solutions that enhance ambiance and create memorable customer experiences.',
+    description:
+      'Distinctive signage solutions that enhance ambiance and create memorable customer experiences.',
     tag: 'Commercial Signage',
   },
   {
     icon: HeartPulse,
     category: 'HEALTHCARE',
     title: 'Hospitals & Healthcare',
-    description: 'Wayfinding and branding solutions designed for clarity, trust, and functionality.',
+    description:
+      'Wayfinding and branding solutions designed for clarity, trust, and functionality.',
     tag: 'Wayfinding Systems',
   },
   {
     icon: Hotel,
     category: 'HOSPITALITY',
     title: 'Hotels & Hospitality',
-    description: 'Premium signage experiences that complement architecture and elevate guest experiences.',
+    description:
+      'Premium signage experiences that complement architecture and elevate guest experiences.',
     tag: 'Hospitality Signage',
   },
   {
     icon: Landmark,
     category: 'REAL ESTATE',
     title: 'Real Estate Projects',
-    description: 'Large-scale branding and signage solutions for residential and commercial developments.',
+    description:
+      'Large-scale branding and signage solutions for residential and commercial developments.',
     tag: 'Project Signage',
   },
   {
     icon: Factory,
     category: 'INDUSTRIAL',
     title: 'Industrial & Manufacturing',
-    description: 'Durable indoor and outdoor signage solutions designed for operational environments.',
+    description:
+      'Durable indoor and outdoor signage solutions designed for operational environments.',
     tag: 'Industrial Signage',
   },
   {
     icon: GraduationCap,
     category: 'EDUCATION',
     title: 'Educational Institutions',
-    description: 'Wayfinding and identity signage that supports learning environments and campus experiences.',
+    description:
+      'Wayfinding and identity signage that supports learning environments and campus experiences.',
     tag: 'Campus Signage',
   },
   {
     icon: LayoutGrid,
     category: 'COMMERCIAL',
     title: 'Commercial Spaces',
-    description: 'Integrated signage systems that improve navigation, branding, and visitor experience.',
+    description:
+      'Integrated signage systems that improve navigation, branding, and visitor experience.',
     tag: 'Commercial Solutions',
   },
 ];
@@ -106,7 +115,9 @@ export const Industries: React.FC<IndustriesProps> = ({
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   const activeTitle = title || 'Signage Solutions for Every Industry.';
-  const activeSubtitle = subtitle || 'From retail storefronts to large commercial developments, we create signage solutions tailored to the unique needs of every industry we serve.';
+  const activeSubtitle =
+    subtitle ||
+    'From retail storefronts to large commercial developments, we create signage solutions tailored to the unique needs of every industry we serve.';
   const activeItems = items || industries;
 
   const cardVariants = {
@@ -137,26 +148,25 @@ export const Industries: React.FC<IndustriesProps> = ({
       <motion.div
         className={styles.headerBlock}
         initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
+        animate={isRevealed ? 'visible' : 'hidden'}
         variants={headerVariants}
       >
         <SectionEyebrow>WHO WE SERVE</SectionEyebrow>
-        <h2 className={styles.heading}>
-          {activeTitle}
-        </h2>
-        <p className={styles.subheading}>
-          {activeSubtitle}
-        </p>
+        <h2 className={styles.mainTitle}>{activeTitle}</h2>
+        <p className={styles.subtitle}>{activeSubtitle}</p>
       </motion.div>
 
       {/* ── Industry Cards Grid ── */}
       <motion.div
         className={styles.grid}
         initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
+        animate={isRevealed ? 'visible' : 'hidden'}
       >
         {activeItems.map((industry, index) => {
-          const Icon = typeof industry.icon === 'string' ? (ICON_MAP[industry.icon] || LayoutGrid) : industry.icon;
+          const Icon =
+            typeof industry.icon === 'string'
+              ? ICON_MAP[industry.icon] || LayoutGrid
+              : industry.icon;
           return (
             <motion.div
               key={index}
@@ -188,12 +198,9 @@ export const Industries: React.FC<IndustriesProps> = ({
 
   return (
     <section ref={ref} className={styles.section} id="industries">
-      <div className={styles.inner}>
-        {content}
-      </div>
+      <div className={styles.inner}>{content}</div>
     </section>
   );
 };
 
 export default Industries;
-

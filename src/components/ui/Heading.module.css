@@ -31,12 +31,28 @@
 }
 
 /* Colors */
-.colorOffWhite { color: var(--color-off-white); }
-.colorCopper { color: var(--color-copper); }
-.colorSteel { color: var(--color-steel); }
+.colorOffWhite {
+  color: var(--color-off-white);
+}
 
-@media (min-width: 768px) {
-  .h1 { font-size: var(--font-size-3xl); }
-  .h2 { font-size: var(--font-size-2xl); }
-  .h3 { font-size: var(--font-size-xl); }
+.colorCopper {
+  color: var(--color-copper);
+}
+
+.colorSteel {
+  color: var(--color-steel);
+}
+
+@media (width >= 768px) {
+  .h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .h3 {
+    font-size: var(--font-size-xl);
+  }
 }

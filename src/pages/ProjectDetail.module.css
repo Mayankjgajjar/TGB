@@ -84,7 +84,7 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+  background: linear-gradient(to bottom, transparent, rgb(0 0 0 / 40%));
   pointer-events: none;
 }
 
@@ -94,7 +94,7 @@
   gap: var(--space-48);
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .grid {
     grid-template-columns: 1.2fr 0.8fr;
   }

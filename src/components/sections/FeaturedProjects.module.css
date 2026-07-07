@@ -1,6 +1,6 @@
 .section {
   padding: 64px 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
   width: 100%;
 }
 
@@ -72,12 +72,15 @@
   border-radius: 16px;
   overflow: hidden;
   background: var(--color-charcoal-surface);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border: 1px solid rgb(255 255 255 / 7%);
   display: flex;
   flex-direction: column;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), border-color 600ms ease, box-shadow 600ms ease;
+  transition:
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 600ms ease,
+    box-shadow 600ms ease;
   width: 100%;
   padding: 0;
   text-align: left;
@@ -86,8 +89,8 @@
 
 .projectCard:hover {
   transform: translateY(-6px);
-  border-color: rgba(255, 255, 255, 0.16);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-color: rgb(255 255 255 / 16%);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 60%);
 }
 
 .imageWrapper {
@@ -96,7 +99,7 @@
   width: 100%;
   z-index: 0;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-bottom: 1px solid rgb(255 255 255 / 7%);
   flex-shrink: 0;
 }
 
@@ -105,7 +108,9 @@
   height: 100%;
   object-fit: cover;
   filter: brightness(0.85) contrast(1.02);
-  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1), filter 1000ms ease;
+  transition:
+    transform 1000ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1000ms ease;
 }
 
 .projectCard:hover .cardImage {
@@ -184,13 +189,13 @@
 
 .ctaWrapper {
   max-width: 1200px;
-  margin: 80px auto 0 auto;
+  margin: 80px auto 0;
   padding: 0 24px;
 }
 
 .ctaBlock {
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgb(255 255 255 / 1%);
+  border: 1px solid rgb(255 255 255 / 6%);
   border-radius: 20px;
   padding: 60px 40px;
   text-align: center;
@@ -221,8 +226,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: #E60000;
-  color: #FFFFFF;
+  background: #e60000;
+  color: #fff;
   font-family: var(--font-primary);
   font-weight: 500;
   font-size: 14px;
@@ -230,13 +235,13 @@
   border-radius: 8px;
   text-decoration: none;
   transition: all 300ms cubic-bezier(0.2, 0, 0, 1);
-  box-shadow: 0 4px 20px rgba(230, 0, 0, 0.15);
+  box-shadow: 0 4px 20px rgb(230 0 0 / 15%);
 }
 
 .ctaButton:hover {
-  background: #FF1A1A;
+  background: #ff1a1a;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(230, 0, 0, 0.3);
+  box-shadow: 0 8px 30px rgb(230 0 0 / 30%);
 }
 
 .ctaButton svg {
@@ -248,9 +253,9 @@
 }
 
 .statsBar {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgb(255 255 255 / 6%);
   margin-top: 80px;
-  padding: 40px 0 0 0;
+  padding: 40px 0 0;
   width: 100%;
 }
 
@@ -287,40 +292,46 @@
 }
 
 /* Responsive */
-@media (max-width: 1280px) {
+@media (width <= 1280px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
   }
+
   .gridContainer {
     padding: 0 20px;
   }
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
+
   .imageWrapper {
     height: 200px;
   }
+
   .cardContent {
     padding: 18px;
   }
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
   .imageWrapper {
     height: 180px;
   }
+
   .cardContent {
     padding: 16px;
   }
+
   .section {
     padding: 56px 0;
   }
@@ -330,7 +341,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgb(0 0 0 / 90%);
   backdrop-filter: blur(16px);
   z-index: 1000;
   display: flex;
@@ -342,18 +353,18 @@
 /* Modal Window */
 .modalWindow {
   background: #080808;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 24px;
   width: 100%;
   max-width: 1100px;
   max-height: 90vh;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 40px 80px rgb(0 0 0 / 90%);
   display: flex;
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .modalWindow {
     flex-direction: column;
     overflow-y: auto;
@@ -386,13 +397,13 @@
   gap: 24px;
   overflow-y: auto;
   background: #0c0c0c;
-  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  border-left: 1px solid rgb(255 255 255 / 6%);
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .modalDetailsPanel {
     border-left: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgb(255 255 255 / 6%);
     padding: 24px;
     overflow-y: visible;
   }
@@ -402,8 +413,8 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 8%);
   color: var(--color-off-white);
   width: 40px;
   height: 40px;
@@ -417,8 +428,8 @@
 }
 
 .modalCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgb(255 255 255 / 8%);
+  border-color: rgb(255 255 255 / 16%);
 }
 
 .modalMetaRow {
@@ -455,13 +466,13 @@
 .modalDesc {
   font-family: var(--font-primary);
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(255 255 255 / 75%);
   line-height: 1.6;
   margin: 0;
 }
 
 .modalSpecsBox {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgb(255 255 255 / 8%);
   padding-top: 24px;
   display: flex;
   flex-direction: column;
@@ -484,7 +495,7 @@
 .modalSpecValue {
   font-family: var(--font-primary);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgb(255 255 255 / 85%);
   line-height: 1.5;
 }
 

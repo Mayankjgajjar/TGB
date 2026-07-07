@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
   padding: 96px 0 64px;
   overflow: hidden;
 }
@@ -103,21 +103,24 @@
   font-size: 9.5px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
 }
 
 .textInput,
 .textareaInput,
 .selectInput {
-  background-color: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 6px;
   color: var(--color-off-white);
   padding: 12px 16px;
   font-family: var(--font-primary);
   font-size: 13.5px;
   outline: none;
-  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
   width: 100%;
   box-sizing: border-box;
 }
@@ -125,9 +128,9 @@
 .textInput:focus,
 .textareaInput:focus,
 .selectInput:focus {
-  border-color: rgba(255, 255, 255, 0.25);
-  background-color: #0F0F0F;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgb(255 255 255 / 25%);
+  background-color: #0f0f0f;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 10%);
 }
 
 .selectWrapper {
@@ -143,9 +146,9 @@
 
 /* Custom Dropdown Arrow */
 .selectWrapper::after {
-  content: "▼";
+  content: '▼';
   font-size: 9px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
   position: absolute;
   right: 16px;
   top: 50%;
@@ -164,8 +167,8 @@
 
 /* Inline validation error styles */
 .inputError {
-  border-color: rgba(200, 50, 50, 0.7) !important;
-  box-shadow: 0 0 0 1px rgba(200, 50, 50, 0.4);
+  border-color: rgb(200 50 50 / 70%) !important;
+  box-shadow: 0 0 0 1px rgb(200 50 50 / 40%);
 }
 
 .fieldError {
@@ -174,7 +177,7 @@
   font-family: var(--font-primary);
   font-size: 11px;
   letter-spacing: 0.02em;
-  color: rgba(220, 80, 80, 0.9);
+  color: rgb(220 80 80 / 90%);
 }
 
 /* Submit Button */
@@ -184,7 +187,7 @@
   justify-content: center;
   gap: 10px;
   background: var(--color-copper);
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-primary);
   font-size: 13.5px;
   font-weight: 500;
@@ -196,14 +199,14 @@
   cursor: pointer;
   outline: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(139, 0, 0, 0.2);
+  box-shadow: 0 4px 16px rgb(139 0 0 / 20%);
   margin-top: 8px;
 }
 
 .submitButton:hover {
   background: var(--color-copper-light);
   transform: translateY(-1.5px);
-  box-shadow: 0 8px 24px rgba(139, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgb(139 0 0 / 35%);
 }
 
 .submitArrow {
@@ -221,7 +224,7 @@
   margin-top: 8px;
   font-family: var(--font-primary);
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(255 255 255 / 35%);
 }
 
 .phoneLink {
@@ -239,8 +242,8 @@
 
 /* Success Message Panel */
 .successMessage {
-  background-color: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
@@ -267,7 +270,7 @@
 
 .resetButton {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgb(255 255 255 / 15%);
   color: var(--color-off-white);
   padding: 10px 24px;
   border-radius: 6px;
@@ -280,7 +283,7 @@
 
 .resetButton:hover {
   border-color: var(--color-off-white);
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: rgb(255 255 255 / 3%);
 }
 
 /* ── Right Column: Studio details & map ── */
@@ -319,12 +322,14 @@
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.40s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.40s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
 }
 
 .mapLinkWrapper:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 36px rgb(0 0 0 / 40%);
 }
 
 .mapLinkWrapper:hover .mapIframe {
@@ -337,7 +342,7 @@
   height: 240px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgb(255 255 255 / 8%);
 }
 
 .mapIframe {
@@ -357,23 +362,6 @@
   gap: 20px;
 }
 
-.infoLinkItem {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.infoLinkItem:hover {
-  transform: translateX(4px);
-}
-
-.infoLinkItem:hover .infoValue {
-  color: var(--color-copper-light);
-}
-
 .infoItem {
   display: flex;
   gap: 16px;
@@ -386,8 +374,8 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background-color: rgba(227, 0, 5, 0.08);
-  border: 1px solid rgba(227, 0, 5, 0.25);
+  background-color: rgb(227 0 5 / 8%);
+  border: 1px solid rgb(227 0 5 / 25%);
   border-radius: 50%;
   color: var(--color-red);
   margin-top: 2px;
@@ -395,12 +383,11 @@
   transition: all var(--transition-base);
 }
 
-.infoLinkItem:hover .infoIconWrapper,
 .infoItem:hover .infoIconWrapper {
-  background-color: rgba(227, 0, 5, 0.16);
-  border-color: rgba(227, 0, 5, 0.5);
+  background-color: rgb(227 0 5 / 16%);
+  border-color: rgb(227 0 5 / 50%);
   color: var(--color-white);
-  box-shadow: 0 0 12px rgba(227, 0, 5, 0.3);
+  box-shadow: 0 0 12px rgb(227 0 5 / 30%);
   transform: scale(1.05);
 }
 
@@ -414,7 +401,7 @@
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(255 255 255 / 35%);
   margin-bottom: 3px;
 }
 
@@ -447,7 +434,7 @@
 
 /* ── Brand Signature / Footer Statement ── */
 .brandSignature {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgb(255 255 255 / 6%);
   padding-top: 48px;
   margin-top: 32px;
   text-align: center;
@@ -474,27 +461,31 @@
 }
 
 /* ── Responsive Viewports ── */
-@media (max-width: 960px) {
+@media (width <= 960px) {
   .section {
     padding: 72px 0 48px;
   }
+
   .splitGrid {
     grid-template-columns: 1fr;
     gap: 56px;
   }
+
   .mapContainer {
     height: 220px;
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .formRow {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
   .successMessage {
     padding: 32px 20px;
   }
+
   .brandSignature {
     padding-top: 36px;
     margin-top: 16px;
@@ -502,7 +493,7 @@
 }
 
 .formErrorBanner {
-  background: rgba(139, 0, 0, 0.1);
+  background: rgb(139 0 0 / 10%);
   border: 1px solid var(--color-copper);
   color: var(--color-off-white);
   padding: var(--space-sm);
@@ -524,8 +515,8 @@
 
 .checkboxInput {
   appearance: none;
-  background-color: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 4px;
   width: 18px;
   height: 18px;
@@ -545,15 +536,15 @@
 }
 
 .checkboxInput:checked::after {
-  content: "✓";
+  content: '✓';
   color: var(--color-white);
   font-size: 12px;
   font-weight: bold;
 }
 
 .checkboxInput:focus {
-  border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgb(255 255 255 / 25%);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 10%);
 }
 
 .checkboxLabel {
@@ -579,7 +570,5 @@
 
 .checkboxError {
   border-color: var(--color-red) !important;
-  box-shadow: 0 0 0 1px rgba(227, 0, 5, 0.2) !important;
+  box-shadow: 0 0 0 1px rgb(227 0 5 / 20%) !important;
 }
-
-

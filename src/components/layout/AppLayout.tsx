@@ -19,9 +19,9 @@ const whatsappVariants = {
     transition: {
       delay: 1.2,
       duration: 0.5,
-      ease: [0.16, 1, 0.3, 1]
-    }
-  }
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
 };
 
 export const AppLayout: React.FC = () => {
@@ -31,47 +31,41 @@ export const AppLayout: React.FC = () => {
   // LocalBusiness Structured Data (JSON-LD)
   useEffect(() => {
     const localBusinessSchema = {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "TGB Enterprise",
-      "image": "https://www.tgbsign.com/assets/logos/tgb-logo.svg",
-      "@id": "https://www.tgbsign.com/#localbusiness",
-      "url": "https://www.tgbsign.com",
-      "telephone": "+919727136137",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Shop No. 7/1, First Floor, Shukan Shopping Centre, opp. Chanakya school, Sukan Cross Rd, New India Colony, Nikol",
-        "addressLocality": "Ahmedabad",
-        "addressRegion": "Gujarat",
-        "postalCode": "382345",
-        "addressCountry": "IN"
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'TGB Enterprise',
+      image: 'https://www.tgbsign.com/assets/logos/tgb-logo.svg',
+      '@id': 'https://www.tgbsign.com/#localbusiness',
+      url: 'https://www.tgbsign.com',
+      telephone: '+919727136137',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress:
+          'Shop No. 7/1, First Floor, Shukan Shopping Centre, opp. Chanakya school, Sukan Cross Rd, New India Colony, Nikol',
+        addressLocality: 'Ahmedabad',
+        addressRegion: 'Gujarat',
+        postalCode: '382345',
+        addressCountry: 'IN',
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 23.0458,
-        "longitude": 72.6782
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 23.0458,
+        longitude: 72.6782,
       },
-      "openingHoursSpecification": [
+      openingHoursSpecification: [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:30",
-          "closes": "19:00"
-        }
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '09:30',
+          closes: '19:00',
+        },
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "5"
-      }
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '5.0',
+        reviewCount: '5',
+      },
     };
 
     const script = document.createElement('script');
@@ -100,11 +94,11 @@ export const AppLayout: React.FC = () => {
     const pathSegments = path.split('/').filter(Boolean);
     const itemListElement = [
       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.tgbsign.com"
-      }
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://www.tgbsign.com',
+      },
     ];
 
     let currentPath = '';
@@ -112,8 +106,8 @@ export const AppLayout: React.FC = () => {
       currentPath += `/${segment}`;
       let name = segment.replace(/-/g, ' ');
       // Capitalize first letter of each word
-      name = name.replace(/\b\w/g, c => c.toUpperCase());
-      
+      name = name.replace(/\b\w/g, (c) => c.toUpperCase());
+
       // Customize names for specific segments
       if (segment === 'claim-warranty') name = 'Claim Warranty';
       if (segment === 'privacy') name = 'Privacy Policy';
@@ -128,17 +122,17 @@ export const AppLayout: React.FC = () => {
       if (segment.startsWith('pylon')) name = 'Pylon Signs';
 
       itemListElement.push({
-        "@type": "ListItem",
-        "position": idx + 2,
-        "name": name,
-        "item": `https://www.tgbsign.com${currentPath}`
+        '@type': 'ListItem',
+        position: idx + 2,
+        name: name,
+        item: `https://www.tgbsign.com${currentPath}`,
       });
     });
 
     const breadcrumbSchema = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": itemListElement
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: itemListElement,
     };
 
     const script = document.createElement('script');
@@ -157,9 +151,10 @@ export const AppLayout: React.FC = () => {
 
   // Centralized Dynamic SEO, OG and Twitter Metadata Updates
   useEffect(() => {
-    let title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";
-    let description = "TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.";
-    let image = "https://www.tgbsign.com/assets/images/hero-poster.png";
+    let title = 'TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad';
+    let description =
+      'TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.';
+    let image = 'https://www.tgbsign.com/assets/images/hero-poster.png';
 
     const path = location.pathname;
 
@@ -188,17 +183,21 @@ export const AppLayout: React.FC = () => {
     };
 
     if (path === '/') {
-      title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";
-      description = "TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.";
+      title = 'TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad';
+      description =
+        'TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.';
     } else if (path === '/about') {
-      title = "About TGB Enterprise | Trusted Sign Board Company in Ahmedabad";
-      description = "Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage for brands across India.";
+      title = 'About TGB Enterprise | Trusted Sign Board Company in Ahmedabad';
+      description =
+        'Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage for brands across India.';
     } else if (path === '/services') {
-      title = "Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad";
-      description = "Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.";
+      title = 'Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad';
+      description =
+        'Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.';
     } else if (path === '/contact') {
-      title = "Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad";
-      description = "Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.";
+      title = 'Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad';
+      description =
+        'Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.';
     } else if (path.startsWith('/services/')) {
       const slug = path.split('/services/')[1];
       const service = slug ? servicesData[slug] : null;
@@ -211,7 +210,9 @@ export const AppLayout: React.FC = () => {
       }
     } else if (path.startsWith('/projects/')) {
       const projectId = path.split('/projects/')[1];
-      const project = projectId ? projectsContent.items.find(item => item.id === projectId) : null;
+      const project = projectId
+        ? projectsContent.items.find((item) => item.id === projectId)
+        : null;
       if (project) {
         title = `${project.name} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
         description = `Project case study: ${project.name} in ${project.location}. View specs, materials, and engineering details by TGB Enterprise.`;
@@ -219,21 +220,30 @@ export const AppLayout: React.FC = () => {
           ? project.imagePath
           : `https://www.tgbsign.com${project.imagePath}`;
       } else {
-        title = "Our Completed Projects Portfolio | TGB Enterprise Ahmedabad";
-        description = "View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.";
+        title = 'Our Completed Projects Portfolio | TGB Enterprise Ahmedabad';
+        description =
+          'View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.';
       }
+    } else if (path === '/gallery') {
+      title = 'Visual Portfolio | TGB Enterprise Signage Gallery';
+      description =
+        'Browse the TGB Enterprise visual portfolio of completed signage installations, LED boards, ACP facades, neon signs, and 3D letter projects across Ahmedabad and Gujarat.';
     } else if (path === '/projects') {
-      title = "Our Completed Projects Portfolio | TGB Enterprise Ahmedabad";
-      description = "View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.";
+      title = 'Visual Portfolio | TGB Enterprise Signage Gallery';
+      description =
+        'Browse the TGB Enterprise visual portfolio of completed signage installations, LED boards, ACP facades, neon signs, and 3D letter projects across Ahmedabad and Gujarat.';
     } else if (path === '/claim-warranty') {
-      title = "Product Warranty Registration & Claim | TGB Enterprise Sign Boards";
-      description = "Register or submit a warranty claim for your TGB Enterprise sign boards. Follow our easy guide to file a claim for LED, ACP, and 3D letters.";
+      title = 'Product Warranty Registration & Claim | TGB Enterprise Sign Boards';
+      description =
+        'Register or submit a warranty claim for your TGB Enterprise sign boards. Follow our easy guide to file a claim for LED, ACP, and 3D letters.';
     } else if (path === '/privacy') {
-      title = "Privacy Policy | TGB Enterprise – Sign Board Manufacturer in Ahmedabad";
-      description = "Privacy Policy for TGB Enterprise, sign board manufacturer in Ahmedabad. Learn how we handle your personal data and respect your online privacy.";
+      title = 'Privacy Policy | TGB Enterprise – Sign Board Manufacturer in Ahmedabad';
+      description =
+        'Privacy Policy for TGB Enterprise, sign board manufacturer in Ahmedabad. Learn how we handle your personal data and respect your online privacy.';
     } else if (path === '/terms') {
-      title = "Terms & Conditions | TGB Enterprise – Sign Board Manufacturer in Ahmedabad";
-      description = "Terms and conditions for using the website and services of TGB Enterprise, premium sign board manufacturer in Ahmedabad. Read our terms of service.";
+      title = 'Terms & Conditions | TGB Enterprise – Sign Board Manufacturer in Ahmedabad';
+      description =
+        'Terms and conditions for using the website and services of TGB Enterprise, premium sign board manufacturer in Ahmedabad. Read our terms of service.';
     }
 
     // 1. Title
@@ -359,13 +369,20 @@ export const AppLayout: React.FC = () => {
               delay: 1.5,
               duration: 2.0,
               repeat: Infinity,
-              ease: "easeOut"
+              ease: 'easeOut',
             }}
           />
 
           <div className={styles.whatsappIconWrapper}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={styles.whatsappIcon}>
-              <path fill="#fff" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              className={styles.whatsappIcon}
+            >
+              <path
+                fill="#fff"
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
+              />
             </svg>
           </div>
         </motion.a>

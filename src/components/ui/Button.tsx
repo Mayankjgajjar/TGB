@@ -44,8 +44,11 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const sizeClass = size === 'large' ? styles.sizeLarge : styles.sizeNormal;
   const variantClass =
-    variant === 'secondary' ? styles.variantSecondary :
-    variant === 'technical' ? styles.variantTechnical : styles.variantPrimary;
+    variant === 'secondary'
+      ? styles.variantSecondary
+      : variant === 'technical'
+        ? styles.variantTechnical
+        : styles.variantPrimary;
 
   const classes = `${styles.button} ${sizeClass} ${variantClass} ${className}`.trim();
 

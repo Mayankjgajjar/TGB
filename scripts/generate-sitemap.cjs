@@ -59,7 +59,8 @@ const srcHomeContent = path.join(__dirname, '..', 'src', 'content', 'home.ts');
 const srcAbout = path.join(__dirname, '..', 'src', 'pages', 'About.tsx');
 const srcServices = path.join(__dirname, '..', 'src', 'pages', 'Services.tsx');
 const srcContact = path.join(__dirname, '..', 'src', 'pages', 'Contact.tsx');
-const srcProjectArchive = path.join(__dirname, '..', 'src', 'pages', 'ProjectArchive.tsx');
+const srcGallery = path.join(__dirname, '..', 'src', 'pages', 'Gallery.tsx');
+const srcGalleryContent = path.join(__dirname, '..', 'src', 'content', 'gallery.ts');
 const srcWarranty = path.join(__dirname, '..', 'src', 'pages', 'Warranty.tsx');
 const srcPrivacy = path.join(__dirname, '..', 'src', 'pages', 'Privacy.tsx');
 const srcTerms = path.join(__dirname, '..', 'src', 'pages', 'Terms.tsx');
@@ -132,8 +133,8 @@ allRoutes.push({
 });
 
 allRoutes.push({
-  loc: '/projects',
-  lastmod: getLatestModifiedDate([srcProjectArchive, projectsFile]),
+  loc: '/gallery',
+  lastmod: getLatestModifiedDate([srcGallery, srcGalleryContent]),
 });
 
 allRoutes.push({

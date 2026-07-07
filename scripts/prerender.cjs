@@ -136,7 +136,7 @@ pages.push({
         <li><strong><a href="/projects/custom-neon-signage">Glow &amp; Co. Creative Studio</a>:</strong> Handcrafted custom neon signs portfolio.</li>
         <li><strong><a href="/projects/acp-board-installation">Apex Commercial Hub</a>:</strong> ACP panel board and LED glow signage landmark.</li>
       </ul>
-      <p>Browse our complete <a href="/projects">completed projects portfolio</a> or submit a <a href="/claim-warranty">warranty claim request</a>.</p>
+      <p>Browse our complete <a href="/gallery">completed projects portfolio</a> or submit a <a href="/claim-warranty">warranty claim request</a>.</p>
     </section>
   `
 });
@@ -175,7 +175,7 @@ pages.push({
     <section>
       <h2>Our Manufacturing Process</h2>
       <p>From discovery to after-sales support, we follow a 5-stage structured process: Consultation &amp; Discovery → Design &amp; Visualization → Manufacturing &amp; Fabrication → Installation &amp; Execution → After-Sales Support. This ensures every project is delivered on time, on spec, and with lasting quality.</p>
-      <p>Explore our <a href="/services">full range of signage services</a>, view our <a href="/projects">completed project portfolio</a>, or <a href="/contact">contact us</a> today.</p>
+      <p>Explore our <a href="/services">full range of signage services</a>, view our <a href="/gallery">completed project portfolio</a>, or <a href="/contact">contact us</a> today.</p>
     </section>
   `
 });
@@ -203,7 +203,7 @@ pages.push({
     </section>
     <section>
       <h2>Industries Served</h2>
-      <p>We serve retail showrooms, corporate offices, restaurants, hospitals, hotels, real estate developments, industrial facilities, and educational campuses. View our <a href="/projects">completed projects portfolio</a> for case studies, or <a href="/contact">contact us</a> to request a customised quotation.</p>
+      <p>We serve retail showrooms, corporate offices, restaurants, hospitals, hotels, real estate developments, industrial facilities, and educational campuses. View our <a href="/gallery">completed projects portfolio</a> for case studies, or <a href="/contact">contact us</a> to request a customised quotation.</p>
     </section>
   `
 });
@@ -226,23 +226,23 @@ pages.push({
         <li><strong>Email:</strong> <a href="mailto:tgbsign@proton.me">tgbsign@proton.me</a></li>
         <li><strong>Office Hours:</strong> Monday – Saturday, 9:30 AM – 7:00 PM IST</li>
       </ul>
-      <p>Browse our <a href="/services">signage services</a>, view our <a href="/projects">completed projects</a>, or return to the <a href="/">Homepage</a>.</p>
+      <p>Browse our <a href="/services">signage services</a>, view our <a href="/gallery">completed projects</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
 
-// E. Project Archive Page
+// E. Gallery Page
 pages.push({
-  route: '/projects',
-  title: 'Our Completed Projects Portfolio | TGB Enterprise Ahmedabad',
-  description: 'View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.',
-  h1: 'Identity Landmarks',
-  h2: 'Project Archive &amp; Select Works',
+  route: '/gallery',
+  title: 'Visual Portfolio | TGB Enterprise Signage Gallery',
+  description: 'Browse the TGB Enterprise visual portfolio of completed signage installations, LED boards, ACP facades, neon signs, and 3D letter projects across Ahmedabad and Gujarat.',
+  h1: 'Visual Portfolio',
+  h2: 'Completed Installations & Fabrication Work',
   image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
   content: `
     <section>
-      <h2>Architectural Signage Case Studies</h2>
-      <p>Explore TGB Enterprise's portfolio of custom-engineered storefront signs, building facade claddings, and lobby letter boards completed for corporate headquarters, jewelry showrooms, and commercial hubs in Nikol, Ahmedabad, and other major cities of Gujarat.</p>
+      <h2>Signage Portfolio Gallery</h2>
+      <p>Explore a curated selection of completed signage installations, custom fabrication projects, storefront branding, architectural signage, and illuminated displays delivered by TGB Enterprise for businesses across multiple industries. Every installation in our gallery was designed, fabricated, and installed at our Nikol, Ahmedabad workshop.</p>
       <ul>
         ${projectItems.map(p => `
           <li>
@@ -251,7 +251,13 @@ pages.push({
           </li>
         `).join('\n')}
       </ul>
-      <p>Return to <a href="/">Home page</a>, browse our <a href="/services">signage services</a>, or <a href="/contact">contact us</a>.</p>
+      <h2>Our Signage Solutions</h2>
+      <ul>
+        ${serviceItems.map(s => `
+          <li><a href="/services/${s.slug}">${escapeHtml(s.name)}</a> - ${escapeHtml(s.positioning)}</li>
+        `).join('\n')}
+      </ul>
+      <p>Return to <a href="/">Home page</a>, browse our <a href="/services">full range of services</a>, or <a href="/contact">contact us</a> for a custom quotation.</p>
     </section>
   `
 });
@@ -388,7 +394,7 @@ serviceItems.forEach(s => {
             <li><a href="/services/${other.slug}">${escapeHtml(other.name)}</a> - ${escapeHtml(other.positioning)}</li>
           `).join('')}
         </ul>
-        <p>Request a quote on our <a href="/contact">Contact Page</a> or browse the full <a href="/projects">Signage Portfolio</a>.</p>
+        <p>Request a quote on our <a href="/contact">Contact Page</a> or browse the full <a href="/gallery">Signage Portfolio</a>.</p>
       </section>
     `
   });
@@ -418,7 +424,7 @@ projectItems.forEach(p => {
       <section>
         <h2>Browse More Landmark Signages &amp; Services</h2>
         <ul>
-          <li>View the full <a href="/projects">All Projects Portfolio</a></li>
+          <li>View the full <a href="/gallery">All Projects Portfolio</a></li>
           <li>Learn more about our <a href="/services/led-sign-boards">LED Sign Board Services</a> or <a href="/services/acp-sign-boards">ACP Sign Boards</a></li>
           <li>Return to the <a href="/">Homepage</a> or submit a <a href="/claim-warranty">Warranty Registration Request</a></li>
         </ul>

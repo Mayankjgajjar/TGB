@@ -52,8 +52,7 @@ export const QuoteModal: React.FC = () => {
           aria-modal="true"
           aria-labelledby="quote-modal-title"
         >
-          
-          <motion.div 
+          <motion.div
             className={styles.modalContent}
             data-lenis-prevent
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -75,19 +74,21 @@ export const QuoteModal: React.FC = () => {
             <span className={styles.portalTag}>SECURE PORTAL // SPECIFICATION REQUEST</span>
 
             {/* Premium Serif Display Title */}
-            <h2 id="quote-modal-title" className={styles.title}>Acquire Quote Specification</h2>
+            <h2 id="quote-modal-title" className={styles.title}>
+              Acquire Quote Specification
+            </h2>
 
             {/* Muted Narrative Copy */}
             <p className={styles.description}>
-              Select your preferred path of engagement. Customize project scope within our interactive builder workspace, or link directly with a design engineer.
+              Select your preferred path of engagement. Customize project scope within our
+              interactive builder workspace, or link directly with a design engineer.
             </p>
 
             {/* Symmetrical Outline Button Stack */}
             <div className={styles.actionStack}>
-              
               {/* Action 1: Launch Builder (Outline with Red Hover border) */}
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 onClick={() => {
                   closeModal();
                   trackQuoteSubmit('builder');
@@ -95,47 +96,53 @@ export const QuoteModal: React.FC = () => {
                 className={`${styles.outlineOption} ${styles.builderOption}`}
               >
                 <div className={styles.optionLabel}>
-                  <span className={styles.optionIcon}><Compass size={16} /></span>
+                  <span className={styles.optionIcon}>
+                    <Compass size={16} />
+                  </span>
                   <span>Start Consultation</span>
                 </div>
                 <ArrowRight size={16} className={styles.arrow} />
               </Link>
 
               {/* Action 2: WhatsApp Desk (Outline with Green Hover border) */}
-              <a 
-                href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote." 
-                target="_blank" 
+              <a
+                href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote."
+                target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackQuoteSubmit('whatsapp')}
                 className={`${styles.outlineOption} ${styles.whatsappOption}`}
               >
                 <div className={styles.optionLabel}>
-                  <span className={`${styles.optionIcon} ${styles.whatsappColor}`}><MessageSquare size={16} /></span>
+                  <span className={`${styles.optionIcon} ${styles.whatsappColor}`}>
+                    <MessageSquare size={16} />
+                  </span>
                   <span>Message Via WhatsApp Desk</span>
                 </div>
                 <div className={styles.statusDot} />
               </a>
 
               {/* Action 3: Hotline Call (Outline with White Hover border) */}
-              <a 
-                href="tel:+919727136137" 
+              <a
+                href="tel:+919727136137"
                 onClick={() => trackQuoteSubmit('hotline')}
                 className={`${styles.outlineOption} ${styles.hotlineOption}`}
               >
                 <div className={styles.optionLabel}>
-                  <span className={styles.optionIcon}><Phone size={16} /></span>
+                  <span className={styles.optionIcon}>
+                    <Phone size={16} />
+                  </span>
                   <span>Dial Hotline Support</span>
                 </div>
               </a>
-
             </div>
 
             {/* Redesigned Bottom Time Indicator */}
             <div className={styles.footerInfo}>
-              <span className={styles.clockIcon}><Clock size={12} /></span>
+              <span className={styles.clockIcon}>
+                <Clock size={12} />
+              </span>
               <span>RESPONSE TARGET: &lt; 3 HOURS</span>
             </div>
-
           </motion.div>
         </div>
       )}

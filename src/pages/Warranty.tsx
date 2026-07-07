@@ -36,7 +36,7 @@ const EMPTY_FORM: FormFields = {
 const validateForm = (fields: FormFields): FormErrors => {
   const errors: FormErrors = {};
   if (!fields.customerName.trim()) errors.customerName = 'Customer name is required.';
-  
+
   if (!fields.phone.trim()) {
     errors.phone = 'Phone number is required.';
   } else if (!/^\+?[0-9\s\-()]{7,15}$/.test(fields.phone)) {
@@ -54,7 +54,7 @@ const validateForm = (fields: FormFields): FormErrors => {
   if (!fields.purchaseDate.trim()) errors.purchaseDate = 'Purchase date is required.';
   if (!fields.signageType) errors.signageType = 'Please select a signage type.';
   if (!fields.issueDetails.trim()) errors.issueDetails = 'Please provide details about the issue.';
-  
+
   if (!fields.consent) {
     errors.consent = 'Consent is required to submit your claim.';
   }
@@ -114,13 +114,13 @@ export const Warranty: React.FC = () => {
       const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
       const field = name as keyof FormFields;
       setFormState((prev) => ({ ...prev, [field]: val }));
-      
+
       // Clear error as user corrects the field
       if (errors[field]) {
         setErrors((prev) => ({ ...prev, [field]: undefined }));
       }
     },
-    [errors]
+    [errors],
   );
 
   const handleBlur = useCallback(
@@ -130,14 +130,14 @@ export const Warranty: React.FC = () => {
       const fieldErrors = validateForm(formState);
       setErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
     },
-    [formState]
+    [formState],
   );
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setSubmitError(null);
-      
+
       if (fileError) {
         setSubmitError('Please resolve the file attachment error before submitting.');
         return;
@@ -149,7 +149,7 @@ export const Warranty: React.FC = () => {
         setErrors(validationErrors);
         const allTouched = Object.keys(formState).reduce(
           (acc, key) => ({ ...acc, [key]: true }),
-          {} as Record<keyof FormFields, boolean>
+          {} as Record<keyof FormFields, boolean>,
         );
         setTouched(allTouched);
         return;
@@ -194,12 +194,14 @@ export const Warranty: React.FC = () => {
         trackWarrantyFormSubmit();
       } catch (error: any) {
         console.error('Error submitting warranty form:', error);
-        setSubmitError(error.message || 'We encountered an issue submitting your claim. Please try again.');
+        setSubmitError(
+          error.message || 'We encountered an issue submitting your claim. Please try again.',
+        );
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formState, fileError, selectedFile, fileBase64, turnstileToken]
+    [formState, fileError, selectedFile, fileBase64, turnstileToken],
   );
 
   const handleReset = useCallback(() => {
@@ -231,8 +233,23 @@ export const Warranty: React.FC = () => {
       <Container>
         <div className={styles.contentWrapper}>
           {/* Integrated breadcrumbs inside form card to prevent double stacked heroes */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>Home</Link>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              marginBottom: '24px',
+              fontFamily: 'var(--font-technical)',
+              fontSize: '11px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              color: 'var(--color-steel)',
+            }}
+          >
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+              Home
+            </Link>
             <span style={{ opacity: 0.4 }}>›</span>
             <span style={{ color: 'var(--color-off-white)' }}>Warranty Support</span>
           </div>
@@ -242,10 +259,13 @@ export const Warranty: React.FC = () => {
 
           {isSubmitted ? (
             <div className={styles.successMessage}>
-              <div style={{ color: 'var(--color-copper)', fontSize: '48px', marginBottom: '8px' }}>✓</div>
+              <div style={{ color: 'var(--color-copper)', fontSize: '48px', marginBottom: '8px' }}>
+                ✓
+              </div>
               <h2 className={styles.successTitle}>Claim Submitted</h2>
               <p className={styles.successDesc}>
-                Thank you for submitting your warranty claim. Our technical support team will review your request and the purchase records and contact you within 24–48 business hours.
+                Thank you for submitting your warranty claim. Our technical support team will review
+                your request and the purchase records and contact you within 24–48 business hours.
               </p>
               <button onClick={handleReset} className={styles.resetButton}>
                 Submit Another Request
@@ -261,7 +281,9 @@ export const Warranty: React.FC = () => {
 
               {/* Customer Name */}
               <div className={styles.inputGroup}>
-                <label htmlFor="customerName" className={styles.fieldLabel}>Full Name *</label>
+                <label htmlFor="customerName" className={styles.fieldLabel}>
+                  Full Name *
+                </label>
                 <input
                   type="text"
                   id="customerName"
@@ -284,7 +306,9 @@ export const Warranty: React.FC = () => {
               {/* Email & Phone Row */}
               <div className={styles.formRow}>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="email" className={styles.fieldLabel}>Email Address *</label>
+                  <label htmlFor="email" className={styles.fieldLabel}>
+                    Email Address *
+                  </label>
                   <input
                     type="email"
                     id="email"
@@ -305,7 +329,9 @@ export const Warranty: React.FC = () => {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label htmlFor="phone" className={styles.fieldLabel}>Phone Number *</label>
+                  <label htmlFor="phone" className={styles.fieldLabel}>
+                    Phone Number *
+                  </label>
                   <input
                     type="tel"
                     id="phone"
@@ -329,7 +355,9 @@ export const Warranty: React.FC = () => {
               {/* Invoice Number & Warranty Number Row */}
               <div className={styles.formRow}>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="invoiceNumber" className={styles.fieldLabel}>Invoice / Order Number *</label>
+                  <label htmlFor="invoiceNumber" className={styles.fieldLabel}>
+                    Invoice / Order Number *
+                  </label>
                   <input
                     type="text"
                     id="invoiceNumber"
@@ -350,7 +378,9 @@ export const Warranty: React.FC = () => {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label htmlFor="warrantyNumber" className={styles.fieldLabel}>Warranty Number *</label>
+                  <label htmlFor="warrantyNumber" className={styles.fieldLabel}>
+                    Warranty Number *
+                  </label>
                   <input
                     type="text"
                     id="warrantyNumber"
@@ -374,7 +404,9 @@ export const Warranty: React.FC = () => {
               {/* Purchase Date & Signage Type Row */}
               <div className={styles.formRow}>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="purchaseDate" className={styles.fieldLabel}>Purchase Date *</label>
+                  <label htmlFor="purchaseDate" className={styles.fieldLabel}>
+                    Purchase Date *
+                  </label>
                   <input
                     type="date"
                     id="purchaseDate"
@@ -394,7 +426,9 @@ export const Warranty: React.FC = () => {
                 </div>
 
                 <div className={styles.inputGroup}>
-                  <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage *</label>
+                  <label htmlFor="signageType" className={styles.fieldLabel}>
+                    Type of Signage *
+                  </label>
                   <div className={styles.selectWrapper}>
                     <select
                       id="signageType"
@@ -412,7 +446,9 @@ export const Warranty: React.FC = () => {
                       <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
                       <option value="Neon Signage">Neon Signage</option>
                       <option value="Corporate Signage">Corporate Signage</option>
-                      <option value="Indoor/Outdoor Systems">Indoor & Outdoor Signage Systems</option>
+                      <option value="Indoor/Outdoor Systems">
+                        Indoor & Outdoor Signage Systems
+                      </option>
                       <option value="Other">Other</option>
                     </select>
                   </div>
@@ -426,7 +462,9 @@ export const Warranty: React.FC = () => {
 
               {/* Issue Details */}
               <div className={styles.inputGroup}>
-                <label htmlFor="issueDetails" className={styles.fieldLabel}>Describe the Issue *</label>
+                <label htmlFor="issueDetails" className={styles.fieldLabel}>
+                  Describe the Issue *
+                </label>
                 <textarea
                   id="issueDetails"
                   name="issueDetails"
@@ -451,7 +489,11 @@ export const Warranty: React.FC = () => {
                 {selectedFile ? (
                   <div className={styles.previewContainer}>
                     {fileBase64 && (
-                      <img src={fileBase64} alt="Preview of issue" className={styles.previewImage} />
+                      <img
+                        src={fileBase64}
+                        alt="Preview of issue"
+                        className={styles.previewImage}
+                      />
                     )}
                     <div className={styles.previewInfo}>
                       <span className={styles.previewName}>{selectedFile.name}</span>
@@ -501,12 +543,17 @@ export const Warranty: React.FC = () => {
                   aria-describedby={errors.consent ? 'consent-error' : undefined}
                 />
                 <label htmlFor="consent" className={styles.checkboxLabel}>
-                  I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
-                  <Link to="/privacy">Privacy Policy</Link>.
+                  I agree to TGB Enterprise collecting and using my information to respond to this
+                  enquiry, in accordance with the <Link to="/privacy">Privacy Policy</Link>.
                 </label>
               </div>
               {touched.consent && errors.consent && (
-                <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
+                <span
+                  id="consent-error"
+                  className={styles.fieldError}
+                  style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }}
+                  role="alert"
+                >
                   {errors.consent}
                 </span>
               )}
@@ -514,11 +561,7 @@ export const Warranty: React.FC = () => {
               {/* Turnstile Captcha */}
               <Turnstile onVerify={setTurnstileToken} />
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={styles.submitButton}
-              >
+              <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
                 {isSubmitting ? 'Submitting...' : 'Submit Claim'}
                 {!isSubmitting && <span className={styles.submitArrow}>→</span>}
               </button>
@@ -528,10 +571,34 @@ export const Warranty: React.FC = () => {
       </Container>
 
       {/* Internal Navigation links at bottom */}
-      <div style={{ textAlign: 'center', paddingBottom: '80px', display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '48px' }}>
-        <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>← Back to Home</Link>
-        <Link to="/contact" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Contact Support</Link>
-        <Link to="/privacy" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Privacy Policy</Link>
+      <div
+        style={{
+          textAlign: 'center',
+          paddingBottom: '80px',
+          display: 'flex',
+          gap: '20px',
+          justifyContent: 'center',
+          marginTop: '48px',
+        }}
+      >
+        <Link
+          to="/"
+          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+        >
+          ← Back to Home
+        </Link>
+        <Link
+          to="/contact"
+          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+        >
+          Contact Support
+        </Link>
+        <Link
+          to="/privacy"
+          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+        >
+          Privacy Policy
+        </Link>
       </div>
     </motion.div>
   );

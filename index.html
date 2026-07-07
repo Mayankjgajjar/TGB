@@ -8,16 +8,8 @@
     <meta name="theme-color" content="#E30005" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Sentry Runtime Error Tracking -->
-    <script src="https://js.sentry-cdn.com/ea60100d84ea383ebce25c862bc2b55f.min.js" crossorigin="anonymous"></script>
-    <script>
-      if (window.Sentry) {
-        Sentry.init({
-          dsn: "https://ea60100d84ea383ebce25c862bc2b55f@o4506823485764024.ingest.sentry.io/4506823487860736",
-          tracesSampleRate: 0.1,
-        });
-      }
-    </script>
+    <!-- Sentry Runtime Error Tracking — install @sentry/react for production use -->
+    <!-- DSN: https://ea60100d84ea383ebce25c862bc2b55f@o4506823485764024.ingest.sentry.io/4506823487860736 -->
 
     <!-- Google Analytics 4 -->
     <!-- ⚠️ REPLACE G-XXXXXXXXXX WITH REAL MEASUREMENT ID BEFORE MERGING TO MAIN -->

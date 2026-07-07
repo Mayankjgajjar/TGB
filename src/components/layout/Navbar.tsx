@@ -48,40 +48,19 @@ export const Navbar: React.FC = () => {
 
   const navLinks = (
     <>
-      <NavLink
-        to="/"
-        end
-        className={getNavLinkClass}
-        onClick={handleMobileClose}
-      >
+      <NavLink to="/" end className={getNavLinkClass} onClick={handleMobileClose}>
         Home
       </NavLink>
-      <NavLink
-        to="/about"
-        className={getNavLinkClass}
-        onClick={handleMobileClose}
-      >
+      <NavLink to="/about" className={getNavLinkClass} onClick={handleMobileClose}>
         About
       </NavLink>
-      <NavLink
-        to="/services"
-        className={getNavLinkClass}
-        onClick={handleMobileClose}
-      >
+      <NavLink to="/services" className={getNavLinkClass} onClick={handleMobileClose}>
         Services
       </NavLink>
-      <NavLink
-        to="/projects"
-        className={getNavLinkClass}
-        onClick={handleMobileClose}
-      >
-        Projects
+      <NavLink to="/gallery" className={getNavLinkClass} onClick={handleMobileClose}>
+        Gallery
       </NavLink>
-      <NavLink
-        to="/contact"
-        className={getNavLinkClass}
-        onClick={handleMobileClose}
-      >
+      <NavLink to="/contact" className={getNavLinkClass} onClick={handleMobileClose}>
         Contact
       </NavLink>
     </>
@@ -89,13 +68,9 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header
-        ref={headerRef}
-        className={`${styles.header} ${isHidden ? styles.headerHidden : ''}`}
-      >
+      <header ref={headerRef} className={`${styles.header} ${isHidden ? styles.headerHidden : ''}`}>
         <Container>
           <div className={styles.inner}>
-
             {/* Top Left: Logo */}
             <NavLink to="/" className={styles.logoLink}>
               <img
@@ -125,12 +100,17 @@ export const Navbar: React.FC = () => {
                 aria-expanded={mobileOpen}
                 aria-controls="mobile-nav"
               >
-                <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineTop : ''}`} />
-                <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineMid : ''}`} />
-                <span className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineBot : ''}`} />
+                <span
+                  className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineTop : ''}`}
+                />
+                <span
+                  className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineMid : ''}`}
+                />
+                <span
+                  className={`${styles.hamburgerLine} ${mobileOpen ? styles.hamburgerLineBot : ''}`}
+                />
               </button>
             </div>
-
           </div>
         </Container>
       </header>
@@ -146,7 +126,10 @@ export const Navbar: React.FC = () => {
           <div className={styles.mobileNavLinks}>
             {navLinks}
             <button
-              onClick={() => { setMobileOpen(false); openModal(); }}
+              onClick={() => {
+                setMobileOpen(false);
+                openModal();
+              }}
               className={styles.mobileConsultBtn}
             >
               Get a Quote →

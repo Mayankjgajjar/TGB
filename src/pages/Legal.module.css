@@ -3,7 +3,7 @@
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
 }
 
 .contentWrapper {

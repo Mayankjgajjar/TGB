@@ -9,15 +9,16 @@
   z-index: var(--z-index-navbar);
   display: flex;
   align-items: center;
-  background-color: rgba(10, 10, 10, 0.45);
+  background-color: rgb(10 10 10 / 45%);
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgb(255 255 255 / 8%);
   transform: translateY(0);
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-              background-color var(--transition-speed-normal) var(--transition-ease-expo),
-              border-color var(--transition-speed-normal) var(--transition-ease-expo);
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color var(--transition-speed-normal) var(--transition-ease-expo),
+    border-color var(--transition-speed-normal) var(--transition-ease-expo);
 }
 
 .headerHidden {
@@ -54,7 +55,7 @@
   font-family: var(--font-primary);
   font-size: 13px;
   font-weight: 500;
-  color: rgba(244, 241, 234, 0.55);
+  color: rgb(244 241 234 / 55%);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   padding: var(--space-8) var(--space-12);
@@ -106,9 +107,9 @@
   font-family: var(--font-primary);
   font-size: 12px;
   font-weight: 600;
-  color: #F4F1EA;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f4f1ea;
+  background-color: rgb(255 255 255 / 2%);
+  border: 1px solid rgb(255 255 255 / 12%);
   border-radius: 8px;
   height: 48px;
   padding: 0 22px; /* Tighter padding to resolve side-space issues */
@@ -121,22 +122,24 @@
   gap: 10px; /* Precise, tight spacing with dot & text */
   line-height: 1;
   box-sizing: border-box;
-  transition: background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-              color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Hover: Premium outline focus state with white border highlights */
 .quoteButton:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #ffffff;
+  background-color: rgb(255 255 255 / 6%);
+  border-color: rgb(255 255 255 / 40%);
+  color: #fff;
+
   /* Removed floating translation for grounded feel */
 }
 
 .quoteButton:active {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgb(255 255 255 / 8%);
 }
 
 /* Arrow transition */
@@ -177,14 +180,25 @@
   height: 1.5px;
   background: var(--color-off-white);
   border-radius: 2px;
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease;
+  transition:
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease;
   transform-origin: center;
 }
 
 /* X state */
-.hamburgerLineTop  { transform: translateY(6.5px) rotate(45deg); }
-.hamburgerLineMid  { opacity: 0; transform: scaleX(0); }
-.hamburgerLineBot  { transform: translateY(-6.5px) rotate(-45deg); }
+.hamburgerLineTop {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburgerLineMid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerLineBot {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
 
 /* ═══════════════════════════════════════════
    MOBILE DRAWER
@@ -195,17 +209,18 @@
   top: 76px; /* 12px margin + ~52px height + 12px gap */
   left: 12px;
   right: 12px;
-  background: rgba(10, 10, 10, 0.85); /* Premium glass background */
+  background: rgb(10 10 10 / 85%); /* Premium glass background */
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgb(255 255 255 / 8%);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 50%);
   transform: translateY(-10px);
   opacity: 0;
   pointer-events: none;
-  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
   z-index: calc(var(--z-index-navbar) - 1);
   overflow: hidden;
 }
@@ -228,9 +243,9 @@
   display: block;
   font-size: 15px;
   padding: var(--space-12) var(--space-8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgb(255 255 255 / 6%);
   letter-spacing: 2px;
-  color: rgba(244, 241, 234, 0.6);
+  color: rgb(244 241 234 / 60%);
   transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
@@ -281,7 +296,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   border: none;
   border-radius: 8px;
   font-family: var(--font-primary);
@@ -302,16 +317,16 @@
 .mobileBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgb(0 0 0 / 60%);
   backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
   z-index: calc(var(--z-index-navbar) - 2);
 }
 
 /* ═══════════════════════════════════════════
    RESPONSIVE BREAKPOINTS
 ═══════════════════════════════════════════ */
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .header {
     margin: 12px 12px 0;
     padding: 12px 16px;
@@ -338,9 +353,9 @@
 }
 
 /* Reduce blur radius on lower-end mobile for performance */
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .header {
     backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
   }
 }

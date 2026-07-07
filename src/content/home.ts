@@ -101,427 +101,553 @@ export interface TGBStandardSection {
 
 export const homeContent = {
   hero: {
-    label: "SIGNAGE • FACADES • BRANDING",
-    title: "Built to be Seen.\nMade to be Remembered.",
-    subtitle: "TGB Enterprise is a premium sign board manufacturer in Ahmedabad. Specializing in custom indoor and outdoor LED sign boards, we manage design, fabrication, installation, and dedicated after-sales support across Gujarat and India.",
-    coordinates: "AHMEDABAD, GUJARAT / 23.0225° N, 72.5714° E",
-    ctaLabel: "Explore Services"
+    label: 'SIGNAGE • FACADES • BRANDING',
+    title: 'Built to be Seen.\nMade to be Remembered.',
+    subtitle:
+      'TGB Enterprise is a premium sign board manufacturer in Ahmedabad. Specializing in custom indoor and outdoor LED sign boards, we manage design, fabrication, installation, and dedicated after-sales support across Gujarat and India.',
+    coordinates: 'AHMEDABAD, GUJARAT / 23.0225° N, 72.5714° E',
+    ctaLabel: 'Explore Services',
   },
 
   identity: {
     intro: {
-      eyebrowStory: "OUR STORY",
-      headingStory: "We Build Visibility for Businesses Across Gujarat and India.",
-      subheadingStory: "Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.",
-      eyebrowWho: "WHO WE ARE",
-      headingWho: "More Than Signage.\nA Partner in Building Brand Presence.",
-      paragraph1: "As a trusted sign board manufacturer in Ahmedabad, we deliver premium custom signage solutions. We design, manufacture, and install durable, high-impact signage that commands attention and elevates your brand.",
-      paragraph2: "Our custom capabilities span heavy-duty outdoor LED display boards, architectural ACP facade cladding panels, 3D acrylic letters, and custom indoor flex-neon signage—all built to standard specs and high tolerances.",
-      paragraph3: "Operating from our Nikol Ahmedabad workshop, we manage both local and national projects. Our commitment extends far beyond delivery—providing long-term maintenance, warranty assurance, and dependable after-sales service.",
-      closingStatement: "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
-      image: "/assets/images/who-we-are.jpg",
+      eyebrowStory: 'OUR STORY',
+      headingStory: 'We Build Visibility for Businesses Across Gujarat and India.',
+      subheadingStory:
+        'Designing, manufacturing, and installing premium signage solutions that transform spaces and strengthen brand identities.',
+      eyebrowWho: 'WHO WE ARE',
+      headingWho: 'More Than Signage.\nA Partner in Building Brand Presence.',
+      paragraph1:
+        'As a trusted sign board manufacturer in Ahmedabad, we deliver premium custom signage solutions. We design, manufacture, and install durable, high-impact signage that commands attention and elevates your brand.',
+      paragraph2:
+        'Our custom capabilities span heavy-duty outdoor LED display boards, architectural ACP facade cladding panels, 3D acrylic letters, and custom indoor flex-neon signage—all built to standard specs and high tolerances.',
+      paragraph3:
+        'Operating from our Nikol Ahmedabad workshop, we manage both local and national projects. Our commitment extends far beyond delivery—providing long-term maintenance, warranty assurance, and dependable after-sales service.',
+      closingStatement:
+        "Because great signage isn't simply made to be seen.\nIt's made to represent your brand for years to come.",
+      image: '/assets/images/who-we-are.jpg',
       metrics: [
-        { value: "100+", label: "Projects Delivered" },
-        { value: "5+", label: "Major Cities Served" },
-        { value: "Pan India", label: "Service Footprint" },
-        { value: "100%", label: "Customer Commitment" }
+        { value: '100+', label: 'Projects Delivered' },
+        { value: '5+', label: 'Major Cities Served' },
+        { value: 'Pan India', label: 'Service Footprint' },
+        { value: '100%', label: 'Customer Commitment' },
       ],
-      featuredClientsTitle: "Trusted by Growing Businesses and Established Brands",
-      featuredClients: [
-        "INFRA CORP India",
-        "The Gold Palace",
-        "Glow & Co.",
-        "Apex Commercial Hub"
-      ],
+      featuredClientsTitle: 'Trusted by Growing Businesses and Established Brands',
+      featuredClients: ['INFRA CORP India', 'The Gold Palace', 'Glow & Co.', 'Apex Commercial Hub'],
       trustBadges: [
-        "Premium Materials",
-        "Custom Design Solutions",
-        "Professional Manufacturing & Installation",
-        "Reliable After-Sales Support",
-        "Customer-First Approach",
-        "Pan India Service"
-      ]
+        'Premium Materials',
+        'Custom Design Solutions',
+        'Professional Manufacturing & Installation',
+        'Reliable After-Sales Support',
+        'Customer-First Approach',
+        'Pan India Service',
+      ],
     },
-    label: "",
-    title: "THE TGB STANDARD",
-    subtitle: "Most signage looks good on day one, ours is built for the years that follow. We combine industrial engineering with architectural design to produce signage that commands attention and withstands the elements.",
-    capabilitiesLabel: "",
+    label: '',
+    title: 'THE TGB STANDARD',
+    subtitle:
+      'Most signage looks good on day one, ours is built for the years that follow. We combine industrial engineering with architectural design to produce signage that commands attention and withstands the elements.',
+    capabilitiesLabel: '',
     capabilities: [
       {
-        number: "01",
-        icon: "Zap",
-        name: "LED Sign Boards",
-        description: "High-brightness LED systems built for visibility day and night, with long-lasting performance."
+        number: '01',
+        icon: 'Zap',
+        name: 'LED Sign Boards',
+        description:
+          'High-brightness LED systems built for visibility day and night, with long-lasting performance.',
       },
       {
-        number: "02",
-        icon: "Layers",
-        name: "ACP Sign Boards",
-        description: "Aluminium composite panel signage — lightweight, weatherproof, and sharp-finished."
+        number: '02',
+        icon: 'Layers',
+        name: 'ACP Sign Boards',
+        description:
+          'Aluminium composite panel signage — lightweight, weatherproof, and sharp-finished.',
       },
       {
-        number: "03",
-        icon: "Flame",
-        name: "Neon Sign Boards",
-        description: "Premium flex-neon and glass-neon displays designed to make your brand impossible to miss."
+        number: '03',
+        icon: 'Flame',
+        name: 'Neon Sign Boards',
+        description:
+          'Premium flex-neon and glass-neon displays designed to make your brand impossible to miss.',
       },
       {
-        number: "04",
-        icon: "Type",
-        name: "Acrylic Letters",
-        description: "Precision-cut acrylic lettering with backlit and front-lit options for clean brand presence."
+        number: '04',
+        icon: 'Type',
+        name: 'Acrylic Letters',
+        description:
+          'Precision-cut acrylic lettering with backlit and front-lit options for clean brand presence.',
       },
       {
-        number: "05",
-        icon: "Bold",
-        name: "SS Letters",
-        description: "Stainless steel letters crafted for architectural permanence and a premium metallic finish."
+        number: '05',
+        icon: 'Bold',
+        name: 'SS Letters',
+        description:
+          'Stainless steel letters crafted for architectural permanence and a premium metallic finish.',
       },
       {
-        number: "06",
-        icon: "Triangle",
-        name: "Pylon Signs",
-        description: "Freestanding pylon structures for commercial complexes, malls, and roadside brand identity."
-      }
+        number: '06',
+        icon: 'Triangle',
+        name: 'Pylon Signs',
+        description:
+          'Freestanding pylon structures for commercial complexes, malls, and roadside brand identity.',
+      },
     ],
-    trustLabel: "",
-    trustTitle: "WHY BUSINESSES TRUST TGB",
-    trustSubtitle: "Built for the years that follow. Most signage looks good on day one, but we engineer for the long term. From premium materials to complete in-house manufacturing, everything we build is designed to endure.",
+    trustLabel: '',
+    trustTitle: 'WHY BUSINESSES TRUST TGB',
+    trustSubtitle:
+      'Built for the years that follow. Most signage looks good on day one, but we engineer for the long term. From premium materials to complete in-house manufacturing, everything we build is designed to endure.',
     standards: [
       {
-        number: "01",
-        icon: "ShieldCheck",
-        category: "QUALITY",
-        title: "Built to Last",
-        description: "Premium materials and engineering designed for long-term performance and lasting visual impact.",
-        techLabel: "Premium Quality"
+        number: '01',
+        icon: 'ShieldCheck',
+        category: 'QUALITY',
+        title: 'Built to Last',
+        description:
+          'Premium materials and engineering designed for long-term performance and lasting visual impact.',
+        techLabel: 'Premium Quality',
       },
       {
-        number: "02",
-        icon: "CloudSun",
-        category: "MATERIALS",
-        title: "Materials That Endure",
-        description: "From ACP and acrylic to stainless steel and LED systems, every component is selected for durability and reliability.",
-        techLabel: "Weather Resistant"
+        number: '02',
+        icon: 'CloudSun',
+        category: 'MATERIALS',
+        title: 'Materials That Endure',
+        description:
+          'From ACP and acrylic to stainless steel and LED systems, every component is selected for durability and reliability.',
+        techLabel: 'Weather Resistant',
       },
       {
-        number: "03",
-        icon: "Factory",
-        category: "EXECUTION",
-        title: "End-to-End Execution",
-        description: "From concept and manufacturing to installation and support, every project is managed with precision and complete quality control.",
-        techLabel: "Complete Solutions"
+        number: '03',
+        icon: 'Factory',
+        category: 'EXECUTION',
+        title: 'End-to-End Execution',
+        description:
+          'From concept and manufacturing to installation and support, every project is managed with precision and complete quality control.',
+        techLabel: 'Complete Solutions',
       },
       {
-        number: "04",
-        icon: "BadgeCheck",
-        category: "SUPPORT",
-        title: "Relationships Beyond Delivery",
-        description: "Reliable after-sales service and long-term partnerships are at the heart of everything we do.",
-        techLabel: "Customer First"
-      }
+        number: '04',
+        icon: 'BadgeCheck',
+        category: 'SUPPORT',
+        title: 'Relationships Beyond Delivery',
+        description:
+          'Reliable after-sales service and long-term partnerships are at the heart of everything we do.',
+        techLabel: 'Customer First',
+      },
     ],
-    leadershipLabel: "",
-    leadershipTitle: "THE PEOPLE BEHIND TGB",
-    leadershipSubtitle: "Three perspectives. One standard. From design and technical execution to marketing and client relationships, our leadership team shares a singular commitment to uncompromising craftsmanship and long-term value.",
+    leadershipLabel: '',
+    leadershipTitle: 'THE PEOPLE BEHIND TGB',
+    leadershipSubtitle:
+      'Three perspectives. One standard. From design and technical execution to marketing and client relationships, our leadership team shares a singular commitment to uncompromising craftsmanship and long-term value.',
     leaders: [
       {
-        name: "Divyesh Gajjar",
-        role: "MARKETING HEAD",
-        description: "Leads client relationships, business development and brand strategy, ensuring every project reflects the values and vision of the businesses we serve.",
-        image: "/assets/images/divyesh-gajjar.jpeg"
+        name: 'Divyesh Gajjar',
+        role: 'MARKETING HEAD',
+        description:
+          'Leads client relationships, business development and brand strategy, ensuring every project reflects the values and vision of the businesses we serve.',
+        image: '/assets/images/divyesh-gajjar.jpeg',
       },
       {
-        name: "Ankit Gajjar",
-        role: "TECHNICAL HEAD",
-        description: "Oversees engineering, fabrication and execution, ensuring every product meets the highest standards of quality and durability.",
-        image: "/assets/images/ankit-gajjar.jpeg"
+        name: 'Ankit Gajjar',
+        role: 'TECHNICAL HEAD',
+        description:
+          'Oversees engineering, fabrication and execution, ensuring every product meets the highest standards of quality and durability.',
+        image: '/assets/images/ankit-gajjar.jpeg',
       },
       {
-        name: "Mayank Gajjar",
-        role: "DESIGNING HEAD",
-        description: "Leads the creative direction and visualization process, transforming ideas into signage and branding systems that leave lasting impressions.",
-        image: "/assets/images/mayank-gajjar.jpeg"
-      }
-    ]
+        name: 'Mayank Gajjar',
+        role: 'DESIGNING HEAD',
+        description:
+          'Leads the creative direction and visualization process, transforming ideas into signage and branding systems that leave lasting impressions.',
+        image: '/assets/images/mayank-gajjar.jpeg',
+      },
+    ],
   } as TGBStandardSection,
 
   services: {
     header: {
-      label: "02 / SPECIFICATIONS",
-      title: "Core Engineering Disciplines",
-      coordinates: "DISCIPLINE INDEX / DIRECTORY"
+      label: '02 / SPECIFICATIONS',
+      title: 'Core Engineering Disciplines',
+      coordinates: 'DISCIPLINE INDEX / DIRECTORY',
     } as SectionHeader,
     items: [
       {
-        id: "design-engineering",
-        number: "02.1",
-        title: "Identity Engineering & Drafting",
-        description: "Translating graphic guidelines into physical CAD structures. We specify wind-load resistance, structural steel substructures, and galvanic corrosion prevention methods.",
-        parameters: ["CAD Modeling", "Wind Load Analysis", "Finite Element Analysis (FEA)", "Material Compatibility Matrices"]
+        id: 'design-engineering',
+        number: '02.1',
+        title: 'Identity Engineering & Drafting',
+        description:
+          'Translating graphic guidelines into physical CAD structures. We specify wind-load resistance, structural steel substructures, and galvanic corrosion prevention methods.',
+        parameters: [
+          'CAD Modeling',
+          'Wind Load Analysis',
+          'Finite Element Analysis (FEA)',
+          'Material Compatibility Matrices',
+        ],
       },
       {
-        id: "precision-fabrication",
-        number: "02.2",
-        title: "Industrial Metal & Stone Fabrication",
-        description: "Manufacturing using heavy-gauge architectural metals. Laser profiles, five-axis milling, chemical patination of copper, and custom metal finishing in cleanroom environments.",
-        parameters: ["5-Axis CNC Milling", "Chemical Patination", "Laser Cut Profiling", "Argon TIG Arc Welding"]
+        id: 'precision-fabrication',
+        number: '02.2',
+        title: 'Industrial Metal & Stone Fabrication',
+        description:
+          'Manufacturing using heavy-gauge architectural metals. Laser profiles, five-axis milling, chemical patination of copper, and custom metal finishing in cleanroom environments.',
+        parameters: [
+          '5-Axis CNC Milling',
+          'Chemical Patination',
+          'Laser Cut Profiling',
+          'Argon TIG Arc Welding',
+        ],
       },
       {
-        id: "structural-installation",
-        number: "02.3",
-        title: "Landmark Site Integration",
-        description: "Rigging and installing identity structures at extreme heights. We handle core-drilling, high-tensile anchors, and integrate architectural illumination wiring directly with building automation systems.",
-        parameters: ["Seismic Anchorage", "Building Automation Integration", "Rigging Engineering", "Corrosion Isolation"]
-      }
-    ] as ServiceItem[]
+        id: 'structural-installation',
+        number: '02.3',
+        title: 'Landmark Site Integration',
+        description:
+          'Rigging and installing identity structures at extreme heights. We handle core-drilling, high-tensile anchors, and integrate architectural illumination wiring directly with building automation systems.',
+        parameters: [
+          'Seismic Anchorage',
+          'Building Automation Integration',
+          'Rigging Engineering',
+          'Corrosion Isolation',
+        ],
+      },
+    ] as ServiceItem[],
   },
 
   engineering: {
     header: {
-      label: "03 / STRUCTURAL INTEGRITY",
-      title: "Built to Resist Environmental Demands",
-      coordinates: "TECHNICAL DATA / TESTING LAB"
+      label: '03 / STRUCTURAL INTEGRITY',
+      title: 'Built to Resist Environmental Demands',
+      coordinates: 'TECHNICAL DATA / TESTING LAB',
     } as SectionHeader,
-    description: "Every identity system we fabricate undergoes strict engineering reviews. We model aerodynamic resistance and anchor stresses to ensure architectural permanence.",
+    description:
+      'Every identity system we fabricate undergoes strict engineering reviews. We model aerodynamic resistance and anchor stresses to ensure architectural permanence.',
     stats: [
-      { metric: "150 km/h", label: "Wind Load Tolerance", details: "Tested against local wind profiles" },
-      { metric: "316 Grade", label: "Marine Stainless Steel", details: "Standard for corrosive environments" },
-      { metric: "0.2 mm", label: "CNC Tolerance Limit", details: "For strict typographic alignment" }
-    ]
+      {
+        metric: '150 km/h',
+        label: 'Wind Load Tolerance',
+        details: 'Tested against local wind profiles',
+      },
+      {
+        metric: '316 Grade',
+        label: 'Marine Stainless Steel',
+        details: 'Standard for corrosive environments',
+      },
+      {
+        metric: '0.2 mm',
+        label: 'CNC Tolerance Limit',
+        details: 'For strict typographic alignment',
+      },
+    ],
   },
 
   materials: {
     header: {
-      label: "04 / MATERIAL SYSTEM",
-      title: "Selected Architectural Mediums",
-      coordinates: "MATERIAL LIBRARY / RAW STOCK"
+      label: '04 / MATERIAL SYSTEM',
+      title: 'Selected Architectural Mediums',
+      coordinates: 'MATERIAL LIBRARY / RAW STOCK',
     } as SectionHeader,
     items: [
       {
-        id: "patinated-copper",
-        name: "Patinated Copper",
-        finish: "Acid Etched / Heat Patinated",
-        thicknessRange: "2.0mm - 4.0mm",
-        description: "Creates a living finish that deepens in color when exposed to Ahmedabad's seasonal monsoon cycles, forming a protective natural oxide barrier.",
-        suitability: "Heritage facade elements and premium entrance columns."
+        id: 'patinated-copper',
+        name: 'Patinated Copper',
+        finish: 'Acid Etched / Heat Patinated',
+        thicknessRange: '2.0mm - 4.0mm',
+        description:
+          "Creates a living finish that deepens in color when exposed to Ahmedabad's seasonal monsoon cycles, forming a protective natural oxide barrier.",
+        suitability: 'Heritage facade elements and premium entrance columns.',
       },
       {
-        id: "marine-stainless",
-        name: "316 Stainless Steel",
-        finish: "Bead Blasted / Directional Satin",
-        thicknessRange: "3.0mm - 6.0mm",
-        description: "Alloyed with molybdenum to resist pitting corrosion. Clean, light-deflecting surfaces that maintain visual structure under harsh sunlight.",
-        suitability: "High-exposure tower branding and exterior structural grids."
+        id: 'marine-stainless',
+        name: '316 Stainless Steel',
+        finish: 'Bead Blasted / Directional Satin',
+        thicknessRange: '3.0mm - 6.0mm',
+        description:
+          'Alloyed with molybdenum to resist pitting corrosion. Clean, light-deflecting surfaces that maintain visual structure under harsh sunlight.',
+        suitability: 'High-exposure tower branding and exterior structural grids.',
       },
       {
-        id: "cast-concrete",
-        name: "Ultra-High Performance Concrete",
-        finish: "Acid Washed / Formwork Textured",
-        thicknessRange: "50mm - 120mm",
-        description: "Reinforced with carbon microfibers for extreme tensile strength, creating monolithic signs integrated with building foundations.",
-        suitability: "Monolithic ground-level monoliths and civic markers."
-      }
-    ] as MaterialItem[]
+        id: 'cast-concrete',
+        name: 'Ultra-High Performance Concrete',
+        finish: 'Acid Washed / Formwork Textured',
+        thicknessRange: '50mm - 120mm',
+        description:
+          'Reinforced with carbon microfibers for extreme tensile strength, creating monolithic signs integrated with building foundations.',
+        suitability: 'Monolithic ground-level monoliths and civic markers.',
+      },
+    ] as MaterialItem[],
   },
 
   process: {
     header: {
-      label: "05 / EXECUTION METHOD",
-      title: "Sequence of Delivery",
-      coordinates: "WORKFLOW STANDARDS / ISO 9001"
+      label: '05 / EXECUTION METHOD',
+      title: 'Sequence of Delivery',
+      coordinates: 'WORKFLOW STANDARDS / ISO 9001',
     } as SectionHeader,
     stages: [
       {
-        step: "05.1",
-        title: "Technical Review & Drafting",
-        duration: "Weeks 1 - 3",
-        description: "We audit structural plans and draw complete cross-sections of the identity element, verifying building facade load points and typography kerning.",
-        deliverables: ["Shop Drawings", "3D Finite Element Analysis", "Material Samples"]
+        step: '05.1',
+        title: 'Technical Review & Drafting',
+        duration: 'Weeks 1 - 3',
+        description:
+          'We audit structural plans and draw complete cross-sections of the identity element, verifying building facade load points and typography kerning.',
+        deliverables: ['Shop Drawings', '3D Finite Element Analysis', 'Material Samples'],
       },
       {
-        step: "05.2",
-        title: "Prototype & Patination Test",
-        duration: "Weeks 4 - 6",
-        description: "We produce 1:1 scale physical prototypes of critical letters and connections, exposing them to patination tests to verify visual tone.",
-        deliverables: ["1:1 Metal Mockups", "Illumination Lux Reports", "Corrosion Chamber Reports"]
+        step: '05.2',
+        title: 'Prototype & Patination Test',
+        duration: 'Weeks 4 - 6',
+        description:
+          'We produce 1:1 scale physical prototypes of critical letters and connections, exposing them to patination tests to verify visual tone.',
+        deliverables: [
+          '1:1 Metal Mockups',
+          'Illumination Lux Reports',
+          'Corrosion Chamber Reports',
+        ],
       },
       {
-        step: "05.3",
-        title: "Structural Fabrication",
-        duration: "Weeks 7 - 12",
-        description: "CNC profiling, structural welding, and finishing. Substructures are hot-dip galvanized and coated for maximum lifespan.",
-        deliverables: ["Galvanization Certificates", "Mill Test Reports", "QA Dimension Logs"]
+        step: '05.3',
+        title: 'Structural Fabrication',
+        duration: 'Weeks 7 - 12',
+        description:
+          'CNC profiling, structural welding, and finishing. Substructures are hot-dip galvanized and coated for maximum lifespan.',
+        deliverables: ['Galvanization Certificates', 'Mill Test Reports', 'QA Dimension Logs'],
       },
       {
-        step: "05.4",
-        title: "Structural Anchoring & Rigging",
-        duration: "Weeks 13 - 15",
-        description: "Our certified rigging team secures the identity structures. Mechanical fastenings are dual-locked to isolate metal contact.",
-        deliverables: ["Structural Engineering Sign-off", "Electrical Integration Report", "Maintenance Ledger"]
-      }
-    ] as ProcessStage[]
+        step: '05.4',
+        title: 'Structural Anchoring & Rigging',
+        duration: 'Weeks 13 - 15',
+        description:
+          'Our certified rigging team secures the identity structures. Mechanical fastenings are dual-locked to isolate metal contact.',
+        deliverables: [
+          'Structural Engineering Sign-off',
+          'Electrical Integration Report',
+          'Maintenance Ledger',
+        ],
+      },
+    ] as ProcessStage[],
   },
 
   industries: {
     header: {
-      label: "06 / ARCHITECTURAL ARCHETYPES",
-      title: "Contexts We Design For",
-      coordinates: "SECTOR ARCHIVE / SYSTEMS"
+      label: '06 / ARCHITECTURAL ARCHETYPES',
+      title: 'Contexts We Design For',
+      coordinates: 'SECTOR ARCHIVE / SYSTEMS',
     } as SectionHeader,
     sectors: [
       {
-        id: "civic-culture",
-        title: "Civic & Cultural Landmarks",
-        description: "Monolithic, permanent scale. Designed in conjunction with public spaces, incorporating local stone, cast concrete, and deeply patinated bronze to fit historical landscapes.",
-        elevationLimit: "Unrestricted"
+        id: 'civic-culture',
+        title: 'Civic & Cultural Landmarks',
+        description:
+          'Monolithic, permanent scale. Designed in conjunction with public spaces, incorporating local stone, cast concrete, and deeply patinated bronze to fit historical landscapes.',
+        elevationLimit: 'Unrestricted',
       },
       {
-        id: "corporate-hq",
-        title: "Corporate Headquarters",
-        description: "Meticulous corporate identity displays that align with curtain-wall glass and architectural steel grids. Focus on precision lettering, internal light paths, and structural integration.",
-        elevationLimit: "Tower Top Standard"
+        id: 'corporate-hq',
+        title: 'Corporate Headquarters',
+        description:
+          'Meticulous corporate identity displays that align with curtain-wall glass and architectural steel grids. Focus on precision lettering, internal light paths, and structural integration.',
+        elevationLimit: 'Tower Top Standard',
       },
       {
-        id: "hospitality-retail",
-        title: "Premium Hospitality & Facades",
-        description: "Refined tactile detailing using high-finish alloys and indirect lighting. We construct entrance portals that act as the interface between the streetscape and the interior design.",
-        elevationLimit: "Ground & Podium Level"
-      }
-    ] as IndustrySector[]
+        id: 'hospitality-retail',
+        title: 'Premium Hospitality & Facades',
+        description:
+          'Refined tactile detailing using high-finish alloys and indirect lighting. We construct entrance portals that act as the interface between the streetscape and the interior design.',
+        elevationLimit: 'Ground & Podium Level',
+      },
+    ] as IndustrySector[],
   },
 
   trust: {
     header: {
-      label: "07 / STANDARDS & VERIFICATION",
-      title: "Engineered Without Compromise",
-      coordinates: "CERTIFICATION REGISTER"
+      label: '07 / STANDARDS & VERIFICATION',
+      title: 'Engineered Without Compromise',
+      coordinates: 'CERTIFICATION REGISTER',
     } as SectionHeader,
     points: [
-      { title: "Typographic Fidelity", text: "We respect visual spacing. We never skew or force typography to fit spaces; instead, we re-engineer structural details to retain typographic integrity." },
-      { title: "No Galvanic Corrosion", text: "We use neoprene isolators between stainless steel and zinc-coated elements. No metallic transfer, no rust bleeds on your building's facade." },
-      { title: "Double-Redundant Anchors", text: "All overhead structures use double-redundant physical locks, calculated to exceed regional seismic load standards." }
-    ]
+      {
+        title: 'Typographic Fidelity',
+        text: 'We respect visual spacing. We never skew or force typography to fit spaces; instead, we re-engineer structural details to retain typographic integrity.',
+      },
+      {
+        title: 'No Galvanic Corrosion',
+        text: "We use neoprene isolators between stainless steel and zinc-coated elements. No metallic transfer, no rust bleeds on your building's facade.",
+      },
+      {
+        title: 'Double-Redundant Anchors',
+        text: 'All overhead structures use double-redundant physical locks, calculated to exceed regional seismic load standards.',
+      },
+    ],
   },
 
   quoteBuilder: {
     header: {
-      label: "08 / CONFIGURATOR",
-      title: "Structural Parameter Estimator",
-      coordinates: "ONLINE SPECIFICATION SHEET"
+      label: '08 / CONFIGURATOR',
+      title: 'Structural Parameter Estimator',
+      coordinates: 'ONLINE SPECIFICATION SHEET',
     } as SectionHeader,
     steps: [
       {
-        id: "material",
-        title: "1. Select Structural Alloy",
-        description: "Materials define physical permanence and weathering performance.",
+        id: 'material',
+        title: '1. Select Structural Alloy',
+        description: 'Materials define physical permanence and weathering performance.',
         options: [
-          { label: "Patinated Copper (Grade C101)", value: "copper", description: "Develops natural oxide patina" },
-          { label: "Marine Stainless (Grade 316)", value: "stainless", description: "Maximum corrosion resistance" },
-          { label: "Architectural Bronze (Alloy 385)", value: "bronze", description: "Deep golden-brown luster" },
-          { label: "Brushed Aluminum (Grade 6061)", value: "aluminum", description: "Lightweight structural metal" }
-        ]
+          {
+            label: 'Patinated Copper (Grade C101)',
+            value: 'copper',
+            description: 'Develops natural oxide patina',
+          },
+          {
+            label: 'Marine Stainless (Grade 316)',
+            value: 'stainless',
+            description: 'Maximum corrosion resistance',
+          },
+          {
+            label: 'Architectural Bronze (Alloy 385)',
+            value: 'bronze',
+            description: 'Deep golden-brown luster',
+          },
+          {
+            label: 'Brushed Aluminum (Grade 6061)',
+            value: 'aluminum',
+            description: 'Lightweight structural metal',
+          },
+        ],
       },
       {
-        id: "scale",
-        title: "2. Scope of Installation",
-        description: "Physical boundaries dictate rigging and wind structural calculation needs.",
+        id: 'scale',
+        title: '2. Scope of Installation',
+        description: 'Physical boundaries dictate rigging and wind structural calculation needs.',
         options: [
-          { label: "Monolithic Ground Monument", value: "ground", description: "Integrated with concrete foundations" },
-          { label: "Curtain-Wall Facade Identity", value: "facade", description: "Requires structural facade engineering" },
-          { label: "High-Rise Tower Branding", value: "tower", description: "Requires heavy wind and rigging analysis" }
-        ]
+          {
+            label: 'Monolithic Ground Monument',
+            value: 'ground',
+            description: 'Integrated with concrete foundations',
+          },
+          {
+            label: 'Curtain-Wall Facade Identity',
+            value: 'facade',
+            description: 'Requires structural facade engineering',
+          },
+          {
+            label: 'High-Rise Tower Branding',
+            value: 'tower',
+            description: 'Requires heavy wind and rigging analysis',
+          },
+        ],
       },
       {
-        id: "illumination",
-        title: "3. Illumination Dynamics",
-        description: "Specify integration with electrical layouts.",
+        id: 'illumination',
+        title: '3. Illumination Dynamics',
+        description: 'Specify integration with electrical layouts.',
         options: [
-          { label: "Non-Illuminated (Reflective Contrast)", value: "none", description: "Relying on natural light angles" },
-          { label: "Indirect Halo Illumination (Warm LED)", value: "halo", description: "Reflected off the architectural surface" },
-          { label: "Internal Channel Projection (Direct)", value: "internal", description: "Diffused through acrylic or quartz glass" }
-        ]
-      }
-    ] as QuoteStep[]
+          {
+            label: 'Non-Illuminated (Reflective Contrast)',
+            value: 'none',
+            description: 'Relying on natural light angles',
+          },
+          {
+            label: 'Indirect Halo Illumination (Warm LED)',
+            value: 'halo',
+            description: 'Reflected off the architectural surface',
+          },
+          {
+            label: 'Internal Channel Projection (Direct)',
+            value: 'internal',
+            description: 'Diffused through acrylic or quartz glass',
+          },
+        ],
+      },
+    ] as QuoteStep[],
   },
 
   contactCta: {
-    label: "09 / CONSULTATION",
-    title: "Incorporate Identity into Your Architectural Plan",
-    description: "Connect with our engineering office in Ahmedabad to discuss structural requirements, load distributions, and material specifications for your project.",
-    actionLabel: "Initiate Technical Briefing"
+    label: '09 / CONSULTATION',
+    title: 'Incorporate Identity into Your Architectural Plan',
+    description:
+      'Connect with our engineering office in Ahmedabad to discuss structural requirements, load distributions, and material specifications for your project.',
+    actionLabel: 'Initiate Technical Briefing',
   },
 
   featuredProjects: {
     header: {
-      eyebrow: "OUR WORK",
-      heading: "Selected Projects That Define Visibility.",
-      subheading: "Every project is an opportunity to transform a space and strengthen a brand. As a leading sign board manufacturer Ahmedabad, we design and deliver custom signage Nikol Ahmedabad projects and premium signage solutions. Proudly serving Ahmedabad and businesses across Gujarat and India."
+      eyebrow: 'OUR WORK',
+      heading: 'Selected Projects That Define Visibility.',
+      subheading:
+        'Every project is an opportunity to transform a space and strengthen a brand. As a leading sign board manufacturer Ahmedabad, we design and deliver custom signage Nikol Ahmedabad projects and premium signage solutions. Proudly serving Ahmedabad and businesses across Gujarat and India.',
     },
     items: [
       {
-        id: "infra-corp-installation",
-        category: "ACP Facade & Corporate Signage",
-        project: "INFRA CORP Headquarters",
-        location: "Ahmedabad, Gujarat",
-        description: "A monumental exterior building facade cladding and high-impact corporate branding system. This landmark ACP board and corporate signage installation was fabricated to withstand wind loads while displaying a crisp, professional brand identity.",
-        buttonText: "View Project →",
-        imagePath: "/assets/images/projects/infra-corp.png",
-        client: "INFRA CORP India",
-        dimensions: "12.0m x 3.5m",
-        materials: "Weatherproof ACP Cladding, Premium SS 316 Letters, LED Backlit Systems",
-        engineering: "Reinforced architectural steel sub-frame engineered to resist local wind gusts up to 150 km/h."
+        id: 'infra-corp-installation',
+        category: 'ACP Facade & Corporate Signage',
+        project: 'INFRA CORP Headquarters',
+        location: 'Ahmedabad, Gujarat',
+        description:
+          'A monumental exterior building facade cladding and high-impact corporate branding system. This landmark ACP board and corporate signage installation was fabricated to withstand wind loads while displaying a crisp, professional brand identity.',
+        buttonText: 'View Project →',
+        imagePath: '/assets/images/projects/infra-corp.png',
+        client: 'INFRA CORP India',
+        dimensions: '12.0m x 3.5m',
+        materials: 'Weatherproof ACP Cladding, Premium SS 316 Letters, LED Backlit Systems',
+        engineering:
+          'Reinforced architectural steel sub-frame engineered to resist local wind gusts up to 150 km/h.',
       },
       {
-        id: "gold-letter-signage",
-        category: "3D Acrylic & Gold Letter Signage",
-        project: "The Gold Palace Showroom",
-        location: "Nikol, Ahmedabad",
-        description: "Elegant 3D acrylic letters with custom gold-titanium finish for a luxury retail storefront. Featuring warm-white halo LED lighting that adds depth and prestige to the storefront entrance.",
-        buttonText: "View Project →",
-        imagePath: "/assets/images/projects/gold-palace.png",
-        client: "The Gold Palace",
-        dimensions: "4.8m x 1.2m",
-        materials: "Gold Titanium Stainless Steel, High-Density Acrylic, Warm LED Halo Modules",
-        engineering: "Blind-pin offset anchoring set into stone facade with neoprene vibration isolation sleeves."
+        id: 'gold-letter-signage',
+        category: '3D Acrylic & Gold Letter Signage',
+        project: 'The Gold Palace Showroom',
+        location: 'Nikol, Ahmedabad',
+        description:
+          'Elegant 3D acrylic letters with custom gold-titanium finish for a luxury retail storefront. Featuring warm-white halo LED lighting that adds depth and prestige to the storefront entrance.',
+        buttonText: 'View Project →',
+        imagePath: '/assets/images/projects/gold-palace.png',
+        client: 'The Gold Palace',
+        dimensions: '4.8m x 1.2m',
+        materials: 'Gold Titanium Stainless Steel, High-Density Acrylic, Warm LED Halo Modules',
+        engineering:
+          'Blind-pin offset anchoring set into stone facade with neoprene vibration isolation sleeves.',
       },
       {
-        id: "custom-neon-signage",
-        category: "Custom Neon Signage",
-        project: "Glow & Co. Creative Studio",
-        location: "Ahmedabad, Gujarat",
-        description: "Vibrant custom neon sign board custom design Ahmedabad styled for creative indoor visibility. Precision flex-neon layout designed to showcase brand typography with high visual impact.",
-        buttonText: "View Project →",
-        imagePath: "/assets/images/projects/creative-neon.png",
-        client: "Glow & Co.",
-        dimensions: "2.2m x 1.0m",
-        materials: "Flexible Silicone Neon, Clear Acrylic Backing, Dynamic LED Controllers",
-        engineering: "Addressable LED wiring hidden within a double-layer CNC-routed backing panel."
+        id: 'custom-neon-signage',
+        category: 'Custom Neon Signage',
+        project: 'Glow & Co. Creative Studio',
+        location: 'Ahmedabad, Gujarat',
+        description:
+          'Vibrant custom neon sign board custom design Ahmedabad styled for creative indoor visibility. Precision flex-neon layout designed to showcase brand typography with high visual impact.',
+        buttonText: 'View Project →',
+        imagePath: '/assets/images/projects/creative-neon.png',
+        client: 'Glow & Co.',
+        dimensions: '2.2m x 1.0m',
+        materials: 'Flexible Silicone Neon, Clear Acrylic Backing, Dynamic LED Controllers',
+        engineering:
+          'Addressable LED wiring hidden within a double-layer CNC-routed backing panel.',
       },
       {
-        id: "acp-board-installation",
-        category: "LED Glow Sign Board",
-        project: "Apex Commercial Hub",
-        location: "Ahmedabad, Gujarat",
-        description: "A premium ACP sign board Ahmedabad installation featuring laser-cut acrylic 3D letters and under-lit lighting. Engineered for 24/7 visibility and absolute durability under intense weather conditions.",
-        buttonText: "View Project →",
-        imagePath: "/assets/images/projects/apex-acp.png",
-        client: "Apex Properties",
-        dimensions: "6.0m x 1.8m",
-        materials: "Architectural Grade ACP, Laser Profile Acrylic, High-Output LED Modules",
-        engineering: "Sub-surface wiring routing with dual-redundant power supplies and automatic dusk-to-dawn sensors."
-      }
+        id: 'acp-board-installation',
+        category: 'LED Glow Sign Board',
+        project: 'Apex Commercial Hub',
+        location: 'Ahmedabad, Gujarat',
+        description:
+          'A premium ACP sign board Ahmedabad installation featuring laser-cut acrylic 3D letters and under-lit lighting. Engineered for 24/7 visibility and absolute durability under intense weather conditions.',
+        buttonText: 'View Project →',
+        imagePath: '/assets/images/projects/apex-acp.png',
+        client: 'Apex Properties',
+        dimensions: '6.0m x 1.8m',
+        materials: 'Architectural Grade ACP, Laser Profile Acrylic, High-Output LED Modules',
+        engineering:
+          'Sub-surface wiring routing with dual-redundant power supplies and automatic dusk-to-dawn sensors.',
+      },
     ],
     cta: {
-      heading: "Have a project in mind?",
-      description: "Let's create signage that transforms your space and makes your brand impossible to ignore.",
-      buttonLabel: "View All Projects →",
-      buttonLink: "/projects"
+      heading: 'Have a project in mind?',
+      description:
+        "Let's create signage that transforms your space and makes your brand impossible to ignore.",
+      buttonLabel: 'View All Projects →',
+      buttonLink: '/gallery',
     },
     stats: [
-      { value: "100+", label: "Projects Delivered" },
-      { value: "5+", label: "Cities Served" },
-      { value: "Pan India", label: "Service Footprint" }
-    ]
-  }
+      { value: '100+', label: 'Projects Delivered' },
+      { value: '5+', label: 'Cities Served' },
+      { value: 'Pan India', label: 'Service Footprint' },
+    ],
+  },
 };

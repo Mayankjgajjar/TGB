@@ -23,12 +23,12 @@ export const ScrollToHash: React.FC<ScrollToHashProps> = ({ lenis }) => {
     // Hash navigation handler for Home page sections
     if (location.hash) {
       const id = location.hash.replace('#', '');
-      
+
       let attempts = 0;
       const interval = setInterval(() => {
         const element = document.getElementById(id);
         attempts++;
-        
+
         if (element) {
           clearInterval(interval);
           if (lenis) {
@@ -45,7 +45,7 @@ export const ScrollToHash: React.FC<ScrollToHashProps> = ({ lenis }) => {
           clearInterval(interval);
         }
       }, 50);
-      
+
       return () => clearInterval(interval);
     } else {
       // If pathname is '/' but no hash, scroll to top

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
+import ContactCTA from '../components/sections/ContactCTA';
 import { servicesData } from '../content/services';
 import { projectsContent } from '../content/projects';
 import styles from './ServiceDetail.module.css';
@@ -23,7 +24,9 @@ export const ServiceDetail: React.FC = () => {
           .replace('signs', '')
           .replace('letters', '')
           .trim();
-        return p.category.toLowerCase().includes(term) || p.description.toLowerCase().includes(term);
+        return (
+          p.category.toLowerCase().includes(term) || p.description.toLowerCase().includes(term)
+        );
       })
     : [];
 
@@ -38,7 +41,9 @@ export const ServiceDetail: React.FC = () => {
           <Link to="/services" className={styles.backLink}>
             <ArrowLeft size={14} /> Back to Services
           </Link>
-          <div style={{ textAlign: 'center', padding: '96px 0', color: 'var(--color-white-muted)' }}>
+          <div
+            style={{ textAlign: 'center', padding: '96px 0', color: 'var(--color-white-muted)' }}
+          >
             <h1 className={styles.title}>Service Not Found</h1>
             <p style={{ marginTop: '16px', fontFamily: 'var(--font-primary)' }}>
               The signage service you are looking for does not exist or has been moved.
@@ -59,10 +64,26 @@ export const ServiceDetail: React.FC = () => {
     >
       <Container>
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px', fontFamily: 'var(--font-technical)', fontSize: '0.6875rem', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.35)' }}>
-          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</Link>
+        <nav
+          aria-label="Breadcrumb"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            marginBottom: '32px',
+            fontFamily: 'var(--font-technical)',
+            fontSize: '0.6875rem',
+            letterSpacing: '0.08em',
+            color: 'rgba(255,255,255,0.35)',
+          }}
+        >
+          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
+            Home
+          </Link>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
-          <Link to="/services" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Services</Link>
+          <Link to="/services" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
+            Services
+          </Link>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
           <span style={{ color: 'rgba(255,255,255,0.6)' }}>{service.name}</span>
         </nav>
@@ -76,8 +97,8 @@ export const ServiceDetail: React.FC = () => {
 
         {/* Cover Hero Image */}
         <div className={styles.imageWrapper}>
-          <img 
-            src={service.heroImage} 
+          <img
+            src={service.heroImage}
             alt={`${service.name} fabrication details - TGB Enterprise Ahmedabad`}
             className={styles.image}
           />
@@ -86,10 +107,8 @@ export const ServiceDetail: React.FC = () => {
 
         {/* 2-Column Details Split Grid */}
         <div className={styles.grid}>
-          
           {/* Left Column: Descriptions, Delivery Process, FAQs */}
           <div className={styles.descriptionCol}>
-            
             {/* Overview */}
             <div className={styles.sectionBlock}>
               <h2 className={styles.sectionTitle}>Service Overview</h2>
@@ -132,44 +151,115 @@ export const ServiceDetail: React.FC = () => {
             </div>
 
             {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
-            <div className={styles.sectionBlock} style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '24px', marginTop: '32px' }}>
+            <div
+              className={styles.sectionBlock}
+              style={{
+                borderTop: '1px solid rgba(255,255,255,0.05)',
+                paddingTop: '24px',
+                marginTop: '32px',
+              }}
+            >
               <h3 className={styles.sectionTitle}>Engineering &amp; Fabrication Standards</h3>
-              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
-                At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict structural and electrical safety codes. Every {service.name} is fabricated using state-of-the-art computer-controlled routers (CNC) and high-precision laser profiling machines to ensure exact alignment with design blueprints. We utilize premium architectural-grade materials (such as aluminum, structural acrylics, and stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or warping under severe weather conditions.
+              <p
+                className={styles.description}
+                style={{
+                  fontSize: '13px',
+                  lineHeight: '1.6',
+                  color: 'rgba(255,255,255,0.5)',
+                  marginBottom: '12px',
+                }}
+              >
+                At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict
+                structural and electrical safety codes. Every {service.name} is fabricated using
+                state-of-the-art computer-controlled routers (CNC) and high-precision laser
+                profiling machines to ensure exact alignment with design blueprints. We utilize
+                premium architectural-grade materials (such as aluminum, structural acrylics, and
+                stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or
+                warping under severe weather conditions.
               </p>
-              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}>
-                Our LED assemblies are powered by industry-leading transformers (Meanwell) and energy-efficient IP67 weather-sealed modules, providing consistent luminous intensity with no visible hot-spots. Our certified installation crew manages structural mounting, anchor point calculation, and grid wiring, ensuring safety compliance for high-rise commercial facades and local retail zones across Ahmedabad, Gujarat, and broader India.
+              <p
+                className={styles.description}
+                style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}
+              >
+                Our LED assemblies are powered by industry-leading transformers (Meanwell) and
+                energy-efficient IP67 weather-sealed modules, providing consistent luminous
+                intensity with no visible hot-spots. Our certified installation crew manages
+                structural mounting, anchor point calculation, and grid wiring, ensuring safety
+                compliance for high-rise commercial facades and local retail zones across Ahmedabad,
+                Gujarat, and broader India.
               </p>
             </div>
-
           </div>
 
           {/* Right Column: Specifications, Capabilities, Pricing */}
           <div className={styles.specsCol}>
-            
             {/* Technical Specifications */}
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Technical Specifications</span>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
+              <div
+                style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    paddingBottom: '8px',
+                  }}
+                >
                   <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Scale Range</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>{service.specifications.dimensions}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                    {service.specifications.dimensions}
+                  </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    paddingBottom: '8px',
+                  }}
+                >
                   <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Weathering</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>{service.specifications.weatherResistance}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                    {service.specifications.weatherResistance}
+                  </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    paddingBottom: '8px',
+                  }}
+                >
                   <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Warranty</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>{service.specifications.warranty}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                    {service.specifications.warranty}
+                  </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.04)', paddingBottom: '8px' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Certifications</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>{service.specifications.certifications}</span>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    paddingBottom: '8px',
+                  }}
+                >
+                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>
+                    Certifications
+                  </span>
+                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                    {service.specifications.certifications}
+                  </span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '4px' }}>
+                <div
+                  style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '4px' }}
+                >
                   <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Maintenance</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>{service.specifications.maintenance}</span>
+                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                    {service.specifications.maintenance}
+                  </span>
                 </div>
               </div>
             </div>
@@ -177,30 +267,63 @@ export const ServiceDetail: React.FC = () => {
             {/* Capabilities */}
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Manufacturing Capabilities</span>
-              
+
               <div style={{ marginTop: '16px' }}>
-                <span style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase' }}>Materials</span>
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: 'var(--color-steel)',
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Materials
+                </span>
                 <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
                   {service.capabilities.materials.map((item, idx) => (
-                    <span key={idx} className={styles.chip}>{item}</span>
+                    <span key={idx} className={styles.chip}>
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
 
               <div style={{ marginTop: '16px' }}>
-                <span style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase' }}>Technology</span>
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: 'var(--color-steel)',
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Technology
+                </span>
                 <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
                   {service.capabilities.technology.map((item, idx) => (
-                    <span key={idx} className={styles.chip}>{item}</span>
+                    <span key={idx} className={styles.chip}>
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
 
               <div style={{ marginTop: '16px' }}>
-                <span style={{ fontSize: '10px', color: 'var(--color-steel)', letterSpacing: '1px', textTransform: 'uppercase' }}>Finishes</span>
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: 'var(--color-steel)',
+                    letterSpacing: '1px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  Finishes
+                </span>
                 <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
                   {service.capabilities.finishes.map((item, idx) => (
-                    <span key={idx} className={styles.chip}>{item}</span>
+                    <span key={idx} className={styles.chip}>
+                      {item}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -211,7 +334,9 @@ export const ServiceDetail: React.FC = () => {
               <span className={styles.specLabel}>Primary Applications</span>
               <div className={styles.chipGrid} style={{ marginTop: '12px' }}>
                 {service.industriesServed.map((ind, idx) => (
-                  <span key={idx} className={styles.chip}>{ind}</span>
+                  <span key={idx} className={styles.chip}>
+                    {ind}
+                  </span>
                 ))}
               </div>
             </div>
@@ -219,9 +344,23 @@ export const ServiceDetail: React.FC = () => {
             {/* Pricing Estimates */}
             <div className={styles.specItem}>
               <span className={styles.priceLabel}>Estimated Pricing</span>
-              <div style={{ marginTop: '8px', display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
+              <div
+                style={{
+                  marginTop: '8px',
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  gap: '8px',
+                  flexWrap: 'wrap',
+                }}
+              >
                 <span className={styles.priceAmount}>{service.pricing.startingFrom}</span>
-                <span style={{ fontSize: '12px', color: 'var(--color-steel)', fontFamily: 'var(--font-technical)' }}>
+                <span
+                  style={{
+                    fontSize: '12px',
+                    color: 'var(--color-steel)',
+                    fontFamily: 'var(--font-technical)',
+                  }}
+                >
                   ({service.pricing.taxNote})
                 </span>
               </div>
@@ -231,8 +370,8 @@ export const ServiceDetail: React.FC = () => {
                 ))}
               </ul>
               <div style={{ marginTop: '24px' }}>
-                <Link 
-                  to="/contact" 
+                <Link
+                  to="/contact"
                   className={styles.backLink}
                   style={{
                     background: 'var(--color-red)',
@@ -250,33 +389,71 @@ export const ServiceDetail: React.FC = () => {
                     textDecoration: 'none',
                     margin: 0,
                     textAlign: 'center',
-                    transition: 'background var(--transition-fast)'
+                    transition: 'background var(--transition-fast)',
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-red-hover)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'var(--color-red)'}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background = 'var(--color-red-hover)')
+                  }
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-red)')}
                 >
                   Request A Quotation
                 </Link>
               </div>
             </div>
-
           </div>
-
         </div>
 
         {/* Related Work & Services Footer Section */}
-        <div style={{ marginTop: '72px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '56px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
-            
+        <div
+          style={{
+            marginTop: '72px',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            paddingTop: '56px',
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '40px',
+            }}
+          >
             {/* Column 1: Other Services */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 400, color: 'var(--color-off-white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '18px',
+                  fontWeight: 400,
+                  color: 'var(--color-off-white)',
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
                 Other Signage Solutions
               </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <ul
+                style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                }}
+              >
                 {otherServices.slice(0, 3).map((s) => (
                   <li key={s.slug}>
-                    <Link to={`/services/${s.slug}`} style={{ color: 'var(--color-copper)', textDecoration: 'none', fontSize: '14px', fontFamily: 'var(--font-primary)' }}>
+                    <Link
+                      to={`/services/${s.slug}`}
+                      style={{
+                        color: 'var(--color-copper)',
+                        textDecoration: 'none',
+                        fontSize: '14px',
+                        fontFamily: 'var(--font-primary)',
+                      }}
+                    >
                       {s.name} →
                     </Link>
                   </li>
@@ -286,30 +463,75 @@ export const ServiceDetail: React.FC = () => {
 
             {/* Column 2: Related Projects */}
             <div>
-              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 400, color: 'var(--color-off-white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '18px',
+                  fontWeight: 400,
+                  color: 'var(--color-off-white)',
+                  marginBottom: '16px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                }}
+              >
                 Completed Installations
               </h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {(relatedProjects.length > 0 ? relatedProjects : projectsContent.items).slice(0, 2).map((p) => (
-                  <li key={p.id}>
-                    <Link to={`/projects/${p.id}`} style={{ color: 'var(--color-copper)', textDecoration: 'none', fontSize: '14px', fontFamily: 'var(--font-primary)' }}>
-                      {p.name} ({p.category}) →
-                    </Link>
-                  </li>
-                ))}
+              <ul
+                style={{
+                  listStyle: 'none',
+                  padding: 0,
+                  margin: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                }}
+              >
+                {(relatedProjects.length > 0 ? relatedProjects : projectsContent.items)
+                  .slice(0, 2)
+                  .map((p) => (
+                    <li key={p.id}>
+                      <Link
+                        to={`/projects/${p.id}`}
+                        style={{
+                          color: 'var(--color-copper)',
+                          textDecoration: 'none',
+                          fontSize: '14px',
+                          fontFamily: 'var(--font-primary)',
+                        }}
+                      >
+                        {p.name} ({p.category}) →
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
-
           </div>
-          
-          <div style={{ marginTop: '48px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
-            <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>← Back to Home</Link>
-            <Link to="/projects" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>All Projects Portfolio</Link>
-            <Link to="/services" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Our Services</Link>
+
+          <div
+            style={{ marginTop: '48px', display: 'flex', gap: '20px', justifyContent: 'center' }}
+          >
+            <Link
+              to="/"
+              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+            >
+              ← Back to Home
+            </Link>
+            <Link
+              to="/gallery"
+              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+            >
+              Project Gallery
+            </Link>
+            <Link
+              to="/services"
+              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
+            >
+              Our Services
+            </Link>
           </div>
         </div>
-
       </Container>
+      <ContactCTA />
     </motion.div>
   );
 };

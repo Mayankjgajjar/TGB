@@ -20,22 +20,36 @@ export const Grid: React.FC<GridProps> = ({
   blueprintLines = false,
   as: Component = 'div',
 }) => {
-  const colClass = 
-    cols === 2 ? styles.cols2 :
-    cols === 3 ? styles.cols3 :
-    cols === 4 ? styles.cols4 :
-    cols === 12 ? styles.cols12 : '';
+  const colClass =
+    cols === 2
+      ? styles.cols2
+      : cols === 3
+        ? styles.cols3
+        : cols === 4
+          ? styles.cols4
+          : cols === 12
+            ? styles.cols12
+            : '';
 
-  const gapClass = 
-    gap === 'none' ? styles.gapNone :
-    gap === 'small' ? styles.gapSmall :
-    gap === 'large' ? styles.gapLarge :
-    gap === 'xlarge' ? styles.gapExtraLarge : '';
+  const gapClass =
+    gap === 'none'
+      ? styles.gapNone
+      : gap === 'small'
+        ? styles.gapSmall
+        : gap === 'large'
+          ? styles.gapLarge
+          : gap === 'xlarge'
+            ? styles.gapExtraLarge
+            : '';
 
-  const alignClass = 
-    align === 'center' ? styles.alignCenter :
-    align === 'start' ? styles.alignStart :
-    align === 'end' ? styles.alignEnd : styles.alignStretch;
+  const alignClass =
+    align === 'center'
+      ? styles.alignCenter
+      : align === 'start'
+        ? styles.alignStart
+        : align === 'end'
+          ? styles.alignEnd
+          : styles.alignStretch;
 
   const classes = [
     styles.grid,
@@ -43,13 +57,11 @@ export const Grid: React.FC<GridProps> = ({
     gapClass,
     alignClass,
     blueprintLines ? styles.blueprintGrid : '',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  return (
-    <Component className={classes}>
-      {children}
-    </Component>
-  );
+  return <Component className={classes}>{children}</Component>;
 };
 export default Grid;

@@ -4,7 +4,7 @@
    ============================================================ */
 
 .section {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgb(0 0 0 / 55%);
   padding: 64px 0;
   position: relative;
   overflow: hidden;
@@ -35,7 +35,7 @@
   display: block;
 }
 
-.heading {
+.mainTitle {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 300;
@@ -48,7 +48,7 @@
   text-align: center;
 }
 
-.subheading {
+.subtitle {
   font-family: var(--font-primary);
   font-size: 15px;
   color: var(--color-off-white-muted);
@@ -69,21 +69,24 @@
 /* ── Individual Card ── */
 .card {
   position: relative;
-  background: #0A0A0A;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a0a0a;
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 12px;
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: default;
-  transition: border-color 400ms cubic-bezier(0.2, 0, 0, 1), background-color 400ms cubic-bezier(0.2, 0, 0, 1), box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition:
+    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 400ms cubic-bezier(0.2, 0, 0, 1),
+    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #111111;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgb(255 255 255 / 20%);
+  background: #111;
+  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
 }
 
 /* ── Icon ── */
@@ -121,7 +124,7 @@
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(255 255 255 / 35%);
   margin-bottom: 12px;
   display: block;
 }
@@ -133,7 +136,7 @@
   font-weight: 400;
   line-height: 1.15;
   color: var(--color-off-white);
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
   letter-spacing: -0.01em;
 }
 
@@ -142,8 +145,8 @@
   font-family: var(--font-primary);
   font-size: 13px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0 0 28px 0;
+  color: rgb(255 255 255 / 45%);
+  margin: 0 0 28px;
   flex-grow: 1;
 }
 
@@ -154,9 +157,9 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 4px;
   display: flex;
   justify-content: center;
@@ -170,7 +173,7 @@
 
 .card:hover .cardTag {
   color: var(--color-off-white);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgb(255 255 255 / 30%);
 }
 
 /* ── Bottom Statement ── */
@@ -186,38 +189,43 @@
 }
 
 /* ── Responsive Viewports ── */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .section {
     padding: 48px 0 40px;
   }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+
   .inner {
     padding: 0 24px;
   }
+
   .headerBlock {
     margin-bottom: 40px;
   }
+
   .bottomStatement {
     font-size: 16px;
     padding: 0 12px;
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
+
   .heading {
     font-size: 1.8rem;
   }

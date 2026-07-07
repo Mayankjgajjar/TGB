@@ -7,11 +7,7 @@ interface SectionEyebrowProps {
 }
 
 export const SectionEyebrow: React.FC<SectionEyebrowProps> = ({ children, className = '' }) => {
-  return (
-    <span className={`${styles.sectionEyebrow} ${className}`}>
-      {children}
-    </span>
-  );
+  return <span className={`${styles.sectionEyebrow} ${className}`}>{children}</span>;
 };
 
 export default SectionEyebrow;

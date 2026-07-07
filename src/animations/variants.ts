@@ -7,14 +7,23 @@ export const EASE_EXPO = [0.16, 1, 0.3, 1];
  * Fade-in variants supporting directional slide-ins.
  * Uses hardware accelerated properties and clean spring/expo curves.
  */
-export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'none', delay = 0, duration = 0.8): Variants => {
+export const fadeIn = (
+  direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'none',
+  delay = 0,
+  duration = 0.8,
+): Variants => {
   const getOffset = () => {
     switch (direction) {
-      case 'up': return { y: 24, x: 0 };
-      case 'down': return { y: -24, x: 0 };
-      case 'left': return { x: 24, y: 0 };
-      case 'right': return { x: -24, y: 0 };
-      default: return { x: 0, y: 0 };
+      case 'up':
+        return { y: 24, x: 0 };
+      case 'down':
+        return { y: -24, x: 0 };
+      case 'left':
+        return { x: 24, y: 0 };
+      case 'right':
+        return { x: -24, y: 0 };
+      default:
+        return { x: 0, y: 0 };
     }
   };
 
@@ -23,7 +32,7 @@ export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'n
   return {
     hidden: {
       opacity: 0,
-      ...offset
+      ...offset,
     },
     visible: {
       opacity: 1,
@@ -32,9 +41,9 @@ export const fadeIn = (direction: 'up' | 'down' | 'left' | 'right' | 'none' = 'n
       transition: {
         duration,
         delay,
-        ease: EASE_EXPO
-      }
-    }
+        ease: EASE_EXPO,
+      },
+    },
   };
 };
 
@@ -48,9 +57,9 @@ export const staggerContainer = (staggerChildren = 0.1, delayChildren = 0): Vari
       opacity: 1,
       transition: {
         staggerChildren,
-        delayChildren
-      }
-    }
+        delayChildren,
+      },
+    },
   };
 };
 
@@ -62,16 +71,16 @@ export const lineDraw = (delay = 0, duration = 1.2): Variants => {
   return {
     hidden: {
       scaleX: 0,
-      transformOrigin: 'left'
+      transformOrigin: 'left',
     },
     visible: {
       scaleX: 1,
       transition: {
         duration,
         delay,
-        ease: EASE_EXPO
-      }
-    }
+        ease: EASE_EXPO,
+      },
+    },
   };
 };
 
@@ -79,16 +88,16 @@ export const lineDrawVertical = (delay = 0, duration = 1.2): Variants => {
   return {
     hidden: {
       scaleY: 0,
-      transformOrigin: 'top'
+      transformOrigin: 'top',
     },
     visible: {
       scaleY: 1,
       transition: {
         duration,
         delay,
-        ease: EASE_EXPO
-      }
-    }
+        ease: EASE_EXPO,
+      },
+    },
   };
 };
 
@@ -98,16 +107,16 @@ export const lineDrawVertical = (delay = 0, duration = 1.2): Variants => {
 export const clipReveal = (delay = 0, duration = 1.4): Variants => {
   return {
     hidden: {
-      clipPath: 'inset(100% 0% 0% 0%)'
+      clipPath: 'inset(100% 0% 0% 0%)',
     },
     visible: {
       clipPath: 'inset(0% 0% 0% 0%)',
       transition: {
         duration,
         delay,
-        ease: EASE_EXPO
-      }
-    }
+        ease: EASE_EXPO,
+      },
+    },
   };
 };
 
@@ -116,20 +125,20 @@ export const clipReveal = (delay = 0, duration = 1.4): Variants => {
  */
 export const pageTransition: Variants = {
   initial: {
-    opacity: 0
+    opacity: 0,
   },
   animate: {
     opacity: 1,
     transition: {
       duration: 0.6,
-      ease: EASE_EXPO
-    }
+      ease: EASE_EXPO,
+    },
   },
   exit: {
     opacity: 0,
     transition: {
       duration: 0.4,
-      ease: EASE_EXPO
-    }
-  }
+      ease: EASE_EXPO,
+    },
+  },
 };

@@ -12,10 +12,6 @@ export const Container: React.FC<ContainerProps> = ({
   className = '',
   as: Component = 'div',
 }) => {
-  return (
-    <Component className={`${styles.container} ${className}`}>
-      {children}
-    </Component>
-  );
+  return <Component className={`${styles.container} ${className}`}>{children}</Component>;
 };
 export default Container;

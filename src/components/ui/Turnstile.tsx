@@ -6,6 +6,8 @@ interface TurnstileProps {
   onError?: () => void;
 }
 
+let turnstileWarningShown = false;
+
 export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onError }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
@@ -13,7 +15,10 @@ export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onErro
   useEffect(() => {
     const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
     if (!siteKey) {
-      console.warn('VITE_TURNSTILE_SITE_KEY is not defined. CAPTCHA cannot render.');
+      if (!turnstileWarningShown) {
+        console.warn('VITE_TURNSTILE_SITE_KEY is not defined. CAPTCHA cannot render.');
+        turnstileWarningShown = true;
+      }
       return;
     }
 
@@ -85,7 +90,9 @@ export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onErro
     }
   }, [onVerify, onExpire, onError]);
 
-  return <div ref={containerRef} style={{ minHeight: 'auto', marginTop: '4px', marginBottom: '8px' }} />;
+  return (
+    <div ref={containerRef} style={{ minHeight: 'auto', marginTop: '4px', marginBottom: '8px' }} />
+  );
 };
 
 declare global {
@@ -99,7 +106,7 @@ declare global {
           'expired-callback'?: () => void;
           'error-callback'?: () => void;
           theme?: 'light' | 'dark' | 'auto';
-        }
+        },
       ) => string;
       remove: (widgetId: string) => void;
     };

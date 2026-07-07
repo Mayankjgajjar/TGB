@@ -35,14 +35,13 @@ export const Hero: React.FC = () => {
 
   return (
     <section ref={ref} className={styles.heroSection} aria-label="Hero">
-
       {/* Hero Content Container */}
       <div className={styles.contentContainer}>
         <Container>
           <motion.div
             className={styles.presentationPanel}
             initial="hidden"
-            animate={isRevealed ? "visible" : "hidden"}
+            animate={isRevealed ? 'visible' : 'hidden'}
             variants={textContainer}
           >
             <motion.h1 variants={fadeUp} className={styles.headline}>
@@ -59,21 +58,16 @@ export const Hero: React.FC = () => {
             </motion.span>
 
             <motion.div variants={fadeUp} className={styles.ctasRow}>
-              <Button
-                to="/services"
-                variant="primary"
-                size="large"
-                showTechnicalDot
-              >
+              <Button to="/services" variant="primary" size="large" showTechnicalDot>
                 {ctaLabel}
               </Button>
               <Button
-                to="/projects"
+                to="/gallery"
                 variant="secondary"
                 size="large"
                 icon={<ArrowUpRight size={14} />}
               >
-                View Projects
+                View Gallery
               </Button>
             </motion.div>
           </motion.div>

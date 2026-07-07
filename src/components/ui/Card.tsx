@@ -39,12 +39,7 @@ export const Card: React.FC<CardProps> = ({
     <>
       {image && (
         <div className={styles.imageWrapper}>
-          <img
-            src={image}
-            alt={imageAlt || title}
-            className={styles.image}
-            loading={loading}
-          />
+          <img src={image} alt={imageAlt || title} className={styles.image} loading={loading} />
           <div className={styles.imageOverlay} />
           {category && (
             <div className={styles.imageBadge}>
@@ -56,10 +51,8 @@ export const Card: React.FC<CardProps> = ({
       )}
 
       <div className={styles.cardContent}>
-        {!image && category && (
-          <span className={styles.categoryEyebrow}>{category}</span>
-        )}
-        
+        {!image && category && <span className={styles.categoryEyebrow}>{category}</span>}
+
         {!image && Icon && (
           <div className={styles.iconWrapper}>
             <Icon className={styles.icon} strokeWidth={1.25} />
@@ -67,23 +60,14 @@ export const Card: React.FC<CardProps> = ({
         )}
 
         <h3 className={styles.title}>{title}</h3>
-        
-        {description && (
-          <p className={styles.description}>
-            {description}
-          </p>
-        )}
 
-        {footerPill && (
-          <span className={styles.footerPill}>
-            {footerPill}
-          </span>
-        )}
+        {description && <p className={styles.description}>{description}</p>}
+
+        {footerPill && <span className={styles.footerPill}>{footerPill}</span>}
 
         {footerLinkText && (
           <div className={styles.footerLink}>
-            {footerLinkText}{' '}
-            <span className={styles.arrow}>→</span>
+            {footerLinkText} <span className={styles.arrow}>→</span>
           </div>
         )}
       </div>

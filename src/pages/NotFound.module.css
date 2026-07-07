@@ -18,7 +18,7 @@
   font-family: var(--font-display);
   font-size: clamp(6rem, 15vw, 12rem);
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.04);
+  color: rgb(255 255 255 / 4%);
   letter-spacing: 0.1em;
   line-height: 1;
   user-select: none;
@@ -64,7 +64,9 @@
   padding: 14px 28px;
   border-radius: var(--radius-sharp);
   text-decoration: none;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 .primaryBtn:hover {
@@ -86,7 +88,7 @@
   color: var(--color-off-white);
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .actions {
     flex-direction: column;
     gap: var(--space-16);

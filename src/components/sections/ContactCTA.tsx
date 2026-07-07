@@ -82,12 +82,7 @@ export const ContactCTA: React.FC<{
   title?: string;
   subtitle?: string;
   breadcrumbs?: { label: string; to?: string }[];
-}> = ({
-  eyebrow,
-  title,
-  subtitle,
-  breadcrumbs,
-}) => {
+}> = ({ eyebrow, title, subtitle, breadcrumbs }) => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
@@ -109,7 +104,7 @@ export const ContactCTA: React.FC<{
         setErrors((prev) => ({ ...prev, [field]: undefined }));
       }
     },
-    [errors]
+    [errors],
   );
 
   const handleBlur = useCallback(
@@ -120,7 +115,7 @@ export const ContactCTA: React.FC<{
       const fieldErrors = validateForm(formState);
       setErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
     },
-    [formState]
+    [formState],
   );
 
   const handleSubmit = useCallback(
@@ -134,7 +129,7 @@ export const ContactCTA: React.FC<{
         // Mark all fields as touched so errors are visible
         const allTouched = Object.keys(formState).reduce(
           (acc, key) => ({ ...acc, [key]: true }),
-          {} as Record<keyof FormFields, boolean>
+          {} as Record<keyof FormFields, boolean>,
         );
         setTouched(allTouched);
         return;
@@ -146,7 +141,7 @@ export const ContactCTA: React.FC<{
       }
 
       setIsSubmitting(true);
-      
+
       try {
         const response = await fetch('/api/contact', {
           method: 'POST',
@@ -181,12 +176,14 @@ export const ContactCTA: React.FC<{
         trackContactFormSubmit();
       } catch (error: any) {
         console.error('Error submitting contact form:', error);
-        setSubmitError(error.message || 'We encountered an issue submitting your inquiry. Please try again.');
+        setSubmitError(
+          error.message || 'We encountered an issue submitting your inquiry. Please try again.',
+        );
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formState, turnstileToken]
+    [formState, turnstileToken],
   );
 
   const handleReset = useCallback(() => {
@@ -211,21 +208,35 @@ export const ContactCTA: React.FC<{
   return (
     <section ref={ref} className={styles.section} id="contact">
       <div className={styles.container}>
-
         {/* ── Center Header Section ── */}
-        <motion.div 
+        <motion.div
           className={styles.sectionHeader}
           initial="hidden"
-          animate={isRevealed ? "visible" : "hidden"}
+          animate={isRevealed ? 'visible' : 'hidden'}
           variants={headerVariants}
         >
           {breadcrumbs && (
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '24px', fontFamily: 'var(--font-technical)', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-steel)' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                marginBottom: '24px',
+                fontFamily: 'var(--font-technical)',
+                fontSize: '11px',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                color: 'var(--color-steel)',
+              }}
+            >
               {breadcrumbs.map((crumb, idx) => (
                 <React.Fragment key={idx}>
                   {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
                   {crumb.to ? (
-                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>{crumb.label}</Link>
+                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>
+                      {crumb.label}
+                    </Link>
                   ) : (
                     <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
                   )}
@@ -233,20 +244,23 @@ export const ContactCTA: React.FC<{
               ))}
             </div>
           )}
-          <SectionEyebrow>{eyebrow || "GET IN TOUCH"}</SectionEyebrow>
-          <h2 className={styles.title}>{title || "Let's Create Signage That Defines Your Brand."}</h2>
+          <SectionEyebrow>{eyebrow || 'GET IN TOUCH'}</SectionEyebrow>
+          <h2 className={styles.title}>
+            {title || "Let's Create Signage That Defines Your Brand."}
+          </h2>
           <p className={styles.subheading}>
-            {subtitle || "Whether you're launching a new business, rebranding a storefront, or developing a commercial space, TGB Enterprise is ready to transform your vision into a signage solution that leaves a lasting impression."}
+            {subtitle ||
+              "Whether you're launching a new business, rebranding a storefront, or developing a commercial space, TGB Enterprise is ready to transform your vision into a signage solution that leaves a lasting impression."}
           </p>
         </motion.div>
 
         {/* ── Two-Column Layout ── */}
         <div className={styles.splitGrid}>
-
           {/* ── Left Column: Contact Form ── */}
           <div className={styles.formColumn}>
             <p className={styles.formIntro}>
-              Tell us about your project, ask a question, or request a consultation. Our team will get back to you as soon as possible.
+              Tell us about your project, ask a question, or request a consultation. Our team will
+              get back to you as soon as possible.
             </p>
 
             <AnimatePresence mode="wait">
@@ -260,7 +274,8 @@ export const ContactCTA: React.FC<{
                 >
                   <h3 className={styles.successTitle}>Thank You</h3>
                   <p className={styles.successDesc}>
-                    Your project inquiry has been received. One of our design engineers will contact you shortly to schedule your consultation.
+                    Your project inquiry has been received. One of our design engineers will contact
+                    you shortly to schedule your consultation.
                   </p>
                   <button onClick={handleReset} className={styles.resetButton}>
                     Send Another Inquiry
@@ -277,7 +292,9 @@ export const ContactCTA: React.FC<{
                   {/* Name Row */}
                   <div className={styles.formRow}>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="firstName" className={styles.fieldLabel}>First Name *</label>
+                      <label htmlFor="firstName" className={styles.fieldLabel}>
+                        First Name *
+                      </label>
                       <input
                         type="text"
                         id="firstName"
@@ -298,7 +315,9 @@ export const ContactCTA: React.FC<{
                       )}
                     </div>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="lastName" className={styles.fieldLabel}>Last Name *</label>
+                      <label htmlFor="lastName" className={styles.fieldLabel}>
+                        Last Name *
+                      </label>
                       <input
                         type="text"
                         id="lastName"
@@ -323,7 +342,9 @@ export const ContactCTA: React.FC<{
                   {/* Contact Info Row */}
                   <div className={styles.formRow}>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="phone" className={styles.fieldLabel}>Phone Number *</label>
+                      <label htmlFor="phone" className={styles.fieldLabel}>
+                        Phone Number *
+                      </label>
                       <input
                         type="tel"
                         id="phone"
@@ -344,7 +365,9 @@ export const ContactCTA: React.FC<{
                       )}
                     </div>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="email" className={styles.fieldLabel}>Email Address *</label>
+                      <label htmlFor="email" className={styles.fieldLabel}>
+                        Email Address *
+                      </label>
                       <input
                         type="email"
                         id="email"
@@ -369,7 +392,9 @@ export const ContactCTA: React.FC<{
                   {/* Company & Location Row */}
                   <div className={styles.formRow}>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="company" className={styles.fieldLabel}>Company Name</label>
+                      <label htmlFor="company" className={styles.fieldLabel}>
+                        Company Name
+                      </label>
                       <input
                         type="text"
                         id="company"
@@ -382,7 +407,9 @@ export const ContactCTA: React.FC<{
                       />
                     </div>
                     <div className={styles.inputGroup}>
-                      <label htmlFor="location" className={styles.fieldLabel}>Project Location</label>
+                      <label htmlFor="location" className={styles.fieldLabel}>
+                        Project Location
+                      </label>
                       <div className={styles.selectWrapper}>
                         <select
                           id="location"
@@ -409,7 +436,9 @@ export const ContactCTA: React.FC<{
 
                   {/* Signage Type Select */}
                   <div className={styles.inputGroup}>
-                    <label htmlFor="signageType" className={styles.fieldLabel}>Type of Signage</label>
+                    <label htmlFor="signageType" className={styles.fieldLabel}>
+                      Type of Signage
+                    </label>
                     <div className={styles.selectWrapper}>
                       <select
                         id="signageType"
@@ -418,7 +447,9 @@ export const ContactCTA: React.FC<{
                         onChange={handleInputChange}
                         className={styles.selectInput}
                       >
-                        <option value="" disabled>Select type of signage</option>
+                        <option value="" disabled>
+                          Select type of signage
+                        </option>
                         <option value="led">LED Sign Boards</option>
                         <option value="acp">ACP Sign Boards</option>
                         <option value="acrylic">Acrylic &amp; 3D Letter Signages</option>
@@ -434,7 +465,9 @@ export const ContactCTA: React.FC<{
 
                   {/* Message Input */}
                   <div className={styles.inputGroup}>
-                    <label htmlFor="message" className={styles.fieldLabel}>Tell Us About Your Project</label>
+                    <label htmlFor="message" className={styles.fieldLabel}>
+                      Tell Us About Your Project
+                    </label>
                     <textarea
                       id="message"
                       name="message"
@@ -460,12 +493,18 @@ export const ContactCTA: React.FC<{
                       aria-describedby={errors.consent ? 'consent-error' : undefined}
                     />
                     <label htmlFor="consent" className={styles.checkboxLabel}>
-                      I agree to TGB Enterprise collecting and using my information to respond to this enquiry, in accordance with the{' '}
-                      <Link to="/privacy">Privacy Policy</Link>.
+                      I agree to TGB Enterprise collecting and using my information to respond to
+                      this enquiry, in accordance with the <Link to="/privacy">Privacy Policy</Link>
+                      .
                     </label>
                   </div>
                   {touched.consent && errors.consent && (
-                    <span id="consent-error" className={styles.fieldError} style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }} role="alert">
+                    <span
+                      id="consent-error"
+                      className={styles.fieldError}
+                      style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }}
+                      role="alert"
+                    >
                       {errors.consent}
                     </span>
                   )}
@@ -536,26 +575,29 @@ export const ContactCTA: React.FC<{
 
             {/* Studio Info Details */}
             <div className={styles.infoDetailsList}>
-              <a
-                href="https://maps.app.goo.gl/Uo3hdVGb74ZTquZ69"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.infoLinkItem}
-              >
+              <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
                   <Building size={18} strokeWidth={2} />
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Office &amp; Studio</span>
                   <span className={styles.infoValue}>TGB Enterprise</span>
-                  <span className={styles.infoSubValue}>
-                    Shop No. 7/1, First Floor, Shukan Shopping Centre,<br />
-                    opp. Chanakya school, Sukan Cross Rd,<br />
-                    New India Colony, Nikol,<br />
+                  <a
+                    href="https://maps.app.goo.gl/Uo3hdVGb74ZTquZ69"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.infoLink}
+                  >
+                    Shop No. 7/1, First Floor, Shukan Shopping Centre,
+                    <br />
+                    opp. Chanakya school, Sukan Cross Rd,
+                    <br />
+                    New India Colony, Nikol,
+                    <br />
                     Ahmedabad, Gujarat 382345
-                  </span>
+                  </a>
                 </div>
-              </a>
+              </div>
 
               <div className={styles.infoItem}>
                 <div className={styles.infoIconWrapper}>
@@ -563,7 +605,9 @@ export const ContactCTA: React.FC<{
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Phone Inquiry Desk</span>
-                  <a href="tel:+919727136137" className={styles.infoLink}>+91 97271 36137</a>
+                  <a href="tel:+919727136137" className={styles.infoLink}>
+                    +91 97271 36137
+                  </a>
                 </div>
               </div>
 
@@ -603,7 +647,6 @@ export const ContactCTA: React.FC<{
               </div>
             </div>
           </div>
-
         </div>
 
         {/* ── Bottom Signature ── */}
@@ -611,7 +654,6 @@ export const ContactCTA: React.FC<{
           <h4 className={styles.signatureHeadline}>Built to be Seen.</h4>
           <p className={styles.signatureSub}>Let's build something remarkable together.</p>
         </div>
-
       </div>
     </section>
   );
