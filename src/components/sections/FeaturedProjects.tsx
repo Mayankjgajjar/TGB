@@ -10,7 +10,7 @@ import SectionEyebrow from '../ui/SectionEyebrow';
 
 
 export const FeaturedProjects: React.FC = () => {
-  const { header, cta, stats } = homeContent.featuredProjects;
+  const { header } = homeContent.featuredProjects;
   // Read projects from the canonical single source of truth
   const items = projectsContent.items;
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
@@ -77,39 +77,6 @@ export const FeaturedProjects: React.FC = () => {
           ))}
         </motion.div>
       </div>
-
-      {/* VIEW ALL PROJECTS CTA */}
-      <motion.div
-        className={styles.ctaWrapper}
-        initial="hidden"
-        animate={isRevealed ? "visible" : "hidden"}
-        variants={headerVariants}
-      >
-        <div className={styles.ctaBlock}>
-          <h3 className={styles.ctaTitle}>{cta.heading}</h3>
-          <p className={styles.ctaDesc}>{cta.description}</p>
-          <Link to="/projects" className={styles.ctaButton}>
-            {cta.buttonLabel}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </Link>
-        </div>
-      </motion.div>
-
-      {/* STATS BAR */}
-      {stats && stats.length > 0 && (
-        <div className={styles.statsBar}>
-          <div className={styles.statsInner}>
-            {stats.map((stat, i) => (
-              <div key={i} className={styles.statCol}>
-                <span className={styles.statValue}>{stat.value}</span>
-                <span className={styles.statLabel}>{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </section>
   );
 };
