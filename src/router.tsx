@@ -3,7 +3,10 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
 
-// Lazy-load infrequently visited pages to keep the main bundle lean
+// Lazy-load all non-home pages to keep the main bundle lean
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Contact = lazy(() => import('./pages/Contact'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
@@ -37,11 +40,36 @@ export const router = createBrowserRouter([
     path: '/',
     element: <AppLayout />,
     children: [
+      // ── Primary pages ────────────────────────────────────────────────────────
       {
         index: true,
         element: <Home />,
       },
-      // /projects archive (must be registered BEFORE /projects/:projectId)
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <About />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'services',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Services />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'contact',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Contact />
+          </Suspense>
+        ),
+      },
+      // ── Project routes (archive before dynamic slug) ─────────────────────────
       {
         path: 'projects',
         element: (
@@ -58,6 +86,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      // ── Service detail ───────────────────────────────────────────────────────
       {
         path: 'services/:serviceId',
         element: (
@@ -66,6 +95,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      // ── Legal & utility ──────────────────────────────────────────────────────
       {
         path: 'privacy',
         element: (
@@ -90,28 +120,21 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // Legacy Redirects
-      {
-        path: 'about',
-        element: <Navigate to="/#about" replace />,
-      },
+      // ── Legacy hash URL redirects → proper page routes ───────────────────────
+      // Old bookmarks and backlinks to /#section are preserved via redirects.
       {
         path: 'home',
-        element: <Navigate to="/#home" replace />,
+        element: <Navigate to="/" replace />,
       },
       {
         path: 'industries',
-        element: <Navigate to="/#industries" replace />,
+        element: <Navigate to="/about" replace />,
       },
       {
         path: 'process',
-        element: <Navigate to="/#process" replace />,
+        element: <Navigate to="/about" replace />,
       },
-      {
-        path: 'contact',
-        element: <Navigate to="/#contact" replace />,
-      },
-      // Catch-all: must be LAST
+      // ── Catch-all 404 — must be LAST ─────────────────────────────────────────
       {
         path: '*',
         element: (

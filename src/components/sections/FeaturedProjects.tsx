@@ -7,6 +7,7 @@ import { homeContent } from '../../content/home';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import styles from './FeaturedProjects.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import { ArrowRight } from 'lucide-react';
 
 
 export const FeaturedProjects: React.FC = () => {
@@ -38,7 +39,7 @@ export const FeaturedProjects: React.FC = () => {
   };
 
   return (
-    <section ref={ref} className={styles.section} id="projects">
+    <section ref={ref} className={styles.section}>
       {/* SECTION HEADER */}
       <motion.div 
         className={styles.headerBlock}
@@ -76,6 +77,32 @@ export const FeaturedProjects: React.FC = () => {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      {/* View All Projects CTA */}
+      <div style={{ textAlign: 'center', marginTop: '40px', paddingBottom: '16px' }}>
+        <Link
+          to="/projects"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontFamily: 'var(--font-technical, monospace)',
+            fontSize: '0.75rem',
+            fontWeight: 500,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.55)',
+            textDecoration: 'none',
+            transition: 'color 0.2s ease',
+            padding: '12px 0',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = '#c8a96e')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
+        >
+          View All Projects
+          <ArrowRight size={14} />
+        </Link>
       </div>
     </section>
   );

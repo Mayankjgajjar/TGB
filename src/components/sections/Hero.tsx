@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
 import Button from '../ui/Button';
 import Container from '../ui/Container';
@@ -32,29 +32,9 @@ const fadeUp = {
 export const Hero: React.FC = () => {
   const { title, ctaLabel } = homeContent.hero;
   const { ref, isRevealed } = useScrollReveal();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleScrollTo = useCallback(
-    (e: React.MouseEvent<HTMLElement>, id: string) => {
-      e.preventDefault();
-      if (location.pathname === '/') {
-        const element = document.getElementById(id);
-        if (element) {
-          const yOffset = -130;
-          const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-          window.history.pushState(null, '', `/#${id}`);
-        }
-      } else {
-        navigate(`/#${id}`);
-      }
-    },
-    [navigate, location.pathname]
-  );
 
   return (
-    <section id="home" ref={ref} className={styles.heroSection} aria-label="Hero">
+    <section ref={ref} className={styles.heroSection} aria-label="Hero">
 
       {/* Hero Content Container */}
       <div className={styles.contentContainer}>
@@ -80,8 +60,7 @@ export const Hero: React.FC = () => {
 
             <motion.div variants={fadeUp} className={styles.ctasRow}>
               <Button
-                to="/#services"
-                onClick={(e) => handleScrollTo(e, 'services')}
+                to="/services"
                 variant="primary"
                 size="large"
                 showTechnicalDot
@@ -89,8 +68,7 @@ export const Hero: React.FC = () => {
                 {ctaLabel}
               </Button>
               <Button
-                to="/#projects"
-                onClick={(e) => handleScrollTo(e, 'projects')}
+                to="/projects"
                 variant="secondary"
                 size="large"
                 icon={<ArrowUpRight size={14} />}
@@ -100,15 +78,6 @@ export const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
         </Container>
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <div 
-        className={styles.scrollDownIndicator} 
-        onClick={(e) => handleScrollTo(e, 'about')}
-      >
-        <span className={styles.scrollText}>Scroll</span>
-        <ChevronDown size={14} className={styles.scrollChevron} />
       </div>
     </section>
   );

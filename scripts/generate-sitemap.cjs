@@ -56,6 +56,9 @@ const servicesFile = path.join(__dirname, '..', 'src', 'content', 'services.ts')
 
 const srcHome = path.join(__dirname, '..', 'src', 'pages', 'Home.tsx');
 const srcHomeContent = path.join(__dirname, '..', 'src', 'content', 'home.ts');
+const srcAbout = path.join(__dirname, '..', 'src', 'pages', 'About.tsx');
+const srcServices = path.join(__dirname, '..', 'src', 'pages', 'Services.tsx');
+const srcContact = path.join(__dirname, '..', 'src', 'pages', 'Contact.tsx');
 const srcProjectArchive = path.join(__dirname, '..', 'src', 'pages', 'ProjectArchive.tsx');
 const srcWarranty = path.join(__dirname, '..', 'src', 'pages', 'Warranty.tsx');
 const srcPrivacy = path.join(__dirname, '..', 'src', 'pages', 'Privacy.tsx');
@@ -113,6 +116,21 @@ allRoutes.push({
 });
 
 // Static routes
+allRoutes.push({
+  loc: '/about',
+  lastmod: getLatestModifiedDate([srcAbout, srcHomeContent]),
+});
+
+allRoutes.push({
+  loc: '/services',
+  lastmod: getLatestModifiedDate([srcServices, servicesFile]),
+});
+
+allRoutes.push({
+  loc: '/contact',
+  lastmod: getLatestModifiedDate([srcContact]),
+});
+
 allRoutes.push({
   loc: '/projects',
   lastmod: getLatestModifiedDate([srcProjectArchive, projectsFile]),

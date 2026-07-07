@@ -2,17 +2,13 @@ import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 
-// ── Eager sections (above-the-fold or near-fold) ─────────────────────────────
+// ── Eager sections (above-the-fold) ──────────────────────────────────────────
 import Hero from '../components/sections/Hero';
-import Identity from '../components/sections/Identity';
 import FeaturedProjects from '../components/sections/FeaturedProjects';
 import ContactCTA from '../components/sections/ContactCTA';
 
 // ── Lazy sections (below-the-fold) ───────────────────────────────────────────
-// These are deferred so the first paint isn't blocked by Framer Motion setup
-// for sections the user hasn't yet scrolled to.
-const Industries = lazy(() => import('../components/sections/Industries'));
-const Process = lazy(() => import('../components/sections/Process'));
+const ServicesOverview = lazy(() => import('../components/sections/ServicesOverview'));
 const Testimonials = lazy(() => import('../components/sections/Testimonials'));
 const FAQ = lazy(() => import('../components/sections/FAQ'));
 
@@ -29,21 +25,28 @@ export const Home: React.FC = () => {
       exit="exit"
       variants={pageTransition}
     >
+      {/* Full-screen video hero with primary CTAs */}
       <Hero />
-      <Identity />
+
+      {/* Service teaser grid — 6 cards linking to /services/:slug */}
+      <Suspense fallback={<SectionFallback />}>
+        <ServicesOverview />
+      </Suspense>
+
+      {/* Featured case studies — 4 project cards */}
       <FeaturedProjects />
-      <Suspense fallback={<SectionFallback />}>
-        <Industries />
-      </Suspense>
-      <Suspense fallback={<SectionFallback />}>
-        <Process />
-      </Suspense>
+
+      {/* Social proof */}
       <Suspense fallback={<SectionFallback />}>
         <Testimonials />
       </Suspense>
+
+      {/* FAQ preview */}
       <Suspense fallback={<SectionFallback />}>
         <FAQ />
       </Suspense>
+
+      {/* Lead generation form */}
       <ContactCTA />
     </motion.div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Container from '../ui/Container';
 import { useQuoteModal } from '../../context/QuoteContext';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
@@ -7,9 +7,6 @@ import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
   const { openModal } = useQuoteModal();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = React.useState('home');
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const scrollDirection = useScrollDirection(8);
   const headerRef = React.useRef<HTMLElement>(null);
@@ -22,7 +19,6 @@ export const Navbar: React.FC = () => {
     if (!header) return;
 
     const onFocusIn = () => {
-      // :focus-visible heuristic — only keyboard-triggered focus should reveal
       const active = document.activeElement as HTMLElement | null;
       if (active && active.matches(':focus-visible')) {
         setFocusVisible(true);
@@ -45,111 +41,49 @@ export const Navbar: React.FC = () => {
   // Don't hide when mobile drawer is open
   const isHidden = scrollDirection === 'down' && !mobileOpen && !focusVisible;
 
-  React.useEffect(() => {
-    const sections = ['home', 'about', 'services', 'projects', 'contact'];
-    
-    const observerOptions = {
-      root: null,
-      rootMargin: '-40% 0px -50% 0px',
-      threshold: 0,
-    };
+  const handleMobileClose = () => setMobileOpen(false);
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
+  const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+    `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`;
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Give a small delay to ensure DOM is fully rendered
-    const timer = setTimeout(() => {
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) observer.observe(element);
-      });
-    }, 500);
-
-    return () => {
-      clearTimeout(timer);
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) observer.unobserve(element);
-      });
-    };
-  }, []);
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLElement>, id: string) => {
-    e.preventDefault();
-    setMobileOpen(false);
-    (e.currentTarget as HTMLElement).blur();
-    
-    if (location.pathname === '/') {
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -130;
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        window.history.pushState(null, '', `/#${id}`);
-      }
-    } else {
-      navigate(`/#${id}`);
-    }
-    setActiveSection(id);
-  };
-
-  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    setMobileOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/');
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      window.history.pushState(null, '', '/');
-      setActiveSection('home');
-    }
-  };
-
-  const isHomePage = location.pathname === '/';
   const navLinks = (
     <>
-      <Link
-        to="/#home"
-        onClick={(e) => handleAnchorClick(e, 'home')}
-        className={`${styles.navLink} ${(isHomePage && activeSection === 'home') ? styles.activeNavLink : ''}`}
+      <NavLink
+        to="/"
+        end
+        className={getNavLinkClass}
+        onClick={handleMobileClose}
       >
         Home
-      </Link>
-      <Link
-        to="/#about"
-        onClick={(e) => handleAnchorClick(e, 'about')}
-        className={`${styles.navLink} ${(isHomePage && activeSection === 'about') ? styles.activeNavLink : ''}`}
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={getNavLinkClass}
+        onClick={handleMobileClose}
       >
         About
-      </Link>
-      <Link
-        to="/#services"
-        onClick={(e) => handleAnchorClick(e, 'services')}
-        className={`${styles.navLink} ${(isHomePage && activeSection === 'services') ? styles.activeNavLink : ''}`}
+      </NavLink>
+      <NavLink
+        to="/services"
+        className={getNavLinkClass}
+        onClick={handleMobileClose}
       >
         Services
-      </Link>
-      <Link
-        to="/#projects"
-        onClick={(e) => handleAnchorClick(e, 'projects')}
-        className={`${styles.navLink} ${(isHomePage && activeSection === 'projects') ? styles.activeNavLink : ''}`}
+      </NavLink>
+      <NavLink
+        to="/projects"
+        className={getNavLinkClass}
+        onClick={handleMobileClose}
       >
         Projects
-      </Link>
-      <Link
-        to="/#contact"
-        onClick={(e) => handleAnchorClick(e, 'contact')}
-        className={`${styles.navLink} ${(isHomePage && activeSection === 'contact') ? styles.activeNavLink : ''}`}
+      </NavLink>
+      <NavLink
+        to="/contact"
+        className={getNavLinkClass}
+        onClick={handleMobileClose}
       >
         Contact
-      </Link>
+      </NavLink>
     </>
   );
 
@@ -163,7 +97,7 @@ export const Navbar: React.FC = () => {
           <div className={styles.inner}>
 
             {/* Top Left: Logo */}
-            <NavLink to="/" onClick={handleLogoClick} className={styles.logoLink}>
+            <NavLink to="/" className={styles.logoLink}>
               <img
                 src="/assets/logos/tgb-logo.svg"
                 alt="TGB Enterprise - Sign Board Manufacturer in Nikol, Ahmedabad"
@@ -201,7 +135,7 @@ export const Navbar: React.FC = () => {
         </Container>
       </header>
 
-      {/* Mobile Drawer - Wrapped in Container to align with header grid */}
+      {/* Mobile Drawer */}
       <nav
         id="mobile-nav"
         className={`${styles.mobileDrawer} ${mobileOpen ? styles.mobileDrawerOpen : ''}`}
@@ -221,7 +155,7 @@ export const Navbar: React.FC = () => {
         </Container>
       </nav>
 
-      {/* Backdrop overlay - Moved outside <header> */}
+      {/* Backdrop overlay */}
       {mobileOpen && (
         <div
           className={styles.mobileBackdrop}

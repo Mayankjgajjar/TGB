@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { QuoteProvider } from '../../context/QuoteContext';
 import QuoteModal from '../ui/QuoteModal';
-import ScrollToHash from './ScrollToHash';
 import { servicesData } from '../../content/services';
 import { projectsContent } from '../../content/projects';
 import { trackWhatsAppFABClick } from '../../lib/analytics';
@@ -96,7 +95,6 @@ export const AppLayout: React.FC = () => {
     let image = "https://www.tgbsign.com/assets/images/hero-poster.png";
 
     const path = location.pathname;
-    const hash = location.hash;
 
     const updateMetaTag = (name: string, content: string) => {
       let element = document.querySelector(`meta[name="${name}"]`);
@@ -123,22 +121,17 @@ export const AppLayout: React.FC = () => {
     };
 
     if (path === '/') {
-      if (hash === '#home' || !hash) {
-        title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";
-        description = "TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.";
-      } else if (hash === '#about') {
-        title = "About TGB Enterprise | Trusted Sign Board Company in Ahmedabad";
-        description = "Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage. Partner with us today.";
-      } else if (hash === '#services') {
-        title = "Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad";
-        description = "Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.";
-      } else if (hash === '#projects') {
-        title = "Our Signage Projects | TGB Enterprise Ahmedabad";
-        description = "View our premium completed signage projects in Ahmedabad by TGB Enterprise. See our high-impact LED boards, neon signs, and ACP installations. Get in touch.";
-      } else if (hash === '#contact') {
-        title = "Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad";
-        description = "Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.";
-      }
+      title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";
+      description = "TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.";
+    } else if (path === '/about') {
+      title = "About TGB Enterprise | Trusted Sign Board Company in Ahmedabad";
+      description = "Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage for brands across India.";
+    } else if (path === '/services') {
+      title = "Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad";
+      description = "Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.";
+    } else if (path === '/contact') {
+      title = "Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad";
+      description = "Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.";
     } else if (path.startsWith('/services/')) {
       const slug = path.split('/services/')[1];
       const service = slug ? servicesData[slug] : null;
@@ -207,10 +200,10 @@ export const AppLayout: React.FC = () => {
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
     updateMetaTag('twitter:image', image);
-  }, [location.pathname, location.hash]);
+  }, [location.pathname]);
 
+  // Initialize Lenis smooth scrolling
   useEffect(() => {
-    // Initialize Lenis smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -234,6 +227,15 @@ export const AppLayout: React.FC = () => {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
+
+  // Scroll to top on every route change
+  useEffect(() => {
+    if (lenisInstance) {
+      lenisInstance.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, lenisInstance]);
 
   return (
     <QuoteProvider>
@@ -264,8 +266,7 @@ export const AppLayout: React.FC = () => {
         </main>
         <Footer />
         <QuoteModal />
-        <ScrollToHash lenis={lenisInstance} />
-        
+
         {/* Floating WhatsApp Action Button */}
         <motion.a
           href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote."
@@ -288,7 +289,7 @@ export const AppLayout: React.FC = () => {
               scale: [0.95, 1.2, 1.45],
             }}
             transition={{
-              delay: 1.5, // Starts pulsing after the main button loads
+              delay: 1.5,
               duration: 2.0,
               repeat: Infinity,
               ease: "easeOut"

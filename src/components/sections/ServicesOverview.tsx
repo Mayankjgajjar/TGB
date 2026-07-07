@@ -128,7 +128,7 @@ export const ServicesOverview: React.FC = () => {
   };
 
   return (
-    <section ref={ref} className={styles.section} id="services">
+    <section ref={ref} className={styles.section}>
       <Container>
         {/* Section Header */}
         <motion.div 

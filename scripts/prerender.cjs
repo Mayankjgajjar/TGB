@@ -141,7 +141,97 @@ pages.push({
   `
 });
 
-// B. Project Archive Page
+// B. About Page
+pages.push({
+  route: '/about',
+  title: 'About TGB Enterprise | Trusted Sign Board Company in Ahmedabad',
+  description: 'Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage for brands across India.',
+  h1: 'About TGB Enterprise',
+  h2: 'Our Story, Mission & Manufacturing Excellence',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Our Company Story</h2>
+      <p>TGB Enterprise was founded in Ahmedabad, Gujarat, with a singular mission: to engineer signage that transforms the way businesses are perceived. Operating from our precision fabrication workshop in Nikol, Ahmedabad, we have grown into one of Gujarat's most trusted sign board manufacturers — serving retail showrooms, corporate headquarters, restaurants, hospitals, and industrial facilities across India.</p>
+      <p>Our founders, Mayank and Ankit, bring deep expertise in architectural signage design and structural engineering. Every project is approached with technical rigour, aesthetic sensitivity, and a commitment to long-term quality.</p>
+    </section>
+    <section>
+      <h2>Our Mission & Values</h2>
+      <p>We believe that great signage is an extension of a brand's identity. Our mission is to fabricate signage that not only looks exceptional but performs reliably under real-world conditions — weather, wind loads, and time. We use premium materials: Aluminium Composite Panels (ACP), high-grade acrylic, stainless steel, and IP67-rated LED modules powered by Meanwell transformers.</p>
+    </section>
+    <section>
+      <h2>Industries We Serve</h2>
+      <ul>
+        <li>Retail &amp; Showrooms — high-impact storefronts</li>
+        <li>Corporate Offices — professional identity signage</li>
+        <li>Restaurants &amp; Cafés — distinctive ambiance signs</li>
+        <li>Hospitals &amp; Healthcare — wayfinding systems</li>
+        <li>Hotels &amp; Hospitality — premium guest experience signs</li>
+        <li>Real Estate &amp; Commercial Developments — project branding</li>
+        <li>Industrial &amp; Manufacturing — durable operational signage</li>
+        <li>Educational Institutions — campus identity signage</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Our Manufacturing Process</h2>
+      <p>From discovery to after-sales support, we follow a 5-stage structured process: Consultation &amp; Discovery → Design &amp; Visualization → Manufacturing &amp; Fabrication → Installation &amp; Execution → After-Sales Support. This ensures every project is delivered on time, on spec, and with lasting quality.</p>
+      <p>Explore our <a href="/services">full range of signage services</a>, view our <a href="/projects">completed project portfolio</a>, or <a href="/contact">contact us</a> today.</p>
+    </section>
+  `
+});
+
+// C. Services Page
+pages.push({
+  route: '/services',
+  title: 'Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad',
+  description: 'Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.',
+  h1: 'Our Signage Services',
+  h2: 'Custom Sign Board Design, Fabrication & Installation',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Premium Signage Solutions</h2>
+      <p>TGB Enterprise offers a comprehensive range of custom signage solutions for businesses across Gujarat and India. Every sign is designed, fabricated, and installed by our expert team in Nikol, Ahmedabad — ensuring end-to-end quality control and structural reliability.</p>
+      <ul>
+        <li><strong><a href="/services/led-sign-boards">LED Sign Boards</a>:</strong> High-brightness illuminated sign boards for indoor and outdoor visibility.</li>
+        <li><strong><a href="/services/acp-sign-boards">ACP Sign Boards</a>:</strong> Durable Aluminium Composite Panel facade cladding systems.</li>
+        <li><strong><a href="/services/acrylic-letters">Acrylic &amp; 3D Letters</a>:</strong> Precision laser-cut dimensional lettering for premium brand identity.</li>
+        <li><strong><a href="/services/ss-letters">SS Letters</a>:</strong> Stainless steel and gold titanium corporate identity letters.</li>
+        <li><strong><a href="/services/neon-sign-boards">Neon &amp; Custom Signages</a>:</strong> Creative flex and LED neon signs for retail and lifestyle brands.</li>
+        <li><strong><a href="/services/pylon-signs">Pylon Signs</a>:</strong> Roadside freestanding monumental signs for commercial visibility.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Industries Served</h2>
+      <p>We serve retail showrooms, corporate offices, restaurants, hospitals, hotels, real estate developments, industrial facilities, and educational campuses. View our <a href="/projects">completed projects portfolio</a> for case studies, or <a href="/contact">contact us</a> to request a customised quotation.</p>
+    </section>
+  `
+});
+
+// D. Contact Page
+pages.push({
+  route: '/contact',
+  title: 'Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad',
+  description: 'Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.',
+  h1: 'Contact TGB Enterprise',
+  h2: 'Start Your Signage Project Today',
+  image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
+  content: `
+    <section>
+      <h2>Get in Touch with Our Team</h2>
+      <p>Ready to elevate your brand with premium signage? Contact TGB Enterprise, Ahmedabad's trusted sign board manufacturer, for a free consultation and customised quotation tailored to your project requirements.</p>
+      <ul>
+        <li><strong>Address:</strong> Shop No. 7/1, First Floor, Shukan Shopping Centre, opp. Chanakya school, Sukan Cross Rd, New India Colony, Nikol, Ahmedabad, Gujarat 382345</li>
+        <li><strong>Phone:</strong> <a href="tel:+919727136137">+91 97271 36137</a></li>
+        <li><strong>Email:</strong> <a href="mailto:tgbsign@proton.me">tgbsign@proton.me</a></li>
+        <li><strong>Office Hours:</strong> Monday – Saturday, 9:30 AM – 7:00 PM IST</li>
+      </ul>
+      <p>Browse our <a href="/services">signage services</a>, view our <a href="/projects">completed projects</a>, or return to the <a href="/">Homepage</a>.</p>
+    </section>
+  `
+});
+
+// E. Project Archive Page
 pages.push({
   route: '/projects',
   title: 'Our Completed Projects Portfolio | TGB Enterprise Ahmedabad',
@@ -161,10 +251,11 @@ pages.push({
           </li>
         `).join('\n')}
       </ul>
-      <p>Return to <a href="/">Home page</a> or check our <a href="/#services">signage services</a>.</p>
+      <p>Return to <a href="/">Home page</a>, browse our <a href="/services">signage services</a>, or <a href="/contact">contact us</a>.</p>
     </section>
   `
 });
+
 
 // C. Claim Warranty Page
 pages.push({
@@ -297,7 +388,7 @@ serviceItems.forEach(s => {
             <li><a href="/services/${other.slug}">${escapeHtml(other.name)}</a> - ${escapeHtml(other.positioning)}</li>
           `).join('')}
         </ul>
-        <p>Request a quote on our <a href="/#contact">Contact Form</a> or browse the full <a href="/projects">Signage Portfolio</a>.</p>
+        <p>Request a quote on our <a href="/contact">Contact Page</a> or browse the full <a href="/projects">Signage Portfolio</a>.</p>
       </section>
     `
   });

@@ -1,28 +1,11 @@
 import React from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
 import { useQuoteModal } from '../../context/QuoteContext';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
   const { openModal } = useQuoteModal();
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleAnchorClick = (e: React.MouseEvent<HTMLElement>, id: string) => {
-    e.preventDefault();
-    if (location.pathname === '/') {
-      const element = document.getElementById(id);
-      if (element) {
-        const yOffset = -130;
-        const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        window.history.pushState(null, '', `/#${id}`);
-      }
-    } else {
-      navigate(`/#${id}`);
-    }
-  };
 
   return (
     <footer className={styles.footer}>
@@ -52,11 +35,11 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className={styles.colTitle}>Quick Links</h4>
             <ul className={styles.linksList}>
-              <li><Link to="/#home" onClick={(e) => handleAnchorClick(e, 'home')} className={styles.navLink}>Home</Link></li>
-              <li><Link to="/#about" onClick={(e) => handleAnchorClick(e, 'about')} className={styles.navLink}>About</Link></li>
-              <li><Link to="/#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.navLink}>Services</Link></li>
-              <li><Link to="/#projects" onClick={(e) => handleAnchorClick(e, 'projects')} className={styles.navLink}>Projects</Link></li>
-              <li><Link to="/#contact" onClick={(e) => handleAnchorClick(e, 'contact')} className={styles.navLink}>Contact</Link></li>
+              <li><Link to="/" className={styles.navLink}>Home</Link></li>
+              <li><Link to="/about" className={styles.navLink}>About Us</Link></li>
+              <li><Link to="/services" className={styles.navLink}>Services</Link></li>
+              <li><Link to="/projects" className={styles.navLink}>Projects</Link></li>
+              <li><Link to="/contact" className={styles.navLink}>Contact</Link></li>
               <li><Link to="/claim-warranty" className={styles.navLink}>Claim Warranty</Link></li>
             </ul>
           </div>
@@ -72,7 +55,7 @@ export const Footer: React.FC = () => {
               <li><Link to="/services/neon-sign-boards" className={styles.navLink}>Neon & Custom Signages</Link></li>
               <li><Link to="/services/pylon-signs" className={styles.navLink}>Pylon Signs</Link></li>
             </ul>
-            <Link to="/#services" onClick={(e) => handleAnchorClick(e, 'services')} className={styles.viewAllLink}>
+            <Link to="/services" className={styles.viewAllLink}>
               View All Services →
             </Link>
           </div>
@@ -81,13 +64,13 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className={styles.colTitle}>Industries We Serve</h4>
             <ul className={styles.linksList}>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Retail & Showrooms</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Corporate Offices</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Restaurants & Cafés</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Hospitals & Healthcare</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Hotels & Hospitality</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Industrial & Manufacturing</Link></li>
-              <li><Link to="/#industries" onClick={(e) => handleAnchorClick(e, 'industries')} className={styles.navLink}>Commercial Spaces</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Retail & Showrooms</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Corporate Offices</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Restaurants & Cafés</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Hospitals & Healthcare</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Hotels & Hospitality</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Industrial & Manufacturing</Link></li>
+              <li><Link to="/about#industries" className={styles.navLink}>Commercial Spaces</Link></li>
             </ul>
           </div>
 
@@ -122,11 +105,8 @@ export const Footer: React.FC = () => {
 
         </div>
 
-        {/* ── Bottom Section (SEO Statement, Quote, and Copyright Links) ── */}
+        {/* ── Bottom Section ── */}
         <div className={styles.bottomSection}>
-
-
-
           <div className={styles.bottomBar}>
             <div className={styles.copyright}>
               © 2025 TGB Enterprise. All Rights Reserved.
