@@ -12,7 +12,7 @@ const steps = [
     category: 'STAGE 01',
     label: 'Understanding Your Vision',
     title: 'Consultation & Discovery',
-    description: 'We begin by understanding your business, objectives, space, and branding requirements to recommend the right custom signage solutions.',
+    description: 'We initiate our workflow with a detailed structural and brand consultation. Our site audit team evaluates spatial coordinates, viewing angles, structural mounting points, local wind velocity factors, and Ahmedabad municipal safety codes to ensure a solid foundation before drafting begins.',
     tag: 'Discovery Phase',
   },
   {
@@ -21,7 +21,7 @@ const steps = [
     category: 'STAGE 02',
     label: 'Turning Ideas Into Concepts',
     title: 'Design & Visualization',
-    description: 'Our team develops layouts and visual representations aligning with brand identity and signage design standards.',
+    description: 'Our engineering draftsmen create comprehensive technical blueprints and 3D architectural renders. We carefully match corporate brand guidelines, calculate distance readability indexes, simulate day-and-night LED lux intensity levels, and prepare precise vector cutpaths.',
     tag: 'Design Phase',
   },
   {
@@ -30,7 +30,7 @@ const steps = [
     category: 'STAGE 03',
     label: 'Built With Precision',
     title: 'Manufacturing & Fabrication',
-    description: 'Using premium materials, our signage manufacturing process ensures every sign is built to the highest quality and durability standards.',
+    description: 'Production takes place in our Nikol, Ahmedabad workshop under strict supervision. Utilizing high-speed CNC routing machines, fiber laser metal cutters, and argon welding stations, we shape ACP facades and stainless steel letters to high tolerances.',
     tag: 'Production Phase',
   },
   {
@@ -39,7 +39,7 @@ const steps = [
     category: 'STAGE 04',
     label: 'Seamless Delivery',
     title: 'Installation & Execution',
-    description: 'Our experienced team ensures professional signage installation with meticulous attention to detail, safety compliance, and robust engineering.',
+    description: 'Our certified rigging crew manages delivery, high-altitude alignment, and structural mounting. We use structural galvanized anchoring bolts, heavy-duty iron frames designed for 150 km/h winds, and surge-protected electrical conduit grids.',
     tag: 'Installation Phase',
   },
   {
@@ -48,7 +48,7 @@ const steps = [
     category: 'STAGE 05',
     label: 'Relationships Beyond Delivery',
     title: 'After-Sales Support',
-    description: 'Our commitment continues past completion with dedicated maintenance, warrantied assurance, and long-term client support.',
+    description: 'We safeguard your visual asset long after installation. Backed by our structured warranty, our service coordinators dispatch technical teams within 24-48 business hours to manage power module checks, LED replacements, and routine diagnostics.',
     tag: 'Support Phase',
   },
 ];
