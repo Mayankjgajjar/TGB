@@ -154,7 +154,7 @@ export const AppLayout: React.FC = () => {
       const project = projectId ? projectsContent.items.find(item => item.id === projectId) : null;
       if (project) {
         title = `${project.name} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
-        description = `View details for the completed project ${project.name} in ${project.location} by TGB Enterprise, premium sign board manufacturer in Ahmedabad. Check out specs and materials.`;
+        description = `Project case study: ${project.name} in ${project.location}. View specs, materials, and engineering details by TGB Enterprise.`;
         image = project.imagePath.startsWith('http')
           ? project.imagePath
           : `https://www.tgbsign.com${project.imagePath}`;

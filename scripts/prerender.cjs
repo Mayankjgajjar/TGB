@@ -120,13 +120,23 @@ pages.push({
     <section>
       <h2>Our Core Signage Solutions</h2>
       <ul>
-        <li><strong>LED Sign Boards:</strong> High-brightness, IP67 weather-sealed LED modules powered by Meanwell transformers for 24/7 exterior brand visibility.</li>
-        <li><strong>ACP Sign Boards:</strong> rigid facade cladding panels CNC-routed for seamless storefront design and structural wind-load performance.</li>
-        <li><strong>Acrylic &amp; 3D Letters:</strong> Precision laser-cut acrylic character boards with warm or cool backlit halo illumination.</li>
-        <li><strong>SS Letters:</strong> Gold titanium and mirror-finish stainless steel channel letters with structural corrosion resistance.</li>
-        <li><strong>Neon &amp; Custom Signages:</strong> Artistic flexible neon boards for cafe, restaurant, and creative office branding.</li>
-        <li><strong>Pylon Signs:</strong> Large-scale double-sided monolith boards built on structural steel sub-frames.</li>
+        <li><strong><a href="/services/led-sign-boards">LED Sign Boards</a>:</strong> High-brightness, IP67 weather-sealed LED modules powered by Meanwell transformers for 24/7 exterior brand visibility.</li>
+        <li><strong><a href="/services/acp-sign-boards">ACP Sign Boards</a>:</strong> Rigid aluminium composite panel facade cladding systems engineered in Nikol, Ahmedabad.</li>
+        <li><strong><a href="/services/acrylic-letters">Acrylic &amp; 3D Letters</a>:</strong> Precision laser-cut high-density acrylic lettering with backlit halo lighting.</li>
+        <li><strong><a href="/services/ss-letters">SS Letters</a>:</strong> Gold titanium and mirror-finish stainless steel letters with premium corporate branding.</li>
+        <li><strong><a href="/services/neon-sign-boards">Neon &amp; Custom Signages</a>:</strong> Flexible custom neon boards handcrafted for stores, cafes, and showrooms.</li>
+        <li><strong><a href="/services/pylon-signs">Pylon Signs</a>:</strong> Freestanding road-side monumental signs built on reinforced steel foundations.</li>
       </ul>
+    </section>
+    <section>
+      <h2>Featured Landmark Installations</h2>
+      <ul>
+        <li><strong><a href="/projects/infra-corp-installation">INFRA CORP Headquarters</a>:</strong> ACP facade cladding and corporate signage in Ahmedabad.</li>
+        <li><strong><a href="/projects/gold-letter-signage">The Gold Palace Showroom</a>:</strong> 3D Acrylic &amp; Gold Letter Signage in Nikol, Ahmedabad.</li>
+        <li><strong><a href="/projects/custom-neon-signage">Glow &amp; Co. Creative Studio</a>:</strong> Handcrafted custom neon signs portfolio.</li>
+        <li><strong><a href="/projects/acp-board-installation">Apex Commercial Hub</a>:</strong> ACP panel board and LED glow signage landmark.</li>
+      </ul>
+      <p>Browse our complete <a href="/projects">completed projects portfolio</a> or submit a <a href="/claim-warranty">warranty claim request</a>.</p>
     </section>
   `
 });
@@ -146,11 +156,12 @@ pages.push({
       <ul>
         ${projectItems.map(p => `
           <li>
-            <h3>${escapeHtml(p.name)}</h3>
+            <h3><a href="/projects/${p.id}">${escapeHtml(p.name)}</a></h3>
             <p><strong>Category:</strong> ${escapeHtml(p.category)} in ${escapeHtml(p.location)} (Client: ${escapeHtml(p.client)} - Year ${escapeHtml(p.year)}). ${escapeHtml(p.description)}</p>
           </li>
         `).join('\n')}
       </ul>
+      <p>Return to <a href="/">Home page</a> or check our <a href="/#services">signage services</a>.</p>
     </section>
   `
 });
@@ -167,7 +178,7 @@ pages.push({
     <section>
       <h2>Warranty Claim Terms &amp; Support Guidelines</h2>
       <p>Every TGB Enterprise signboard undergoes strict QA before dispatch from our Ahmedabad facility. We offer a 5-year warranty on premium LED modules and transformers, and a 10-year structural warranty on steel frameworks. Use this warranty dashboard to file claims for components experiencing technical issues.</p>
-      <p>Submit your customer name, email address, phone, invoice details, and photos of the signage issue. Our technical support team in Nikol will review the records and respond within 24-48 business hours to coordinate structural repairs or replacements.</p>
+      <p>Submit your customer details online. Our support team in Nikol will review the records and respond within 24-48 business hours. Return to the <a href="/">Homepage</a>, read our <a href="/privacy">Privacy Policy</a>, or read our <a href="/terms">Terms &amp; Conditions</a>.</p>
     </section>
   `
 });
@@ -184,6 +195,7 @@ pages.push({
     <section>
       <h2>Personal Information Collection and Security</h2>
       <p>In accordance with India's Digital Personal Data Protection (DPDP) Act, 2023, TGB Enterprise collects personal identity details (name, email, phone) exclusively to process design quotations and verify product warranties. We secure your design specifications and contact information against unauthorized access. We do not rent, sell, or distribute client databases to unverified third-party marketers.</p>
+      <p>Read our <a href="/terms">Terms &amp; Conditions</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
@@ -200,12 +212,26 @@ pages.push({
     <section>
       <h2>Blueprint Approvals, Site Readiness, and Billings</h2>
       <p>These Terms govern TGB Enterprise's signage fabrication and mounting services. Design proofs and CAD drawings must be formally signed off before production starts. Standard billing requires 50% deposit advance, 30% upon completion of fabrication, and 20% on installation. Clients are responsible for obtaining building manager permissions and providing secure power inputs near the signage mounting site.</p>
+      <p>Read our <a href="/privacy">Privacy Policy</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
 
 // F. Dynamic Service Pages
 serviceItems.forEach(s => {
+  const otherServices = serviceItems.filter(other => other.slug !== s.slug);
+  const relatedProjects = projectItems.filter(proj => {
+    const term = s.name
+      .toLowerCase()
+      .replace('boards', '')
+      .replace('signage', '')
+      .replace('signages', '')
+      .replace('signs', '')
+      .replace('letters', '')
+      .trim();
+    return proj.category.toLowerCase().includes(term) || proj.description.toLowerCase().includes(term);
+  });
+
   pages.push({
     route: `/services/${s.slug}`,
     title: `Premium ${s.name} | TGB Enterprise – Nikol, Ahmedabad`,
@@ -224,6 +250,21 @@ serviceItems.forEach(s => {
         <p>At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict structural and electrical safety codes. Every ${escapeHtml(s.name)} is fabricated using state-of-the-art computer-controlled routers (CNC) and high-precision laser profiling machines to ensure exact alignment with design blueprints. We utilize premium architectural-grade materials (such as aluminum, structural acrylics, and stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or warping under severe weather conditions.</p>
         <p>Our LED assemblies are powered by industry-leading transformers (Meanwell) and energy-efficient IP67 weather-sealed modules, providing consistent luminous intensity with no visible hot-spots. Our certified installation crew manages structural mounting, anchor point calculation, and grid wiring, ensuring safety compliance for high-rise commercial facades and local retail zones across Ahmedabad, Gujarat, and broader India.</p>
       </section>
+      <section>
+        <h2>Completed Installations</h2>
+        <ul>
+          ${(relatedProjects.length > 0 ? relatedProjects : projectItems).slice(0, 2).map(proj => `
+            <li><a href="/projects/${proj.id}">${escapeHtml(proj.name)}</a> (${escapeHtml(proj.category)}) in ${escapeHtml(proj.location)}</li>
+          `).join('')}
+        </ul>
+        <h2>Other Signage Solutions</h2>
+        <ul>
+          ${otherServices.slice(0, 3).map(other => `
+            <li><a href="/services/${other.slug}">${escapeHtml(other.name)}</a> - ${escapeHtml(other.positioning)}</li>
+          `).join('')}
+        </ul>
+        <p>Request a quote on our <a href="/#contact">Contact Form</a> or browse the full <a href="/projects">Signage Portfolio</a>.</p>
+      </section>
     `
   });
 });
@@ -233,7 +274,7 @@ projectItems.forEach(p => {
   pages.push({
     route: `/projects/${p.id}`,
     title: `${p.name} case study | TGB Enterprise`,
-    description: `Case study details for ${p.name} - ${p.category} completed in ${p.location}. See structural design and engineering highlight specs.`,
+    description: `Case study: ${p.name} (${p.category}) in ${p.location}. View materials and engineering details by TGB Enterprise.`,
     h1: p.name,
     h2: p.category,
     image: p.imagePath.startsWith('http') ? p.imagePath : `${CANONICAL_ORIGIN}${p.imagePath}`,
@@ -248,6 +289,14 @@ projectItems.forEach(p => {
         <p>The fabrication of the ${escapeHtml(p.name)} installation showcases TGB Enterprise's structural engineering guidelines. By selecting premium raw materials and utilizing precision automated tooling, our Nikol-based fabrication shop achieved seamless joints and high-tolerance alignment. The structural sub-frames are hot-dip galvanized to resist corrosion in high-humidity local climates, while the illuminated modules are fully weather-sealed to guarantee longevity.</p>
         <p>During the deployment phase, our technical team executed site alignment surveys and wind-load calculations to ensure the signage stands robustly. This project case study demonstrates our capacity to translate architect-level blueprints into durable physical landmarks, providing Ahmedabad and Gujarat businesses with unmatched brand permanence.</p>
         <p><strong>Engineering Highlight:</strong> ${escapeHtml(p.engineeringHighlight)}</p>
+      </section>
+      <section>
+        <h2>Browse More Landmark Signages &amp; Services</h2>
+        <ul>
+          <li>View the full <a href="/projects">All Projects Portfolio</a></li>
+          <li>Learn more about our <a href="/services/led-sign-boards">LED Sign Board Services</a> or <a href="/services/acp-sign-boards">ACP Sign Boards</a></li>
+          <li>Return to the <a href="/">Homepage</a> or submit a <a href="/claim-warranty">Warranty Registration Request</a></li>
+        </ul>
       </section>
     `
   });
