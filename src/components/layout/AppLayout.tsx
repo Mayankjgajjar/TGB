@@ -7,6 +7,8 @@ import Footer from './Footer';
 import { QuoteProvider } from '../../context/QuoteContext';
 import QuoteModal from '../ui/QuoteModal';
 import ScrollToHash from './ScrollToHash';
+import { servicesData } from '../../content/services';
+import { projectsContent } from '../../content/projects';
 import { trackWhatsAppFABClick } from '../../lib/analytics';
 import styles from './AppLayout.module.css';
 
@@ -87,13 +89,38 @@ export const AppLayout: React.FC = () => {
     };
   }, []);
 
-  // Dynamic Title and Meta Description Updates
+  // Centralized Dynamic SEO, OG and Twitter Metadata Updates
   useEffect(() => {
     let title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";
     let description = "TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.";
+    let image = "https://www.tgbsign.com/assets/images/hero-poster.png";
 
     const path = location.pathname;
     const hash = location.hash;
+
+    const updateMetaTag = (name: string, content: string) => {
+      let element = document.querySelector(`meta[name="${name}"]`);
+      if (element) {
+        element.setAttribute('content', content);
+      } else {
+        element = document.createElement('meta');
+        element.setAttribute('name', name);
+        element.setAttribute('content', content);
+        document.head.appendChild(element);
+      }
+    };
+
+    const updateMetaProperty = (property: string, content: string) => {
+      let element = document.querySelector(`meta[property="${property}"]`);
+      if (element) {
+        element.setAttribute('content', content);
+      } else {
+        element = document.createElement('meta');
+        element.setAttribute('property', property);
+        element.setAttribute('content', content);
+        document.head.appendChild(element);
+      }
+    };
 
     if (path === '/') {
       if (hash === '#home' || !hash) {
@@ -112,10 +139,35 @@ export const AppLayout: React.FC = () => {
         title = "Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad";
         description = "Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.";
       }
+    } else if (path.startsWith('/services/')) {
+      const slug = path.split('/services/')[1];
+      const service = slug ? servicesData[slug] : null;
+      if (service) {
+        title = service.seoMetadata.title;
+        description = service.seoMetadata.description;
+        image = service.heroImage.startsWith('http')
+          ? service.heroImage
+          : `https://www.tgbsign.com${service.heroImage}`;
+      }
     } else if (path.startsWith('/projects/')) {
-      // Set to generic title, dynamic page handles it specifically
-      title = "Our Signage Projects | TGB Enterprise Ahmedabad";
-      description = "View TGB Enterprise completed project details in Ahmedabad and Gujarat.";
+      const projectId = path.split('/projects/')[1];
+      const project = projectId ? projectsContent.items.find(item => item.id === projectId) : null;
+      if (project) {
+        title = `${project.name} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
+        description = `View details for the completed project ${project.name} in ${project.location} by TGB Enterprise, premium sign board manufacturer in Ahmedabad. Check out specs and materials.`;
+        image = project.imagePath.startsWith('http')
+          ? project.imagePath
+          : `https://www.tgbsign.com${project.imagePath}`;
+      } else {
+        title = "Our Completed Projects Portfolio | TGB Enterprise Ahmedabad";
+        description = "View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.";
+      }
+    } else if (path === '/projects') {
+      title = "Our Completed Projects Portfolio | TGB Enterprise Ahmedabad";
+      description = "View TGB Enterprise completed projects and landmarks across Ahmedabad and Gujarat, featuring premium LED sign boards, ACP cladding, and neon signs.";
+    } else if (path === '/claim-warranty') {
+      title = "Product Warranty Registration & Claim | TGB Enterprise Sign Boards";
+      description = "Register or submit a warranty claim for your TGB Enterprise sign boards. Follow our easy guide to file a claim for LED, ACP, and 3D letters.";
     } else if (path === '/privacy') {
       title = "Privacy Policy | TGB Enterprise – Sign Board Manufacturer in Ahmedabad";
       description = "Privacy Policy for TGB Enterprise, sign board manufacturer in Ahmedabad. Learn how we handle your personal data and respect your online privacy.";
@@ -124,17 +176,37 @@ export const AppLayout: React.FC = () => {
       description = "Terms and conditions for using the website and services of TGB Enterprise, premium sign board manufacturer in Ahmedabad. Read our terms of service.";
     }
 
+    // 1. Title
     document.title = title;
 
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', description);
+    // 2. Meta description
+    updateMetaTag('description', description);
+
+    // 3. Dynamic Canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]');
+    const canonicalUrl = `https://www.tgbsign.com${path === '/' ? '' : path}`;
+    if (canonical) {
+      canonical.setAttribute('href', canonicalUrl);
     } else {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      metaDesc.setAttribute('content', description);
-      document.head.appendChild(metaDesc);
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      canonical.setAttribute('href', canonicalUrl);
+      document.head.appendChild(canonical);
     }
+
+    // 4. Open Graph Metadata
+    updateMetaProperty('og:title', title);
+    updateMetaProperty('og:description', description);
+    updateMetaProperty('og:url', canonicalUrl);
+    updateMetaProperty('og:image', image);
+    updateMetaProperty('og:type', 'website');
+    updateMetaProperty('og:site_name', 'TGB Enterprise');
+
+    // 5. Twitter Card Metadata
+    updateMetaTag('twitter:card', 'summary_large_image');
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', image);
   }, [location.pathname, location.hash]);
 
   useEffect(() => {

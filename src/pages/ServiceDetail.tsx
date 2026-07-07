@@ -5,21 +5,27 @@ import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import { servicesData } from '../content/services';
+import { projectsContent } from '../content/projects';
 import styles from './ServiceDetail.module.css';
 
 export const ServiceDetail: React.FC = () => {
   const { serviceId } = useParams<{ serviceId: string }>();
   const service = serviceId ? servicesData[serviceId] : null;
 
-  useEffect(() => {
-    if (service) {
-      document.title = service.seoMetadata.title;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', service.seoMetadata.description);
-      }
-    }
-  }, [service]);
+  const otherServices = Object.values(servicesData).filter((s) => s.slug !== serviceId);
+  const relatedProjects = service
+    ? projectsContent.items.filter((p) => {
+        const term = service.name
+          .toLowerCase()
+          .replace('boards', '')
+          .replace('signage', '')
+          .replace('signages', '')
+          .replace('signs', '')
+          .replace('letters', '')
+          .trim();
+        return p.category.toLowerCase().includes(term) || p.description.toLowerCase().includes(term);
+      })
+    : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -119,6 +125,17 @@ export const ServiceDetail: React.FC = () => {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
+            <div className={styles.sectionBlock} style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '24px', marginTop: '32px' }}>
+              <h3 className={styles.sectionTitle}>Engineering &amp; Fabrication Standards</h3>
+              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
+                At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict structural and electrical safety codes. Every {service.name} is fabricated using state-of-the-art computer-controlled routers (CNC) and high-precision laser profiling machines to ensure exact alignment with design blueprints. We utilize premium architectural-grade materials (such as aluminum, structural acrylics, and stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or warping under severe weather conditions.
+              </p>
+              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}>
+                Our LED assemblies are powered by industry-leading transformers (Meanwell) and energy-efficient IP67 weather-sealed modules, providing consistent luminous intensity with no visible hot-spots. Our certified installation crew manages structural mounting, anchor point calculation, and grid wiring, ensuring safety compliance for high-rise commercial facades and local retail zones across Ahmedabad, Gujarat, and broader India.
+              </p>
             </div>
 
           </div>
@@ -241,6 +258,50 @@ export const ServiceDetail: React.FC = () => {
 
           </div>
 
+        </div>
+
+        {/* Related Work & Services Footer Section */}
+        <div style={{ marginTop: '72px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '56px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
+            
+            {/* Column 1: Other Services */}
+            <div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 400, color: 'var(--color-off-white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                Other Signage Solutions
+              </h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {otherServices.slice(0, 3).map((s) => (
+                  <li key={s.slug}>
+                    <Link to={`/services/${s.slug}`} style={{ color: 'var(--color-copper)', textDecoration: 'none', fontSize: '14px', fontFamily: 'var(--font-primary)' }}>
+                      {s.name} →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 2: Related Projects */}
+            <div>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 400, color: 'var(--color-off-white)', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                Completed Installations
+              </h3>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {(relatedProjects.length > 0 ? relatedProjects : projectsContent.items).slice(0, 2).map((p) => (
+                  <li key={p.id}>
+                    <Link to={`/projects/${p.id}`} style={{ color: 'var(--color-copper)', textDecoration: 'none', fontSize: '14px', fontFamily: 'var(--font-primary)' }}>
+                      {p.name} ({p.category}) →
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </div>
+          
+          <div style={{ marginTop: '48px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
+            <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>← Back to Home</Link>
+            <Link to="/projects" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>All Projects Portfolio</Link>
+          </div>
         </div>
 
       </Container>

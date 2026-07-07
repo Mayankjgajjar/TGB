@@ -16,6 +16,10 @@ export const Privacy: React.FC = () => {
     >
       <Container>
         <div className={styles.contentWrapper}>
+          <div style={{ marginBottom: '24px', display: 'flex', gap: '16px' }}>
+            <Link to="/" className={styles.link}>← Back to Home</Link>
+            <Link to="/#contact" className={styles.link}>Contact Us</Link>
+          </div>
           <h1 className={styles.title}>Privacy Policy</h1>
           <span className={styles.lastUpdated}>LAST UPDATED: OCTOBER 2025</span>
 

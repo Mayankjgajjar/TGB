@@ -106,6 +106,10 @@ export const ProjectArchive: React.FC = () => {
             <Link to="/#contact" className={styles.bottomCtaLink}>
               Start a Consultation →
             </Link>
+            <div style={{ marginTop: '20px', display: 'flex', gap: '16px', justifyContent: 'center', fontSize: '13px' }}>
+              <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>← Back to Home</Link>
+              <Link to="/#services" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Explore Services</Link>
+            </div>
           </div>
         </Container>
       </div>

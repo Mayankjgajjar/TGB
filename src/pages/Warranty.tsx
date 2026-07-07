@@ -230,6 +230,11 @@ export const Warranty: React.FC = () => {
     >
       <Container>
         <div className={styles.contentWrapper}>
+          <div style={{ marginBottom: '24px', display: 'flex', gap: '16px', fontSize: '14px' }}>
+            <Link to="/" style={{ color: 'var(--color-copper)', textDecoration: 'none' }}>← Back to Home</Link>
+            <Link to="/#services" style={{ color: 'var(--color-copper)', textDecoration: 'none' }}>Our Services</Link>
+            <Link to="/#contact" style={{ color: 'var(--color-copper)', textDecoration: 'none' }}>Contact Us</Link>
+          </div>
           <h1 className={styles.title}>Warranty Claim</h1>
           <span className={styles.subtitle}>Submit Warranty Request</span>
 

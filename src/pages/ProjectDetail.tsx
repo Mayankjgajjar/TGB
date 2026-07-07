@@ -13,16 +13,7 @@ export const ProjectDetail: React.FC = () => {
     (item) => item.id === projectId
   );
 
-  useEffect(() => {
-    if (project) {
-      document.title = `${project.name} | TGB Enterprise – Sign Board Manufacturer in Ahmedabad`;
-      const metaDesc = document.querySelector('meta[name="description"]');
-      const descContent = `View details for the completed project ${project.name} in ${project.location} by TGB Enterprise, premium sign board manufacturer in Ahmedabad. Check out specs and materials.`;
-      if (metaDesc) {
-        metaDesc.setAttribute('content', descContent);
-      }
-    }
-  }, [project]);
+
 
   if (!project) {
     return (
@@ -93,6 +84,19 @@ export const ProjectDetail: React.FC = () => {
             <p className={styles.description}>
               This installation exemplifies TGB Enterprise's dedication to architectural signage standards, ensuring premium brand expression and heavy-duty structural permanence.
             </p>
+
+            {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
+            <div style={{ marginTop: '24px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px' }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '14px', fontWeight: 500, color: 'var(--color-white)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                Engineering &amp; Quality Execution
+              </h3>
+              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)', marginBottom: '12px' }}>
+                The fabrication of the {project.name} installation showcases TGB Enterprise's structural engineering guidelines. By selecting premium raw materials and utilizing precision automated tooling, our Nikol-based fabrication shop achieved seamless joints and high-tolerance alignment. The structural sub-frames are hot-dip galvanized to resist corrosion in high-humidity local climates, while the illuminated modules are fully weather-sealed to guarantee longevity.
+              </p>
+              <p className={styles.description} style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}>
+                During the deployment phase, our technical team executed site alignment surveys and wind-load calculations to ensure the signage stands robustly. This project case study demonstrates our capacity to translate architect-level blueprints into durable physical landmarks, providing Ahmedabad and Gujarat businesses with unmatched brand permanence.
+              </p>
+            </div>
           </div>
 
           {/* Right Column: Physical Specs and Engineering Highlights */}
@@ -113,6 +117,24 @@ export const ProjectDetail: React.FC = () => {
                 {project.engineeringHighlight}
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom Navigation CTA */}
+        <div style={{ marginTop: '56px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '40px', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+          <p style={{ fontFamily: 'var(--font-primary)', fontSize: '15px', color: 'rgba(255,255,255,0.5)' }}>
+            Need similar custom signage engineered for your commercial space?
+          </p>
+          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link to="/#contact" style={{ display: 'inline-flex', background: 'var(--color-copper)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
+              Request Quote →
+            </Link>
+            <Link to="/#services" style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
+              View Services
+            </Link>
+            <Link to="/projects" style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
+              More Projects
+            </Link>
           </div>
         </div>
       </Container>
