@@ -193,9 +193,27 @@ pages.push({
   image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
   content: `
     <section>
-      <h2>Personal Information Collection and Security</h2>
-      <p>In accordance with India's Digital Personal Data Protection (DPDP) Act, 2023, TGB Enterprise collects personal identity details (name, email, phone) exclusively to process design quotations and verify product warranties. We secure your design specifications and contact information against unauthorized access. We do not rent, sell, or distribute client databases to unverified third-party marketers.</p>
-      <p>Read our <a href="/terms">Terms &amp; Conditions</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
+      <h2>Enterprise Data Protection &amp; Compliance Policy</h2>
+      <p>TGB Enterprise (referred to as "the Company", "We", "Us", or "Our") is dedicated to protecting the privacy, confidentiality, and security of our clients, business partners, and website visitors. This Privacy Policy details how we collect, store, handle, and process personal and business data through our website (https://www.tgbsign.com) and associated operations. We process data strictly in compliance with applicable law, including India's Digital Personal Data Protection Act, 2023 (DPDP Act) and international data protection standards where appropriate.</p>
+      
+      <h3>1. Company &amp; Data Collection Details</h3>
+      <p>TGB Enterprise is an architectural identity systems manufacturer based in Ahmedabad, India. We collect personal details and project specifications to quote and fabricate signs at our Nikol facility. Data collected includes:</p>
+      <ul>
+        <li>Personal Identity Details (First/Last Names)</li>
+        <li>Contact Details (Phone Numbers, Email Addresses)</li>
+        <li>Business Information (Company Names, Corporate Designations)</li>
+        <li>Project Specifications (Signage dimensions, structural materials, site location, blueprints, and files)</li>
+        <li>Warranty Information (Purchase history, invoice values, claim details, and uploaded product condition images)</li>
+      </ul>
+      <p>Automatically collected metadata includes connection parameters, operating systems, rate-limiting tokens, Sentry error logs, and Google Analytics 4 performance metrics.</p>
+
+      <h3>2. Third-Party Integrations &amp; Storage</h3>
+      <p>We restrict data transfers to trusted cloud platforms that comply with high security requirements. These integrations include Cloudflare Turnstile (spam defense tokens at challenges.cloudflare.com), Resend (transactional email routing), and Sentry (error diagnostic tracing). Data is stored in secure data centers. Retention periods match our long-term signage warranties (typically up to 10-15 years).</p>
+
+      <h3>3. Your Rights &amp; Grievance Officer</h3>
+      <p>Under the DPDP Act 2023, you have the right to request access to the personal data we process, request data corrections, request deletion, or withdraw your consent. To exercise these rights, please email tgbsign@proton.me or write to our Grievance Officer at our Nikol workshop address.</p>
+      
+      <p>Read our full <a href="/terms">Terms &amp; Conditions</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
