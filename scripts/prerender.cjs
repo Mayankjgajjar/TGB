@@ -228,9 +228,25 @@ pages.push({
   image: 'https://www.tgbsign.com/assets/images/hero-poster.png',
   content: `
     <section>
-      <h2>Blueprint Approvals, Site Readiness, and Billings</h2>
-      <p>These Terms govern TGB Enterprise's signage fabrication and mounting services. Design proofs and CAD drawings must be formally signed off before production starts. Standard billing requires 50% deposit advance, 30% upon completion of fabrication, and 20% on installation. Clients are responsible for obtaining building manager permissions and providing secure power inputs near the signage mounting site.</p>
-      <p>Read our <a href="/privacy">Privacy Policy</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
+      <h2>Enterprise Terms &amp; Conditions</h2>
+      <p>These Terms and Conditions constitute a legally binding agreement between TGB Enterprise and the Client for the procurement of custom-built interior and exterior sign boards, LED displays, ACP panels, and pylon monoliths. By requesting a quotation or placing an order, you agree to comply with and be bound by these terms.</p>
+      
+      <h3>1. Fabrication Milestones &amp; Bill of Quantities (BOQ)</h3>
+      <p>All prices quoted represent baseline estimates valid for thirty (30) calendar days from the date of issue. Signage costs are subject to material tolerances, scale requirements, and electrical specifications. Our standard billing milestones consist of:
+      <ul>
+        <li><strong>50% Advance Payment:</strong> Cleared before design drafting, material allocation, and routing begin.</li>
+        <li><strong>30% Progress Payment:</strong> Cleared upon completion of fabrication at Nikol workshop and before dispatch.</li>
+        <li><strong>20% Final Balance:</strong> Due immediately upon installation sign-off or delivery.</li>
+      </ul>
+      Taxes (GST at 18%) and transit freight are added separately.</p>
+
+      <h3>2. Sizing Approvals &amp; Facade Mounting Permissions</h3>
+      <p>Clients must review and sign off technical design drawings. TGB Enterprise holds no liability for layout, spelling, or sizing errors after artwork approval. Clients are responsible for obtaining societal, society manager, landlord, and municipal licenses (e.g., from the Ahmedabad Municipal Corporation) required to mount signs, and providing safely terminated electrical supply near the signs.</p>
+
+      <h3>3. Warranty Commitments &amp; Exclusions</h3>
+      <p>We provide a 5-Year warranty on premium LED modules and transformers (like Meanwell) and a 10-Year structural guarantee on steel sub-frames. Exclusions apply for damage resulting from voltage spikes, unauthorized modifications by third parties, vandalism, or extreme cyclones and force majeure circumstances.</p>
+      
+      <p>Read our full <a href="/privacy">Privacy Policy</a>, file a <a href="/claim-warranty">Product Warranty Claim</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
