@@ -1,93 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.tgbsign.com/</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.tgbsign.com/projects</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.tgbsign.com/claim-warranty</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.tgbsign.com/privacy</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.tgbsign.com/terms</loc>
+    <loc>https://www.tgbsign.com/projects</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.tgbsign.com/projects/infra-corp-installation</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.tgbsign.com/projects/gold-letter-signage</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.tgbsign.com/projects/custom-neon-signage</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.tgbsign.com/projects/acp-board-installation</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/images/projects/apex-acp.png</image:loc>
+      <image:title>Apex Commercial Hub</image:title>
+      <image:caption>Apex Commercial Hub - LED Glow Sign Board landmark project by TGB Enterprise</image:caption>
+    </image:image>
   </url>
   <url>
-    <loc>https://www.tgbsign.com/services/led-sign-boards</loc>
+    <loc>https://www.tgbsign.com/projects/custom-neon-signage</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/images/projects/creative-neon.png</image:loc>
+      <image:title>Glow &amp; Co. Creative Studio</image:title>
+      <image:caption>Glow &amp; Co. Creative Studio - Custom Neon Signage landmark project by TGB Enterprise</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.tgbsign.com/projects/gold-letter-signage</loc>
+    <lastmod>2026-07-07</lastmod>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/images/projects/gold-palace.png</image:loc>
+      <image:title>The Gold Palace Showroom</image:title>
+      <image:caption>The Gold Palace Showroom - 3D Acrylic &amp; Gold Letter Signage landmark project by TGB Enterprise</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.tgbsign.com/projects/infra-corp-installation</loc>
+    <lastmod>2026-07-07</lastmod>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/images/projects/infra-corp.png</image:loc>
+      <image:title>INFRA CORP Headquarters</image:title>
+      <image:caption>INFRA CORP Headquarters - ACP Facade &amp; Corporate Signage landmark project by TGB Enterprise</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.tgbsign.com/services/acp-sign-boards</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.tgbsign.com/services/neon-sign-boards</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/acp-sign.png</image:loc>
+      <image:title>ACP Sign Boards</image:title>
+      <image:caption>TGB Enterprise ACP Sign Boards Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.tgbsign.com/services/acrylic-letters</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/acrylic-letters.png</image:loc>
+      <image:title>Acrylic Letters</image:title>
+      <image:caption>TGB Enterprise Acrylic Letters Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
   </url>
   <url>
-    <loc>https://www.tgbsign.com/services/ss-letters</loc>
+    <loc>https://www.tgbsign.com/services/led-sign-boards</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/led-sign.png</image:loc>
+      <image:title>LED Sign Boards</image:title>
+      <image:caption>TGB Enterprise LED Sign Boards Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.tgbsign.com/services/neon-sign-boards</loc>
+    <lastmod>2026-07-07</lastmod>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/neon-sign.png</image:loc>
+      <image:title>Neon Sign Boards</image:title>
+      <image:caption>TGB Enterprise Neon Sign Boards Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.tgbsign.com/services/pylon-signs</loc>
     <lastmod>2026-07-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/pylon-sign.png</image:loc>
+      <image:title>Pylon Signs</image:title>
+      <image:caption>TGB Enterprise Pylon Signs Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.tgbsign.com/services/ss-letters</loc>
+    <lastmod>2026-07-07</lastmod>
+    <image:image>
+      <image:loc>https://www.tgbsign.com/assets/services/ss-letters.png</image:loc>
+      <image:title>SS Letters</image:title>
+      <image:caption>TGB Enterprise SS Letters Design &amp; Installation Ahmedabad</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.tgbsign.com/terms</loc>
+    <lastmod>2026-07-07</lastmod>
   </url>
 </urlset>
