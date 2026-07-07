@@ -45,10 +45,14 @@ export const ProjectDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        {/* Navigation Link back to projects archive */}
-        <Link to="/projects" className={styles.backLink}>
-          <ArrowLeft size={14} /> Back to Projects
-        </Link>
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px', fontFamily: 'var(--font-technical)', fontSize: '0.6875rem', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.35)' }}>
+          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</Link>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
+          <Link to="/projects" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Projects</Link>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
+          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{project.name}</span>
+        </nav>
 
         {/* Project Header block */}
         <header className={styles.header}>
@@ -126,10 +130,10 @@ export const ProjectDetail: React.FC = () => {
             Need similar custom signage engineered for your commercial space?
           </p>
           <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link to="/#contact" style={{ display: 'inline-flex', background: 'var(--color-copper)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
+            <Link to="/contact" style={{ display: 'inline-flex', background: 'var(--color-copper)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
               Request Quote →
             </Link>
-            <Link to="/#services" style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
+            <Link to="/services" style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>
               View Services
             </Link>
             <Link to="/projects" style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', textDecoration: 'none', padding: '12px 28px', borderRadius: '4px', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '12px', fontWeight: 600 }}>

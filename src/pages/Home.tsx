@@ -4,13 +4,14 @@ import { pageTransition } from '../animations/variants';
 
 // ── Eager sections (above-the-fold) ──────────────────────────────────────────
 import Hero from '../components/sections/Hero';
+import HomeAboutPreview from '../components/sections/HomeAboutPreview';
 import FeaturedProjects from '../components/sections/FeaturedProjects';
 import ContactCTA from '../components/sections/ContactCTA';
 
 // ── Lazy sections (below-the-fold) ───────────────────────────────────────────
 const ServicesOverview = lazy(() => import('../components/sections/ServicesOverview'));
+const Industries = lazy(() => import('../components/sections/Industries'));
 const Testimonials = lazy(() => import('../components/sections/Testimonials'));
-const FAQ = lazy(() => import('../components/sections/FAQ'));
 
 // Lightweight inline fallback — avoids layout shift
 const SectionFallback = () => (
@@ -28,22 +29,25 @@ export const Home: React.FC = () => {
       {/* Full-screen video hero with primary CTAs */}
       <Hero />
 
+      {/* Company introduction + 4 key stats → links to /about */}
+      <HomeAboutPreview />
+
       {/* Service teaser grid — 6 cards linking to /services/:slug */}
       <Suspense fallback={<SectionFallback />}>
         <ServicesOverview />
       </Suspense>
 
-      {/* Featured case studies — 4 project cards */}
+      {/* Featured case studies — 4 project cards → links to /projects */}
       <FeaturedProjects />
 
-      {/* Social proof */}
+      {/* Industries overview — who we serve */}
       <Suspense fallback={<SectionFallback />}>
-        <Testimonials />
+        <Industries />
       </Suspense>
 
-      {/* FAQ preview */}
+      {/* Client testimonials — social proof */}
       <Suspense fallback={<SectionFallback />}>
-        <FAQ />
+        <Testimonials />
       </Suspense>
 
       {/* Lead generation form */}

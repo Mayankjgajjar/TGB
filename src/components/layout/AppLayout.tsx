@@ -88,6 +88,73 @@ export const AppLayout: React.FC = () => {
     };
   }, []);
 
+  // Dynamic Breadcrumb Structured Data (JSON-LD)
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/') {
+      const existingScript = document.getElementById('breadcrumb-schema');
+      if (existingScript) existingScript.remove();
+      return;
+    }
+
+    const pathSegments = path.split('/').filter(Boolean);
+    const itemListElement = [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.tgbsign.com"
+      }
+    ];
+
+    let currentPath = '';
+    pathSegments.forEach((segment, idx) => {
+      currentPath += `/${segment}`;
+      let name = segment.replace(/-/g, ' ');
+      // Capitalize first letter of each word
+      name = name.replace(/\b\w/g, c => c.toUpperCase());
+      
+      // Customize names for specific segments
+      if (segment === 'claim-warranty') name = 'Claim Warranty';
+      if (segment === 'privacy') name = 'Privacy Policy';
+      if (segment === 'terms') name = 'Terms & Conditions';
+
+      // Special check for dynamic names if matches known ones
+      if (segment.startsWith('led-sign')) name = 'LED Sign Boards';
+      if (segment.startsWith('acp-sign')) name = 'ACP Sign Boards';
+      if (segment.startsWith('neon-sign')) name = 'Neon Sign Boards';
+      if (segment.startsWith('acrylic')) name = 'Acrylic & 3D Letters';
+      if (segment.startsWith('ss-letters')) name = 'SS Letters';
+      if (segment.startsWith('pylon')) name = 'Pylon Signs';
+
+      itemListElement.push({
+        "@type": "ListItem",
+        "position": idx + 2,
+        "name": name,
+        "item": `https://www.tgbsign.com${currentPath}`
+      });
+    });
+
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": itemListElement
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'breadcrumb-schema';
+    script.innerHTML = JSON.stringify(breadcrumbSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const existingScript = document.getElementById('breadcrumb-schema');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [location.pathname]);
+
   // Centralized Dynamic SEO, OG and Twitter Metadata Updates
   useEffect(() => {
     let title = "TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad";

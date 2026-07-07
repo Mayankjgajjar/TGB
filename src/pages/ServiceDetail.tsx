@@ -35,7 +35,7 @@ export const ServiceDetail: React.FC = () => {
     return (
       <div className={styles.page}>
         <Container>
-          <Link to="/#services" className={styles.backLink}>
+          <Link to="/services" className={styles.backLink}>
             <ArrowLeft size={14} /> Back to Services
           </Link>
           <div style={{ textAlign: 'center', padding: '96px 0', color: 'var(--color-white-muted)' }}>
@@ -58,10 +58,14 @@ export const ServiceDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        {/* Navigation Link back to homepage services */}
-        <Link to="/#services" className={styles.backLink}>
-          <ArrowLeft size={14} /> Back to Services
-        </Link>
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px', fontFamily: 'var(--font-technical)', fontSize: '0.6875rem', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.35)' }}>
+          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</Link>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
+          <Link to="/services" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Services</Link>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
+          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{service.name}</span>
+        </nav>
 
         {/* Header Block */}
         <header className={styles.header}>
@@ -228,7 +232,7 @@ export const ServiceDetail: React.FC = () => {
               </ul>
               <div style={{ marginTop: '24px' }}>
                 <Link 
-                  to="/#contact" 
+                  to="/contact" 
                   className={styles.backLink}
                   style={{
                     background: 'var(--color-red)',
@@ -301,6 +305,7 @@ export const ServiceDetail: React.FC = () => {
           <div style={{ marginTop: '48px', display: 'flex', gap: '20px', justifyContent: 'center' }}>
             <Link to="/" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>← Back to Home</Link>
             <Link to="/projects" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>All Projects Portfolio</Link>
+            <Link to="/services" style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}>Our Services</Link>
           </div>
         </div>
 

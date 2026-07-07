@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import PageHero from '../components/sections/PageHero';
+import ContactInfoPanel from '../components/sections/ContactInfoPanel';
 import ContactCTA from '../components/sections/ContactCTA';
+
+const FAQ = lazy(() => import('../components/sections/FAQ'));
+
+const SectionFallback = () => <div style={{ minHeight: '400px' }} aria-hidden="true" />;
 
 export const Contact: React.FC = () => {
   return (
@@ -22,8 +27,16 @@ export const Contact: React.FC = () => {
         ]}
       />
 
-      {/* Full contact form with Turnstile, consent, and all validation */}
+      {/* Workshop address, phone, email, WhatsApp, business hours, map & service areas */}
+      <ContactInfoPanel />
+
+      {/* Main inquiry submission form with Turnstile validation */}
       <ContactCTA />
+
+      {/* FAQs regarding consultations, site audits, and delivery timelines */}
+      <Suspense fallback={<SectionFallback />}>
+        <FAQ />
+      </Suspense>
     </motion.div>
   );
 };
