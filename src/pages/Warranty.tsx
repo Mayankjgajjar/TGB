@@ -263,9 +263,7 @@ export const Warranty: React.FC = () => {
 
           {isSubmitted ? (
             <div className={styles.successMessage} role="status">
-              <div className={styles.warrantyIcon}>
-                ✓
-              </div>
+              <div className={styles.warrantyIcon}>✓</div>
               <h2 className={styles.successTitle}>Claim Submitted</h2>
               <p className={styles.successDesc}>
                 Thank you for submitting your warranty claim. Our technical support team will review
@@ -277,7 +275,6 @@ export const Warranty: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
-
               {/* Customer Name */}
               <div className={styles.inputGroup}>
                 <label htmlFor="customerName" className={styles.fieldLabel}>
@@ -569,13 +566,21 @@ export const Warranty: React.FC = () => {
               />
 
               {turnstileExpired && (
-                <div className={styles.fieldError} role="alert" style={{ marginTop: '4px', marginBottom: '8px' }}>
+                <div
+                  className={styles.fieldError}
+                  role="alert"
+                  style={{ marginTop: '4px', marginBottom: '8px' }}
+                >
                   Verification expired. Please verify the CAPTCHA again.
                 </div>
               )}
 
               {submitError && (
-                <div className={styles.errorBanner} role="alert" style={{ marginTop: '12px', marginBottom: '12px' }}>
+                <div
+                  className={styles.errorBanner}
+                  role="alert"
+                  style={{ marginTop: '12px', marginBottom: '12px' }}
+                >
                   {submitError}
                 </div>
               )}

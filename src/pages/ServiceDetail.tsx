@@ -63,7 +63,13 @@ export const ServiceDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.name }]} />
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Services', to: '/services' },
+            { label: service.name },
+          ]}
+        />
 
         {/* Header Block */}
         <header className={styles.header}>
@@ -159,9 +165,7 @@ export const ServiceDetail: React.FC = () => {
               <div className={styles.specRows}>
                 <div className={styles.specRow}>
                   <span className={styles.specFieldLabel}>Scale Range</span>
-                  <span className={styles.specFieldValue}>
-                    {service.specifications.dimensions}
-                  </span>
+                  <span className={styles.specFieldValue}>{service.specifications.dimensions}</span>
                 </div>
                 <div className={styles.specRow}>
                   <span className={styles.specFieldLabel}>Weathering</span>
@@ -171,9 +175,7 @@ export const ServiceDetail: React.FC = () => {
                 </div>
                 <div className={styles.specRow}>
                   <span className={styles.specFieldLabel}>Warranty</span>
-                  <span className={styles.specFieldValue}>
-                    {service.specifications.warranty}
-                  </span>
+                  <span className={styles.specFieldValue}>{service.specifications.warranty}</span>
                 </div>
                 <div className={styles.specRow}>
                   <span className={styles.specFieldLabel}>Certifications</span>
@@ -195,9 +197,7 @@ export const ServiceDetail: React.FC = () => {
               <span className={styles.specLabel}>Manufacturing Capabilities</span>
 
               <div className={styles.capabilitySection}>
-                <span className={styles.capabilityLabel}>
-                  Materials
-                </span>
+                <span className={styles.capabilityLabel}>Materials</span>
                 <div className={styles.chipGrid}>
                   {service.capabilities.materials.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
@@ -208,9 +208,7 @@ export const ServiceDetail: React.FC = () => {
               </div>
 
               <div className={styles.capabilitySection}>
-                <span className={styles.capabilityLabel}>
-                  Technology
-                </span>
+                <span className={styles.capabilityLabel}>Technology</span>
                 <div className={styles.chipGrid}>
                   {service.capabilities.technology.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
@@ -221,9 +219,7 @@ export const ServiceDetail: React.FC = () => {
               </div>
 
               <div className={styles.capabilitySection}>
-                <span className={styles.capabilityLabel}>
-                  Finishes
-                </span>
+                <span className={styles.capabilityLabel}>Finishes</span>
                 <div className={styles.chipGrid}>
                   {service.capabilities.finishes.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
@@ -251,9 +247,7 @@ export const ServiceDetail: React.FC = () => {
               <span className={styles.priceLabel}>Estimated Pricing</span>
               <div className={styles.pricingRow}>
                 <span className={styles.priceAmount}>{service.pricing.startingFrom}</span>
-                <span className={styles.priceMeta}>
-                  ({service.pricing.taxNote})
-                </span>
+                <span className={styles.priceMeta}>({service.pricing.taxNote})</span>
               </div>
               <ul className={styles.priceNotes}>
                 {service.pricing.customQuotationNotes.map((note, idx) => (
@@ -274,9 +268,7 @@ export const ServiceDetail: React.FC = () => {
           <div className={styles.relatedGrid}>
             {/* Column 1: Other Services */}
             <div>
-              <h3 className={styles.relatedHeading}>
-                Other Signage Solutions
-              </h3>
+              <h3 className={styles.relatedHeading}>Other Signage Solutions</h3>
               <ul className={styles.relatedList}>
                 {otherServices.slice(0, 3).map((s) => (
                   <li key={s.slug}>
@@ -290,9 +282,7 @@ export const ServiceDetail: React.FC = () => {
 
             {/* Column 2: Related Projects */}
             <div>
-              <h3 className={styles.relatedHeading}>
-                Completed Installations
-              </h3>
+              <h3 className={styles.relatedHeading}>Completed Installations</h3>
               <ul className={styles.relatedList}>
                 {(relatedProjects.length > 0 ? relatedProjects : projectsContent.items)
                   .slice(0, 2)

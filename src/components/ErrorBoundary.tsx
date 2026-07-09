@@ -50,9 +50,7 @@ function DefaultFallback({ error, onReset }: { error: Error | null; onReset: () 
     <div role="alert" className={styles.container}>
       <div className={styles.icon}>⚠</div>
       <h2 className={styles.heading}>Something went wrong</h2>
-      <p className={styles.message}>
-        An unexpected error occurred. Our team has been notified.
-      </p>
+      <p className={styles.message}>An unexpected error occurred. Our team has been notified.</p>
       {error && (
         <details className={styles.details}>
           <summary>Error details</summary>

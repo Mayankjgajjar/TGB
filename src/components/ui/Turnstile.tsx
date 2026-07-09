@@ -91,7 +91,9 @@ export const Turnstile = React.forwardRef<TurnstileHandle, TurnstileProps>(
 
       if (isPlaceholder && !window.turnstile) {
         if (!turnstileWarningShown) {
-          console.warn('VITE_TURNSTILE_SITE_KEY is not defined or is placeholder. CAPTCHA cannot render.');
+          console.warn(
+            'VITE_TURNSTILE_SITE_KEY is not defined or is placeholder. CAPTCHA cannot render.',
+          );
           turnstileWarningShown = true;
         }
         setHasError(true);
@@ -120,8 +122,7 @@ export const Turnstile = React.forwardRef<TurnstileHandle, TurnstileProps>(
         if (!script) {
           script = document.createElement('script');
           script.id = scriptId;
-          script.src =
-            'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+          script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
           script.async = true;
           script.defer = true;
           script.onerror = () => {
@@ -169,11 +170,7 @@ export const Turnstile = React.forwardRef<TurnstileHandle, TurnstileProps>(
               : 'CAPTCHA verification failed.'}
           </span>
           {!isPlaceholder && (
-            <button
-              type="button"
-              onClick={handleRetry}
-              className={styles.retryButton}
-            >
+            <button type="button" onClick={handleRetry} className={styles.retryButton}>
               Retry verification
             </button>
           )}

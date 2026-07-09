@@ -145,7 +145,7 @@ export const Gallery: React.FC = () => {
               variants={headerVariants}
             >
               <SectionEyebrow>BROWSE BY TYPE</SectionEyebrow>
-              <h2 className={servicesOverviewStyles.mainTitle}>              Explore Our Signage Solutions</h2>
+              <h2 className={servicesOverviewStyles.mainTitle}> Explore Our Signage Solutions</h2>
               <p className={servicesOverviewStyles.subtitle}>
                 Each category represents a dedicated manufacturing line with specific materials,
                 technology, and finishing standards.
@@ -223,7 +223,7 @@ export const Gallery: React.FC = () => {
               variants={headerVariants}
             >
               <SectionEyebrow>WORKMANSHIP</SectionEyebrow>
-              <h2 className={servicesOverviewStyles.mainTitle}>              Built to Exact Standards</h2>
+              <h2 className={servicesOverviewStyles.mainTitle}> Built to Exact Standards</h2>
               <p className={servicesOverviewStyles.subtitle}>
                 Every sign that leaves our workshop undergoes strict quality checks. The images tell
                 the story — here is what makes them possible.

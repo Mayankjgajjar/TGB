@@ -44,7 +44,13 @@ export const ProjectDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Gallery', to: '/gallery' }, { label: project.name }]} />
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Gallery', to: '/gallery' },
+            { label: project.name },
+          ]}
+        />
 
         {/* Project Header block */}
         <header className={styles.header}>
@@ -83,9 +89,7 @@ export const ProjectDetail: React.FC = () => {
 
             {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
             <div className={styles.seoBlock}>
-              <h3 className={styles.seoHeading}>
-                Engineering &amp; Quality Execution
-              </h3>
+              <h3 className={styles.seoHeading}>Engineering &amp; Quality Execution</h3>
               <p className={styles.seoText}>
                 The fabrication of the {project.name} installation showcases TGB Enterprise's
                 structural engineering guidelines. By selecting premium raw materials and utilizing

@@ -32,7 +32,9 @@
   font-weight: 500;
   padding: 6px 14px;
   white-space: nowrap;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .retryButton:hover {

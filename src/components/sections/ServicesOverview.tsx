@@ -160,11 +160,7 @@ export const ServicesOverview: React.FC<{
             {subtitle ||
               'From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore.'}
           </p>
-          {introParagraph && (
-            <p className={styles.introParagraph}>
-              {introParagraph}
-            </p>
-          )}
+          {introParagraph && <p className={styles.introParagraph}>{introParagraph}</p>}
         </motion.div>
 
         {/* Service Card Grid */}

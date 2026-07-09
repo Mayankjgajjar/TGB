@@ -525,7 +525,11 @@ export const ContactCTA: React.FC<{
                   />
 
                   {turnstileExpired && (
-                    <div className={styles.fieldError} role="alert" style={{ marginTop: '4px', marginBottom: '8px' }}>
+                    <div
+                      className={styles.fieldError}
+                      role="alert"
+                      style={{ marginTop: '4px', marginBottom: '8px' }}
+                    >
                       Verification expired. Please verify the CAPTCHA again.
                     </div>
                   )}

@@ -40,7 +40,12 @@ export const Card: React.FC<CardProps> = ({
     <>
       {image && (
         <div className={styles.imageWrapper}>
-          <OptimizedImage src={image} alt={imageAlt || title} className={styles.image} loading={loading} />
+          <OptimizedImage
+            src={image}
+            alt={imageAlt || title}
+            className={styles.image}
+            loading={loading}
+          />
           <div className={styles.imageOverlay} />
           {category && (
             <div className={styles.imageBadge}>
