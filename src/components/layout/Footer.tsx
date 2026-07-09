@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
 import { useQuoteModal } from '../../context/QuoteContext';
+import { getEnvVar } from '../../lib/env';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
@@ -194,10 +195,10 @@ export const Footer: React.FC = () => {
                 <strong>Email:</strong>
                 <br />
                 <a
-                  href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
+                  href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}`}
                   className={styles.contactAnchor}
                 >
-                  {import.meta.env.VITE_CONTACT_EMAIL}
+                  {getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}
                 </a>
               </p>
               <p className={`${styles.contactText} ${styles.contactItalic}`}>

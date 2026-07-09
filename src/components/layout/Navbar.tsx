@@ -41,7 +41,12 @@ export const Navbar: React.FC = () => {
   // Don't hide when mobile drawer is open
   const isHidden = scrollDirection === 'down' && !mobileOpen && !focusVisible;
 
-  const handleMobileClose = () => setMobileOpen(false);
+  const handleMobileClose = () => {
+    setMobileOpen(false);
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
 
   const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
     `${styles.navLink} ${isActive ? styles.activeNavLink : ''}`;

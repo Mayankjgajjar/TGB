@@ -7,6 +7,7 @@ import SectionEyebrow from '../ui/SectionEyebrow';
 import { trackContactFormSubmit } from '../../lib/analytics';
 import { captureError } from '../../lib/telemetry';
 import Turnstile, { TurnstileHandle } from '../ui/Turnstile';
+import { getEnvVar } from '../../lib/env';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
@@ -640,10 +641,10 @@ export const ContactCTA: React.FC<{
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
                   <a
-                    href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
+                    href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}`}
                     className={styles.infoLink}
                   >
-                    {import.meta.env.VITE_CONTACT_EMAIL}
+                    {getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}
                   </a>
                 </div>
               </div>
