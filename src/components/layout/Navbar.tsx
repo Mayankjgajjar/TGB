@@ -121,6 +121,7 @@ export const Navbar: React.FC = () => {
         className={`${styles.mobileDrawer} ${mobileOpen ? styles.mobileDrawerOpen : ''}`}
         aria-label="Mobile navigation"
         aria-hidden={!mobileOpen}
+        inert={!mobileOpen ? true : undefined}
       >
         <Container>
           <div className={styles.mobileNavLinks}>

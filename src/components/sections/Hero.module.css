@@ -89,7 +89,6 @@
     flex-direction: row;
     align-items: center;
     width: auto;
-    max-content: none;
     max-width: none;
   }
 }

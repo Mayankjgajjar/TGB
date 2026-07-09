@@ -13,7 +13,7 @@
 }
 
 .inner {
-  max-width: 1300px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
   padding: 0 var(--space-32);
 }
@@ -65,6 +65,18 @@
   }
 }
 
+.brandLogoWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brandLogoImg {
+  height: 32px;
+  width: auto;
+  align-self: start;
+}
+
 .brandLogo {
   font-family: var(--font-display);
   font-size: 20px;
@@ -81,6 +93,12 @@
   color: var(--color-copper-light);
   letter-spacing: 1.5px;
   text-transform: uppercase;
+}
+
+.contactItalic {
+  opacity: 0.8;
+  font-size: 12px;
+  font-style: italic;
 }
 
 .brandDesc {
@@ -102,7 +120,7 @@
   font-size: 11px;
   color: var(--color-steel);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
 }
 
 .socialLink:hover {
@@ -124,7 +142,7 @@
   font-size: 13px;
   color: var(--color-off-white-muted);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
   display: inline-block;
 }
 
@@ -143,7 +161,7 @@
   align-items: center;
   gap: 4px;
   margin-top: 12px;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
 }
 
 .viewAllLink:hover {
@@ -170,7 +188,7 @@
   font-size: 13px;
   color: var(--color-off-white);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
 }
 
 .contactAnchor:hover {
@@ -188,7 +206,7 @@
   font-size: 12px;
   font-weight: 500;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: var(--radius-input);
   text-decoration: none;
   transition:
     border-color 0.2s ease,
@@ -251,7 +269,7 @@
   font-size: 11px;
   color: var(--color-steel);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
 }
 
 .legalLink:hover {

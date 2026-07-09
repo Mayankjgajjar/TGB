@@ -6,6 +6,7 @@ import Turnstile from '../components/ui/Turnstile';
 import { trackWarrantyFormSubmit } from '../lib/analytics';
 import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 
 interface FormFields {
   customerName: string;
@@ -232,34 +233,14 @@ export const Warranty: React.FC = () => {
     >
       <Container>
         <div className={styles.contentWrapper}>
-          {/* Integrated breadcrumbs inside form card to prevent double stacked heroes */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              marginBottom: '24px',
-              fontFamily: 'var(--font-technical)',
-              fontSize: '11px',
-              letterSpacing: '2px',
-              textTransform: 'uppercase',
-              color: 'var(--color-steel)',
-            }}
-          >
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-              Home
-            </Link>
-            <span style={{ opacity: 0.4 }}>›</span>
-            <span style={{ color: 'var(--color-off-white)' }}>Warranty Support</span>
-          </div>
+          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Warranty Support' }]} />
 
           <h1 className={styles.title}>Warranty Claim</h1>
           <span className={styles.subtitle}>Submit Warranty Request</span>
 
           {isSubmitted ? (
-            <div className={styles.successMessage}>
-              <div style={{ color: 'var(--color-copper)', fontSize: '48px', marginBottom: '8px' }}>
+            <div className={styles.successMessage} role="status">
+              <div className={styles.warrantyIcon}>
                 ✓
               </div>
               <h2 className={styles.successTitle}>Claim Submitted</h2>
@@ -485,7 +466,9 @@ export const Warranty: React.FC = () => {
 
               {/* Proof of purchase or issue photo */}
               <div className={styles.fileInputGroup}>
-                <label className={styles.fieldLabel}>Upload Photo of the Issue (Optional)</label>
+                <label className={styles.fieldLabel} htmlFor="issuePhoto">
+                  Upload Photo of the Issue (Optional)
+                </label>
                 {selectedFile ? (
                   <div className={styles.previewContainer}>
                     {fileBase64 && (
@@ -493,6 +476,7 @@ export const Warranty: React.FC = () => {
                         src={fileBase64}
                         alt="Preview of issue"
                         className={styles.previewImage}
+                        loading="lazy"
                       />
                     )}
                     <div className={styles.previewInfo}>
@@ -515,6 +499,7 @@ export const Warranty: React.FC = () => {
                     <span className={styles.uploadText}>Select or drag a photo here</span>
                     <span className={styles.uploadLimit}>Max file size: 4MB (JPG, PNG, WebP)</span>
                     <input
+                      id="issuePhoto"
                       type="file"
                       accept="image/*"
                       onChange={handleFileChange}
@@ -550,8 +535,7 @@ export const Warranty: React.FC = () => {
               {touched.consent && errors.consent && (
                 <span
                   id="consent-error"
-                  className={styles.fieldError}
-                  style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }}
+                  className={`${styles.fieldError} ${styles.fieldErrorConsent}`}
                   role="alert"
                 >
                   {errors.consent}
@@ -571,32 +555,14 @@ export const Warranty: React.FC = () => {
       </Container>
 
       {/* Internal Navigation links at bottom */}
-      <div
-        style={{
-          textAlign: 'center',
-          paddingBottom: '80px',
-          display: 'flex',
-          gap: '20px',
-          justifyContent: 'center',
-          marginTop: '48px',
-        }}
-      >
-        <Link
-          to="/"
-          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-        >
+      <div className={styles.bottomSection}>
+        <Link to="/" className={styles.bottomLink}>
           ← Back to Home
         </Link>
-        <Link
-          to="/contact"
-          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-        >
+        <Link to="/contact" className={styles.bottomLink}>
           Contact Support
         </Link>
-        <Link
-          to="/privacy"
-          style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-        >
+        <Link to="/privacy" className={styles.bottomLink}>
           Privacy Policy
         </Link>
       </div>

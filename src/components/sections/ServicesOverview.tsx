@@ -9,6 +9,7 @@ import useScrollReveal from '../../hooks/useScrollReveal';
 import { servicesData } from '../../content/services';
 import styles from './ServicesOverview.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 interface HomepageServiceItem {
   slug: string;
@@ -125,7 +126,7 @@ export const ServicesOverview: React.FC<{
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.72,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.16, 1, 0.3, 1],
         delay: shouldReduceMotion ? 0 : index * 0.08,
       },
     }),
@@ -150,35 +151,7 @@ export const ServicesOverview: React.FC<{
           animate={isRevealed ? 'visible' : 'hidden'}
           variants={headerVariants}
         >
-          {breadcrumbs && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                marginBottom: '24px',
-                fontFamily: 'var(--font-technical)',
-                fontSize: '11px',
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                color: 'var(--color-steel)',
-              }}
-            >
-              {breadcrumbs.map((crumb, idx) => (
-                <React.Fragment key={idx}>
-                  {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
-                  {crumb.to ? (
-                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {crumb.label}
-                    </Link>
-                  ) : (
-                    <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          )}
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           <SectionEyebrow>{eyebrow || 'OUR EXPERTISE'}</SectionEyebrow>
           <h2 className={styles.mainTitle}>
             {title || 'Signage Solutions Built to Elevate Brands.'}
@@ -188,18 +161,7 @@ export const ServicesOverview: React.FC<{
               'From iconic storefronts to corporate environments, we design, manufacture, and install premium signage solutions that make businesses impossible to ignore.'}
           </p>
           {introParagraph && (
-            <p
-              className={styles.introParagraph}
-              style={{
-                maxWidth: '800px',
-                margin: '24px auto 0 auto',
-                fontSize: '15px',
-                lineHeight: '1.75',
-                color: 'rgba(255, 255, 255, 0.65)',
-                textAlign: 'center',
-                fontFamily: 'var(--font-primary)',
-              }}
-            >
+            <p className={styles.introParagraph}>
               {introParagraph}
             </p>
           )}

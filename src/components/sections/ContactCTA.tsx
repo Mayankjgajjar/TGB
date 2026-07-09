@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Phone, Mail, Clock, MapPin, Building, Globe } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
 import styles from './ContactCTA.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { trackContactFormSubmit } from '../../lib/analytics';
+import { captureError } from '../../lib/telemetry';
 import Turnstile from '../ui/Turnstile';
 import { Link } from 'react-router-dom';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -88,6 +90,13 @@ export const ContactCTA: React.FC<{
   const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [isSubmitted]);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string>('');
 
@@ -176,6 +185,7 @@ export const ContactCTA: React.FC<{
         trackContactFormSubmit();
       } catch (error: any) {
         console.error('Error submitting contact form:', error);
+        captureError(error, { context: 'ContactCTA' });
         setSubmitError(
           error.message || 'We encountered an issue submitting your inquiry. Please try again.',
         );
@@ -215,38 +225,10 @@ export const ContactCTA: React.FC<{
           animate={isRevealed ? 'visible' : 'hidden'}
           variants={headerVariants}
         >
-          {breadcrumbs && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '8px',
-                marginBottom: '24px',
-                fontFamily: 'var(--font-technical)',
-                fontSize: '11px',
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                color: 'var(--color-steel)',
-              }}
-            >
-              {breadcrumbs.map((crumb, idx) => (
-                <React.Fragment key={idx}>
-                  {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
-                  {crumb.to ? (
-                    <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {crumb.label}
-                    </Link>
-                  ) : (
-                    <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          )}
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           <SectionEyebrow>{eyebrow || 'GET IN TOUCH'}</SectionEyebrow>
           <h2 className={styles.title}>
-            {title || "Let's Create Signage That Defines Your Brand."}
+            {title || "Let's Create Signage That Defines Your Brand"}
           </h2>
           <p className={styles.subheading}>
             {subtitle ||
@@ -266,11 +248,14 @@ export const ContactCTA: React.FC<{
             <AnimatePresence mode="wait">
               {isSubmitted ? (
                 <motion.div
+                  ref={successRef}
                   className={styles.successMessage}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
                   transition={{ duration: 0.5, ease: EASE_EXPO }}
+                  tabIndex={-1}
+                  role="status"
                 >
                   <h3 className={styles.successTitle}>Thank You</h3>
                   <p className={styles.successDesc}>
@@ -501,8 +486,7 @@ export const ContactCTA: React.FC<{
                   {touched.consent && errors.consent && (
                     <span
                       id="consent-error"
-                      className={styles.fieldError}
-                      style={{ display: 'block', marginTop: '-12px', marginBottom: '12px' }}
+                      className={`${styles.fieldError} ${styles.fieldErrorConsent}`}
                       role="alert"
                     >
                       {errors.consent}
@@ -563,7 +547,7 @@ export const ContactCTA: React.FC<{
                   title="TGB Enterprise Ahmedabad Studio Map"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  border="0"
                   allowFullScreen={false}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -617,8 +601,11 @@ export const ContactCTA: React.FC<{
                 </div>
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
-                  <a href="mailto:tgbsign@proton.me" className={styles.infoLink}>
-                    tgbsign@proton.me
+                  <a
+                    href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
+                    className={styles.infoLink}
+                  >
+                    {import.meta.env.VITE_CONTACT_EMAIL}
                   </a>
                 </div>
               </div>
@@ -651,7 +638,7 @@ export const ContactCTA: React.FC<{
 
         {/* ── Bottom Signature ── */}
         <div className={styles.brandSignature}>
-          <h4 className={styles.signatureHeadline}>Built to be Seen.</h4>
+          <span className={styles.signatureHeadline}>Built to be Seen.</span>
           <p className={styles.signatureSub}>Let's build something remarkable together.</p>
         </div>
       </div>

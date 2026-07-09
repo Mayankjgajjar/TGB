@@ -13,11 +13,12 @@ export const Footer: React.FC = () => {
         <div className={styles.grid}>
           {/* ── Column 01: Brand Information ── */}
           <div className={styles.brandCol}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div className={styles.brandLogoWrap}>
               <img
                 src="/assets/logos/tgb-logo.svg"
                 alt="TGB Enterprise - Premium Signage & Branding Solutions in Ahmedabad"
-                style={{ height: '32px', width: 'auto', alignSelf: 'start' }}
+                loading="lazy"
+                className={styles.brandLogoImg}
               />
               <span className={styles.brandTagline}>Built to be Seen.</span>
             </div>
@@ -32,6 +33,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
+                aria-label="Follow us on Instagram (opens in new tab)"
               >
                 Instagram
               </a>
@@ -40,6 +42,7 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.socialLink}
+                aria-label="Follow us on Facebook (opens in new tab)"
               >
                 Facebook
               </a>
@@ -190,14 +193,14 @@ export const Footer: React.FC = () => {
               <p className={styles.contactText}>
                 <strong>Email:</strong>
                 <br />
-                <a href="mailto:tgbsign@proton.me" className={styles.contactAnchor}>
-                  tgbsign@proton.me
+                <a
+                  href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}
+                  className={styles.contactAnchor}
+                >
+                  {import.meta.env.VITE_CONTACT_EMAIL}
                 </a>
               </p>
-              <p
-                className={styles.contactText}
-                style={{ opacity: 0.8, fontSize: '12px', fontStyle: 'italic' }}
-              >
+              <p className={`${styles.contactText} ${styles.contactItalic}`}>
                 Proudly serving Ahmedabad and businesses across Gujarat and India.
               </p>
               <button onClick={openModal} className={styles.startProjectBtn}>
@@ -210,7 +213,9 @@ export const Footer: React.FC = () => {
         {/* ── Bottom Section ── */}
         <div className={styles.bottomSection}>
           <div className={styles.bottomBar}>
-            <div className={styles.copyright}>© 2025 TGB Enterprise. All Rights Reserved.</div>
+            <div className={styles.copyright}>
+              © {new Date().getFullYear()} TGB Enterprise. All Rights Reserved.
+            </div>
             <div className={styles.legalLinks}>
               <Link to="/privacy" className={styles.legalLink}>
                 Privacy Policy

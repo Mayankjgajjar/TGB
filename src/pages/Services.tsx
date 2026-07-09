@@ -26,7 +26,7 @@ export const Services: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      style={{ paddingTop: 'var(--space-xl)' }}
+      className="page"
     >
       {/* 1. Page Introduction & 2. Service Categories (Grid) */}
       <ServicesOverview
@@ -39,7 +39,7 @@ export const Services: React.FC = () => {
       {/* 3. Which Service Is Right for You? (Concise Recommendation Cards) */}
       <Section spacing="large" id="recommendations">
         <Container>
-          <div className={servicesOverviewStyles.headerBlock} style={{ marginBottom: '48px' }}>
+          <div className={servicesOverviewStyles.headerBlock}>
             <SectionEyebrow>{servicesHubContent.recommendations.header.eyebrow}</SectionEyebrow>
             <h2 className={servicesOverviewStyles.mainTitle}>
               {servicesHubContent.recommendations.header.title}
@@ -74,7 +74,7 @@ export const Services: React.FC = () => {
       {/* 5. Why Choose TGB Enterprise (Service Delivery Standards) */}
       <Section spacing="large" id="why-choose-us" style={{ background: 'rgba(10, 10, 10, 0.4)' }}>
         <Container>
-          <div className={servicesOverviewStyles.headerBlock} style={{ marginBottom: '48px' }}>
+          <div className={servicesOverviewStyles.headerBlock}>
             <SectionEyebrow>{servicesHubContent.whyChooseUs.header.eyebrow}</SectionEyebrow>
             <h2 className={servicesOverviewStyles.mainTitle}>
               {servicesHubContent.whyChooseUs.header.title}

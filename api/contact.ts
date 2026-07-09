@@ -132,11 +132,15 @@ export default async function handler(req: any, res: any) {
   try {
     const resend = new Resend(apiKey);
 
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'info@tgbsign.com';
+    const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
+    const toEmail = process.env.RESEND_TO_EMAIL || 'tgbsign@proton.me';
+
     await Promise.all([
       // Notification to business
       resend.emails.send({
-        from: 'TGB Sign <info@tgbsign.com>',
-        to: 'tgbsign@proton.me',
+        from: `${fromName} <${fromEmail}>`,
+        to: toEmail,
         subject: 'New Website Inquiry',
         html: `
           <h2>New Contact Form Submission</h2>
@@ -154,7 +158,7 @@ export default async function handler(req: any, res: any) {
       }),
       // Auto-reply to customer
       resend.emails.send({
-        from: 'TGB Sign <info@tgbsign.com>',
+        from: `${fromName} <${fromEmail}>`,
         to: email,
         subject: 'Inquiry Received - TGB Enterprise',
         html: `

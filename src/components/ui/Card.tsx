@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { LucideIcon } from 'lucide-react';
+import OptimizedImage from './OptimizedImage';
 import styles from './Card.module.css';
 
 interface CardProps {
@@ -39,7 +40,7 @@ export const Card: React.FC<CardProps> = ({
     <>
       {image && (
         <div className={styles.imageWrapper}>
-          <img src={image} alt={imageAlt || title} className={styles.image} loading={loading} />
+          <OptimizedImage src={image} alt={imageAlt || title} className={styles.image} loading={loading} />
           <div className={styles.imageOverlay} />
           {category && (
             <div className={styles.imageBadge}>

@@ -4,11 +4,10 @@
   justify-content: center;
   position: relative;
   font-family: var(--font-primary);
-  font-size: var(--font-size-sm);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  border-radius: var(--radius-subtle);
+  border-radius: var(--radius-sharp);
   transition:
     background-color var(--transition-base),
     border-color var(--transition-base),
@@ -26,7 +25,7 @@
   align-items: center;
   justify-content: center;
   margin-left: var(--space-12);
-  transition: transform var(--transition-speed-fast) var(--transition-ease-expo);
+  transition: transform var(--transition-fast);
 }
 
 .technicalDot {
@@ -93,8 +92,8 @@
 
 .variantSecondary:hover {
   background-color: rgb(255 255 255 / 6%);
-  border-color: #fff;
-  color: #fff;
+  border-color: var(--color-off-white);
+  color: var(--color-off-white);
   transform: translateY(-1.5px);
 }
 
@@ -131,7 +130,7 @@
   border-color: var(--color-copper);
   border-style: solid;
   opacity: 0;
-  transition: opacity var(--transition-speed-normal) var(--transition-ease-expo);
+  transition: opacity var(--transition-base);
 }
 
 .cornerTL {

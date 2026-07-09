@@ -6,6 +6,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { QuoteProvider } from '../../context/QuoteContext';
 import QuoteModal from '../ui/QuoteModal';
+import { ErrorBoundary } from '../ErrorBoundary';
 import { servicesData } from '../../content/services';
 import { projectsContent } from '../../content/projects';
 import { trackWhatsAppFABClick } from '../../lib/analytics';
@@ -331,6 +332,8 @@ export const AppLayout: React.FC = () => {
             preload="auto"
             poster="/assets/images/hero-poster.png"
             className={styles.globalVideoElement}
+            aria-hidden="true"
+            tabIndex={-1}
           >
             <source src="/assets/videos/sign_wall.mp4" type="video/mp4" />
           </video>
@@ -339,7 +342,9 @@ export const AppLayout: React.FC = () => {
 
         <Navbar />
         <main id="main-content" className={styles.mainContent}>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
         <Footer />
         <QuoteModal />

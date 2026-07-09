@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import {
   Lightbulb,
@@ -19,8 +18,10 @@ import {
 } from 'lucide-react';
 import { homeContent, type TGBStandardSection } from '../../content/home';
 import ServicesOverview from './ServicesOverview';
+import OptimizedImage from '../ui/OptimizedImage';
 import styles from './Identity.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import Breadcrumbs from '../ui/Breadcrumbs';
 
 // Icon registry — covers service cards + trust cards
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -54,7 +55,7 @@ const fadeUp = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -63,7 +64,7 @@ const capabilityVariant = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -72,7 +73,7 @@ const cardVariant = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.68, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -84,50 +85,25 @@ export const CompanyIntro: React.FC<{
   eyebrow?: string;
   title?: string;
   subtitle?: string;
-}> = ({ breadcrumbs, eyebrow, title, subtitle }) => {
+  headingLevel?: 1 | 2;
+}> = ({ breadcrumbs, eyebrow, title, subtitle, headingLevel = 1 }) => {
   const identity = homeContent.identity as TGBStandardSection;
   const { intro } = identity;
 
   return (
     <motion.div className={styles.introTopHeader} variants={fadeUp}>
-      {breadcrumbs && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            marginBottom: '24px',
-            fontFamily: 'var(--font-technical)',
-            fontSize: '11px',
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: 'var(--color-steel)',
-          }}
-        >
-          {breadcrumbs.map((crumb, idx) => (
-            <React.Fragment key={idx}>
-              {idx > 0 && <span style={{ opacity: 0.4 }}>›</span>}
-              {crumb.to ? (
-                <Link to={crumb.to} style={{ color: 'inherit', textDecoration: 'none' }}>
-                  {crumb.label}
-                </Link>
-              ) : (
-                <span style={{ color: 'var(--color-off-white)' }}>{crumb.label}</span>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-      )}
+      {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
       <SectionEyebrow>{eyebrow || intro.eyebrowStory}</SectionEyebrow>
-      <h1 className={styles.introTitle}>
-        {(title || intro.headingStory).split('\n').map((line, i, arr) => (
+      {React.createElement(
+        headingLevel === 1 ? 'h1' : 'h2',
+        { className: styles.introTitle },
+        (title || intro.headingStory).split('\n').map((line, i, arr) => (
           <React.Fragment key={i}>
             {line}
             {i < arr.length - 1 && <br />}
           </React.Fragment>
-        ))}
-      </h1>
+        )),
+      )}
       <p className={styles.introSubheading}>{subtitle || intro.subheadingStory}</p>
     </motion.div>
   );
@@ -206,15 +182,17 @@ export const WhoWeAreSplit: React.FC<{
 };
 
 export const WhyTrustGrid: React.FC<{
+  eyebrow?: string;
   title?: string;
   subtitle?: string;
   standards?: any[];
   asDiv?: boolean;
-}> = ({ title, subtitle, standards, asDiv = false }) => {
+}> = ({ eyebrow, title, subtitle, standards, asDiv = false }) => {
   const identity = homeContent.identity as TGBStandardSection;
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-60px' });
 
+  const activeEyebrow = eyebrow || identity.trustLabel;
   const activeTitle = title || identity.trustTitle;
   const activeSubtitle = subtitle || identity.trustSubtitle;
   const activeStandards = standards || identity.standards;
@@ -227,6 +205,7 @@ export const WhyTrustGrid: React.FC<{
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
       >
+        {activeEyebrow && <SectionEyebrow>{activeEyebrow}</SectionEyebrow>}
         <h2 className={styles.mainTitle}>{activeTitle}</h2>
         <p className={styles.subtitle}>{activeSubtitle}</p>
       </motion.div>
@@ -263,7 +242,7 @@ export const WhyTrustGrid: React.FC<{
 
   if (asDiv) {
     return (
-      <div ref={sectionRef as any} id="trust" style={{ width: '100%', position: 'relative' }}>
+      <div ref={sectionRef as any} id="trust" className={styles.sectionAnchor}>
         {content}
       </div>
     );
@@ -317,7 +296,7 @@ export const LeadershipGrid: React.FC<{
           >
             <div className={styles.leaderImageContainer}>
               {leader.image && (
-                <img
+                <OptimizedImage
                   src={leader.image}
                   alt={leader.name}
                   className={styles.leaderImage}
@@ -340,7 +319,7 @@ export const LeadershipGrid: React.FC<{
 
   if (asDiv) {
     return (
-      <div ref={sectionRef as any} id="leadership" style={{ width: '100%', position: 'relative' }}>
+      <div ref={sectionRef as any} id="leadership" className={styles.sectionAnchor}>
         {content}
       </div>
     );
@@ -387,6 +366,7 @@ export const Identity: React.FC<{
                 eyebrow={eyebrow}
                 title={title}
                 subtitle={subtitle}
+                headingLevel={2}
               />
               <WhoWeAreSplit intro={intro} />
             </div>

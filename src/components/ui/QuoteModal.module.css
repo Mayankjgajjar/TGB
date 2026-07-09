@@ -6,7 +6,6 @@
   bottom: 0;
   background-color: rgb(5 5 5 / 85%); /* Premium matte backdrop */
   backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,7 +19,7 @@
   max-width: 580px; /* Spacious, wide proportions */
   background-color: var(--color-charcoal-surface); /* Deep Charcoal #111111 */
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: var(--radius-card); /* 16px soft curve */
+  border-radius: var(--radius-card);
 
   /* Balanced internal paddings */
   padding: 56px 48px 48px;
@@ -112,9 +111,9 @@
   border: 1px solid rgb(255 255 255 / 10%); /* Default thin border */
   border-radius: var(--radius-sharp); /* Soft curved 8px radius */
   transition:
-    border-color var(--transition-speed-fast) var(--transition-ease-expo),
-    transform var(--transition-speed-fast) var(--transition-ease-expo),
-    box-shadow var(--transition-speed-fast) var(--transition-ease-expo);
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
   box-sizing: border-box;
 }
 
@@ -133,7 +132,7 @@
   display: flex;
   align-items: center;
   color: var(--color-off-white-muted);
-  transition: color var(--transition-speed-fast) var(--transition-ease-expo);
+  transition: color var(--transition-fast);
 }
 
 /* 1. Builder Option Hover - Red highlight border, no background fill */
@@ -146,8 +145,8 @@
 .arrow {
   color: var(--color-off-white-muted);
   transition:
-    transform var(--transition-speed-fast) var(--transition-ease-expo),
-    color var(--transition-speed-fast) var(--transition-ease-expo);
+    transform var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .builderOption:hover .arrow {
@@ -172,7 +171,7 @@
   border-radius: 50%;
   background-color: #00a884;
   box-shadow: 0 0 8px rgb(0 168 132 / 80%);
-  transition: transform var(--transition-speed-fast) var(--transition-ease-expo);
+  transition: transform var(--transition-fast);
 }
 
 .whatsappOption:hover .statusDot {

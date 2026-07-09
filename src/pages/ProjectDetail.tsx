@@ -5,6 +5,8 @@ import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import ContactCTA from '../components/sections/ContactCTA';
+import OptimizedImage from '../components/ui/OptimizedImage';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 import { projectsContent } from '../content/projects';
 import styles from './ProjectDetail.module.css';
 
@@ -19,15 +21,9 @@ export const ProjectDetail: React.FC = () => {
           <Link to="/gallery" className={styles.backLink}>
             <ArrowLeft size={14} /> Back to Gallery
           </Link>
-          <div
-            style={{
-              textAlign: 'center',
-              padding: '96px 0',
-              color: 'var(--color-off-white-muted)',
-            }}
-          >
+          <div className={styles.notFound}>
             <h1 className={styles.title}>Project Not Found</h1>
-            <p style={{ marginTop: '16px', fontFamily: 'var(--font-primary)' }}>
+            <p className={styles.notFoundText}>
               The signage project you are looking for does not exist or has been moved.
             </p>
           </div>
@@ -48,30 +44,7 @@ export const ProjectDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginBottom: '32px',
-            fontFamily: 'var(--font-technical)',
-            fontSize: '0.6875rem',
-            letterSpacing: '0.08em',
-            color: 'rgba(255,255,255,0.35)',
-          }}
-        >
-          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Home
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
-          <Link to="/gallery" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Gallery
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
-          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{project.name}</span>
-        </nav>
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Gallery', to: '/gallery' }, { label: project.name }]} />
 
         {/* Project Header block */}
         <header className={styles.header}>
@@ -88,10 +61,11 @@ export const ProjectDetail: React.FC = () => {
 
         {/* Large Image Showcase */}
         <div className={styles.imageWrapper}>
-          <img
+          <OptimizedImage
             src={project.imagePath}
             alt={`${project.category} installation for ${project.name} - TGB Enterprise Ahmedabad`}
             className={styles.image}
+            loading="lazy"
           />
           <div className={styles.imageOverlay} />
         </div>
@@ -108,35 +82,11 @@ export const ProjectDetail: React.FC = () => {
             </p>
 
             {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
-            <div
-              style={{
-                marginTop: '24px',
-                borderTop: '1px solid rgba(255,255,255,0.05)',
-                paddingTop: '20px',
-              }}
-            >
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '14px',
-                  fontWeight: 500,
-                  color: 'var(--color-white)',
-                  marginBottom: '12px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                }}
-              >
+            <div className={styles.seoBlock}>
+              <h3 className={styles.seoHeading}>
                 Engineering &amp; Quality Execution
               </h3>
-              <p
-                className={styles.description}
-                style={{
-                  fontSize: '13px',
-                  lineHeight: '1.6',
-                  color: 'rgba(255,255,255,0.5)',
-                  marginBottom: '12px',
-                }}
-              >
+              <p className={styles.seoText}>
                 The fabrication of the {project.name} installation showcases TGB Enterprise's
                 structural engineering guidelines. By selecting premium raw materials and utilizing
                 precision automated tooling, our Nikol-based fabrication shop achieved seamless
@@ -144,10 +94,7 @@ export const ProjectDetail: React.FC = () => {
                 galvanized to resist corrosion in high-humidity local climates, while the
                 illuminated modules are fully weather-sealed to guarantee longevity.
               </p>
-              <p
-                className={styles.description}
-                style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}
-              >
+              <p className={styles.seoText}>
                 During the deployment phase, our technical team executed site alignment surveys and
                 wind-load calculations to ensure the signage stands robustly. This project case
                 study demonstrates our capacity to translate architect-level blueprints into durable
@@ -179,76 +126,18 @@ export const ProjectDetail: React.FC = () => {
         </div>
 
         {/* Bottom Navigation CTA */}
-        <div
-          style={{
-            marginTop: '56px',
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            paddingTop: '40px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-            alignItems: 'center',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-primary)',
-              fontSize: '15px',
-              color: 'rgba(255,255,255,0.5)',
-            }}
-          >
+        <div className={styles.bottomSection}>
+          <p className={styles.bottomText}>
             Need similar custom signage engineered for your commercial space?
           </p>
-          <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link
-              to="/contact"
-              style={{
-                display: 'inline-flex',
-                background: 'var(--color-copper)',
-                color: '#fff',
-                textDecoration: 'none',
-                padding: '12px 28px',
-                borderRadius: '4px',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                fontSize: '12px',
-                fontWeight: 600,
-              }}
-            >
+          <div className={styles.bottomLinks}>
+            <Link to="/contact" className={styles.ctaPrimary}>
               Request Quote →
             </Link>
-            <Link
-              to="/services"
-              style={{
-                display: 'inline-flex',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: '#fff',
-                textDecoration: 'none',
-                padding: '12px 28px',
-                borderRadius: '4px',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                fontSize: '12px',
-                fontWeight: 600,
-              }}
-            >
+            <Link to="/services" className={styles.ctaSecondary}>
               View Services
             </Link>
-            <Link
-              to="/gallery"
-              style={{
-                display: 'inline-flex',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: '#fff',
-                textDecoration: 'none',
-                padding: '12px 28px',
-                borderRadius: '4px',
-                textTransform: 'uppercase',
-                letterSpacing: '1px',
-                fontSize: '12px',
-                fontWeight: 600,
-              }}
-            >
+            <Link to="/gallery" className={styles.ctaSecondary}>
               More Projects
             </Link>
           </div>

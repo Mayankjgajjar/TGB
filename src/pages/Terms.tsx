@@ -20,7 +20,7 @@ export const Terms: React.FC = () => {
     >
       <Container>
         <div className={styles.contentWrapper}>
-          <div style={{ marginBottom: '24px', display: 'flex', gap: '16px' }}>
+          <div className={styles.linkRow}>
             <Link to="/" className={styles.link}>
               ← Back to Home
             </Link>

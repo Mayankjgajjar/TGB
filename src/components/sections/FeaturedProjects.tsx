@@ -22,7 +22,7 @@ export const FeaturedProjects: React.FC = () => {
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.72,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.16, 1, 0.3, 1],
         delay: shouldReduceMotion ? 0 : idx * 0.08,
       },
     }),
@@ -33,7 +33,7 @@ export const FeaturedProjects: React.FC = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: shouldReduceMotion ? 0 : 0.72, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: shouldReduceMotion ? 0 : 0.72, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
@@ -79,26 +79,8 @@ export const FeaturedProjects: React.FC = () => {
       </div>
 
       {/* View All Projects CTA */}
-      <div style={{ textAlign: 'center', marginTop: '40px', paddingBottom: '16px' }}>
-        <Link
-          to="/gallery"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontFamily: 'var(--font-technical, monospace)',
-            fontSize: '0.75rem',
-            fontWeight: 500,
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.55)',
-            textDecoration: 'none',
-            transition: 'color 0.2s ease',
-            padding: '12px 0',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#c8a96e')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
-        >
+      <div className={styles.ctaFooter}>
+        <Link to="/gallery" className={styles.ctaLink}>
           View All Projects
           <ArrowRight size={14} />
         </Link>

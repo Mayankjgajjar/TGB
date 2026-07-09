@@ -63,24 +63,6 @@ p {
   hyphens: auto;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-charcoal-deep);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-steel-dark);
-  border-radius: var(--radius-sharp);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-copper-dark);
-}
-
 /* Lenis Smooth Scroll Integration */
 html.lenis,
 html.lenis body {
@@ -101,12 +83,6 @@ html.lenis body {
 
 .lenis-scrolling iframe {
   pointer-events: none;
-}
-
-/* Selection Highlighting */
-::selection {
-  background-color: var(--color-copper-dark);
-  color: var(--color-off-white);
 }
 
 /* Layout Blueprint Line Utilities */
@@ -161,40 +137,81 @@ section[id],
 }
 
 /* ============================================================
-   GLOBAL SECTION HEADER TYPOGRAPHY SYSTEM
-   All section eyebrows, headings, subheadings inherit these
+   SECTION HEADER COMPOSITION UTILITY
+   Minimal — eyebrow is handled by SectionEyebrow component
    ============================================================ */
 
-/* Eyebrow label above each section heading */
-.sectionEyebrow {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--color-copper);
-  display: block;
+/* ── Shared Page Layout (top padding for floating navbar clearance) ── */
+.page {
+  padding-top: 128px;
+  padding-bottom: 96px;
+  min-height: 80vh;
+  box-sizing: border-box;
 }
 
-/* Primary section h2 */
-.sectionHeading {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 300;
-  color: var(--color-off-white);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  margin: 0;
+@media (width <= 900px) {
+  .page {
+    padding-top: 96px;
+    padding-bottom: 64px;
+  }
 }
 
-/* Supporting paragraph beneath heading */
-.sectionSubheading {
-  font-family: var(--font-primary);
-  font-size: 15px;
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-steel-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-steel);
+}
+
+/* ── Code & Preformatted Text ── */
+code {
+  font-family: var(--font-technical);
+  font-size: 0.9em;
+  color: var(--color-copper-light);
+  background: rgba(255 255 255 / 5%);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: var(--font-technical);
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--color-off-white-muted);
-  line-height: 1.65;
-  margin: 0;
-  max-width: 560px;
+  background: var(--color-charcoal-surface);
+  border: 1px solid rgba(255 255 255 / 8%);
+  border-radius: var(--radius-sharp);
+  padding: 16px 20px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* ── Selection Color ── */
+::selection {
+  background: var(--color-red);
+  color: var(--color-off-white);
+}
+
+/* ── Section scroll anchor ── */
+.sectionAnchor {
+  width: 100%;
+  position: relative;
 }
 
 /* ── Accessibility: Focus Indicators (WCAG AA) ── */
@@ -205,6 +222,40 @@ select:focus-visible,
 textarea:focus-visible,
 [role='button']:focus-visible,
 [tabindex='0']:focus-visible {
-  outline: 2px solid var(--color-copper-light) !important;
-  outline-offset: 4px !important;
+  outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
+  outline-offset: var(--focus-ring-offset) !important;
+}
+
+/* ── Print Styles ── */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  nav,
+  .no-print,
+  iframe,
+  video {
+    display: none !important;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+
+  .section {
+    padding: 24px 0 !important;
+    page-break-inside: avoid;
+  }
+}
+
+/* ── Disabled State (WCAG AA contrast ≥ 3:1) ── */
+:disabled,
+[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(50%);
 }

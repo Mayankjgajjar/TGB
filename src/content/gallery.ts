@@ -213,7 +213,7 @@ const faqItems = [
 export const galleryContent = {
   hero: {
     eyebrow: 'GALLERY / PORTFOLIO',
-    title: 'Visual Portfolio.',
+    title: 'Visual Portfolio',
     subtitle:
       'Explore a selection of completed signage installations, custom fabrication projects, storefront branding, architectural signage, and illuminated displays delivered by TGB Enterprise for businesses across multiple industries.',
   },
@@ -223,7 +223,7 @@ export const galleryContent = {
   industries,
   qualityPoints,
   faq: {
-    title: 'Your Questions About Our Work.',
+    title: 'Your Questions About Our Work',
     subtitle: 'Common questions from visitors exploring our portfolio.',
     items: faqItems,
   },

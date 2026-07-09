@@ -139,9 +139,13 @@ export default async function handler(req: any, res: any) {
       });
     }
 
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'info@tgbsign.com';
+    const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
+    const toEmail = process.env.RESEND_TO_EMAIL || 'tgbsign@proton.me';
+
     await resend.emails.send({
-      from: 'TGB Sign <info@tgbsign.com>',
-      to: 'tgbsign@proton.me',
+      from: `${fromName} <${fromEmail}>`,
+      to: toEmail,
       subject: 'New Warranty Claim Submission',
       attachments,
       html: `

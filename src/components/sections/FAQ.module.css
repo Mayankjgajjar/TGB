@@ -10,7 +10,7 @@
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
   padding: 0 var(--space-32);
 }
@@ -62,8 +62,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  align-items: start;
+  gap: 24px;
 }
 
 .column {
@@ -76,7 +75,7 @@
 .accordion {
   background: var(--color-charcoal-surface);
   border: 1px solid rgb(255 255 255 / 6%);
-  border-radius: 20px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   transition:
     border-color 0.3s ease,
@@ -109,11 +108,11 @@
   color: var(--color-off-white);
   line-height: 1.4;
   margin: 0;
-  transition: color 0.25s ease;
+  transition: color 0.25s var(--transition-ease-expo);
 }
 
 .accordionHeader:hover .question {
-  color: #fff;
+  color: var(--color-off-white);
 }
 
 .iconWrapper {
@@ -125,8 +124,8 @@
   height: 24px;
   color: var(--color-steel);
   transition:
-    transform 0.3s ease,
-    color 0.3s ease;
+    transform 0.3s var(--transition-ease-expo),
+    color 0.3s var(--transition-ease-expo);
 }
 
 .accordionActive .iconWrapper {
@@ -137,8 +136,8 @@
 .contentWrapper {
   overflow: hidden;
   transition:
-    max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.35s ease;
+    max-height 0.35s var(--transition-ease-expo),
+    opacity 0.35s var(--transition-ease-expo);
   max-height: 0;
   opacity: 0;
 }
@@ -168,7 +167,7 @@
   color: var(--color-copper-light);
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--transition-ease-expo);
   margin-left: 4px;
   background: transparent;
   border: none;

@@ -7,6 +7,7 @@ import Section from '../components/ui/Section';
 import SectionEyebrow from '../components/ui/SectionEyebrow';
 import Grid from '../components/ui/Grid';
 import Card from '../components/ui/Card';
+import OptimizedImage from '../components/ui/OptimizedImage';
 import ContactCTA from '../components/sections/ContactCTA';
 import useScrollReveal from '../hooks/useScrollReveal';
 import { galleryContent } from '../content/gallery';
@@ -32,7 +33,7 @@ const fadeUp = {
     y: 0,
     transition: {
       duration: 0.72,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.16, 1, 0.3, 1],
       delay: idx * 0.08,
     },
   }),
@@ -53,7 +54,7 @@ export const Gallery: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      style={{ paddingTop: 'var(--space-xl)' }}
+      className="page"
     >
       {/* ── Gallery Introduction ── */}
       <div className={styles.page}>
@@ -69,7 +70,7 @@ export const Gallery: React.FC = () => {
             <div className={styles.featuredGrid}>
               {featuredWork.map((work) => (
                 <Link key={work.id} to={work.link} className={styles.featuredCard}>
-                  <img
+                  <OptimizedImage
                     src={work.src}
                     alt={work.title}
                     className={styles.featuredCardImage}
@@ -93,7 +94,7 @@ export const Gallery: React.FC = () => {
           <div className={servicesOverviewStyles.headerBlock}>
             <SectionEyebrow>IMAGE GALLERY</SectionEyebrow>
             <h2 className={servicesOverviewStyles.mainTitle}>
-              Completed Installations & Fabrication Work.
+              Completed Installations & Fabrication Work
             </h2>
             <p className={servicesOverviewStyles.subtitle}>
               Browse our full catalog of signage projects, product close-ups, and installation
@@ -116,7 +117,7 @@ export const Gallery: React.FC = () => {
               return (
                 <motion.div key={item.id} variants={fadeUp} custom={idx} className={itemClass}>
                   <Link to={item.link}>
-                    <img
+                    <OptimizedImage
                       src={item.src}
                       alt={item.alt}
                       className={styles.galleryImage}
@@ -144,7 +145,7 @@ export const Gallery: React.FC = () => {
               variants={headerVariants}
             >
               <SectionEyebrow>BROWSE BY TYPE</SectionEyebrow>
-              <h2 className={servicesOverviewStyles.mainTitle}>Explore Our Signage Solutions.</h2>
+              <h2 className={servicesOverviewStyles.mainTitle}>              Explore Our Signage Solutions</h2>
               <p className={servicesOverviewStyles.subtitle}>
                 Each category represents a dedicated manufacturing line with specific materials,
                 technology, and finishing standards.
@@ -186,7 +187,7 @@ export const Gallery: React.FC = () => {
             >
               <SectionEyebrow>BROWSE BY INDUSTRY</SectionEyebrow>
               <h2 className={servicesOverviewStyles.mainTitle}>
-                Signage Solutions for Every Sector.
+                Signage Solutions for Every Sector
               </h2>
               <p className={servicesOverviewStyles.subtitle}>
                 We customize visual cladding, viewing dimensions, and lighting configurations to
@@ -222,7 +223,7 @@ export const Gallery: React.FC = () => {
               variants={headerVariants}
             >
               <SectionEyebrow>WORKMANSHIP</SectionEyebrow>
-              <h2 className={servicesOverviewStyles.mainTitle}>Built to Exact Standards.</h2>
+              <h2 className={servicesOverviewStyles.mainTitle}>              Built to Exact Standards</h2>
               <p className={servicesOverviewStyles.subtitle}>
                 Every sign that leaves our workshop undergoes strict quality checks. The images tell
                 the story — here is what makes them possible.

@@ -6,7 +6,7 @@
 /* ---- SECTION WRAPPER ---- */
 .section {
   background-color: transparent;
-  padding: 56px 0;
+  padding: 64px 0;
   position: relative;
   overflow: hidden;
   z-index: 10;
@@ -27,7 +27,7 @@
 }
 
 .inner {
-  max-width: 1300px; /* Slightly wider inner container for premium feel */
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
   padding: 0 var(--space-24);
 }
@@ -59,10 +59,10 @@
 .introEyebrow {
   font-family: var(--font-technical);
   font-size: 11px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--color-copper-light);
+  color: var(--color-copper);
   display: block;
   text-align: center;
 }
@@ -110,7 +110,7 @@
   min-height: 500px;
   position: relative;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: var(--radius-card);
 }
 
 .introImage {
@@ -129,7 +129,7 @@
   inset: 0;
   background: linear-gradient(to top, rgb(5 5 5 / 75%) 0%, transparent 50%);
   pointer-events: none;
-  border-radius: 28px;
+  border-radius: var(--radius-card);
 }
 
 /* Right Content Column */
@@ -139,9 +139,8 @@
   justify-content: center;
   background: rgb(10 10 10 / 70%); /* Dark premium glassmorphic card background */
   backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 24px;
+  border-radius: var(--radius-card);
   padding: var(--space-48);
   box-shadow: var(--shadow-medium);
 }
@@ -195,13 +194,13 @@
 
 .statsRowCard {
   background: #0b0b0b;
-  border: 1px solid #1a1a1a;
-  border-radius: 20px;
+  border: 1px solid var(--color-charcoal-panel);
+  border-radius: var(--radius-card);
   padding: var(--space-48) var(--space-32);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: all 400ms var(--transition-ease-expo);
   cursor: default;
 }
 
@@ -306,7 +305,6 @@
 
   /* Glassmorphic fading effect at edges */
   mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   padding: var(--space-8) 0;
 }
 
@@ -338,7 +336,7 @@
   text-transform: uppercase;
   color: rgb(244 241 234 / 35%);
   padding: 10px 24px;
-  transition: all 300ms ease;
+  transition: all 300ms var(--transition-ease-expo);
   cursor: default;
 }
 
@@ -348,9 +346,6 @@
 }
 
 /* TRUST BADGES */
-.trustBadgesSection {
-}
-
 .trustSectionHeader {
   display: flex;
   flex-direction: column;
@@ -444,10 +439,10 @@
 
 .subtitle {
   font-family: var(--font-primary);
-  font-size: 13.5px; /* Scaled down slightly */
-  line-height: 1.6; /* Slightly tighter line height */
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--color-off-white-muted);
-  max-width: 800px; /* Centered max-width standard */
+  max-width: 800px;
   text-align: center;
 }
 
@@ -470,7 +465,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  background-color: #0a0a0a; /* Section Rhythm */
+  background-color: var(--color-black); /* Section Rhythm */
   z-index: -1;
 }
 
@@ -505,8 +500,8 @@
 .capabilitiesGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 1200px;
+  gap: 24px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
 }
 
@@ -525,15 +520,15 @@
 /* Individual service card */
 .serviceCard {
   position: relative;
-  background: #0a0a0a; /* Level 2 Solid */
+  background: var(--color-black); /* Level 2 Solid */
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   padding: 28px 24px 24px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   cursor: default;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: all 400ms var(--transition-ease-expo);
   overflow: hidden;
 }
 
@@ -541,7 +536,7 @@
   transform: scale(1.005);
   border-color: rgb(255 255 255 / 20%); /* Subtle highlight */
   background: #111; /* Level 3 Solid */
-  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Icon container */
@@ -551,14 +546,14 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 8px;
+  border-radius: var(--radius-sharp);
   background-color: rgb(255 255 255 / 4%);
   border: 1px solid rgb(255 255 255 / 8%);
   color: rgb(244 241 234 / 38%);
   transition:
-    background-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    background-color 320ms var(--transition-ease-expo),
+    border-color 320ms var(--transition-ease-expo),
+    color 320ms var(--transition-ease-expo);
   flex-shrink: 0;
 }
 
@@ -566,7 +561,7 @@
 .serviceCard:hover .serviceIcon {
   background-color: rgb(255 255 255 / 6%);
   border-color: rgb(255 255 255 / 35%); /* Pure white border */
-  color: #fff; /* Pure white icon */
+  color: var(--color-off-white); /* Pure white icon */
 }
 
 /* Service number (top-right corner) */
@@ -579,7 +574,7 @@
   font-weight: 500;
   letter-spacing: 1.5px;
   color: rgb(244 241 234 / 12%);
-  transition: color 320ms ease;
+  transition: color 320ms var(--transition-ease-expo);
 }
 
 .serviceCard:hover .serviceNum {
@@ -625,7 +620,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  max-width: 1360px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto; /* Removed the 140px bottom margin */
 }
 
@@ -646,24 +641,24 @@
 /* Individual Feature Card */
 .featureCard {
   position: relative;
-  background: #0a0a0a; /* Level 2 Solid */
+  background: var(--color-black); /* Level 2 Solid */
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 12px;
-  padding: 32px 24px; /* Reduced padding */
+  border-radius: var(--radius-card);
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: default;
   transition:
-    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    background-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
+    border-color 400ms var(--transition-ease-expo),
+    background-color 400ms var(--transition-ease-expo),
+    box-shadow 400ms var(--transition-ease-expo);
 }
 
 .featureCard:hover {
   border-color: rgb(255 255 255 / 20%); /* Subtle highlight */
   background: #111; /* Level 3 Solid */
-  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Icon */
@@ -671,7 +666,7 @@
   margin-bottom: 24px;
   color: var(--color-off-white);
   opacity: 0.5; /* Subtle opacity */
-  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms var(--transition-ease-expo);
 }
 
 .featureIcon {
@@ -726,14 +721,14 @@
   color: rgb(255 255 255 / 30%);
   padding: 10px;
   border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   text-align: center;
   margin-top: auto; /* Pushes label to bottom if descriptions vary in length */
-  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 400ms var(--transition-ease-expo);
 }
 
 .featureCard:hover .featureTechLabel {
@@ -752,7 +747,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  max-width: 1200px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
 }
 
@@ -775,12 +770,12 @@
   justify-content: flex-end; /* Pushes text to the bottom */
   height: 540px; /* Reduced from aspect-ratio: 3 / 4 (~700px height on large displays) */
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   transition:
-    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    background-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
+    border-color 400ms var(--transition-base),
+    background-color 400ms var(--transition-base),
+    box-shadow 400ms var(--transition-base);
 }
 
 @media (width <= 768px) {
@@ -791,7 +786,7 @@
 
 .leaderCard:hover {
   border-color: rgb(255 255 255 / 20%);
-  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Portrait area covers the entire card */
@@ -810,7 +805,7 @@
   height: 100%;
   object-fit: cover;
   filter: grayscale(80%) contrast(1.2) brightness(0.6);
-  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 500ms var(--transition-ease-expo);
 }
 
 .leaderCard:hover .leaderImage {
@@ -834,17 +829,10 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(
-    to top,
-    rgb(5 5 5 / 95%) 0%,
-    rgb(5 5 5 / 60%) 50%,
-    transparent 100%
-  );
-  backdrop-filter: blur(12px);
+  background: linear-gradient(to top, rgb(5 5 5 / 95%) 0%, rgb(5 5 5 / 60%) 50%, transparent 100%);
   backdrop-filter: blur(12px);
 
   /* Fades the blur out smoothly so there's no harsh line across the teammate's face */
-  mask-image: linear-gradient(to top, black 40%, transparent 100%);
   mask-image: linear-gradient(to top, black 40%, transparent 100%);
 }
 
@@ -856,7 +844,7 @@
   letter-spacing: -0.015em;
   color: rgb(244 241 234 / 85%);
   margin-bottom: 8px;
-  transition: color 380ms ease;
+  transition: color 380ms var(--transition-ease-expo);
 }
 
 .leaderCard:hover .leaderName {
@@ -871,7 +859,7 @@
   text-transform: uppercase;
   color: rgb(139 0 0 / 80%);
   margin-bottom: 16px;
-  transition: color 380ms ease;
+  transition: color 380ms var(--transition-ease-expo);
 }
 
 .leaderCard:hover .leaderRole {
@@ -914,7 +902,7 @@
 .standardsGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  gap: 24px;
 }
 
 @media (width <= 900px) {
@@ -933,12 +921,12 @@
 .standardCard {
   background-color: #0d0d0d;
   border: 1px solid rgb(255 255 255 / 7%);
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   position: relative;
   padding: 32px 28px 28px;
   overflow: hidden;
   transition:
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 350ms var(--transition-ease-expo),
     border-color 350ms ease,
     background-color 350ms ease;
   cursor: default;
@@ -983,7 +971,7 @@
   color: rgb(244 241 234 / 3%);
   pointer-events: none;
   user-select: none;
-  transition: color 350ms ease;
+  transition: color 350ms var(--transition-ease-expo);
   letter-spacing: -0.04em;
 }
 
@@ -1020,7 +1008,7 @@
   width: 36px;
   height: 36px;
   border: 1px solid rgb(255 255 255 / 9%);
-  border-radius: 7px;
+  border-radius: var(--radius-sharp);
   margin-bottom: 20px;
   color: rgb(244 241 234 / 40%);
   transition:
@@ -1066,16 +1054,11 @@
   display: inline-block;
   padding: 5px 10px;
   border: 1px solid rgb(255 255 255 / 7%);
-  border-radius: 3px;
+  border-radius: var(--radius-small);
   transition:
     color 350ms ease,
     border-color 350ms ease;
   align-self: flex-start;
-}
-
-.standardCard:hover .cardBadge {
-  color: rgb(244 241 234 / 45%);
-  border-color: rgb(255 255 255 / 15%);
 }
 
 .standardCard:hover .cardBadge {
@@ -1102,13 +1085,13 @@
 .rightColStatCard {
   background: #080808; /* Solid very deep black fallback */
   border: 1px solid rgb(255 255 255 / 5%); /* Subtle border */
-  border-radius: 12px;
-  padding: 36px 28px; /* Spacious internal padding */
+  border-radius: var(--radius-card);
+  padding: 36px 28px;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Left-aligned */
   gap: 12px;
-  transition: all 400ms cubic-bezier(0.2, 0, 0, 1);
+  transition: all 400ms var(--transition-ease-expo);
   cursor: default;
 }
 
@@ -1116,7 +1099,7 @@
   border-color: rgb(255 255 255 / 15%); /* Subtle highlight */
   background: #0e0e0e;
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 40%);
+  box-shadow: var(--shadow-medium);
 }
 
 .rightColStatValue {
@@ -1183,6 +1166,11 @@
 .brandsSection {
   background: transparent;
   padding: 24px 0 32px;
+}
+
+.sectionAnchor {
+  width: 100%;
+  position: relative;
 }
 
 .trustSection {

@@ -11,12 +11,12 @@ export const Contact: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      style={{ paddingTop: 'var(--space-xl)' }}
+      className="page"
     >
       {/* Contact form and details with Page Hero content integrated directly inside the top header of ContactCTA */}
       <ContactCTA
         eyebrow="GET IN TOUCH"
-        title="Start Your Signage Project Today."
+        title="Start Your Signage Project Today"
         subtitle="Ready to elevate your brand? Contact our team for a free consultation and customised quotation tailored to your requirements."
       />
 

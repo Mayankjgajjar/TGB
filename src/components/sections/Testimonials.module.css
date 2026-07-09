@@ -11,7 +11,7 @@
 }
 
 .inner {
-  max-width: 1200px;
+  max-width: var(--section-inner-max-width);
   margin: 0 auto;
   padding: 0 var(--space-32);
 }
@@ -69,9 +69,9 @@
 /* ── Individual Card ── */
 .card {
   position: relative;
-  background: #0a0a0a;
+  background: var(--color-black);
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 12px;
+  border-radius: var(--radius-card);
   padding: 32px 28px;
   display: flex;
   flex-direction: column;
@@ -79,16 +79,16 @@
   overflow: hidden;
   cursor: default;
   transition:
-    border-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    background-color 400ms cubic-bezier(0.2, 0, 0, 1),
-    box-shadow 400ms cubic-bezier(0.2, 0, 0, 1);
+    border-color 400ms var(--transition-ease-expo),
+    background-color 400ms var(--transition-ease-expo),
+    box-shadow 400ms var(--transition-ease-expo);
   box-sizing: border-box;
 }
 
 .card:hover {
   border-color: rgb(255 255 255 / 20%);
   background: #111;
-  box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Quote Icon Backdrop */
@@ -186,7 +186,7 @@
 .cta {
   background: rgb(255 255 255 / 1.5%);
   border: 1px solid rgb(255 255 255 / 7%);
-  border-radius: 24px;
+  border-radius: var(--radius-card);
   padding: 56px 48px;
   text-align: center;
   display: flex;
@@ -219,12 +219,12 @@
   align-items: center;
   gap: 8px;
   background: var(--color-copper);
-  color: #fff;
+  color: var(--color-off-white);
   font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 500;
   padding: 13px 28px;
-  border-radius: 8px;
+  border-radius: var(--radius-sharp);
   text-decoration: none;
   transition:
     background 0.25s ease,
@@ -240,7 +240,7 @@
 }
 
 .ctaButton svg {
-  transition: transform 0.25s ease;
+  transition: transform 0.25s var(--transition-ease-expo);
 }
 
 .ctaButton:hover svg {
@@ -266,7 +266,7 @@
 
   .card {
     padding: 32px 24px;
-    border-radius: 18px;
+    border-radius: var(--radius-card);
   }
 
   .headerBlock {
@@ -275,7 +275,7 @@
 
   .cta {
     padding: 40px 24px;
-    border-radius: 16px;
+    border-radius: var(--radius-card);
   }
 
   .bottomTrustBar {

@@ -11,14 +11,13 @@
   align-items: center;
   background-color: rgb(10 10 10 / 45%);
   backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
   border-radius: 16px;
   border: 1px solid rgb(255 255 255 / 8%);
   transform: translateY(0);
   transition:
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color var(--transition-speed-normal) var(--transition-ease-expo),
-    border-color var(--transition-speed-normal) var(--transition-ease-expo);
+    transform 300ms var(--transition-ease-expo),
+    background-color var(--transition-base),
+    border-color var(--transition-base);
 }
 
 .headerHidden {
@@ -60,7 +59,7 @@
   letter-spacing: 1.5px;
   padding: var(--space-8) var(--space-12);
   position: relative; /* Anchor for custom underline hairline */
-  transition: color var(--transition-speed-fast) var(--transition-ease-expo);
+  transition: color var(--transition-fast);
 }
 
 .navLink::after {
@@ -73,7 +72,7 @@
   background-color: var(--color-off-white); /* Solid off-white hover underline */
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 350ms var(--transition-ease-expo);
 }
 
 .navLink:hover {
@@ -123,17 +122,17 @@
   line-height: 1;
   box-sizing: border-box;
   transition:
-    background-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    color 300ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    background-color 300ms var(--transition-ease-expo),
+    border-color 300ms var(--transition-ease-expo),
+    color 300ms var(--transition-ease-expo),
+    transform 300ms var(--transition-ease-expo);
 }
 
 /* Hover: Premium outline focus state with white border highlights */
 .quoteButton:hover {
   background-color: rgb(255 255 255 / 6%);
   border-color: rgb(255 255 255 / 40%);
-  color: #fff;
+  color: var(--color-off-white);
 
   /* Removed floating translation for grounded feel */
 }
@@ -145,7 +144,7 @@
 /* Arrow transition */
 .btnArrow {
   display: inline-block;
-  transition: transform 300ms cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 300ms var(--transition-ease-expo);
   margin-left: 2px;
   font-family: var(--font-body);
 }
@@ -181,7 +180,7 @@
   background: var(--color-off-white);
   border-radius: 2px;
   transition:
-    transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 300ms var(--transition-ease-expo),
     opacity 200ms ease;
   transform-origin: center;
 }
@@ -211,7 +210,6 @@
   right: 12px;
   background: rgb(10 10 10 / 85%); /* Premium glass background */
   backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
   border-radius: 16px;
   border: 1px solid rgb(255 255 255 / 8%);
   box-shadow: 0 20px 40px rgb(0 0 0 / 50%);
@@ -219,8 +217,8 @@
   opacity: 0;
   pointer-events: none;
   transition:
-    transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 300ms var(--transition-ease-expo),
+    opacity 300ms var(--transition-ease-expo);
   z-index: calc(var(--z-index-navbar) - 1);
   overflow: hidden;
 }
@@ -246,7 +244,7 @@
   border-bottom: 1px solid rgb(255 255 255 / 6%);
   letter-spacing: 2px;
   color: rgb(244 241 234 / 60%);
-  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 250ms var(--transition-ease-expo);
   position: relative;
 }
 
@@ -261,7 +259,7 @@
   height: 6px;
   border-radius: 50%;
   background-color: var(--color-copper);
-  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 250ms var(--transition-ease-expo);
 }
 
 .mobileNavLinks .navLink:hover,
@@ -296,7 +294,7 @@
   align-items: center;
   justify-content: center;
   background-color: var(--color-red);
-  color: #fff;
+  color: var(--color-off-white);
   border: none;
   border-radius: 8px;
   font-family: var(--font-primary);
@@ -305,7 +303,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 300ms ease;
+  transition: background-color 300ms var(--transition-ease-expo);
 }
 
 .mobileConsultBtn:hover,
@@ -318,7 +316,6 @@
   position: fixed;
   inset: 0;
   background: rgb(0 0 0 / 60%);
-  backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   z-index: calc(var(--z-index-navbar) - 2);
 }
@@ -355,7 +352,6 @@
 /* Reduce blur radius on lower-end mobile for performance */
 @media (width <= 480px) {
   .header {
-    backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
   }
 }

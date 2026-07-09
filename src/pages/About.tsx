@@ -44,14 +44,11 @@ export const About: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      className={identityStyles.identityWrapper}
-      style={{ paddingTop: 'var(--space-xl)' }}
+      className={`${identityStyles.identityWrapper} page`}
     >
       <section className={identityStyles.aboutSection} id="about-us">
-        <div
-          className={identityStyles.inner}
-          style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-96)' }}
-        >
+        <div className={identityStyles.inner}>
+          <div className={aboutStyles.aboutContent}>
           {/* 1. Company Introduction */}
           <CompanyIntro
             eyebrow={aboutContent.introduction.eyebrow}
@@ -85,7 +82,7 @@ export const About: React.FC = () => {
                   <h3 className={identityStyles.featureTitle}>
                     {aboutContent.missionVision.mission.title}
                   </h3>
-                  <p className={identityStyles.featureDescription} style={{ marginBottom: '0px' }}>
+                  <p className={`${identityStyles.featureDescription} ${aboutStyles.cardDescription}`}>
                     {aboutContent.missionVision.mission.description}
                   </p>
                 </div>
@@ -98,7 +95,7 @@ export const About: React.FC = () => {
                   <h3 className={identityStyles.featureTitle}>
                     {aboutContent.missionVision.vision.title}
                   </h3>
-                  <p className={identityStyles.featureDescription} style={{ marginBottom: '0px' }}>
+                  <p className={`${identityStyles.featureDescription} ${aboutStyles.cardDescription}`}>
                     {aboutContent.missionVision.vision.description}
                   </p>
                 </div>
@@ -186,8 +183,7 @@ export const About: React.FC = () => {
                       <div className={identityStyles.featureCategory}>VALUE {idx + 1}</div>
                       <h3 className={identityStyles.featureTitle}>{value.title}</h3>
                       <p
-                        className={identityStyles.featureDescription}
-                        style={{ marginBottom: '0px' }}
+                        className={`${identityStyles.featureDescription} ${aboutStyles.cardDescription}`}
                       >
                         {value.description}
                       </p>
@@ -200,6 +196,7 @@ export const About: React.FC = () => {
 
           {/* 7. Why Businesses Trust TGB */}
           <WhyTrustGrid
+            eyebrow={aboutContent.trust.header.eyebrow}
             title={aboutContent.trust.header.title}
             subtitle={aboutContent.trust.header.subtitle}
             standards={aboutContent.trust.items}
@@ -257,8 +254,7 @@ export const About: React.FC = () => {
                     <div className={identityStyles.featureCategory}>STANDARD {idx + 1}</div>
                     <h3 className={identityStyles.featureTitle}>{item.title}</h3>
                     <p
-                      className={identityStyles.featureDescription}
-                      style={{ marginBottom: '0px' }}
+                      className={`${identityStyles.featureDescription} ${aboutStyles.cardDescription}`}
                     >
                       {item.description}
                     </p>
@@ -293,7 +289,7 @@ export const About: React.FC = () => {
               </div>
             </motion.div>
           </div>
-
+          </div>
         </div>
       </section>
     </motion.div>

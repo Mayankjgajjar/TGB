@@ -53,7 +53,7 @@ export const Testimonials: React.FC = () => {
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.72,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.16, 1, 0.3, 1],
         delay: shouldReduceMotion ? 0 : index * 0.08,
       },
     }),

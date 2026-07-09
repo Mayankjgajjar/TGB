@@ -5,6 +5,8 @@ import { ArrowLeft } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
 import ContactCTA from '../components/sections/ContactCTA';
+import OptimizedImage from '../components/ui/OptimizedImage';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 import { servicesData } from '../content/services';
 import { projectsContent } from '../content/projects';
 import styles from './ServiceDetail.module.css';
@@ -41,11 +43,9 @@ export const ServiceDetail: React.FC = () => {
           <Link to="/services" className={styles.backLink}>
             <ArrowLeft size={14} /> Back to Services
           </Link>
-          <div
-            style={{ textAlign: 'center', padding: '96px 0', color: 'var(--color-white-muted)' }}
-          >
+          <div className={styles.notFound}>
             <h1 className={styles.title}>Service Not Found</h1>
-            <p style={{ marginTop: '16px', fontFamily: 'var(--font-primary)' }}>
+            <p className={styles.notFoundText}>
               The signage service you are looking for does not exist or has been moved.
             </p>
           </div>
@@ -63,30 +63,7 @@ export const ServiceDetail: React.FC = () => {
       className={styles.page}
     >
       <Container>
-        {/* Breadcrumb Navigation */}
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            marginBottom: '32px',
-            fontFamily: 'var(--font-technical)',
-            fontSize: '0.6875rem',
-            letterSpacing: '0.08em',
-            color: 'rgba(255,255,255,0.35)',
-          }}
-        >
-          <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Home
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
-          <Link to="/services" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>
-            Services
-          </Link>
-          <span style={{ color: 'rgba(255,255,255,0.2)' }}>›</span>
-          <span style={{ color: 'rgba(255,255,255,0.6)' }}>{service.name}</span>
-        </nav>
+        <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.name }]} />
 
         {/* Header Block */}
         <header className={styles.header}>
@@ -97,10 +74,11 @@ export const ServiceDetail: React.FC = () => {
 
         {/* Cover Hero Image */}
         <div className={styles.imageWrapper}>
-          <img
+          <OptimizedImage
             src={service.heroImage}
             alt={`${service.name} fabrication details - TGB Enterprise Ahmedabad`}
             className={styles.image}
+            loading="lazy"
           />
           <div className={styles.imageOverlay} />
         </div>
@@ -151,24 +129,9 @@ export const ServiceDetail: React.FC = () => {
             </div>
 
             {/* Dynamic Rich Content Expansion Block for SEO Word Count */}
-            <div
-              className={styles.sectionBlock}
-              style={{
-                borderTop: '1px solid rgba(255,255,255,0.05)',
-                paddingTop: '24px',
-                marginTop: '32px',
-              }}
-            >
+            <div className={`${styles.sectionBlock} ${styles.sectionBlockBordered}`}>
               <h3 className={styles.sectionTitle}>Engineering &amp; Fabrication Standards</h3>
-              <p
-                className={styles.description}
-                style={{
-                  fontSize: '13px',
-                  lineHeight: '1.6',
-                  color: 'rgba(255,255,255,0.5)',
-                  marginBottom: '12px',
-                }}
-              >
+              <p className={`${styles.description} ${styles.descriptionCompact}`}>
                 At TGB Enterprise, our manufacturing process in Nikol, Ahmedabad adheres to strict
                 structural and electrical safety codes. Every {service.name} is fabricated using
                 state-of-the-art computer-controlled routers (CNC) and high-precision laser
@@ -177,10 +140,7 @@ export const ServiceDetail: React.FC = () => {
                 stainless steel) treated with UV-resistant coatings to prevent fading, oxidation, or
                 warping under severe weather conditions.
               </p>
-              <p
-                className={styles.description}
-                style={{ fontSize: '13px', lineHeight: '1.6', color: 'rgba(255,255,255,0.5)' }}
-              >
+              <p className={`${styles.description} ${styles.descriptionCompact}`}>
                 Our LED assemblies are powered by industry-leading transformers (Meanwell) and
                 energy-efficient IP67 weather-sealed modules, providing consistent luminous
                 intensity with no visible hot-spots. Our certified installation crew manages
@@ -196,68 +156,34 @@ export const ServiceDetail: React.FC = () => {
             {/* Technical Specifications */}
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Technical Specifications</span>
-              <div
-                style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '12px' }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    paddingBottom: '8px',
-                  }}
-                >
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Scale Range</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+              <div className={styles.specRows}>
+                <div className={styles.specRow}>
+                  <span className={styles.specFieldLabel}>Scale Range</span>
+                  <span className={styles.specFieldValue}>
                     {service.specifications.dimensions}
                   </span>
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    paddingBottom: '8px',
-                  }}
-                >
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Weathering</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                <div className={styles.specRow}>
+                  <span className={styles.specFieldLabel}>Weathering</span>
+                  <span className={styles.specFieldValue}>
                     {service.specifications.weatherResistance}
                   </span>
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    paddingBottom: '8px',
-                  }}
-                >
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Warranty</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                <div className={styles.specRow}>
+                  <span className={styles.specFieldLabel}>Warranty</span>
+                  <span className={styles.specFieldValue}>
                     {service.specifications.warranty}
                   </span>
                 </div>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
-                    paddingBottom: '8px',
-                  }}
-                >
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>
-                    Certifications
-                  </span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                <div className={styles.specRow}>
+                  <span className={styles.specFieldLabel}>Certifications</span>
+                  <span className={styles.specFieldValue}>
                     {service.specifications.certifications}
                   </span>
                 </div>
-                <div
-                  style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '4px' }}
-                >
-                  <span style={{ fontSize: '12px', color: 'var(--color-steel)' }}>Maintenance</span>
-                  <span style={{ fontSize: '12px', color: 'var(--color-white)' }}>
+                <div className={styles.specRow}>
+                  <span className={styles.specFieldLabel}>Maintenance</span>
+                  <span className={styles.specFieldValue}>
                     {service.specifications.maintenance}
                   </span>
                 </div>
@@ -268,18 +194,11 @@ export const ServiceDetail: React.FC = () => {
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Manufacturing Capabilities</span>
 
-              <div style={{ marginTop: '16px' }}>
-                <span
-                  style={{
-                    fontSize: '10px',
-                    color: 'var(--color-steel)',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                  }}
-                >
+              <div className={styles.capabilitySection}>
+                <span className={styles.capabilityLabel}>
                   Materials
                 </span>
-                <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
+                <div className={styles.chipGrid}>
                   {service.capabilities.materials.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
                       {item}
@@ -288,18 +207,11 @@ export const ServiceDetail: React.FC = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '16px' }}>
-                <span
-                  style={{
-                    fontSize: '10px',
-                    color: 'var(--color-steel)',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                  }}
-                >
+              <div className={styles.capabilitySection}>
+                <span className={styles.capabilityLabel}>
                   Technology
                 </span>
-                <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
+                <div className={styles.chipGrid}>
                   {service.capabilities.technology.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
                       {item}
@@ -308,18 +220,11 @@ export const ServiceDetail: React.FC = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: '16px' }}>
-                <span
-                  style={{
-                    fontSize: '10px',
-                    color: 'var(--color-steel)',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                  }}
-                >
+              <div className={styles.capabilitySection}>
+                <span className={styles.capabilityLabel}>
                   Finishes
                 </span>
-                <div className={styles.chipGrid} style={{ marginTop: '8px' }}>
+                <div className={styles.chipGrid}>
                   {service.capabilities.finishes.map((item, idx) => (
                     <span key={idx} className={styles.chip}>
                       {item}
@@ -332,7 +237,7 @@ export const ServiceDetail: React.FC = () => {
             {/* Industries Served */}
             <div className={styles.specItem}>
               <span className={styles.specLabel}>Primary Applications</span>
-              <div className={styles.chipGrid} style={{ marginTop: '12px' }}>
+              <div className={styles.chipGrid}>
                 {service.industriesServed.map((ind, idx) => (
                   <span key={idx} className={styles.chip}>
                     {ind}
@@ -344,23 +249,9 @@ export const ServiceDetail: React.FC = () => {
             {/* Pricing Estimates */}
             <div className={styles.specItem}>
               <span className={styles.priceLabel}>Estimated Pricing</span>
-              <div
-                style={{
-                  marginTop: '8px',
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: '8px',
-                  flexWrap: 'wrap',
-                }}
-              >
+              <div className={styles.pricingRow}>
                 <span className={styles.priceAmount}>{service.pricing.startingFrom}</span>
-                <span
-                  style={{
-                    fontSize: '12px',
-                    color: 'var(--color-steel)',
-                    fontFamily: 'var(--font-technical)',
-                  }}
-                >
+                <span className={styles.priceMeta}>
                   ({service.pricing.taxNote})
                 </span>
               </div>
@@ -369,33 +260,8 @@ export const ServiceDetail: React.FC = () => {
                   <li key={idx}>{note}</li>
                 ))}
               </ul>
-              <div style={{ marginTop: '24px' }}>
-                <Link
-                  to="/contact"
-                  className={styles.backLink}
-                  style={{
-                    background: 'var(--color-red)',
-                    color: '#ffffff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '12px 24px',
-                    borderRadius: '6px',
-                    fontFamily: 'var(--font-primary)',
-                    fontSize: '13px',
-                    fontWeight: 500,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    textDecoration: 'none',
-                    margin: 0,
-                    textAlign: 'center',
-                    transition: 'background var(--transition-fast)',
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = 'var(--color-red-hover)')
-                  }
-                  onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-red)')}
-                >
+              <div className={styles.quoteWrapper}>
+                <Link to="/contact" className={styles.quoteButton}>
                   Request A Quotation
                 </Link>
               </div>
@@ -404,56 +270,17 @@ export const ServiceDetail: React.FC = () => {
         </div>
 
         {/* Related Work & Services Footer Section */}
-        <div
-          style={{
-            marginTop: '72px',
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            paddingTop: '56px',
-          }}
-        >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '40px',
-            }}
-          >
+        <div className={styles.relatedSection}>
+          <div className={styles.relatedGrid}>
             {/* Column 1: Other Services */}
             <div>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '18px',
-                  fontWeight: 400,
-                  color: 'var(--color-off-white)',
-                  marginBottom: '16px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                }}
-              >
+              <h3 className={styles.relatedHeading}>
                 Other Signage Solutions
               </h3>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px',
-                }}
-              >
+              <ul className={styles.relatedList}>
                 {otherServices.slice(0, 3).map((s) => (
                   <li key={s.slug}>
-                    <Link
-                      to={`/services/${s.slug}`}
-                      style={{
-                        color: 'var(--color-copper)',
-                        textDecoration: 'none',
-                        fontSize: '14px',
-                        fontFamily: 'var(--font-primary)',
-                      }}
-                    >
+                    <Link to={`/services/${s.slug}`} className={styles.relatedLink}>
                       {s.name} →
                     </Link>
                   </li>
@@ -463,42 +290,15 @@ export const ServiceDetail: React.FC = () => {
 
             {/* Column 2: Related Projects */}
             <div>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '18px',
-                  fontWeight: 400,
-                  color: 'var(--color-off-white)',
-                  marginBottom: '16px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                }}
-              >
+              <h3 className={styles.relatedHeading}>
                 Completed Installations
               </h3>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  padding: 0,
-                  margin: 0,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px',
-                }}
-              >
+              <ul className={styles.relatedList}>
                 {(relatedProjects.length > 0 ? relatedProjects : projectsContent.items)
                   .slice(0, 2)
                   .map((p) => (
                     <li key={p.id}>
-                      <Link
-                        to={`/projects/${p.id}`}
-                        style={{
-                          color: 'var(--color-copper)',
-                          textDecoration: 'none',
-                          fontSize: '14px',
-                          fontFamily: 'var(--font-primary)',
-                        }}
-                      >
+                      <Link to={`/projects/${p.id}`} className={styles.relatedLink}>
                         {p.name} ({p.category}) →
                       </Link>
                     </li>
@@ -507,25 +307,14 @@ export const ServiceDetail: React.FC = () => {
             </div>
           </div>
 
-          <div
-            style={{ marginTop: '48px', display: 'flex', gap: '20px', justifyContent: 'center' }}
-          >
-            <Link
-              to="/"
-              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-            >
+          <div className={styles.bottomNav}>
+            <Link to="/" className={styles.bottomNavLink}>
               ← Back to Home
             </Link>
-            <Link
-              to="/gallery"
-              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-            >
+            <Link to="/gallery" className={styles.bottomNavLink}>
               Project Gallery
             </Link>
-            <Link
-              to="/services"
-              style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px' }}
-            >
+            <Link to="/services" className={styles.bottomNavLink}>
               Our Services
             </Link>
           </div>

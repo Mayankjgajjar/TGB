@@ -1,12 +1,12 @@
 .sectionEyebrow {
   display: block;
-  font-family: var(--font-display);
-  font-size: 14px; /* Standardized legible size */
-  font-weight: 600; /* Semi-bold weight as requested */
-  color: var(--color-red);
-  letter-spacing: 0.07em; /* Moderate technical tracking */
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-copper);
+  letter-spacing: 3px;
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: var(--space-12);
+  margin-bottom: 0;
   line-height: 1.4;
 }

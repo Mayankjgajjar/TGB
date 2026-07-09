@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
+import PageLoader from './components/layout/PageLoader';
 import Home from './pages/Home';
 
 // Lazy-load all non-home pages to keep the main bundle lean
@@ -14,26 +15,6 @@ const Gallery = lazy(() => import('./pages/Gallery'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
 const NotFound = lazy(() => import('./pages/NotFound'));
-
-// Minimal, accessible loading fallback shown while code-split chunks load
-const PageLoader = () => (
-  <div
-    role="status"
-    aria-label="Loading page"
-    style={{
-      minHeight: '60vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'rgba(255,255,255,0.4)',
-      fontSize: '0.875rem',
-      letterSpacing: '0.1em',
-      fontFamily: 'var(--font-technical, monospace)',
-    }}
-  >
-    LOADING...
-  </div>
-);
 
 export const router = createBrowserRouter([
   {

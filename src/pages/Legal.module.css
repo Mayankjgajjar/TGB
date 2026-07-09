@@ -1,5 +1,5 @@
 .legalPage {
-  padding-top: 160px;
+  padding-top: 128px;
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
@@ -17,7 +17,8 @@
   font-weight: 300;
   color: var(--color-off-white);
   margin-bottom: var(--space-8);
-  letter-spacing: -0.015em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .lastUpdated {
@@ -64,4 +65,22 @@
 
 .listItem {
   margin-bottom: var(--space-8);
+}
+
+.linkRow {
+  margin-bottom: 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.link {
+  color: var(--color-copper);
+  text-decoration: none;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  transition: color var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--color-copper-light);
 }

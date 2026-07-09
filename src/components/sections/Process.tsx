@@ -117,7 +117,7 @@ export const Process: React.FC<ProcessProps> = ({
       y: 0,
       transition: {
         duration: shouldReduceMotion ? 0 : 0.72,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.16, 1, 0.3, 1],
         delay: shouldReduceMotion ? 0 : index * 0.08,
       },
     }),
@@ -149,19 +149,10 @@ export const Process: React.FC<ProcessProps> = ({
       {/* ── Optional Standards Intro Paragraph ── */}
       {activeIntro && (
         <motion.div
-          className={styles.introParagraphWrapper}
+          className={styles.introParagraph}
           initial={{ opacity: 0, y: 15 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
           transition={{ duration: 0.65, delay: 0.15 }}
-          style={{
-            maxWidth: '800px',
-            margin: '-16px auto 48px auto',
-            textAlign: 'center',
-            fontFamily: 'var(--font-primary)',
-            fontSize: '15px',
-            lineHeight: '1.75',
-            color: 'rgba(255, 255, 255, 0.65)',
-          }}
         >
           {activeIntro}
         </motion.div>
@@ -210,7 +201,7 @@ export const Process: React.FC<ProcessProps> = ({
 
   if (asDiv) {
     return (
-      <div ref={ref} id="process" style={{ width: '100%', position: 'relative' }}>
+      <div ref={ref} id="process" className="sectionAnchor">
         {content}
       </div>
     );

@@ -124,7 +124,7 @@ export const FAQ: React.FC<FAQProps> = ({ title, subtitle, items }) => {
           aria-expanded={isOpen}
           aria-controls={panelId}
         >
-          <h3 className={styles.question}>{faq.question}</h3>
+          <span className={styles.question}>{faq.question}</span>
           <div className={styles.iconWrapper}>
             <Plus size={16} strokeWidth={2} />
           </div>
@@ -134,11 +134,9 @@ export const FAQ: React.FC<FAQProps> = ({ title, subtitle, items }) => {
           id={panelId}
           role="region"
           aria-labelledby={btnId}
+          aria-hidden={!isOpen}
           className={styles.contentWrapper}
-          style={{
-            maxHeight: isOpen ? '240px' : '0',
-            transition: 'max-height 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease',
-          }}
+          style={{ maxHeight: isOpen ? '240px' : '0' }}
         >
           <div className={styles.contentInner}>{faq.answer}</div>
         </div>

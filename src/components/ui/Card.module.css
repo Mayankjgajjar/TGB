@@ -1,8 +1,8 @@
 .card {
   position: relative;
-  background: #0a0a0a;
+  background: var(--color-black);
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: var(--radius-card, 16px);
+  border-radius: var(--radius-card);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -91,7 +91,7 @@ button.card:hover {
   color: rgb(255 255 255 / 75%);
   background: rgb(10 10 10 / 65%);
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   border: 1px solid rgb(255 255 255 / 10%);
   backdrop-filter: blur(8px);
   transition:
@@ -176,10 +176,10 @@ button.card:hover {
   font-weight: 500;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 35%);
+  color: rgb(255 255 255 / 55%);
   padding: 8px 12px;
   border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   display: inline-flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import styles from './Turnstile.module.css';
 
 interface TurnstileProps {
   onVerify: (token: string) => void;
@@ -14,7 +15,8 @@ export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onErro
 
   useEffect(() => {
     const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
-    if (!siteKey) {
+    // Allow mock (e.g., in Playwright tests) even without a real site key
+    if (!siteKey && !window.turnstile) {
       if (!turnstileWarningShown) {
         console.warn('VITE_TURNSTILE_SITE_KEY is not defined. CAPTCHA cannot render.');
         turnstileWarningShown = true;
@@ -91,7 +93,12 @@ export const Turnstile: React.FC<TurnstileProps> = ({ onVerify, onExpire, onErro
   }, [onVerify, onExpire, onError]);
 
   return (
-    <div ref={containerRef} style={{ minHeight: 'auto', marginTop: '4px', marginBottom: '8px' }} />
+    <div
+      ref={containerRef}
+      role="figure"
+      aria-label="CAPTCHA verification — complete this step to submit the form"
+      className={styles.wrapper}
+    />
   );
 };
 

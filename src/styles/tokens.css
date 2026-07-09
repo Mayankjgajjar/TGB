@@ -2,7 +2,7 @@
   /* Color System - Exact Brand Identity (Rich Black & Pure Brand Red) */
   --color-black: #0a0a0a;
   --color-black-soft: #141414;
-  --color-red: #e30005;
+  --color-red: #d40000;
   --color-red-hover: #c10004; /* slightly darker for hover states */
   --color-white: #fff;
   --color-white-muted: #b8b8b8;
@@ -28,11 +28,10 @@
   --space-16: calc(var(--space-unit) * 2); /* 16px */
   --space-24: calc(var(--space-unit) * 3); /* 24px */
   --space-32: calc(var(--space-unit) * 4); /* 32px */
+  --space-40: calc(var(--space-unit) * 5); /* 40px */
   --space-48: calc(var(--space-unit) * 6); /* 48px */
   --space-64: calc(var(--space-unit) * 8); /* 64px */
   --space-96: calc(var(--space-unit) * 12); /* 96px */
-  --space-128: calc(var(--space-unit) * 16); /* 128px */
-  --space-160: calc(var(--space-unit) * 20); /* 160px */
 
   /* Typography Scale (Redesigned to Clean Modern Industrial Sans-Serif) */
   --font-display: 'Montserrat', sans-serif;
@@ -41,11 +40,7 @@
   --font-technical: var(--font-display);
 
   /* Font Scale Custom Properties */
-  --text-h1: 56px;
-  --text-h2: 36px;
-  --text-body: 16px;
   --lh-h1: 1.1;
-  --lh-h2: 1.25;
   --lh-body: 1.6;
 
   /* Font Sizes */
@@ -66,24 +61,31 @@
 
   /* Layout Widths */
   --container-max-width: 1440px;
+  --section-inner-max-width: 1320px;
 
-  /* Radius (Premium Apple-inspired soft shapes) */
+  /* Radius (Standardized system) */
   --radius-sharp: 8px;
-  --radius-subtle: 8px;
-  --radius-rounded: 30px;
-  --radius-card: 16px;
+  --radius-card: 12px;
+  --radius-small: 4px;
+  --radius-input: 6px;
 
   /* Shadows (Minimal depth, dark focus) */
-  --shadow-subtle: 0 4px 12px rgb(0 0 0 / 40%);
   --shadow-medium: 0 12px 32px rgb(0 0 0 / 60%);
-  --shadow-inset: inset 0 2px 4px rgb(0 0 0 / 80%);
+  --shadow-elevated: 0 16px 40px rgb(0 0 0 / 50%);
 
   /* Z-Index Hierarchy */
-  --z-index-base: 1;
-  --z-index-sticky: 100;
   --z-index-navbar: 1000;
-  --z-index-overlay: 2000;
   --z-index-modal: 3000;
+
+  /* Focus Ring */
+  --focus-ring-color: var(--color-copper-light);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 4px;
+
+  /* Form States */
+  --color-error: rgb(220 80 80 / 90%);
+  --color-error-border: rgb(200 50 50 / 70%);
+  --color-error-bg: rgb(220 80 80 / 10%);
 
   /* Transition Easing (Premium Ease Curves) */
   --transition-speed-fast: 0.2s;

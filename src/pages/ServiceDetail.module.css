@@ -1,5 +1,5 @@
 .page {
-  padding-top: 160px;
+  padding-top: 128px;
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
@@ -174,7 +174,7 @@
 .chip {
   background: rgb(255 255 255 / 4%);
   border: 1px solid rgb(255 255 255 / 8%);
-  border-radius: 4px;
+  border-radius: var(--radius-small);
   color: var(--color-white-muted);
   font-family: var(--font-primary);
   font-size: 12px;
@@ -237,7 +237,7 @@
   background: rgb(255 255 255 / 2%);
   border: 1px solid rgb(255 255 255 / 4%);
   padding: 20px;
-  border-radius: 8px;
+  border-radius: var(--radius-sharp);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -283,4 +283,185 @@
   line-height: 1.4;
   list-style-type: disc;
   padding-left: 16px;
+}
+
+/* ── Spec Table Rows ── */
+.specRow {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255 255 255 / 4%);
+  padding-bottom: 8px;
+}
+
+.specRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.specFieldLabel {
+  font-size: 12px;
+  color: var(--color-steel);
+}
+
+.specFieldValue {
+  font-size: 12px;
+  color: var(--color-white);
+}
+
+/* ── Capabilities Section ── */
+.capabilitySection {
+  margin-top: 16px;
+}
+
+.capabilityLabel {
+  font-size: 10px;
+  color: var(--color-steel);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Related Content Footer ── */
+.relatedSection {
+  margin-top: 72px;
+  border-top: 1px solid rgba(255 255 255 / 8%);
+  padding-top: 56px;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.relatedHeading {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--color-off-white);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.relatedList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.relatedLink {
+  color: var(--color-copper);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: var(--font-primary);
+}
+
+.relatedLink:hover {
+  color: var(--color-red-hover);
+}
+
+/* ── Bottom Navigation ── */
+.bottomNav {
+  margin-top: 48px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.bottomNavLink {
+  color: rgba(255 255 255 / 40%);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color var(--transition-fast);
+}
+
+.bottomNavLink:hover {
+  color: var(--color-white-muted);
+}
+
+/* ── Quote CTA Button ── */
+.quoteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: var(--radius-sharp);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  margin: 0;
+  text-align: center;
+  transition: background var(--transition-fast);
+  background: var(--color-red);
+  color: var(--color-off-white);
+}
+
+.quoteButton:hover,
+.quoteButton:focus {
+  background: var(--color-red-hover);
+  color: var(--color-off-white);
+}
+
+/* ── Section block with top border ── */
+.sectionBlockBordered {
+  border-top: 1px solid rgba(255 255 255 / 5%);
+  padding-top: 24px;
+  margin-top: 32px;
+}
+
+/* ── Compact description (13px) ── */
+.descriptionCompact {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255 255 255 / 50%);
+  margin-bottom: 12px;
+}
+
+.descriptionCompact:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Pricing meta text ── */
+.priceMeta {
+  font-size: 12px;
+  color: var(--color-steel);
+  font-family: var(--font-technical);
+}
+
+.pricingRow {
+  margin-top: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quoteWrapper {
+  margin-top: 24px;
+}
+
+/* ── Not-found page ── */
+.notFound {
+  text-align: center;
+  padding: 96px 0;
+  color: var(--color-white-muted);
+}
+
+.notFoundText {
+  margin-top: 16px;
+  font-family: var(--font-primary);
+}
+
+/* ── specRows container ── */
+.specRows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
 }
