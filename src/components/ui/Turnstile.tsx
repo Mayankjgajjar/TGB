@@ -162,7 +162,7 @@ export const Turnstile = React.forwardRef<TurnstileHandle, TurnstileProps>(
         siteKey === '0x4AAAAAAA_xxxxxxxxxxxxxxxxxxxxxxxx';
 
       return (
-        <div className={styles.errorState} role="alert">
+        <div key="turnstile-error" className={styles.errorState} role="alert">
           <span className={styles.errorText}>
             {isPlaceholder
               ? 'CAPTCHA site key is missing or not configured. Please set VITE_TURNSTILE_SITE_KEY in your hosting dashboard settings.'
@@ -183,6 +183,7 @@ export const Turnstile = React.forwardRef<TurnstileHandle, TurnstileProps>(
 
     return (
       <div
+        key="turnstile-widget"
         ref={containerRef}
         role="figure"
         aria-label="CAPTCHA verification — complete this step to submit the form"
