@@ -437,7 +437,7 @@
 }
 
 .bottomLink {
-  color: rgba(255 255 255 / 40%);
+  color: rgb(255 255 255 / 40%);
   text-decoration: none;
   font-size: 13px;
   transition: color var(--transition-fast);

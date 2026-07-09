@@ -170,7 +170,7 @@
 /* ── SEO Content Block ── */
 .seoBlock {
   margin-top: 24px;
-  border-top: 1px solid rgba(255 255 255 / 5%);
+  border-top: 1px solid rgb(255 255 255 / 5%);
   padding-top: 20px;
 }
 
@@ -187,7 +187,7 @@
 .seoText {
   font-size: 13px;
   line-height: 1.6;
-  color: rgba(255 255 255 / 50%);
+  color: rgb(255 255 255 / 50%);
   margin-bottom: 12px;
 }
 
@@ -198,7 +198,7 @@
 /* ── Bottom CTA Section ── */
 .bottomSection {
   margin-top: 56px;
-  border-top: 1px solid rgba(255 255 255 / 8%);
+  border-top: 1px solid rgb(255 255 255 / 8%);
   padding-top: 40px;
   display: flex;
   flex-direction: column;
@@ -209,7 +209,7 @@
 .bottomText {
   font-family: var(--font-primary);
   font-size: 15px;
-  color: rgba(255 255 255 / 50%);
+  color: rgb(255 255 255 / 50%);
 }
 
 .bottomLinks {
@@ -238,7 +238,7 @@
 
 .ctaSecondary {
   display: inline-flex;
-  border: 1px solid rgba(255 255 255 / 15%);
+  border: 1px solid rgb(255 255 255 / 15%);
   color: var(--color-off-white);
   text-decoration: none;
   padding: 12px 28px;
@@ -250,7 +250,7 @@
 }
 
 .ctaSecondary:hover {
-  border-color: rgba(255 255 255 / 40%);
+  border-color: rgb(255 255 255 / 40%);
 }
 
 /* ── Not-found page ── */

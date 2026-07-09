@@ -179,7 +179,7 @@ code {
   font-family: var(--font-technical);
   font-size: 0.9em;
   color: var(--color-copper-light);
-  background: rgba(255 255 255 / 5%);
+  background: rgb(255 255 255 / 5%);
   padding: 2px 6px;
   border-radius: 3px;
 }
@@ -190,7 +190,7 @@ pre {
   line-height: 1.6;
   color: var(--color-off-white-muted);
   background: var(--color-charcoal-surface);
-  border: 1px solid rgba(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: var(--radius-sharp);
   padding: 16px 20px;
   overflow-x: auto;
@@ -247,7 +247,7 @@ textarea:focus-visible,
 
   .section {
     padding: 24px 0 !important;
-    page-break-inside: avoid;
+    break-inside: avoid;
   }
 }
 

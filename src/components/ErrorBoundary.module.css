@@ -6,7 +6,7 @@
   justify-content: center;
   gap: 16px;
   padding: 48px 24px;
-  color: rgba(255 255 255 / 85%);
+  color: rgb(255 255 255 / 85%);
 }
 
 .icon {
@@ -43,8 +43,8 @@
   margin-top: 8px;
   padding: 12px 24px;
   border-radius: var(--radius-sharp);
-  border: 1px solid rgba(255 255 255 / 20%);
-  background: rgba(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  background: rgb(255 255 255 / 8%);
   color: inherit;
   cursor: pointer;
   font-size: 0.875rem;

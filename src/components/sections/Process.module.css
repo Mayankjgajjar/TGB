@@ -60,12 +60,12 @@
 
 .introParagraph {
   max-width: 800px;
-  margin: -16px auto 48px auto;
+  margin: -16px auto 48px;
   text-align: center;
   font-family: var(--font-primary);
   font-size: 15px;
   line-height: 1.75;
-  color: rgba(255 255 255 / 65%);
+  color: rgb(255 255 255 / 65%);
 }
 
 /* ── Card Grid — 5 columns ── */
