@@ -6,7 +6,7 @@ import styles from './ContactCTA.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import { trackContactFormSubmit } from '../../lib/analytics';
 import { captureError } from '../../lib/telemetry';
-import Turnstile from '../ui/Turnstile';
+import Turnstile, { TurnstileHandle } from '../ui/Turnstile';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '../ui/Breadcrumbs';
 
@@ -91,6 +91,7 @@ export const ContactCTA: React.FC<{
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const successRef = useRef<HTMLDivElement>(null);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   useEffect(() => {
     if (isSubmitted && successRef.current) {
@@ -99,6 +100,22 @@ export const ContactCTA: React.FC<{
   }, [isSubmitted]);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [turnstileExpired, setTurnstileExpired] = useState(false);
+
+  const handleTurnstileVerify = useCallback((token: string) => {
+    setTurnstileToken(token);
+    setTurnstileExpired(false);
+  }, []);
+
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileExpired(true);
+  }, []);
+
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setTurnstileExpired(false);
+  }, []);
 
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
@@ -180,6 +197,8 @@ export const ContactCTA: React.FC<{
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
         setTurnstileToken('');
+        setTurnstileExpired(false);
+        turnstileRef.current?.reset();
         setErrors({});
         setTouched({});
         trackContactFormSubmit();
@@ -189,6 +208,8 @@ export const ContactCTA: React.FC<{
         setSubmitError(
           error.message || 'We encountered an issue submitting your inquiry. Please try again.',
         );
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
       } finally {
         setIsSubmitting(false);
       }
@@ -200,6 +221,8 @@ export const ContactCTA: React.FC<{
     setIsSubmitted(false);
     setSubmitError(null);
     setTurnstileToken('');
+    setTurnstileExpired(false);
+    turnstileRef.current?.reset();
   }, []);
 
   /** Helper to get input className with error state */
@@ -494,7 +517,18 @@ export const ContactCTA: React.FC<{
                   )}
 
                   {/* Turnstile Captcha */}
-                  <Turnstile onVerify={setTurnstileToken} />
+                  <Turnstile
+                    ref={turnstileRef}
+                    onVerify={handleTurnstileVerify}
+                    onExpire={handleTurnstileExpire}
+                    onError={handleTurnstileError}
+                  />
+
+                  {turnstileExpired && (
+                    <div className={styles.fieldError} role="alert" style={{ marginTop: '4px', marginBottom: '8px' }}>
+                      Verification expired. Please verify the CAPTCHA again.
+                    </div>
+                  )}
 
                   {submitError && (
                     <div className={styles.formErrorBanner} role="alert">
