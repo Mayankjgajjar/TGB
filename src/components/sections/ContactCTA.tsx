@@ -577,14 +577,14 @@ export const ContactCTA: React.FC<{
             >
               <div className={styles.mapContainer}>
                 <iframe
-                  src="https://maps.google.com/maps?q=23.0512243,72.6624139&z=16&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.1895780518337!2d72.6602252758999!3d23.051224279153063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e87dcf5fc5ced%3A0x7f67e11554da7d1c!2sTGB%20ENTERPRISE!5e0!3m2!1sen!2sin!4v1720512345678!5m2!1sen!2sin"
                   title="TGB Enterprise Ahmedabad Studio Map"
                   width="100%"
                   height="100%"
-                  border="0"
+                  style={{ border: 0 }}
                   allowFullScreen={false}
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   className={styles.mapIframe}
                 />
                 <div className={styles.mapOverlay} />
