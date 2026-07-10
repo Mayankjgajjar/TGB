@@ -56,6 +56,14 @@ function validateForm(fields: FormFields): FormErrors {
     errors.email = 'Enter a valid email address.';
   }
 
+  if (!fields.message.trim()) {
+    errors.message = 'Message is required.';
+  } else if (fields.message.trim().length < 10) {
+    errors.message = 'Message must be at least 10 characters.';
+  } else if (fields.message.trim().length > 2000) {
+    errors.message = 'Message must be under 2000 characters.';
+  }
+
   if (!fields.consent) {
     errors.consent = 'Consent is required to submit your enquiry.';
   }
@@ -167,7 +175,23 @@ export const ContactCTA: React.FC<{
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || 'Failed to submit inquiry.');
+          if (errorData.errors) {
+            const clientErrors: FormErrors = {};
+            Object.keys(errorData.errors).forEach((key) => {
+              const clientKey = key === 'consentGiven' ? 'consent' : (key as keyof FormFields);
+              clientErrors[clientKey] = errorData.errors[key];
+            });
+            setErrors(clientErrors);
+            const touchedFields = Object.keys(clientErrors).reduce(
+              (acc, key) => ({ ...acc, [key]: true }),
+              {} as Record<string, boolean>,
+            );
+            setTouched((prev) => ({ ...prev, ...touchedFields }));
+            throw new Error('Please correct the validation errors below.');
+          }
+          throw new Error(
+            errorData.error || errorData.message || 'Failed to submit inquiry.',
+          );
         }
 
         setIsSubmitted(true);
@@ -196,6 +220,9 @@ export const ContactCTA: React.FC<{
   /** Helper to get input className with error state */
   const inputClass = (field: keyof FormFields) =>
     `${styles.textInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
+
+  const textareaClass = (field: keyof FormFields) =>
+    `${styles.textareaInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
 
   const headerVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
@@ -442,7 +469,7 @@ export const ContactCTA: React.FC<{
                   {/* Message Input */}
                   <div className={styles.inputGroup}>
                     <label htmlFor="message" className={styles.fieldLabel}>
-                      Tell Us About Your Project
+                      Tell Us About Your Project *
                     </label>
                     <textarea
                       id="message"
@@ -450,9 +477,17 @@ export const ContactCTA: React.FC<{
                       rows={4}
                       value={formState.message}
                       onChange={handleInputChange}
+                      onBlur={handleBlur}
                       placeholder="Please share your requirements, project location, timeline, or any specific ideas you have in mind."
-                      className={styles.textareaInput}
+                      className={textareaClass('message')}
+                      aria-invalid={touched.message && !!errors.message}
+                      aria-describedby={errors.message ? 'message-error' : undefined}
                     />
+                    {touched.message && errors.message && (
+                      <span id="message-error" className={styles.fieldError} role="alert">
+                        {errors.message}
+                      </span>
+                    )}
                   </div>
 
                   {/* Consent Checkbox */}

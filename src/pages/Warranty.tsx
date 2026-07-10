@@ -35,7 +35,11 @@ const EMPTY_FORM: FormFields = {
 
 const validateForm = (fields: FormFields): FormErrors => {
   const errors: FormErrors = {};
-  if (!fields.customerName.trim()) errors.customerName = 'Customer name is required.';
+  if (!fields.customerName.trim()) {
+    errors.customerName = 'Customer name is required.';
+  } else if (fields.customerName.trim().length < 2) {
+    errors.customerName = 'Full name must be at least 2 characters.';
+  }
 
   if (!fields.phone.trim()) {
     errors.phone = 'Phone number is required.';
@@ -53,7 +57,14 @@ const validateForm = (fields: FormFields): FormErrors => {
   if (!fields.warrantyNumber.trim()) errors.warrantyNumber = 'Warranty number is required.';
   if (!fields.purchaseDate.trim()) errors.purchaseDate = 'Purchase date is required.';
   if (!fields.signageType) errors.signageType = 'Please select a signage type.';
-  if (!fields.issueDetails.trim()) errors.issueDetails = 'Please provide details about the issue.';
+
+  if (!fields.issueDetails.trim()) {
+    errors.issueDetails = 'Please provide details about the issue.';
+  } else if (fields.issueDetails.trim().length < 10) {
+    errors.issueDetails = 'Issue description must be at least 10 characters.';
+  } else if (fields.issueDetails.trim().length > 2000) {
+    errors.issueDetails = 'Issue description must be under 2000 characters.';
+  }
 
   if (!fields.consent) {
     errors.consent = 'Consent is required to submit your claim.';
@@ -173,7 +184,23 @@ export const Warranty: React.FC = () => {
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          throw new Error(errorData.error || 'Failed to submit warranty claim.');
+          if (errorData.errors) {
+            const clientErrors: FormErrors = {};
+            Object.keys(errorData.errors).forEach((key) => {
+              const clientKey = key === 'consentGiven' ? 'consent' : (key as keyof FormFields);
+              clientErrors[clientKey] = errorData.errors[key];
+            });
+            setErrors(clientErrors);
+            const touchedFields = Object.keys(clientErrors).reduce(
+              (acc, key) => ({ ...acc, [key]: true }),
+              {} as Record<string, boolean>,
+            );
+            setTouched((prev) => ({ ...prev, ...touchedFields }));
+            throw new Error('Please correct the validation errors below.');
+          }
+          throw new Error(
+            errorData.error || errorData.message || 'Failed to submit warranty claim.',
+          );
         }
 
         setIsSubmitted(true);
