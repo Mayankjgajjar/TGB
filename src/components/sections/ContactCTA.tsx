@@ -187,7 +187,8 @@ export const ContactCTA: React.FC<{
               {} as Record<string, boolean>,
             );
             setTouched((prev) => ({ ...prev, ...touchedFields }));
-            throw new Error('Please correct the validation errors below.');
+            const errorList = Object.values(clientErrors).filter(Boolean).join(' ');
+            throw new Error(errorList || 'Please correct the validation errors below.');
           }
           throw new Error(errorData.error || errorData.message || 'Failed to submit inquiry.');
         }

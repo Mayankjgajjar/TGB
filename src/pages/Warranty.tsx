@@ -175,8 +175,8 @@ export const Warranty: React.FC = () => {
           },
           body: JSON.stringify({
             ...formState,
-            imageFileName: selectedFile ? selectedFile.name : null,
-            imageContent: fileBase64,
+            imageFileName: selectedFile ? selectedFile.name : undefined,
+            imageContent: fileBase64 || undefined,
             consentGiven: formState.consent,
             consentTimestamp: new Date().toISOString(),
           }),
@@ -196,7 +196,8 @@ export const Warranty: React.FC = () => {
               {} as Record<string, boolean>,
             );
             setTouched((prev) => ({ ...prev, ...touchedFields }));
-            throw new Error('Please correct the validation errors below.');
+            const errorList = Object.values(clientErrors).filter(Boolean).join(' ');
+            throw new Error(errorList || 'Please correct the validation errors below.');
           }
           throw new Error(
             errorData.error || errorData.message || 'Failed to submit warranty claim.',
