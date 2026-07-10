@@ -27,7 +27,7 @@ const whatsappVariants = {
 
 const ORIGIN = import.meta.env.DEV
   ? window.location.origin
-  : (import.meta.env.VITE_SITE_URL || window.location.origin);
+  : import.meta.env.VITE_SITE_URL || window.location.origin;
 
 export const AppLayout: React.FC = () => {
   const location = useLocation();
