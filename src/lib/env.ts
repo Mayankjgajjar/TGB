@@ -1,11 +1,8 @@
-const TURNSTILE_PLACEHOLDER_PATTERN = /^0x4[Aa]{6,}_x/;
-
 const REQUIRED_VITE_VARS: (keyof ImportMetaEnv)[] = [
   'VITE_CONTACT_EMAIL',
   'VITE_CONTACT_PHONE',
   'VITE_SITE_URL',
   'VITE_SITE_NAME',
-  'VITE_TURNSTILE_SITE_KEY',
 ];
 
 const OPTIONAL_VITE_VARS: (keyof ImportMetaEnv)[] = [
@@ -28,7 +25,6 @@ export function validateEnv(): void {
     if (
       !value ||
       value === 'undefined' ||
-      TURNSTILE_PLACEHOLDER_PATTERN.test(value) ||
       value === 'G-XXXXXXXXXX'
     ) {
       missing.push(key);

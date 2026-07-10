@@ -3,16 +3,6 @@ import path from 'path';
 
 test.describe('Warranty Form', () => {
   test.beforeEach(async ({ page }) => {
-    // Mock Turnstile CAPTCHA so the form can submit
-    await page.addInitScript(() => {
-      (window as any).turnstile = {
-        render: (_container: any, options: any) => {
-          if (options.callback) options.callback('mock-turnstile-token');
-          return 'mock-widget-id';
-        },
-        remove: () => {},
-      };
-    });
     await page.goto('/claim-warranty');
     await page.waitForLoadState('networkidle');
   });

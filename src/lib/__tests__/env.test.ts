@@ -5,7 +5,6 @@ const ALL_VARS = [
   'VITE_CONTACT_PHONE',
   'VITE_SITE_URL',
   'VITE_SITE_NAME',
-  'VITE_TURNSTILE_SITE_KEY',
   'VITE_WHATSAPP_NUMBER',
   'VITE_STUDIO_LATITUDE',
   'VITE_STUDIO_LONGITUDE',
@@ -28,7 +27,6 @@ describe('validateEnv', () => {
     vi.stubEnv('VITE_CONTACT_PHONE', '');
     vi.stubEnv('VITE_SITE_URL', '');
     vi.stubEnv('VITE_SITE_NAME', '');
-    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', '');
 
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const { validateEnv } = await import('../env');
@@ -42,7 +40,6 @@ describe('validateEnv', () => {
     vi.stubEnv('VITE_CONTACT_PHONE', '+1234567890');
     vi.stubEnv('VITE_SITE_URL', 'https://example.com');
     vi.stubEnv('VITE_SITE_NAME', 'Test Site');
-    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', '0x4AAAAAAAARandomRealKey');
     vi.stubEnv('VITE_SENTRY_DSN', '');
 
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
@@ -52,26 +49,11 @@ describe('validateEnv', () => {
     warn.mockRestore();
   });
 
-  it('detects placeholder Turnstile key matching the _x pattern', async () => {
-    vi.stubEnv('VITE_CONTACT_EMAIL', 'test@example.com');
-    vi.stubEnv('VITE_CONTACT_PHONE', '+1234567890');
-    vi.stubEnv('VITE_SITE_URL', 'https://example.com');
-    vi.stubEnv('VITE_SITE_NAME', 'Test Site');
-    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', '0x4AAAAAAA_xxxxxxxxxxxx');
-
-    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const { validateEnv } = await import('../env');
-    validateEnv();
-    expect(warn).toHaveBeenCalledWith(expect.stringContaining('VITE_TURNSTILE_SITE_KEY'));
-    warn.mockRestore();
-  });
-
   it('warns about GA4 placeholder G-XXXXXXXXXX', async () => {
     vi.stubEnv('VITE_CONTACT_EMAIL', 'test@example.com');
     vi.stubEnv('VITE_CONTACT_PHONE', '+1234567890');
     vi.stubEnv('VITE_SITE_URL', 'https://example.com');
     vi.stubEnv('VITE_SITE_NAME', 'Test Site');
-    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', '0x4AAAAAAAARandomRealKey');
     vi.stubEnv('VITE_GA4_MEASUREMENT_ID', 'G-XXXXXXXXXX');
 
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
@@ -86,7 +68,6 @@ describe('validateEnv', () => {
     vi.stubEnv('VITE_CONTACT_PHONE', '+1234567890');
     vi.stubEnv('VITE_SITE_URL', 'https://example.com');
     vi.stubEnv('VITE_SITE_NAME', 'Test Site');
-    vi.stubEnv('VITE_TURNSTILE_SITE_KEY', '0x4AAAAAAAARandomRealKey');
     vi.stubEnv('VITE_GA4_MEASUREMENT_ID', 'G-ABC123DEF');
 
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});

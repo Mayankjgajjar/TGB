@@ -12,7 +12,6 @@ interface ImportMetaEnv {
   readonly VITE_SITE_NAME: string;
   readonly VITE_GA4_MEASUREMENT_ID: string;
   readonly VITE_SENTRY_DSN: string;
-  readonly VITE_TURNSTILE_SITE_KEY: string;
 }
 
 interface ImportMeta {

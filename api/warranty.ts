@@ -25,37 +25,11 @@ const warrantySchema = z.object({
     .max(2000, 'Issue description must be under 2000 characters.'),
   imageFileName: z.string().optional(),
   imageContent: z.string().optional(),
-  turnstileToken: z.string().min(1, 'CAPTCHA token is required.'),
   consentGiven: z.literal(true, {
     message: 'Consent is required to submit your claim.',
   }),
   consentTimestamp: z.string().min(1, 'Consent timestamp is required.'),
 });
-
-// ── Turnstile Verification ────────────────────────────────────────────────────
-
-async function verifyTurnstile(token: string, remoteIp: string): Promise<boolean> {
-  const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) {
-    console.warn('[warranty] TURNSTILE_SECRET_KEY not set — skipping verification in dev mode.');
-    return true;
-  }
-
-  const formData = new URLSearchParams();
-  formData.append('secret', secret);
-  formData.append('response', token);
-  formData.append('remoteip', remoteIp);
-
-  const response = await fetch(
-    'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-    {
-      method: 'POST',
-      body: formData,
-    }
-  );
-  const data = await response.json() as { success: boolean };
-  return data.success === true;
-}
 
 // ── Handler ───────────────────────────────────────────────────────────────────
 
@@ -103,21 +77,11 @@ export default async function handler(req: any, res: any) {
     issueDetails,
     imageFileName,
     imageContent,
-    turnstileToken,
     consentGiven,
     consentTimestamp,
   } = parsed.data;
 
-  // 3. Turnstile verification
-  const turnstileValid = await verifyTurnstile(turnstileToken, clientIp);
-  if (!turnstileValid) {
-    return res.status(400).json({
-      success: false,
-      message: 'CAPTCHA verification failed. Please refresh and try again.',
-    });
-  }
-
-  // 4. Resend API key check
+  // 3. Resend API key check
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
@@ -126,7 +90,7 @@ export default async function handler(req: any, res: any) {
     });
   }
 
-  // 5. Send email
+  // 4. Send email
   try {
     const resend = new Resend(apiKey);
 

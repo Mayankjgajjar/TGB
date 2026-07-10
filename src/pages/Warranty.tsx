@@ -2,7 +2,6 @@ import React, { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
-import Turnstile, { TurnstileHandle } from '../components/ui/Turnstile';
 import { trackWarrantyFormSubmit } from '../lib/analytics';
 import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
@@ -70,24 +69,6 @@ export const Warranty: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState<string>('');
-  const turnstileRef = useRef<TurnstileHandle>(null);
-  const [turnstileExpired, setTurnstileExpired] = useState(false);
-
-  const handleTurnstileVerify = useCallback((token: string) => {
-    setTurnstileToken(token);
-    setTurnstileExpired(false);
-  }, []);
-
-  const handleTurnstileExpire = useCallback(() => {
-    setTurnstileToken('');
-    setTurnstileExpired(true);
-  }, []);
-
-  const handleTurnstileError = useCallback(() => {
-    setTurnstileToken('');
-    setTurnstileExpired(false);
-  }, []);
 
   // File Upload State
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -173,11 +154,6 @@ export const Warranty: React.FC = () => {
         return;
       }
 
-      if (!turnstileToken) {
-        setSubmitError('Please complete the CAPTCHA verification.');
-        return;
-      }
-
       setIsSubmitting(true);
 
       try {
@@ -190,7 +166,6 @@ export const Warranty: React.FC = () => {
             ...formState,
             imageFileName: selectedFile ? selectedFile.name : null,
             imageContent: fileBase64,
-            turnstileToken,
             consentGiven: formState.consent,
             consentTimestamp: new Date().toISOString(),
           }),
@@ -206,9 +181,6 @@ export const Warranty: React.FC = () => {
         setSelectedFile(null);
         setFileBase64(null);
         setFileError(null);
-        setTurnstileToken('');
-        setTurnstileExpired(false);
-        turnstileRef.current?.reset();
         setErrors({});
         setTouched({});
         trackWarrantyFormSubmit();
@@ -217,13 +189,11 @@ export const Warranty: React.FC = () => {
         setSubmitError(
           error.message || 'We encountered an issue submitting your claim. Please try again.',
         );
-        setTurnstileToken('');
-        turnstileRef.current?.reset();
       } finally {
         setIsSubmitting(false);
       }
     },
-    [formState, fileError, selectedFile, fileBase64, turnstileToken],
+    [formState, fileError, selectedFile, fileBase64],
   );
 
   const handleReset = useCallback(() => {
@@ -232,9 +202,6 @@ export const Warranty: React.FC = () => {
     setSelectedFile(null);
     setFileBase64(null);
     setFileError(null);
-    setTurnstileToken('');
-    setTurnstileExpired(false);
-    turnstileRef.current?.reset();
   }, []);
 
   const inputClass = (field: keyof FormFields) =>
@@ -555,24 +522,6 @@ export const Warranty: React.FC = () => {
                 >
                   {errors.consent}
                 </span>
-              )}
-
-              {/* Turnstile Captcha */}
-              <Turnstile
-                ref={turnstileRef}
-                onVerify={handleTurnstileVerify}
-                onExpire={handleTurnstileExpire}
-                onError={handleTurnstileError}
-              />
-
-              {turnstileExpired && (
-                <div
-                  className={styles.fieldError}
-                  role="alert"
-                  style={{ marginTop: '4px', marginBottom: '8px' }}
-                >
-                  Verification expired. Please verify the CAPTCHA again.
-                </div>
               )}
 
               {submitError && (

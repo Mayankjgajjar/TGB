@@ -2,16 +2,6 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Contact Form', () => {
   test.beforeEach(async ({ page }) => {
-    // Mock Turnstile CAPTCHA so the form can submit
-    await page.addInitScript(() => {
-      (window as any).turnstile = {
-        render: (_container: any, options: any) => {
-          if (options.callback) options.callback('mock-turnstile-token');
-          return 'mock-widget-id';
-        },
-        remove: () => {},
-      };
-    });
     await page.goto('/contact');
     await page.waitForLoadState('networkidle');
   });

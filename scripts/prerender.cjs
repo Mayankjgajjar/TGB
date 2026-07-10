@@ -305,7 +305,7 @@ pages.push({
       <p>Automatically collected metadata includes connection parameters, operating systems, rate-limiting tokens, Sentry error logs, and Google Analytics 4 performance metrics.</p>
 
       <h3>2. Third-Party Integrations &amp; Storage</h3>
-      <p>We restrict data transfers to trusted cloud platforms that comply with high security requirements. These integrations include Cloudflare Turnstile (spam defense tokens at challenges.cloudflare.com), Resend (transactional email routing), and Sentry (error diagnostic tracing). Data is stored in secure data centers. Retention periods match our long-term signage warranties (typically up to 10-15 years).</p>
+      <p>We restrict data transfers to trusted cloud platforms that comply with high security requirements. These integrations include Resend (transactional email routing) and Sentry (error diagnostic tracing). Data is stored in secure data centers. Retention periods match our long-term signage warranties (typically up to 10-15 years).</p>
 
       <h3>3. Your Rights &amp; Grievance Officer</h3>
       <p>Under the DPDP Act 2023, you have the right to request access to the personal data we process, request data corrections, request deletion, or withdraw your consent. To exercise these rights, please email tgbsign@proton.me or write to our Grievance Officer at our Nikol workshop address.</p>

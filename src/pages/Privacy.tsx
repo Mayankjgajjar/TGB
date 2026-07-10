@@ -177,7 +177,7 @@ export const Privacy: React.FC = () => {
               Essential cookies are required to process form submissions and verify browser tokens.
               Performance cookies help us understand which signage pages receive traffic. You can
               configure your browser to reject all cookies, but doing so may impact certain
-              functionalities of the website, such as CAPTCHA form submission.
+              functionalities of the website, such as form submission.
             </p>
           </section>
 
@@ -199,11 +199,6 @@ export const Privacy: React.FC = () => {
               operations. Our integration list consists of:
             </p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                <strong>Cloudflare Turnstile:</strong> Integrated to provide non-intrusive CAPTCHA
-                challenge checks on our Contact and Warranty forms, verifying submissions against
-                automated spam networks.
-              </li>
               <li className={styles.listItem}>
                 <strong>Resend Email Platform:</strong> Utilized on our serverless backend to
                 process contact leads and warranty submissions and deliver email notifications and
@@ -421,10 +416,8 @@ export const Privacy: React.FC = () => {
           <section className={styles.article}>
             <h2 className={styles.sectionHeading}>25. External Services</h2>
             <p className={styles.paragraph}>
-              For external services such as Cloudflare Turnstile, verification requests are sent to
-              challenges.cloudflare.com. Cloudflare processes these requests to protect the website
-              from spam, under its own privacy terms. We do not transfer your form fields (such as
-              name or email) to Cloudflare during this process.
+              For external services, we partner with selected providers under their own privacy terms.
+              We do not transfer your form fields (such as name or email) to unauthorized third parties.
             </p>
           </section>
 
