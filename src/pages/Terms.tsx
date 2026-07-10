@@ -397,8 +397,8 @@ export const Terms: React.FC = () => {
             <p className={styles.paragraph}>
               You agree to use this Website strictly for lawful business inquiries. When submitting
               information through our forms, you must provide accurate, current, and complete
-              details. You must provide accurate information in good
-              faith without attempting automated bulk submissions.
+              details. You must provide accurate information in good faith without attempting
+              automated bulk submissions.
             </p>
           </section>
 

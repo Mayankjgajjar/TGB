@@ -22,11 +22,7 @@ export function validateEnv(): void {
 
   for (const key of REQUIRED_VITE_VARS) {
     const value = import.meta.env[key] as string | undefined;
-    if (
-      !value ||
-      value === 'undefined' ||
-      value === 'G-XXXXXXXXXX'
-    ) {
+    if (!value || value === 'undefined' || value === 'G-XXXXXXXXXX') {
       missing.push(key);
     }
   }

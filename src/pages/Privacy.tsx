@@ -416,8 +416,9 @@ export const Privacy: React.FC = () => {
           <section className={styles.article}>
             <h2 className={styles.sectionHeading}>25. External Services</h2>
             <p className={styles.paragraph}>
-              For external services, we partner with selected providers under their own privacy terms.
-              We do not transfer your form fields (such as name or email) to unauthorized third parties.
+              For external services, we partner with selected providers under their own privacy
+              terms. We do not transfer your form fields (such as name or email) to unauthorized
+              third parties.
             </p>
           </section>
 
