@@ -27,7 +27,7 @@ const warrantySchema = z.object({
   imageContent: z.string().optional(),
   turnstileToken: z.string().min(1, 'CAPTCHA token is required.'),
   consentGiven: z.literal(true, {
-    errorMap: () => ({ message: 'Consent is required to submit your claim.' }),
+    message: 'Consent is required to submit your claim.',
   }),
   consentTimestamp: z.string().min(1, 'Consent timestamp is required.'),
 });
@@ -85,7 +85,7 @@ export default async function handler(req: any, res: any) {
   const parsed = warrantySchema.safeParse(req.body);
   if (!parsed.success) {
     const errors: Record<string, string> = {};
-    parsed.error.errors.forEach((e) => {
+    parsed.error.issues.forEach((e) => {
       const field = e.path[0] as string;
       errors[field] = e.message;
     });

@@ -1,7 +1,25 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+const ALL_VARS = [
+  'VITE_CONTACT_EMAIL',
+  'VITE_CONTACT_PHONE',
+  'VITE_SITE_URL',
+  'VITE_SITE_NAME',
+  'VITE_TURNSTILE_SITE_KEY',
+  'VITE_WHATSAPP_NUMBER',
+  'VITE_STUDIO_LATITUDE',
+  'VITE_STUDIO_LONGITUDE',
+  'VITE_MAPS_EMBED_URL',
+  'VITE_MAPS_LINK',
+  'VITE_GA4_MEASUREMENT_ID',
+  'VITE_SENTRY_DSN',
+];
+
 beforeEach(() => {
   vi.unstubAllEnvs();
+  for (const v of ALL_VARS) {
+    vi.stubEnv(v, '');
+  }
 });
 
 describe('validateEnv', () => {
