@@ -25,6 +25,10 @@ const whatsappVariants = {
   },
 };
 
+const ORIGIN = import.meta.env.DEV
+  ? window.location.origin
+  : (import.meta.env.VITE_SITE_URL || window.location.origin);
+
 export const AppLayout: React.FC = () => {
   const location = useLocation();
   const [lenisInstance, setLenisInstance] = useState<Lenis | null>(null);
@@ -35,9 +39,9 @@ export const AppLayout: React.FC = () => {
       '@context': 'https://schema.org',
       '@type': 'LocalBusiness',
       name: 'TGB Enterprise',
-      image: 'https://www.tgbsign.com/assets/logos/tgb-logo.svg',
-      '@id': 'https://www.tgbsign.com/#localbusiness',
-      url: 'https://www.tgbsign.com',
+      image: `${ORIGIN}/assets/logos/tgb-logo.svg`,
+      '@id': `${ORIGIN}/#localbusiness`,
+      url: ORIGIN,
       telephone: '+919727136137',
       priceRange: '$$',
       address: {
@@ -98,7 +102,7 @@ export const AppLayout: React.FC = () => {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://www.tgbsign.com',
+        item: ORIGIN,
       },
     ];
 
@@ -126,7 +130,7 @@ export const AppLayout: React.FC = () => {
         '@type': 'ListItem',
         position: idx + 2,
         name: name,
-        item: `https://www.tgbsign.com${currentPath}`,
+        item: `${ORIGIN}${currentPath}`,
       });
     });
 
@@ -155,7 +159,7 @@ export const AppLayout: React.FC = () => {
     let title = 'TGB Enterprise | Sign Board & Signage Manufacturer in Ahmedabad';
     let description =
       'TGB Enterprise is a leading sign board manufacturer in Ahmedabad, specializing in premium LED, ACP, and acrylic signage. Contact us to elevate your brand.';
-    let image = 'https://www.tgbsign.com/assets/images/hero-poster.png';
+    let image = `${ORIGIN}/assets/images/hero-poster.png`;
 
     const path = location.pathname;
 
@@ -207,7 +211,7 @@ export const AppLayout: React.FC = () => {
         description = service.seoMetadata.description;
         image = service.heroImage.startsWith('http')
           ? service.heroImage
-          : `https://www.tgbsign.com${service.heroImage}`;
+          : `${ORIGIN}${service.heroImage}`;
       }
     } else if (path.startsWith('/projects/')) {
       const projectId = path.split('/projects/')[1];
@@ -219,7 +223,7 @@ export const AppLayout: React.FC = () => {
         description = `Project case study: ${project.name} in ${project.location}. View specs, materials, and engineering details by TGB Enterprise.`;
         image = project.imagePath.startsWith('http')
           ? project.imagePath
-          : `https://www.tgbsign.com${project.imagePath}`;
+          : `${ORIGIN}${project.imagePath}`;
       } else {
         title = 'Our Completed Projects Portfolio | TGB Enterprise Ahmedabad';
         description =
@@ -255,7 +259,7 @@ export const AppLayout: React.FC = () => {
 
     // 3. Dynamic Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
-    const canonicalUrl = `https://www.tgbsign.com${path === '/' ? '' : path}`;
+    const canonicalUrl = `${ORIGIN}${path === '/' ? '' : path}`;
     if (canonical) {
       canonical.setAttribute('href', canonicalUrl);
     } else {

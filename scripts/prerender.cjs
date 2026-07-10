@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const CANONICAL_ORIGIN = 'https://www.tgbsign.com';
+const CANONICAL_ORIGIN = process.env.VITE_SITE_URL || 'https://www.tgbsign.com';
 const DIST_DIR = path.join(__dirname, '..', 'dist');
 const INDEX_HTML_PATH = path.join(DIST_DIR, 'index.html');
 
