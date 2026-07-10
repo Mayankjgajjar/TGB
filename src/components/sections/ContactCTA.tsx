@@ -189,9 +189,7 @@ export const ContactCTA: React.FC<{
             setTouched((prev) => ({ ...prev, ...touchedFields }));
             throw new Error('Please correct the validation errors below.');
           }
-          throw new Error(
-            errorData.error || errorData.message || 'Failed to submit inquiry.',
-          );
+          throw new Error(errorData.error || errorData.message || 'Failed to submit inquiry.');
         }
 
         setIsSubmitted(true);
