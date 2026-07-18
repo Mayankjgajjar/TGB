@@ -6,6 +6,7 @@ import { trackWarrantyFormSubmit } from '../lib/analytics';
 import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
+import Input from '../components/ui/Input';
 
 interface FormFields {
   customerName: string;
@@ -232,15 +233,6 @@ export const Warranty: React.FC = () => {
     setFileError(null);
   }, []);
 
-  const inputClass = (field: keyof FormFields) =>
-    `${styles.textInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
-
-  const selectClass = () =>
-    `${styles.selectInput} ${touched.signageType && errors.signageType ? styles.inputError : ''}`;
-
-  const textareaClass = () =>
-    `${styles.textareaInput} ${touched.issueDetails && errors.issueDetails ? styles.inputError : ''}`;
-
   return (
     <motion.div
       initial="initial"
@@ -271,208 +263,130 @@ export const Warranty: React.FC = () => {
           ) : (
             <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
               {/* Customer Name */}
-              <div className={styles.inputGroup}>
-                <label htmlFor="customerName" className={styles.fieldLabel}>
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="customerName"
-                  name="customerName"
-                  value={formState.customerName}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter your full name"
-                  className={inputClass('customerName')}
-                  aria-invalid={touched.customerName && !!errors.customerName}
-                  aria-describedby={errors.customerName ? 'customerName-error' : undefined}
-                />
-                {touched.customerName && errors.customerName && (
-                  <span id="customerName-error" className={styles.fieldError} role="alert">
-                    {errors.customerName}
-                  </span>
-                )}
-              </div>
+              <Input
+                label="Full Name"
+                id="customerName"
+                name="customerName"
+                value={formState.customerName}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                placeholder="Enter your full name"
+                required
+                error={errors.customerName}
+                touched={touched.customerName}
+              />
 
               {/* Email & Phone Row */}
               <div className={styles.formRow}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="email" className={styles.fieldLabel}>
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="name@company.com"
-                    className={inputClass('email')}
-                    aria-invalid={touched.email && !!errors.email}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
-                  />
-                  {touched.email && errors.email && (
-                    <span id="email-error" className={styles.fieldError} role="alert">
-                      {errors.email}
-                    </span>
-                  )}
-                </div>
-
-                <div className={styles.inputGroup}>
-                  <label htmlFor="phone" className={styles.fieldLabel}>
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formState.phone}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="Enter phone number"
-                    className={inputClass('phone')}
-                    aria-invalid={touched.phone && !!errors.phone}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
-                  />
-                  {touched.phone && errors.phone && (
-                    <span id="phone-error" className={styles.fieldError} role="alert">
-                      {errors.phone}
-                    </span>
-                  )}
-                </div>
+                <Input
+                  label="Email Address"
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formState.email}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="name@company.com"
+                  required
+                  error={errors.email}
+                  touched={touched.email}
+                />
+                <Input
+                  label="Phone Number"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formState.phone}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="Enter phone number"
+                  required
+                  error={errors.phone}
+                  touched={touched.phone}
+                />
               </div>
 
               {/* Invoice Number & Warranty Number Row */}
               <div className={styles.formRow}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="invoiceNumber" className={styles.fieldLabel}>
-                    Invoice / Order Number *
-                  </label>
-                  <input
-                    type="text"
-                    id="invoiceNumber"
-                    name="invoiceNumber"
-                    value={formState.invoiceNumber}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="e.g. TGB-2025-1045"
-                    className={inputClass('invoiceNumber')}
-                    aria-invalid={touched.invoiceNumber && !!errors.invoiceNumber}
-                    aria-describedby={errors.invoiceNumber ? 'invoiceNumber-error' : undefined}
-                  />
-                  {touched.invoiceNumber && errors.invoiceNumber && (
-                    <span id="invoiceNumber-error" className={styles.fieldError} role="alert">
-                      {errors.invoiceNumber}
-                    </span>
-                  )}
-                </div>
-
-                <div className={styles.inputGroup}>
-                  <label htmlFor="warrantyNumber" className={styles.fieldLabel}>
-                    Warranty Number *
-                  </label>
-                  <input
-                    type="text"
-                    id="warrantyNumber"
-                    name="warrantyNumber"
-                    value={formState.warrantyNumber}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    placeholder="e.g. WR-TGB-9874"
-                    className={inputClass('warrantyNumber')}
-                    aria-invalid={touched.warrantyNumber && !!errors.warrantyNumber}
-                    aria-describedby={errors.warrantyNumber ? 'warrantyNumber-error' : undefined}
-                  />
-                  {touched.warrantyNumber && errors.warrantyNumber && (
-                    <span id="warrantyNumber-error" className={styles.fieldError} role="alert">
-                      {errors.warrantyNumber}
-                    </span>
-                  )}
-                </div>
+                <Input
+                  label="Invoice / Order Number"
+                  id="invoiceNumber"
+                  name="invoiceNumber"
+                  value={formState.invoiceNumber}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="e.g. TGB-2025-1045"
+                  required
+                  error={errors.invoiceNumber}
+                  touched={touched.invoiceNumber}
+                />
+                <Input
+                  label="Warranty Number"
+                  id="warrantyNumber"
+                  name="warrantyNumber"
+                  value={formState.warrantyNumber}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  placeholder="e.g. WR-TGB-9874"
+                  required
+                  error={errors.warrantyNumber}
+                  touched={touched.warrantyNumber}
+                />
               </div>
 
               {/* Purchase Date & Signage Type Row */}
               <div className={styles.formRow}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="purchaseDate" className={styles.fieldLabel}>
-                    Purchase Date *
-                  </label>
-                  <input
-                    type="date"
-                    id="purchaseDate"
-                    name="purchaseDate"
-                    value={formState.purchaseDate}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    className={inputClass('purchaseDate')}
-                    aria-invalid={touched.purchaseDate && !!errors.purchaseDate}
-                    aria-describedby={errors.purchaseDate ? 'purchaseDate-error' : undefined}
-                  />
-                  {touched.purchaseDate && errors.purchaseDate && (
-                    <span id="purchaseDate-error" className={styles.fieldError} role="alert">
-                      {errors.purchaseDate}
-                    </span>
-                  )}
-                </div>
-
-                <div className={styles.inputGroup}>
-                  <label htmlFor="signageType" className={styles.fieldLabel}>
-                    Type of Signage *
-                  </label>
-                  <div className={styles.selectWrapper}>
-                    <select
-                      id="signageType"
-                      name="signageType"
-                      value={formState.signageType}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      className={selectClass()}
-                      aria-invalid={touched.signageType && !!errors.signageType}
-                      aria-describedby={errors.signageType ? 'signageType-error' : undefined}
-                    >
-                      <option value="">Select signage type</option>
-                      <option value="LED Sign Board">LED Sign Board</option>
-                      <option value="ACP Sign Board">ACP Sign Board</option>
-                      <option value="Acrylic & 3D Letters">Acrylic & 3D Letters</option>
-                      <option value="Neon Signage">Neon Signage</option>
-                      <option value="Corporate Signage">Corporate Signage</option>
-                      <option value="Indoor/Outdoor Systems">
-                        Indoor & Outdoor Signage Systems
-                      </option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  {touched.signageType && errors.signageType && (
-                    <span id="signageType-error" className={styles.fieldError} role="alert">
-                      {errors.signageType}
-                    </span>
-                  )}
-                </div>
+                <Input
+                  label="Purchase Date"
+                  id="purchaseDate"
+                  name="purchaseDate"
+                  type="date"
+                  value={formState.purchaseDate}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  required
+                  error={errors.purchaseDate}
+                  touched={touched.purchaseDate}
+                />
+                <Input
+                  label="Type of Signage"
+                  id="signageType"
+                  name="signageType"
+                  as="select"
+                  value={formState.signageType}
+                  onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  required
+                  error={errors.signageType}
+                  touched={touched.signageType}
+                  options={[
+                    { value: '', label: 'Select signage type' },
+                    { value: 'LED Sign Board', label: 'LED Sign Board' },
+                    { value: 'ACP Sign Board', label: 'ACP Sign Board' },
+                    { value: 'Acrylic & 3D Letters', label: 'Acrylic & 3D Letters' },
+                    { value: 'Neon Signage', label: 'Neon Signage' },
+                    { value: 'Corporate Signage', label: 'Corporate Signage' },
+                    { value: 'Indoor/Outdoor Systems', label: 'Indoor & Outdoor Signage Systems' },
+                    { value: 'Other', label: 'Other' },
+                  ]}
+                />
               </div>
 
               {/* Issue Details */}
-              <div className={styles.inputGroup}>
-                <label htmlFor="issueDetails" className={styles.fieldLabel}>
-                  Describe the Issue *
-                </label>
-                <textarea
-                  id="issueDetails"
-                  name="issueDetails"
-                  value={formState.issueDetails}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="Please describe the issue with your signage in detail..."
-                  className={textareaClass()}
-                  aria-invalid={touched.issueDetails && !!errors.issueDetails}
-                  aria-describedby={errors.issueDetails ? 'issueDetails-error' : undefined}
-                />
-                {touched.issueDetails && errors.issueDetails && (
-                  <span id="issueDetails-error" className={styles.fieldError} role="alert">
-                    {errors.issueDetails}
-                  </span>
-                )}
-              </div>
+              <Input
+                label="Describe the Issue"
+                id="issueDetails"
+                name="issueDetails"
+                as="textarea"
+                rows={4}
+                value={formState.issueDetails}
+                onChange={handleInputChange}
+                onBlur={handleBlur}
+                placeholder="Please describe the issue with your signage in detail..."
+                required
+                error={errors.issueDetails}
+                touched={touched.issueDetails}
+              />
 
               {/* Proof of purchase or issue photo */}
               <div className={styles.fileInputGroup}>

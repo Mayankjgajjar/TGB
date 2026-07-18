@@ -216,13 +216,6 @@ export const ContactCTA: React.FC<{
     setSubmitError(null);
   }, []);
 
-  /** Helper to get input className with error state */
-  const inputClass = (field: keyof FormFields) =>
-    `${styles.textInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
-
-  const textareaClass = (field: keyof FormFields) =>
-    `${styles.textareaInput} ${touched[field] && errors[field] ? styles.inputError : ''}`;
-
   const headerVariants = {
     hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
     visible: {
@@ -293,201 +286,137 @@ export const ContactCTA: React.FC<{
                 >
                   {/* Name Row */}
                   <div className={styles.formRow}>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="firstName" className={styles.fieldLabel}>
-                        First Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="firstName"
-                        name="firstName"
-                        autoComplete="given-name"
-                        value={formState.firstName}
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        placeholder="John"
-                        className={inputClass('firstName')}
-                        aria-invalid={touched.firstName && !!errors.firstName}
-                        aria-describedby={errors.firstName ? 'firstName-error' : undefined}
-                      />
-                      {touched.firstName && errors.firstName && (
-                        <span id="firstName-error" className={styles.fieldError} role="alert">
-                          {errors.firstName}
-                        </span>
-                      )}
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="lastName" className={styles.fieldLabel}>
-                        Last Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        autoComplete="family-name"
-                        value={formState.lastName}
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        placeholder="Doe"
-                        className={inputClass('lastName')}
-                        aria-invalid={touched.lastName && !!errors.lastName}
-                        aria-describedby={errors.lastName ? 'lastName-error' : undefined}
-                      />
-                      {touched.lastName && errors.lastName && (
-                        <span id="lastName-error" className={styles.fieldError} role="alert">
-                          {errors.lastName}
-                        </span>
-                      )}
-                    </div>
+                    <Input
+                      label="First Name"
+                      id="firstName"
+                      name="firstName"
+                      autoComplete="given-name"
+                      value={formState.firstName}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      placeholder="John"
+                      required
+                      error={errors.firstName}
+                      touched={touched.firstName}
+                    />
+                    <Input
+                      label="Last Name"
+                      id="lastName"
+                      name="lastName"
+                      autoComplete="family-name"
+                      value={formState.lastName}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      placeholder="Doe"
+                      required
+                      error={errors.lastName}
+                      touched={touched.lastName}
+                    />
                   </div>
 
                   {/* Contact Info Row */}
                   <div className={styles.formRow}>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="phone" className={styles.fieldLabel}>
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        autoComplete="tel"
-                        value={formState.phone}
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        placeholder="+91 XXXXX XXXXX"
-                        className={inputClass('phone')}
-                        aria-invalid={touched.phone && !!errors.phone}
-                        aria-describedby={errors.phone ? 'phone-error' : undefined}
-                      />
-                      {touched.phone && errors.phone && (
-                        <span id="phone-error" className={styles.fieldError} role="alert">
-                          {errors.phone}
-                        </span>
-                      )}
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="email" className={styles.fieldLabel}>
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        autoComplete="email"
-                        value={formState.email}
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        placeholder="name@company.com"
-                        className={inputClass('email')}
-                        aria-invalid={touched.email && !!errors.email}
-                        aria-describedby={errors.email ? 'email-error' : undefined}
-                      />
-                      {touched.email && errors.email && (
-                        <span id="email-error" className={styles.fieldError} role="alert">
-                          {errors.email}
-                        </span>
-                      )}
-                    </div>
+                    <Input
+                      label="Phone Number"
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      value={formState.phone}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      placeholder="+91 XXXXX XXXXX"
+                      required
+                      error={errors.phone}
+                      touched={touched.phone}
+                    />
+                    <Input
+                      label="Email Address"
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={formState.email}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      placeholder="tgbsign@proton.me"
+                      required
+                      error={errors.email}
+                      touched={touched.email}
+                    />
                   </div>
 
                   {/* Company & Location Row */}
                   <div className={styles.formRow}>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="company" className={styles.fieldLabel}>
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        autoComplete="organization"
-                        value={formState.company}
-                        onChange={handleInputChange}
-                        placeholder="Enter company name"
-                        className={styles.textInput}
-                      />
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="location" className={styles.fieldLabel}>
-                        Project Location
-                      </label>
-                      <div className={styles.selectWrapper}>
-                        <select
-                          id="location"
-                          name="location"
-                          value={formState.location}
-                          onChange={handleInputChange}
-                          onBlur={handleBlur}
-                          className={styles.selectInput}
-                        >
-                          <option value="">Select project location</option>
-                          <option value="Ahmedabad">Ahmedabad</option>
-                          <option value="Surat">Surat</option>
-                          <option value="Rajkot">Rajkot</option>
-                          <option value="Vadodara">Vadodara</option>
-                          <option value="Gandhinagar">Gandhinagar</option>
-                          <option value="Mumbai">Mumbai</option>
-                          <option value="Bengaluru">Bengaluru</option>
-                          <option value="Delhi">Delhi</option>
-                          <option value="Other">Other (Gujarat &amp; Pan India)</option>
-                        </select>
-                      </div>
-                    </div>
+                    <Input
+                      label="Company Name"
+                      id="company"
+                      name="company"
+                      autoComplete="organization"
+                      value={formState.company}
+                      onChange={handleInputChange}
+                      placeholder="Enter company name"
+                    />
+                    <Input
+                      label="Project Location"
+                      id="location"
+                      name="location"
+                      as="select"
+                      value={formState.location}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      options={[
+                        { value: '', label: 'Select project location' },
+                        { value: 'Ahmedabad', label: 'Ahmedabad' },
+                        { value: 'Surat', label: 'Surat' },
+                        { value: 'Rajkot', label: 'Rajkot' },
+                        { value: 'Vadodara', label: 'Vadodara' },
+                        { value: 'Gandhinagar', label: 'Gandhinagar' },
+                        { value: 'Mumbai', label: 'Mumbai' },
+                        { value: 'Bengaluru', label: 'Bengaluru' },
+                        { value: 'Delhi', label: 'Delhi' },
+                        { value: 'Other', label: 'Other (Gujarat & Pan India)' },
+                      ]}
+                    />
                   </div>
 
                   {/* Signage Type Select */}
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="signageType" className={styles.fieldLabel}>
-                      Type of Signage
-                    </label>
-                    <div className={styles.selectWrapper}>
-                      <select
-                        id="signageType"
-                        name="signageType"
-                        value={formState.signageType}
-                        onChange={handleInputChange}
-                        className={styles.selectInput}
-                      >
-                        <option value="" disabled>
-                          Select type of signage
-                        </option>
-                        <option value="led">LED Sign Boards</option>
-                        <option value="acp">ACP Sign Boards</option>
-                        <option value="acrylic">Acrylic &amp; 3D Letter Signages</option>
-                        <option value="corporate">Corporate Signages</option>
-                        <option value="neon">Neon Signages</option>
-                        <option value="wayfinding">Wayfinding Signages</option>
-                        <option value="retail">Retail Signages</option>
-                        <option value="custom">Custom Signages</option>
-                        <option value="not-sure">Not Sure Yet</option>
-                      </select>
-                    </div>
-                  </div>
+                  <Input
+                    label="Type of Signage"
+                    id="signageType"
+                    name="signageType"
+                    as="select"
+                    value={formState.signageType}
+                    onChange={handleInputChange}
+                    options={[
+                      { value: '', label: 'Select type of signage' },
+                      { value: 'led', label: 'LED Sign Boards' },
+                      { value: 'acp', label: 'ACP Sign Boards' },
+                      { value: 'acrylic', label: 'Acrylic & 3D Letter Signages' },
+                      { value: 'corporate', label: 'Corporate Signages' },
+                      { value: 'neon', label: 'Neon Signages' },
+                      { value: 'wayfinding', label: 'Wayfinding Signages' },
+                      { value: 'retail', label: 'Retail Signages' },
+                      { value: 'custom', label: 'Custom Signages' },
+                      { value: 'not-sure', label: 'Not Sure Yet' },
+                    ]}
+                  />
 
                   {/* Message Input */}
-                  <div className={styles.inputGroup}>
-                    <label htmlFor="message" className={styles.fieldLabel}>
-                      Tell Us About Your Project *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      value={formState.message}
-                      onChange={handleInputChange}
-                      onBlur={handleBlur}
-                      placeholder="Please share your requirements, project location, timeline, or any specific ideas you have in mind."
-                      className={textareaClass('message')}
-                      aria-invalid={touched.message && !!errors.message}
-                      aria-describedby={errors.message ? 'message-error' : undefined}
-                    />
-                    {touched.message && errors.message && (
-                      <span id="message-error" className={styles.fieldError} role="alert">
-                        {errors.message}
-                      </span>
-                    )}
-                  </div>
+                  <Input
+                    label="Tell Us About Your Project"
+                    id="message"
+                    name="message"
+                    as="textarea"
+                    rows={4}
+                    value={formState.message}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    placeholder="Please share your requirements, project location, timeline, or any specific ideas you have in mind."
+                    required
+                    error={errors.message}
+                    touched={touched.message}
+                  />
 
                   {/* Consent Checkbox */}
                   <div className={styles.checkboxGroup}>

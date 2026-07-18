@@ -1,0 +1,78 @@
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.fieldLabel {
+  font-family: var(--font-technical);
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 55%);
+}
+
+.textInput,
+.textareaInput,
+.selectInput {
+  background-color: var(--color-black);
+  border: 1px solid var(--color-steel-dark);
+  border-radius: var(--radius-input);
+  color: var(--color-white);
+  padding: 12px 16px;
+  font-family: var(--font-primary);
+  font-size: 13.5px;
+  outline: none;
+  transition:
+    border-color 0.25s var(--transition-ease-expo),
+    background-color 0.25s var(--transition-ease-expo),
+    box-shadow 0.25s var(--transition-ease-expo);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.textInput:focus-visible,
+.textareaInput:focus-visible,
+.selectInput:focus-visible {
+  border-color: var(--color-red);
+  background-color: #0f0f0f;
+  outline: 2px solid var(--color-red);
+  outline-offset: 4px;
+}
+
+.inputError {
+  border-color: var(--color-error-border) !important;
+  background-color: var(--color-error-bg) !important;
+}
+
+.fieldError {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  color: var(--color-error);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Custom Dropdown Styling */
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.selectInput {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 40px;
+}
+
+.selectWrapper::after {
+  content: '▼';
+  font-size: 9px;
+  color: rgb(255 255 255 / 40%);
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
