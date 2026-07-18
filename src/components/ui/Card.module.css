@@ -169,6 +169,16 @@ button.card:hover {
   flex-grow: 1;
 }
 
+@media (max-width: 767px) {
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 /* Footer Badge Pill */
 .footerPill {
   font-family: var(--font-technical);

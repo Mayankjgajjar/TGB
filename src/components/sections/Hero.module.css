@@ -31,8 +31,10 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 var(--space-24);
+  padding: var(--space-32) var(--space-24);
   box-sizing: border-box;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 80%);
+  border-radius: var(--radius-card);
 }
 
 .tagline {
