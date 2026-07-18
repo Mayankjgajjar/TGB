@@ -169,7 +169,7 @@ button.card:hover {
   flex-grow: 1;
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .description {
     display: -webkit-box;
     -webkit-line-clamp: 2;
