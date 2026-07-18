@@ -9,6 +9,7 @@ import { captureError } from '../../lib/telemetry';
 import { getEnvVar } from '../../lib/env';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '../ui/Breadcrumbs';
+import Input from '../ui/Input';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
