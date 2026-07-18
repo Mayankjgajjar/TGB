@@ -40,7 +40,7 @@ function createSentryProvider(): TelemetryProvider {
           integrations: [Sentry.browserTracingIntegration()],
           tracesSampleRate: env === 'production' ? 0.1 : 0.0,
           beforeSend(event) {
-            if (env !== 'production' && env !== 'staging') {
+            if (env !== 'production' && env !== 'staging' && env !== 'development') {
               console.debug('[sentry] Event suppressed in non-production:', event);
               return null;
             }

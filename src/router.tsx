@@ -14,6 +14,7 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
+const SentryTest = lazy(() => import('./pages/SentryTest'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export const router = createBrowserRouter([
@@ -102,6 +103,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <Warranty />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'sentry-test',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SentryTest />
           </Suspense>
         ),
       },
