@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Layers, Box, Building2, Flame, LayoutGrid, ArrowRight, X } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Zap, Layers, Box, Building2, Flame, LayoutGrid } from 'lucide-react';
 import Container from '../ui/Container';
 import Label from '../ui/Label';
 import Card from '../ui/Card';
 import useScrollReveal from '../../hooks/useScrollReveal';
-import { servicesData } from '../../content/services';
 import styles from './ServicesOverview.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
 import Breadcrumbs from '../ui/Breadcrumbs';

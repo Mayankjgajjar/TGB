@@ -39,13 +39,8 @@ function createSentryProvider(): TelemetryProvider {
           environment: env,
           integrations: [Sentry.browserTracingIntegration()],
           tracesSampleRate: env === 'production' ? 0.1 : 0.0,
-          dataCollection: {
-            // To disable sending user data and HTTP bodies, uncomment the lines below.
-            // userInfo: false,
-            // httpBodies: []
-          },
           beforeSend(event) {
-            if (env !== 'production' && env !== 'staging' && env !== 'development') {
+            if (env !== 'production' && env !== 'staging') {
               console.debug('[sentry] Event suppressed in non-production:', event);
               return null;
             }

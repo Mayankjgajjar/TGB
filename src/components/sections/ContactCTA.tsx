@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Phone, Mail, Clock, MapPin, Building, Globe } from 'lucide-react';
+import { ArrowRight, Phone, Mail, Clock, Building, Globe } from 'lucide-react';
 import { EASE_EXPO } from '../../animations/variants';
 import styles from './ContactCTA.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';

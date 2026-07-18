@@ -58,7 +58,7 @@ const steps = [
   },
 ];
 
-import { ICON_MAP } from '../../content/about';
+
 
 interface ProcessProps {
   title?: string;

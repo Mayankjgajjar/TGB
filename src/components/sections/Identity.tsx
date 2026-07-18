@@ -16,7 +16,7 @@ import {
   BadgeCheck,
   LucideIcon,
 } from 'lucide-react';
-import { homeContent, type TGBStandardSection } from '../../content/home';
+import { homeContent } from '../../content/home';
 import ServicesOverview from './ServicesOverview';
 import OptimizedImage from '../ui/OptimizedImage';
 import styles from './Identity.module.css';

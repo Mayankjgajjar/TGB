@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import useScrollReveal from '../../hooks/useScrollReveal';
 import { useQuoteModal } from '../../context/QuoteContext';

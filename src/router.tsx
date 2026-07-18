@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
 import PageLoader from './components/layout/PageLoader';
@@ -14,7 +14,6 @@ const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
-const SentryTest = lazy(() => import('./pages/SentryTest'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 export const router = createBrowserRouter([
@@ -106,14 +105,7 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: 'sentry-test',
-        element: (
-          <Suspense fallback={<PageLoader />}>
-            <SentryTest />
-          </Suspense>
-        ),
-      },
+
       // ── Legacy hash URL redirects → proper page routes ───────────────────────
       // Old bookmarks and backlinks to /#section are preserved via redirects.
       {
