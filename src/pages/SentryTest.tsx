@@ -15,13 +15,13 @@ export const SentryTest: React.FC = () => {
 
   useEffect(() => {
     document.title = 'Sentry Telemetry Diagnostic | TGB Enterprise';
-    
+
     // Check DSN status
     const dsn = import.meta.env.VITE_SENTRY_DSN;
     const mode = import.meta.env.MODE;
-    
+
     setEnvMode(mode);
-    
+
     if (dsn && !dsn.startsWith('https://example')) {
       setDsnConfigured(true);
       setDsnValue(dsn);
@@ -68,7 +68,9 @@ export const SentryTest: React.FC = () => {
               <ShieldCheck size={36} className={styles.headerIcon} />
               <div>
                 <h1 className={styles.heading}>Sentry Diagnostic Center</h1>
-                <p className={styles.subheading}>Validate application error capturing and telemetry dispatching.</p>
+                <p className={styles.subheading}>
+                  Validate application error capturing and telemetry dispatching.
+                </p>
               </div>
             </div>
 
@@ -92,7 +94,10 @@ export const SentryTest: React.FC = () => {
                 </div>
                 <div className={styles.statusItem} style={{ marginTop: '1rem' }}>
                   <span className={styles.statusLabel}>Environment Mode:</span>
-                  <span className={styles.badge} style={{ backgroundColor: '#1A1A1A', color: '#FFF' }}>
+                  <span
+                    className={styles.badge}
+                    style={{ backgroundColor: '#1A1A1A', color: '#FFF' }}
+                  >
                     {envMode}
                   </span>
                 </div>
