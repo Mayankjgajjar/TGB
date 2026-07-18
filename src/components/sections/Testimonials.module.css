@@ -240,7 +240,7 @@
 }
 
 .ctaButton svg {
-  transition: transform 0.25s var(--transition-ease-expo);
+  transition: transform var(--transition-fast);
 }
 
 .ctaButton:hover svg {

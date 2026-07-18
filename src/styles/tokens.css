@@ -77,6 +77,12 @@
   --z-index-navbar: 1000;
   --z-index-modal: 3000;
 
+  /* Header Clearance offsets */
+  --header-height: 80px;
+  --header-height-mobile: 64px;
+  --header-offset-desktop: calc(var(--header-height) + var(--space-48));
+  --header-offset-mobile: calc(var(--header-height-mobile) + var(--space-32));
+
   /* Focus Ring */
   --focus-ring-color: var(--color-copper-light);
   --focus-ring-width: 2px;

@@ -1,9 +1,16 @@
 .page {
-  padding-top: 128px;
+  padding-top: var(--header-offset-desktop);
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
   background: var(--color-black);
+}
+
+@media (width <= 900px) {
+  .page {
+    padding-top: var(--header-offset-mobile);
+    padding-bottom: 64px;
+  }
 }
 
 .backLink {

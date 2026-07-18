@@ -1,9 +1,16 @@
 .legalPage {
-  padding-top: 128px;
+  padding-top: var(--header-offset-desktop);
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
   background: rgb(0 0 0 / 55%);
+}
+
+@media (width <= 900px) {
+  .legalPage {
+    padding-top: var(--header-offset-mobile);
+    padding-bottom: 64px;
+  }
 }
 
 .contentWrapper {

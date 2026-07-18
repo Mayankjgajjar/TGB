@@ -3,12 +3,22 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-top: 8px;
   margin-bottom: 24px;
   font-family: var(--font-technical);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--color-steel);
+}
+
+@media (width <= 600px) {
+  .row {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+  }
 }
 
 .separator {

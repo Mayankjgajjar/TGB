@@ -143,7 +143,7 @@ section[id],
 
 /* ── Shared Page Layout (top padding for floating navbar clearance) ── */
 .page {
-  padding-top: 128px;
+  padding-top: var(--header-offset-desktop);
   padding-bottom: 96px;
   min-height: 80vh;
   box-sizing: border-box;
@@ -151,7 +151,7 @@ section[id],
 
 @media (width <= 900px) {
   .page {
-    padding-top: 96px;
+    padding-top: var(--header-offset-mobile);
     padding-bottom: 64px;
   }
 }

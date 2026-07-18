@@ -203,7 +203,7 @@
   border: none;
   cursor: pointer;
   outline: none;
-  transition: all 0.3s var(--transition-ease-expo);
+  transition: var(--transition-base);
   box-shadow: 0 4px 16px rgb(139 0 0 / 20%);
   margin-top: 8px;
 }
@@ -215,7 +215,7 @@
 }
 
 .submitArrow {
-  transition: transform 0.25s var(--transition-ease-expo);
+  transition: transform var(--transition-fast);
 }
 
 .submitButton:hover .submitArrow {
@@ -282,7 +282,7 @@
   font-family: var(--font-primary);
   font-size: 12.5px;
   cursor: pointer;
-  transition: all 0.25s var(--transition-ease-expo);
+  transition: var(--transition-fast);
   margin-top: 8px;
 }
 
@@ -531,7 +531,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.25s var(--transition-ease-expo);
+  transition: var(--transition-fast);
   margin-top: 2px;
   outline: none;
 }
