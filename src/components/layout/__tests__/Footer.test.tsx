@@ -7,7 +7,7 @@ import { Footer } from '../Footer';
 
 describe('Footer', () => {
   beforeEach(() => {
-    vi.stubEnv('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com');
+    vi.stubEnv('VITE_CONTACT_EMAIL', 'tgbsign@proton.me');
     vi.stubEnv('VITE_CONTACT_PHONE', '+919824817381');
   });
 
@@ -51,13 +51,13 @@ describe('Footer', () => {
 
   it('renders contact email from env', () => {
     renderFooter();
-    expect(screen.getByText('info@tgbenterprise.com')).toBeInTheDocument();
+    expect(screen.getByText('tgbsign@proton.me')).toBeInTheDocument();
   });
 
   it('renders mailto link', () => {
     renderFooter();
-    const link = screen.getByText('info@tgbenterprise.com').closest('a');
-    expect(link).toHaveAttribute('href', 'mailto:info@tgbenterprise.com');
+    const link = screen.getByText('tgbsign@proton.me').closest('a');
+    expect(link).toHaveAttribute('href', 'mailto:tgbsign@proton.me');
   });
 
   it('renders quick links section', () => {

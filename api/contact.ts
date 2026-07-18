@@ -96,7 +96,7 @@ export default async function handler(req: any, res: any) {
   try {
     const resend = new Resend(apiKey);
 
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'info@tgbsign.com';
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'tgbsign@proton.me';
     const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
     const toEmail = process.env.RESEND_TO_EMAIL || 'tgbsign@proton.me';
 

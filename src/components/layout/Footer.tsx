@@ -195,10 +195,10 @@ export const Footer: React.FC = () => {
                 <strong>Email:</strong>
                 <br />
                 <a
-                  href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}`}
+                  href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'tgbsign@proton.me')}`}
                   className={styles.contactAnchor}
                 >
-                  {getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}
+                  {getEnvVar('VITE_CONTACT_EMAIL', 'tgbsign@proton.me')}
                 </a>
               </p>
               <p className={`${styles.contactText} ${styles.contactItalic}`}>

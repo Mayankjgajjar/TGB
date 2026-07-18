@@ -624,10 +624,10 @@ export const ContactCTA: React.FC<{
                 <div className={styles.infoContent}>
                   <span className={styles.infoLabel}>Email Communications</span>
                   <a
-                    href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}`}
+                    href={`mailto:${getEnvVar('VITE_CONTACT_EMAIL', 'tgbsign@proton.me')}`}
                     className={styles.infoLink}
                   >
-                    {getEnvVar('VITE_CONTACT_EMAIL', 'info@tgbenterprise.com')}
+                    {getEnvVar('VITE_CONTACT_EMAIL', 'tgbsign@proton.me')}
                   </a>
                 </div>
               </div>
