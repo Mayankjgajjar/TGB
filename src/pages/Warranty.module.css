@@ -357,6 +357,32 @@
   border-color: rgb(220 80 80 / 60%);
 }
 
+.fileErrorContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.clearErrorBtn {
+  background: transparent;
+  border: 1px solid rgb(255 255 255 / 15%);
+  color: var(--color-off-white-muted);
+  font-family: var(--font-primary);
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: all 0.25s var(--transition-ease-expo);
+  flex-shrink: 0;
+}
+
+.clearErrorBtn:hover {
+  background: rgb(255 255 255 / 5%);
+  border-color: rgb(255 255 255 / 30%);
+  color: var(--color-off-white);
+}
+
 .checkboxGroup {
   display: flex;
   align-items: flex-start;

@@ -94,12 +94,16 @@ export const Warranty: React.FC = () => {
     // Check size limit (4MB)
     if (file.size > 4 * 1024 * 1024) {
       setFileError('File is too large. Please select an image under 4MB.');
+      setSelectedFile(null);
+      setFileBase64(null);
       return;
     }
 
     // Check file type
     if (!file.type.startsWith('image/')) {
       setFileError('Invalid file type. Please upload an image file (JPG, PNG, WebP).');
+      setSelectedFile(null);
+      setFileBase64(null);
       return;
     }
 
@@ -432,9 +436,18 @@ export const Warranty: React.FC = () => {
                   </div>
                 )}
                 {fileError && (
-                  <span className={styles.fieldError} role="alert">
-                    {fileError}
-                  </span>
+                  <div className={styles.fileErrorContainer}>
+                    <span className={styles.fieldError} role="alert">
+                      {fileError}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className={styles.clearErrorBtn}
+                    >
+                      Clear
+                    </button>
+                  </div>
                 )}
               </div>
 
