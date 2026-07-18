@@ -36,6 +36,41 @@ export const QuoteModal: React.FC = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isModalOpen, closeModal]);
 
+  // Tab-focus trap inside modal
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      const modalElement = document.querySelector(`.${styles.modalContent}`);
+      if (!modalElement) return;
+
+      const focusableElements = modalElement.querySelectorAll('button, a, [tabindex="0"]');
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+      if (e.shiftKey) {
+        // Shift + Tab -> Wrap to last element if on first
+        if (document.activeElement === firstElement) {
+          lastElement.focus();
+          e.preventDefault();
+        }
+      } else {
+        // Tab -> Wrap to first element if on last
+        if (document.activeElement === lastElement) {
+          firstElement.focus();
+          e.preventDefault();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen]);
+
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       closeModal();
