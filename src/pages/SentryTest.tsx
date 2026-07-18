@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import * as Sentry from '@sentry/react';
 import { AlertCircle, CheckCircle, Bug, Send, ShieldCheck, RefreshCw } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
@@ -126,6 +127,8 @@ export const SentryTest: React.FC = () => {
                     <Send size={18} />
                     Capture Message
                   </button>
+
+                  <ErrorButton disabled={!dsnConfigured} />
                 </div>
                 {!dsnConfigured && (
                   <p className={styles.warningText}>
@@ -162,5 +165,21 @@ export const SentryTest: React.FC = () => {
     </motion.div>
   );
 };
+
+// Add this button component to your app to test Sentry's error tracking
+function ErrorButton({ disabled }: { disabled: boolean }) {
+  return (
+    <button
+      onClick={() => {
+        throw new Error('This is your first error!');
+      }}
+      className={`${styles.btn} ${styles.btnDanger}`}
+      style={{ border: '2px solid #FFF', background: '#000', color: '#FFF' }}
+      disabled={disabled}
+    >
+      Break the world
+    </button>
+  );
+}
 
 export default SentryTest;
