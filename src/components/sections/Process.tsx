@@ -58,8 +58,6 @@ const steps = [
   },
 ];
 
-
-
 interface ProcessProps {
   title?: string;
   subtitle?: string;
