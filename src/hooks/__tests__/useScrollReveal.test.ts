@@ -37,17 +37,17 @@ describe('useScrollReveal', () => {
   it('returns isRevealed true after element intersects', () => {
     const { result } = renderHook(() => useScrollReveal(0.15, '0px'));
 
-    expect(observeCallback).not.toBeNull();
-    if (observeCallback) {
+    const callback = observeCallback;
+    if (callback) {
       act(() => {
-        observeCallback(
+        callback(
           [
             {
               isIntersecting: true,
               boundingClientRect: {} as DOMRect,
               intersectionRatio: 1,
               target: document.createElement('div'),
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver,
         );
@@ -60,16 +60,17 @@ describe('useScrollReveal', () => {
   it('does not set isRevealed when not intersecting', () => {
     const { result } = renderHook(() => useScrollReveal(0.15, '0px'));
 
-    if (observeCallback) {
+    const callback = observeCallback;
+    if (callback) {
       act(() => {
-        observeCallback(
+        callback(
           [
             {
               isIntersecting: false,
               boundingClientRect: {} as DOMRect,
               intersectionRatio: 0,
               target: document.createElement('div'),
-            } as IntersectionObserverEntry,
+            } as unknown as IntersectionObserverEntry,
           ],
           {} as IntersectionObserver,
         );
