@@ -1,0 +1,267 @@
+/* Resources Page Module Styles */
+
+.tabsWrapper {
+  display: flex;
+  gap: 12px;
+  margin-top: 36px;
+  border-bottom: 1px solid var(--color-outline-variant);
+  padding-bottom: 16px;
+  overflow-x: auto;
+}
+
+.tabBtn {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.tabBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.tabBtnActive {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+
+.downloadCard {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.downloadCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+}
+
+.downloadIconWrap {
+  width: 44px;
+  height: 44px;
+  background: rgb(227 27 35 / 10%);
+  color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.downloadCategory {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--color-primary);
+}
+
+.downloadTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 6px 0 10px;
+  line-height: 1.35;
+}
+
+.downloadDesc {
+  font-size: 0.85rem;
+  color: var(--color-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.downloadFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.fileInfo {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  color: var(--color-secondary);
+}
+
+.downloadLink {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.downloadLink:hover {
+  text-decoration: underline;
+}
+
+.articleCard {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.articleImage {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.faqWrapper {
+  width: 100%;
+}
+
+.faqSearchInput {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+}
+
+.faqCategoriesSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faqCatBtn {
+  text-align: left;
+  background: none;
+  border: 1px solid transparent;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 13px;
+  color: var(--color-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.faqCatBtnActive {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border-color: var(--color-outline-variant);
+  font-weight: 600;
+}
+
+.faqAccordionCol {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faqItemCard {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.faqHeaderBtn {
+  width: 100%;
+  padding: 18px 24px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-on-surface);
+  text-align: left;
+}
+
+.faqQuestionText {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.faqChevron {
+  transition: transform 0.2s ease;
+  color: var(--color-secondary);
+}
+
+.faqChevronRotated {
+  transform: rotate(180deg);
+}
+
+.faqAnswerText {
+  padding: 0 24px 20px;
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  line-height: 1.6;
+}
+
+.specBox {
+  background: var(--color-surface-container-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.specSystemBadge {
+  font-family: var(--font-technical);
+  font-size: 10px;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.specPointList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.specPointItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--color-on-surface);
+}
+
+.specCheckIcon {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+@media (width <= 850px) {
+  .faqGrid {
+    grid-template-columns: 1fr;
+  }
+}

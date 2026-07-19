@@ -18,6 +18,12 @@ export interface ProjectDetails {
   description: string;
   /** Path relative to /public — e.g. "/assets/images/projects/infra-corp.png" */
   imagePath: string;
+  // Faceted filtering metadata
+  productType: string;
+  industry: string;
+  material: string;
+  locationFilter: string;
+  relatedProductSlugs: string[];
 }
 
 export const projectsContent = {
@@ -45,6 +51,11 @@ export const projectsContent = {
       description:
         'A monumental exterior building facade cladding and high-impact corporate branding system. This landmark ACP board and corporate signage installation was fabricated to withstand wind loads while displaying a crisp, professional brand identity.',
       imagePath: '/assets/images/projects/infra-corp.png',
+      productType: 'ACP Sign Boards',
+      industry: 'Corporate',
+      material: 'Aluminum Composite Panel',
+      locationFilter: 'Ahmedabad',
+      relatedProductSlugs: ['acp-sign-boards', 'led-sign-boards', 'corporate-branding'],
     },
     {
       id: 'gold-letter-signage',
@@ -63,6 +74,11 @@ export const projectsContent = {
       description:
         'Elegant 3D acrylic letters with custom gold-titanium finish for a luxury retail storefront. Featuring warm-white halo LED lighting that adds depth and prestige to the storefront entrance.',
       imagePath: '/assets/images/projects/gold-palace.png',
+      productType: 'Acrylic Signage',
+      industry: 'Retail & Showrooms',
+      material: 'Acrylic & Stainless Steel',
+      locationFilter: 'Nikol',
+      relatedProductSlugs: ['acrylic-letters', 'ss-letters', 'retail-branding'],
     },
     {
       id: 'custom-neon-signage',
@@ -81,6 +97,11 @@ export const projectsContent = {
       description:
         'Vibrant custom neon sign board styled for creative indoor visibility. Precision flex-neon layout designed to showcase brand typography with high visual impact.',
       imagePath: '/assets/images/projects/creative-neon.png',
+      productType: 'Neon Signs',
+      industry: 'Creative Studios',
+      material: 'Silicone & Acrylic',
+      locationFilter: 'Ahmedabad',
+      relatedProductSlugs: ['neon-sign-boards', 'acrylic-letters'],
     },
     {
       id: 'acp-board-installation',
@@ -99,6 +120,11 @@ export const projectsContent = {
       description:
         'A premium ACP sign board installation featuring laser-cut acrylic 3D letters and under-lit lighting. Engineered for 24/7 visibility and absolute durability under intense weather conditions.',
       imagePath: '/assets/images/projects/apex-acp.png',
+      productType: 'LED Sign Boards',
+      industry: 'Corporate',
+      material: 'Aluminum Composite Panel',
+      locationFilter: 'Ahmedabad',
+      relatedProductSlugs: ['led-sign-boards', 'acp-sign-boards'],
     },
   ] as ProjectDetails[],
 };

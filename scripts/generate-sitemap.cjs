@@ -52,19 +52,20 @@ function getLatestModifiedDate(filePaths) {
 
 // File paths
 const projectsFile = path.join(__dirname, '..', 'src', 'content', 'projects.ts');
-const servicesFile = path.join(__dirname, '..', 'src', 'content', 'services.ts');
+const productsFile = path.join(__dirname, '..', 'src', 'content', 'products.ts');
 
 const srcHome = path.join(__dirname, '..', 'src', 'pages', 'Home.tsx');
 const srcHomeContent = path.join(__dirname, '..', 'src', 'content', 'home.ts');
 const srcAbout = path.join(__dirname, '..', 'src', 'pages', 'About.tsx');
-const srcServices = path.join(__dirname, '..', 'src', 'pages', 'Services.tsx');
+const srcProducts = path.join(__dirname, '..', 'src', 'pages', 'Products.tsx');
+const srcResources = path.join(__dirname, '..', 'src', 'pages', 'Resources.tsx');
 const srcContact = path.join(__dirname, '..', 'src', 'pages', 'Contact.tsx');
 const srcGallery = path.join(__dirname, '..', 'src', 'pages', 'Gallery.tsx');
 const srcGalleryContent = path.join(__dirname, '..', 'src', 'content', 'gallery.ts');
 const srcWarranty = path.join(__dirname, '..', 'src', 'pages', 'Warranty.tsx');
 const srcPrivacy = path.join(__dirname, '..', 'src', 'pages', 'Privacy.tsx');
 const srcTerms = path.join(__dirname, '..', 'src', 'pages', 'Terms.tsx');
-const srcServiceDetail = path.join(__dirname, '..', 'src', 'pages', 'ServiceDetail.tsx');
+const srcProductDetail = path.join(__dirname, '..', 'src', 'pages', 'ProductDetail.tsx');
 const srcProjectDetail = path.join(__dirname, '..', 'src', 'pages', 'ProjectDetail.tsx');
 
 // ── 1. Parse Project Data ───────────────────────────────────────────────────
@@ -87,19 +88,19 @@ for (let i = 1; i < parts.length; i++) {
   }
 }
 
-// ── 2. Parse Service Data ───────────────────────────────────────────────────
-const servicesSrc = fs.readFileSync(servicesFile, 'utf-8');
-const serviceItems = [];
-const serviceBlockPattern = /["']([^"']+)["']:\s*\{\s*slug:\s*["']([^"']+)["'][\s\S]*?seoMetadata/g;
-let sMatch;
-while ((sMatch = serviceBlockPattern.exec(servicesSrc)) !== null) {
-  const block = sMatch[0];
-  const slug = sMatch[2];
+// ── 2. Parse Product Data ───────────────────────────────────────────────────
+const productsSrc = fs.readFileSync(productsFile, 'utf-8');
+const productItems = [];
+const productBlockPattern = /["']([^"']+)["']:\s*\{\s*slug:\s*["']([^"']+)["'][\s\S]*?seoMetadata/g;
+let pMatch;
+while ((pMatch = productBlockPattern.exec(productsSrc)) !== null) {
+  const block = pMatch[0];
+  const slug = pMatch[2];
   const nameMatch = /name:\s*["']([^"']+)["']/.exec(block);
   const heroImageMatch = /heroImage:\s*["']([^"']+)["']/.exec(block);
   
   if (slug && nameMatch && heroImageMatch) {
-    serviceItems.push({
+    productItems.push({
       slug,
       name: nameMatch[1],
       heroImage: heroImageMatch[1]
@@ -123,8 +124,13 @@ allRoutes.push({
 });
 
 allRoutes.push({
-  loc: '/services',
-  lastmod: getLatestModifiedDate([srcServices, servicesFile]),
+  loc: '/products',
+  lastmod: getLatestModifiedDate([srcProducts, productsFile]),
+});
+
+allRoutes.push({
+  loc: '/resources',
+  lastmod: getLatestModifiedDate([srcResources]),
 });
 
 allRoutes.push({
@@ -152,15 +158,15 @@ allRoutes.push({
   lastmod: getLatestModifiedDate([srcTerms]),
 });
 
-// Dynamic Service routes
-serviceItems.forEach(service => {
+// Dynamic Product routes
+productItems.forEach(product => {
   allRoutes.push({
-    loc: `/services/${service.slug}`,
-    lastmod: getLatestModifiedDate([servicesFile, srcServiceDetail]),
+    loc: `/products/${product.slug}`,
+    lastmod: getLatestModifiedDate([productsFile, srcProductDetail]),
     image: {
-      loc: service.heroImage,
-      title: service.name,
-      caption: `TGB Enterprise ${service.name} Design & Installation Ahmedabad`
+      loc: product.heroImage,
+      title: product.name,
+      caption: `TGB Enterprise ${product.name} Design & Installation Ahmedabad`
     }
   });
 });

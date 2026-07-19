@@ -89,6 +89,7 @@ export function useJsonLd() {
       name = name.replace(/\b\w/g, (c) => c.toUpperCase());
 
       // Customize names for specific segments
+      if (segment === 'services' || segment === 'products') name = 'Products';
       if (segment === 'claim-warranty') name = 'Claim Warranty';
       if (segment === 'privacy') name = 'Privacy Policy';
       if (segment === 'terms') name = 'Terms & Conditions';

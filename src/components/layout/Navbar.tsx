@@ -56,14 +56,17 @@ export const Navbar: React.FC = () => {
       <NavLink to="/" end className={getNavLinkClass} onClick={handleMobileClose}>
         Home
       </NavLink>
-      <NavLink to="/about" className={getNavLinkClass} onClick={handleMobileClose}>
-        About
-      </NavLink>
-      <NavLink to="/services" className={getNavLinkClass} onClick={handleMobileClose}>
-        Services
+      <NavLink to="/products" className={getNavLinkClass} onClick={handleMobileClose}>
+        Products
       </NavLink>
       <NavLink to="/gallery" className={getNavLinkClass} onClick={handleMobileClose}>
         Gallery
+      </NavLink>
+      <NavLink to="/about" className={getNavLinkClass} onClick={handleMobileClose}>
+        About
+      </NavLink>
+      <NavLink to="/resources" className={getNavLinkClass} onClick={handleMobileClose}>
+        Resources
       </NavLink>
       <NavLink to="/contact" className={getNavLinkClass} onClick={handleMobileClose}>
         Contact

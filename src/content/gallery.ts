@@ -1,5 +1,5 @@
 import { projectsContent } from './projects';
-import { servicesData } from './services';
+import { productsData } from './products';
 
 export interface GalleryItem {
   id: string;
@@ -59,27 +59,27 @@ function buildGalleryItems(): GalleryItem[] {
     });
   }
 
-  for (const [slug, svc] of Object.entries(servicesData)) {
-    if (svc.heroImage) {
+  for (const [slug, prod] of Object.entries(productsData)) {
+    if (prod.heroImage) {
       items.push({
-        id: `service-${slug}`,
-        src: svc.heroImage,
-        alt: `${svc.name} - TGB Enterprise`,
-        category: svc.name,
+        id: `product-${slug}`,
+        src: prod.heroImage,
+        alt: `${prod.name} - TGB Enterprise`,
+        category: prod.name,
         tags: [slug],
-        link: `/services/${slug}`,
+        link: `/products/${slug}`,
       });
     }
 
-    if (svc.gallery && svc.gallery.length > 0) {
-      for (let i = 0; i < svc.gallery.length; i++) {
+    if (prod.gallery && prod.gallery.length > 0) {
+      for (let i = 0; i < prod.gallery.length; i++) {
         items.push({
           id: `gallery-${slug}-${i}`,
-          src: svc.gallery[i],
-          alt: `${svc.name} gallery image - TGB Enterprise`,
-          category: svc.name,
+          src: prod.gallery[i],
+          alt: `${prod.name} gallery image - TGB Enterprise`,
+          category: prod.name,
           tags: [slug],
-          link: `/services/${slug}`,
+          link: `/products/${slug}`,
         });
       }
     }
@@ -105,10 +105,10 @@ function categoryToTags(category: string): string[] {
 
 const galleryItems = buildGalleryItems();
 
-const signageTypes: SignageType[] = Object.values(servicesData).map((s) => ({
-  slug: s.slug,
-  name: s.name,
-  shortDescription: s.shortDescription,
+const signageTypes: SignageType[] = Object.values(productsData).map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  shortDescription: p.shortDescription,
 }));
 
 const industries: IndustryItem[] = [

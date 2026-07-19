@@ -50,120 +50,85 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* ── Column 02: Quick Links ── */}
+          {/* ── Column 02: Company ── */}
           <div>
-            <h4 className={styles.colTitle}>Quick Links</h4>
+            <h4 className={styles.colTitle}>Company</h4>
             <ul className={styles.linksList}>
-              <li>
-                <Link to="/" className={styles.navLink}>
-                  Home
-                </Link>
-              </li>
               <li>
                 <Link to="/about" className={styles.navLink}>
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/services" className={styles.navLink}>
-                  Services
-                </Link>
-              </li>
-              <li>
                 <Link to="/gallery" className={styles.navLink}>
-                  Gallery
+                  Project Portfolio
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className={styles.navLink}>
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link to="/claim-warranty" className={styles.navLink}>
-                  Claim Warranty
+                  Contact Us
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* ── Column 03: Our Services ── */}
+          {/* ── Column 03: Products ── */}
           <div>
-            <h4 className={styles.colTitle}>Our Services</h4>
+            <h4 className={styles.colTitle}>Products</h4>
             <ul className={styles.linksList}>
               <li>
-                <Link to="/services/led-sign-boards" className={styles.navLink}>
+                <Link to="/products/led-sign-boards" className={styles.navLink}>
                   LED Sign Boards
                 </Link>
               </li>
               <li>
-                <Link to="/services/acp-sign-boards" className={styles.navLink}>
+                <Link to="/products/acp-sign-boards" className={styles.navLink}>
                   ACP Sign Boards
                 </Link>
               </li>
               <li>
-                <Link to="/services/acrylic-letters" className={styles.navLink}>
-                  Acrylic & 3D Letter Signages
+                <Link to="/products/acrylic-letters" className={styles.navLink}>
+                  3D Acrylic Letters
                 </Link>
               </li>
               <li>
-                <Link to="/services/ss-letters" className={styles.navLink}>
-                  SS Letters
+                <Link to="/products/ss-letters" className={styles.navLink}>
+                  Stainless Steel Letters
                 </Link>
               </li>
               <li>
-                <Link to="/services/neon-sign-boards" className={styles.navLink}>
-                  Neon & Custom Signages
+                <Link to="/products/neon-sign-boards" className={styles.navLink}>
+                  Neon Signs
                 </Link>
               </li>
               <li>
-                <Link to="/services/pylon-signs" className={styles.navLink}>
-                  Pylon Signs
+                <Link to="/products/pylon-signs" className={styles.navLink}>
+                  Pylon &amp; Totem Signs
                 </Link>
               </li>
             </ul>
-            <Link to="/services" className={styles.viewAllLink}>
-              View All Services →
+            <Link to="/products" className={styles.viewAllLink}>
+              View All Products →
             </Link>
           </div>
 
-          {/* ── Column 04: Industries We Serve ── */}
+          {/* ── Column 04: Resources & Support ── */}
           <div>
-            <h4 className={styles.colTitle}>Industries We Serve</h4>
+            <h4 className={styles.colTitle}>Resources</h4>
             <ul className={styles.linksList}>
               <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Retail & Showrooms
+                <Link to="/resources" className={styles.navLink}>
+                  Resources &amp; Downloads
                 </Link>
               </li>
               <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Corporate Offices
+                <Link to="/claim-warranty" className={styles.navLink}>
+                  Warranty Support
                 </Link>
               </li>
               <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Restaurants & Cafés
-                </Link>
-              </li>
-              <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Hospitals & Healthcare
-                </Link>
-              </li>
-              <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Hotels & Hospitality
-                </Link>
-              </li>
-              <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Industrial & Manufacturing
-                </Link>
-              </li>
-              <li>
-                <Link to="/about#industries" className={styles.navLink}>
-                  Commercial Spaces
+                <Link to="/resources" className={styles.navLink}>
+                  Technical FAQs
                 </Link>
               </li>
             </ul>

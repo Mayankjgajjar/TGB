@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { servicesData } from '../content/services';
+import { productsData } from '../content/products';
 import { projectsContent } from '../content/projects';
 
 const ORIGIN = import.meta.env.DEV
@@ -50,23 +50,30 @@ export function useSeoMetadata() {
       title = 'About TGB Enterprise | Trusted Sign Board Company in Ahmedabad';
       description =
         'Learn about TGB Enterprise, the trusted sign board company in Ahmedabad. We design, manufacture, and install high-quality signage for brands across India.';
-    } else if (path === '/services') {
-      title = 'Signage Services – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad';
+    } else if (path === '/products' || path === '/services') {
+      title =
+        'Products Catalogue – LED, ACP, Neon & Acrylic Sign Boards | TGB Enterprise Ahmedabad';
       description =
-        'Explore custom signage services in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters. Request a free quote.';
+        'Explore custom architectural signage products in Ahmedabad by TGB Enterprise, including durable LED boards, ACP panels, neon signs, and 3D letters.';
+    } else if (path === '/resources') {
+      title = 'Technical Resources, Downloads & Signage Guides | TGB Enterprise Ahmedabad';
+      description =
+        'Download product catalogues, company profile PDF, material specs, installation manuals, and FAQs from TGB Enterprise, Ahmedabad.';
     } else if (path === '/contact') {
       title = 'Contact TGB Enterprise | Sign Board Manufacturer, Nikol, Ahmedabad';
       description =
         'Contact TGB Enterprise, the leading sign board manufacturer in Nikol, Ahmedabad. Visit our workshop or call us today to start your custom signage project.';
-    } else if (path.startsWith('/services/')) {
-      const slug = path.split('/services/')[1];
-      const service = slug ? servicesData[slug] : null;
-      if (service) {
-        title = service.seoMetadata.title;
-        description = service.seoMetadata.description;
-        image = service.heroImage.startsWith('http')
-          ? service.heroImage
-          : `${ORIGIN}${service.heroImage}`;
+    } else if (path.startsWith('/products/') || path.startsWith('/services/')) {
+      const slug = path.startsWith('/products/')
+        ? path.split('/products/')[1]
+        : path.split('/services/')[1];
+      const product = slug ? productsData[slug] : null;
+      if (product) {
+        title = product.seoMetadata.title;
+        description = product.seoMetadata.description;
+        image = product.heroImage.startsWith('http')
+          ? product.heroImage
+          : `${ORIGIN}${product.heroImage}`;
       }
     } else if (path.startsWith('/projects/')) {
       const projectId = path.split('/projects/')[1];

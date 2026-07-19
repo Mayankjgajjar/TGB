@@ -6,13 +6,14 @@ import Home from './pages/Home';
 
 // Lazy-load all non-home pages to keep the main bundle lean
 const About = lazy(() => import('./pages/About'));
-const Services = lazy(() => import('./pages/Services'));
+const Products = lazy(() => import('./pages/Products'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+const Resources = lazy(() => import('./pages/Resources'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'));
 const Gallery = lazy(() => import('./pages/Gallery'));
-const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
 const Warranty = lazy(() => import('./pages/Warranty'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -35,10 +36,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'services',
+        path: 'products',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <Services />
+            <Products />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'products/:slug',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ProductDetail />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'resources',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <Resources />
           </Suspense>
         ),
       },
@@ -71,12 +88,16 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      // ── Service detail ───────────────────────────────────────────────────────
+      // ── Legacy /services redirects ──────────────────────────────────────────
+      {
+        path: 'services',
+        element: <Navigate to="/products" replace />,
+      },
       {
         path: 'services/:serviceId',
         element: (
           <Suspense fallback={<PageLoader />}>
-            <ServiceDetail />
+            <ProductDetail />
           </Suspense>
         ),
       },

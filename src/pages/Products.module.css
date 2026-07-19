@@ -1,0 +1,148 @@
+/* Products Page Module Styles */
+.filterBarWrapper {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.searchBox {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-secondary);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 45px 14px 44px;
+  background-color: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(227 27 35 / 15%);
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 12px;
+  font-family: var(--font-technical);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clearSearchBtn:hover {
+  color: var(--color-primary);
+}
+
+.categoriesPillTrack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 4px;
+}
+
+.categoryPill {
+  background: var(--color-surface-container-high);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.categoryPill:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.categoryPillActive {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary);
+  border-color: var(--color-primary);
+}
+
+.noResultsBox {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-surface-container-low);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-outline-variant);
+}
+
+.noResultsBox h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.noResultsBox p {
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.resetBtn {
+  background: var(--color-primary-container);
+  color: var(--color-on-primary);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-technical);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+@media (width <= 768px) {
+  .categoriesPillTrack {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+}
