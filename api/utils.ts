@@ -16,13 +16,13 @@ export function escapeHtml(str: string): string {
 // Magic number byte signatures for common file formats
 const MAGIC_NUMBERS: Record<string, number[]> = {
   '.pdf': [0x25, 0x50, 0x44, 0x46], // %PDF
-  '.png': [0x89, 0x50, 0x4E, 0x47], // PNG
-  '.jpg': [0xFF, 0xD8, 0xFF], // JPEG
-  '.jpeg': [0xFF, 0xD8, 0xFF], // JPEG
+  '.png': [0x89, 0x50, 0x4e, 0x47], // PNG
+  '.jpg': [0xff, 0xd8, 0xff], // JPEG
+  '.jpeg': [0xff, 0xd8, 0xff], // JPEG
   '.gif': [0x47, 0x49, 0x46, 0x38], // GIF
   '.webp': [0x52, 0x49, 0x46, 0x46], // WebP (RIFF header)
-  '.zip': [0x50, 0x4B, 0x03, 0x04], // ZIP
-  '.docx': [0x50, 0x4B, 0x03, 0x04], // DOCX is a ZIP container
+  '.zip': [0x50, 0x4b, 0x03, 0x04], // ZIP
+  '.docx': [0x50, 0x4b, 0x03, 0x04], // DOCX is a ZIP container
   '.dwg': [0x41, 0x43, 0x31, 0x30], // DWG (AC10)
   '.psd': [0x38, 0x42, 0x50, 0x53], // PSD (8BPS)
   '.eps': [0x25, 0x21, 0x50, 0x53], // EPS (%!PS)
@@ -36,8 +36,8 @@ export function validateFilePayload(
   base64Content: string,
   fileName: string,
   maxSizeMB: number,
-  allowedExtensions: string[]
-): Buffer {
+  allowedExtensions: string[],
+): { buffer: Buffer; base64Data: string } {
   // 1. Verify data URI structure
   const match = base64Content.match(/^data:([^;]+);base64,(.*)$/);
   if (!match) {
@@ -69,5 +69,5 @@ export function validateFilePayload(
     }
   }
 
-  return buffer;
+  return { buffer, base64Data };
 }

@@ -44,9 +44,7 @@ export default async function handler(req: any, res: any) {
     req.headers['x-real-ip'] ||
     req.socket.remoteAddress ||
     '127.0.0.1';
-  const clientIp = (
-    typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader
-  ).trim();
+  const clientIp = (typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader).trim();
 
   if (await isRateLimited(clientIp)) {
     return res.status(429).json({
@@ -82,20 +80,20 @@ export default async function handler(req: any, res: any) {
   } = parsed.data;
 
   // 3. File validation (optional, max 4MB, images only)
-  const attachments: { filename: string; content: Buffer }[] = [];
+  const attachments: { filename: string; content: string }[] = [];
   if (imageContent && imageFileName) {
     try {
       const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.svg'];
-      const buffer = validateFilePayload(imageContent, imageFileName, 4, allowedExtensions);
+      const { base64Data } = validateFilePayload(imageContent, imageFileName, 4, allowedExtensions);
       attachments.push({
         filename: imageFileName,
-        content: buffer,
+        content: base64Data,
       });
     } catch (err: any) {
       console.warn('[warranty] File validation failed:', err.message);
       return res.status(400).json({
         success: false,
-        error: err.message || 'Invalid file payload.'
+        error: err.message || 'Invalid file payload.',
       });
     }
   }
@@ -154,7 +152,8 @@ export default async function handler(req: any, res: any) {
     console.error('[warranty] Resend error:', error);
     return res.status(500).json({
       success: false,
-      error: 'An internal server error occurred while submitting your claim. Please try again later.',
+      error:
+        'An internal server error occurred while submitting your claim. Please try again later.',
     });
   }
 }

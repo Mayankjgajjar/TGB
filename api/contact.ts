@@ -17,10 +17,7 @@ const contactSchema = z.object({
   phone: z
     .string()
     .optional()
-    .refine(
-      (val) => !val || /^[+\d][\d\s\-().]{7,19}$/.test(val),
-      'Enter a valid phone number.'
-    ),
+    .refine((val) => !val || /^[+\d][\d\s\-().]{7,19}$/.test(val), 'Enter a valid phone number.'),
   email: z.string().email('Enter a valid email address.'),
   company: z.string().optional(),
   location: z.string().optional(),
@@ -50,9 +47,7 @@ export default async function handler(req: any, res: any) {
     req.headers['x-real-ip'] ||
     req.socket.remoteAddress ||
     '127.0.0.1';
-  const clientIp = (
-    typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader
-  ).trim();
+  const clientIp = (typeof ipHeader === 'string' ? ipHeader.split(',')[0] : ipHeader).trim();
 
   if (await isRateLimited(clientIp)) {
     return res.status(429).json({
@@ -88,22 +83,41 @@ export default async function handler(req: any, res: any) {
   } = parsed.data;
 
   // 3. File validation (optional upload, up to 50MB)
-  const attachments: { filename: string; content: Buffer }[] = [];
+  const attachments: { filename: string; content: string }[] = [];
   if (attachmentContent && attachmentFileName) {
     try {
       const allowedExtensions = [
-        '.jpg', '.jpeg', '.png', '.webp', '.pdf', '.zip', '.dwg', '.dxf', '.ai', '.eps', '.psd', '.cdr', '.doc', '.docx', '.txt'
+        '.jpg',
+        '.jpeg',
+        '.png',
+        '.webp',
+        '.pdf',
+        '.zip',
+        '.dwg',
+        '.dxf',
+        '.ai',
+        '.eps',
+        '.psd',
+        '.cdr',
+        '.doc',
+        '.docx',
+        '.txt',
       ];
-      const buffer = validateFilePayload(attachmentContent, attachmentFileName, 50, allowedExtensions);
+      const { base64Data } = validateFilePayload(
+        attachmentContent,
+        attachmentFileName,
+        50,
+        allowedExtensions,
+      );
       attachments.push({
         filename: attachmentFileName,
-        content: buffer,
+        content: base64Data,
       });
     } catch (err: any) {
       console.warn('[contact] File validation failed:', err.message);
       return res.status(400).json({
         success: false,
-        error: err.message || 'Invalid file payload.'
+        error: err.message || 'Invalid file payload.',
       });
     }
   }
@@ -181,7 +195,8 @@ export default async function handler(req: any, res: any) {
     console.error('[contact] Resend error:', error);
     return res.status(500).json({
       success: false,
-      error: 'An internal server error occurred while sending your message. Please try again later.',
+      error:
+        'An internal server error occurred while sending your message. Please try again later.',
     });
   }
 }
