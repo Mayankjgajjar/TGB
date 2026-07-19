@@ -11,6 +11,7 @@ import {
   ChevronDown,
   HelpCircle,
   ArrowRight,
+  CheckCircle2,
 } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
