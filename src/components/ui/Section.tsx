@@ -5,6 +5,7 @@ interface SectionProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
+  style?: React.CSSProperties;
   dividerTop?: boolean;
   dividerBottom?: boolean;
   spacing?: 'small' | 'normal' | 'large' | 'xlarge';
@@ -15,6 +16,7 @@ export const Section: React.FC<SectionProps> = ({
   children,
   id,
   className = '',
+  style,
   dividerTop = false,
   dividerBottom = false,
   spacing = 'normal',
@@ -40,7 +42,7 @@ export const Section: React.FC<SectionProps> = ({
     .join(' ');
 
   return (
-    <Component id={id} className={classes}>
+    <Component id={id} className={classes} style={style}>
       {children}
     </Component>
   );

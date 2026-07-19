@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   ChevronDown,
   HelpCircle,
-  ArrowRight,
   CheckCircle2,
 } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
