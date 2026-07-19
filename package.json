@@ -10,14 +10,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,css,json}\"",
     "lint:css": "stylelint \"src/**/*.{css,module.css}\"",
     "lint:css:fix": "stylelint --fix \"src/**/*.{css,module.css}\"",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
     "build": "node scripts/generate-sitemap.cjs && node scripts/optimize-images.mjs && tsc && vite build && node scripts/prerender.cjs",
-    "preview": "vite preview",
-    "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed",
-    "test:e2e:ui": "playwright test --ui"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.2.8",
@@ -33,20 +27,15 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
-    "jsdom": "^29.1.1",
     "prettier": "^3.9.4",
     "rollup-plugin-visualizer": "^7.0.1",
     "sharp": "^0.35.3",
     "stylelint": "^17.14.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5",
-    "vitest": "^4.1.10"
+    "vite": "^6.0.5"
   }
 }
