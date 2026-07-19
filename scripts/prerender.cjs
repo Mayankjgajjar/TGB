@@ -238,7 +238,7 @@ pages.push({
         <li><strong>Email:</strong> <a href="mailto:tgbsign@proton.me">tgbsign@proton.me</a></li>
         <li><strong>Office Hours:</strong> Monday – Saturday, 9:30 AM – 7:00 PM IST</li>
       </ul>
-      <p>Browse our <a href="/services">signage services</a>, view our <a href="/gallery">completed projects</a>, or return to the <a href="/">Homepage</a>.</p>
+      <p>Browse our <a href="/products">signage products</a>, view our <a href="/gallery">completed projects</a>, or return to the <a href="/">Homepage</a>.</p>
     </section>
   `
 });
@@ -265,11 +265,11 @@ pages.push({
       </ul>
       <h2>Our Signage Solutions</h2>
       <ul>
-        ${serviceItems.map(s => `
-          <li><a href="/services/${s.slug}">${escapeHtml(s.name)}</a> - ${escapeHtml(s.positioning)}</li>
+        ${productItems.map(p => `
+          <li><a href="/products/${p.slug}">${escapeHtml(p.name)}</a> - ${escapeHtml(p.positioning)}</li>
         `).join('\n')}
       </ul>
-      <p>Return to <a href="/">Home page</a>, browse our <a href="/services">full range of services</a>, or <a href="/contact">contact us</a> for a custom quotation.</p>
+      <p>Return to <a href="/">Home page</a>, browse our <a href="/products">full range of products</a>, or <a href="/contact">contact us</a> for a custom quotation.</p>
     </section>
   `
 });
