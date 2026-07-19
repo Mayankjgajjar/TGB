@@ -37,3 +37,8 @@ Thumbs.db
 .env.production.local
 
 scratch/
+
+# Test Reports and visualizer outputs
+playwright-report/
+test-results/
+bundle-report.html
