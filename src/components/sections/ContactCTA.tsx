@@ -439,9 +439,21 @@ export const ContactCTA: React.FC<{
                     label="Attach Reference Files / Layout Drawings (Optional)"
                     maxSizeMB={50}
                     allowedExtensions={[
-                      '.jpg', '.jpeg', '.png', '.webp', '.pdf', '.zip', 
-                      '.dwg', '.dxf', '.ai', '.eps', '.psd', '.cdr', 
-                      '.doc', '.docx', '.txt'
+                      '.jpg',
+                      '.jpeg',
+                      '.png',
+                      '.webp',
+                      '.pdf',
+                      '.zip',
+                      '.dwg',
+                      '.dxf',
+                      '.ai',
+                      '.eps',
+                      '.psd',
+                      '.cdr',
+                      '.doc',
+                      '.docx',
+                      '.txt',
                     ]}
                     selectedFile={selectedFile}
                     fileBase64={fileBase64}

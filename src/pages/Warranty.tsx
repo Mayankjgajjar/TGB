@@ -88,8 +88,6 @@ export const Warranty: React.FC = () => {
   const [fileBase64, setFileBase64] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
-
-
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const { name, value, type } = e.target;

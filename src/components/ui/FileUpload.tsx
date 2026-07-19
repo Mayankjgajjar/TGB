@@ -29,50 +29,59 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const processFile = useCallback((file: File) => {
-    // 1. Validate file size
-    const maxSizeBytes = maxSizeMB * 1024 * 1024;
-    if (file.size > maxSizeBytes) {
-      const errorMsg = `File is too large. Please select a file under ${maxSizeMB}MB.`;
-      onFileSelect(null, null, errorMsg);
-      return;
-    }
+  const processFile = useCallback(
+    (file: File) => {
+      // 1. Validate file size
+      const maxSizeBytes = maxSizeMB * 1024 * 1024;
+      if (file.size > maxSizeBytes) {
+        const errorMsg = `File is too large. Please select a file under ${maxSizeMB}MB.`;
+        onFileSelect(null, null, errorMsg);
+        return;
+      }
 
-    // 2. Validate extension
-    const fileExt = '.' + file.name.split('.').pop()?.toLowerCase();
-    const isAllowedExt = allowedExtensions.some(ext => ext.toLowerCase() === fileExt);
-    if (allowedExtensions.length > 0 && !isAllowedExt) {
-      const errorMsg = `Invalid file format. Allowed types: ${allowedExtensions.join(', ')}.`;
-      onFileSelect(null, null, errorMsg);
-      return;
-    }
+      // 2. Validate extension
+      const fileExt = '.' + file.name.split('.').pop()?.toLowerCase();
+      const isAllowedExt = allowedExtensions.some((ext) => ext.toLowerCase() === fileExt);
+      if (allowedExtensions.length > 0 && !isAllowedExt) {
+        const errorMsg = `Invalid file format. Allowed types: ${allowedExtensions.join(', ')}.`;
+        onFileSelect(null, null, errorMsg);
+        return;
+      }
 
-    // 3. Convert to base64
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      onFileSelect(file, reader.result as string, null);
-    };
-    reader.onerror = () => {
-      onFileSelect(null, null, 'Error reading file content.');
-    };
-    reader.readAsDataURL(file);
-  }, [maxSizeMB, allowedExtensions, onFileSelect]);
+      // 3. Convert to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        onFileSelect(file, reader.result as string, null);
+      };
+      reader.onerror = () => {
+        onFileSelect(null, null, 'Error reading file content.');
+      };
+      reader.readAsDataURL(file);
+    },
+    [maxSizeMB, allowedExtensions, onFileSelect],
+  );
 
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      processFile(file);
-    }
-  }, [processFile]);
+  const handleFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        processFile(file);
+      }
+    },
+    [processFile],
+  );
 
-  const handleRemoveFile = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onFileSelect(null, null, null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  }, [onFileSelect]);
+  const handleRemoveFile = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      onFileSelect(null, null, null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    },
+    [onFileSelect],
+  );
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -84,15 +93,18 @@ export const FileUpload: React.FC<FileUploadProps> = ({
     }
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragActive(false);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragActive(false);
 
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      processFile(e.dataTransfer.files[0]);
-    }
-  }, [processFile]);
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processFile(e.dataTransfer.files[0]);
+      }
+    },
+    [processFile],
+  );
 
   return (
     <div className={styles.fileInputGroup}>
