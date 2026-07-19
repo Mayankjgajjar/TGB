@@ -1,13 +1,13 @@
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { isRateLimited } from './rateLimit.js';
+import { escapeHtml, validateFilePayload } from './utils.js';
 
 declare const process: {
   env: {
     [key: string]: string | undefined;
   };
 };
-
-import { isRateLimited } from './rateLimit.js';
 
 // ── Zod Schema ────────────────────────────────────────────────────────────────
 
@@ -33,6 +33,8 @@ const contactSchema = z.object({
     message: 'Consent is required to submit your enquiry.',
   }),
   consentTimestamp: z.string().min(1, 'Consent timestamp is required.'),
+  attachmentFileName: z.string().optional(),
+  attachmentContent: z.string().optional(),
 });
 
 // ── Handler ───────────────────────────────────────────────────────────────────
@@ -81,9 +83,42 @@ export default async function handler(req: any, res: any) {
     message,
     consentGiven,
     consentTimestamp,
+    attachmentFileName,
+    attachmentContent,
   } = parsed.data;
 
-  // 3. Resend API key check
+  // 3. File validation (optional upload, up to 50MB)
+  const attachments: { filename: string; content: Buffer }[] = [];
+  if (attachmentContent && attachmentFileName) {
+    try {
+      const allowedExtensions = [
+        '.jpg', '.jpeg', '.png', '.webp', '.pdf', '.zip', '.dwg', '.dxf', '.ai', '.eps', '.psd', '.cdr', '.doc', '.docx', '.txt'
+      ];
+      const buffer = validateFilePayload(attachmentContent, attachmentFileName, 50, allowedExtensions);
+      attachments.push({
+        filename: attachmentFileName,
+        content: buffer,
+      });
+    } catch (err: any) {
+      console.warn('[contact] File validation failed:', err.message);
+      return res.status(400).json({
+        success: false,
+        error: err.message || 'Invalid file payload.'
+      });
+    }
+  }
+
+  // 4. Input sanitization (escape user input values to prevent HTML injection)
+  const safeFirstName = escapeHtml(firstName);
+  const safeLastName = escapeHtml(lastName);
+  const safePhone = phone ? escapeHtml(phone) : '';
+  const safeEmail = escapeHtml(email);
+  const safeCompany = company ? escapeHtml(company) : '';
+  const safeLocation = location ? escapeHtml(location) : '';
+  const safeSignage = signage ? escapeHtml(signage) : '';
+  const safeMessage = escapeHtml(message);
+
+  // 5. Resend API key check
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
@@ -92,7 +127,7 @@ export default async function handler(req: any, res: any) {
     });
   }
 
-  // 4. Send emails
+  // 6. Send emails
   try {
     const resend = new Resend(apiKey);
 
@@ -106,18 +141,19 @@ export default async function handler(req: any, res: any) {
         from: `${fromName} <${fromEmail}>`,
         to: toEmail,
         subject: 'New Website Inquiry',
+        attachments,
         html: `
           <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-          <p><strong>Location:</strong> ${location || 'Not provided'}</p>
-          <p><strong>Type of Signage:</strong> ${signage || 'Not specified'}</p>
+          <p><strong>Name:</strong> ${safeFirstName} ${safeLastName}</p>
+          <p><strong>Phone:</strong> ${safePhone || 'Not provided'}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          <p><strong>Company:</strong> ${safeCompany || 'Not provided'}</p>
+          <p><strong>Location:</strong> ${safeLocation || 'Not provided'}</p>
+          <p><strong>Type of Signage:</strong> ${safeSignage || 'Not specified'}</p>
           <p><strong>Consent Given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
           <p><strong>Consent Timestamp:</strong> ${consentTimestamp}</p>
           <p><strong>Message:</strong></p>
-          <p>${message}</p>
+          <p>${safeMessage}</p>
         `,
       }),
       // Auto-reply to customer
@@ -128,7 +164,7 @@ export default async function handler(req: any, res: any) {
         html: `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; line-height: 1.6; color: #333333; border: 1px solid #eaeaea; border-radius: 8px;">
             <h2 style="color: #0c0c0c; margin-top: 0; border-bottom: 1px solid #eaeaea; padding-bottom: 12px; font-weight: 600;">Inquiry Received</h2>
-            <p>Hi ${firstName},</p>
+            <p>Hi ${safeFirstName},</p>
             <p>Your project inquiry has been received. One of our design engineers will contact you shortly to schedule your consultation.</p>
             <br />
             <p>Best Regards,</p>
@@ -145,7 +181,7 @@ export default async function handler(req: any, res: any) {
     console.error('[contact] Resend error:', error);
     return res.status(500).json({
       success: false,
-      error: error.message || error.toString(),
+      error: 'An internal server error occurred while sending your message. Please try again later.',
     });
   }
 }

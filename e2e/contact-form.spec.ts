@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Contact Form', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/contact');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
   });
 
   test('displays contact form with all fields', async ({ page }) => {

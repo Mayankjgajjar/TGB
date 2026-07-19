@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import styles from './Warranty.module.css';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Input from '../components/ui/Input';
+import FileUpload from '../components/ui/FileUpload';
 
 interface FormFields {
   customerName: string;
@@ -87,41 +88,7 @@ export const Warranty: React.FC = () => {
   const [fileBase64, setFileBase64] = useState<string | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
-  const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
 
-    // Check size limit (4MB)
-    if (file.size > 4 * 1024 * 1024) {
-      setFileError('File is too large. Please select an image under 4MB.');
-      setSelectedFile(null);
-      setFileBase64(null);
-      return;
-    }
-
-    // Check file type
-    if (!file.type.startsWith('image/')) {
-      setFileError('Invalid file type. Please upload an image file (JPG, PNG, WebP).');
-      setSelectedFile(null);
-      setFileBase64(null);
-      return;
-    }
-
-    setFileError(null);
-    setSelectedFile(file);
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setFileBase64(reader.result as string);
-    };
-    reader.readAsDataURL(file);
-  }, []);
-
-  const handleRemoveFile = useCallback(() => {
-    setSelectedFile(null);
-    setFileBase64(null);
-    setFileError(null);
-  }, []);
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -393,63 +360,21 @@ export const Warranty: React.FC = () => {
               />
 
               {/* Proof of purchase or issue photo */}
-              <div className={styles.fileInputGroup}>
-                <label className={styles.fieldLabel} htmlFor="issuePhoto">
-                  Upload Photo of the Issue (Optional)
-                </label>
-                {selectedFile ? (
-                  <div className={styles.previewContainer}>
-                    {fileBase64 && (
-                      <img
-                        src={fileBase64}
-                        alt="Preview of issue"
-                        className={styles.previewImage}
-                        loading="lazy"
-                      />
-                    )}
-                    <div className={styles.previewInfo}>
-                      <span className={styles.previewName}>{selectedFile.name}</span>
-                      <span className={styles.previewSize}>
-                        {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleRemoveFile}
-                      className={styles.removeFileBtn}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ) : (
-                  <div className={styles.fileInputWrapper}>
-                    <div className={styles.uploadIcon}>↑</div>
-                    <span className={styles.uploadText}>Select or drag a photo here</span>
-                    <span className={styles.uploadLimit}>Max file size: 4MB (JPG, PNG, WebP)</span>
-                    <input
-                      id="issuePhoto"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      className={styles.hiddenFileInput}
-                    />
-                  </div>
-                )}
-                {fileError && (
-                  <div className={styles.fileErrorContainer}>
-                    <span className={styles.fieldError} role="alert">
-                      {fileError}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleRemoveFile}
-                      className={styles.clearErrorBtn}
-                    >
-                      Clear
-                    </button>
-                  </div>
-                )}
-              </div>
+              <FileUpload
+                id="issuePhoto"
+                label="Upload Photo of the Issue (Optional)"
+                maxSizeMB={4}
+                allowedExtensions={['.jpg', '.jpeg', '.png', '.webp', '.svg']}
+                selectedFile={selectedFile}
+                fileBase64={fileBase64}
+                fileError={fileError}
+                onFileSelect={(file, base64, error) => {
+                  setSelectedFile(file);
+                  setFileBase64(base64);
+                  setFileError(error);
+                }}
+                accept="image/*"
+              />
 
               {/* Consent Checkbox */}
               <div className={styles.checkboxGroup}>

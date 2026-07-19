@@ -4,7 +4,7 @@ import path from 'path';
 test.describe('Warranty Form', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/claim-warranty');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
   });
 
   test('shows warranty section on page', async ({ page }) => {
@@ -20,7 +20,7 @@ test.describe('Warranty Form', () => {
     const testImage = path.resolve(process.cwd(), 'public', 'assets', 'logos', 'tgb-logo.svg');
     await fileInput.setInputFiles(testImage);
     await page.waitForTimeout(500);
-    await expect(page.locator('img[alt="Preview of issue"]')).toBeVisible();
+    await expect(page.locator('img[alt="Preview of upload"]')).toBeVisible();
   });
 
   test('submits warranty successfully with valid data and mock API', async ({ page }) => {

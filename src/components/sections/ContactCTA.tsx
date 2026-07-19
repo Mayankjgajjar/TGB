@@ -10,6 +10,7 @@ import { getEnvVar } from '../../lib/env';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import Input from '../ui/Input';
+import FileUpload from '../ui/FileUpload';
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -108,6 +109,11 @@ export const ContactCTA: React.FC<{
   }, [isSubmitted]);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // File Upload State
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   const handleInputChange = useCallback(
@@ -171,6 +177,8 @@ export const ContactCTA: React.FC<{
             message: formState.message,
             consentGiven: formState.consent,
             consentTimestamp: new Date().toISOString(),
+            attachmentFileName: selectedFile?.name || undefined,
+            attachmentContent: fileBase64 || undefined,
           }),
         });
 
@@ -196,6 +204,9 @@ export const ContactCTA: React.FC<{
 
         setIsSubmitted(true);
         setFormState(EMPTY_FORM);
+        setSelectedFile(null);
+        setFileBase64(null);
+        setFileError(null);
         setErrors({});
         setTouched({});
         trackContactFormSubmit();
@@ -215,6 +226,9 @@ export const ContactCTA: React.FC<{
   const handleReset = useCallback(() => {
     setIsSubmitted(false);
     setSubmitError(null);
+    setSelectedFile(null);
+    setFileBase64(null);
+    setFileError(null);
   }, []);
 
   const headerVariants = {
@@ -417,6 +431,28 @@ export const ContactCTA: React.FC<{
                     required
                     error={errors.message}
                     touched={touched.message}
+                  />
+
+                  {/* Reference file upload */}
+                  <FileUpload
+                    id="projectAttachment"
+                    label="Attach Reference Files / Layout Drawings (Optional)"
+                    maxSizeMB={50}
+                    allowedExtensions={[
+                      '.jpg', '.jpeg', '.png', '.webp', '.pdf', '.zip', 
+                      '.dwg', '.dxf', '.ai', '.eps', '.psd', '.cdr', 
+                      '.doc', '.docx', '.txt'
+                    ]}
+                    selectedFile={selectedFile}
+                    fileBase64={fileBase64}
+                    fileError={fileError}
+                    onFileSelect={(file, base64, error) => {
+                      setSelectedFile(file);
+                      setFileBase64(base64);
+                      setFileError(error);
+                    }}
+                    accept="image/*,application/pdf,application/zip,application/x-zip-compressed,application/octet-stream,text/plain,.dwg,.dxf,.ai,.eps,.psd,.cdr,.doc,.docx"
+                    helperText="Max file size: 50MB (Images, PDFs, ZIPs, CAD/Design drawings)"
                   />
 
                   {/* Consent Checkbox */}

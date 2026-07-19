@@ -1,13 +1,13 @@
 import { Resend } from 'resend';
 import { z } from 'zod';
+import { isRateLimited } from './rateLimit.js';
+import { escapeHtml, validateFilePayload } from './utils.js';
 
 declare const process: {
   env: {
     [key: string]: string | undefined;
   };
 };
-
-import { isRateLimited } from './rateLimit.js';
 
 // ── Zod Schema ────────────────────────────────────────────────────────────────
 
@@ -81,7 +81,36 @@ export default async function handler(req: any, res: any) {
     consentTimestamp,
   } = parsed.data;
 
-  // 3. Resend API key check
+  // 3. File validation (optional, max 4MB, images only)
+  const attachments: { filename: string; content: Buffer }[] = [];
+  if (imageContent && imageFileName) {
+    try {
+      const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.svg'];
+      const buffer = validateFilePayload(imageContent, imageFileName, 4, allowedExtensions);
+      attachments.push({
+        filename: imageFileName,
+        content: buffer,
+      });
+    } catch (err: any) {
+      console.warn('[warranty] File validation failed:', err.message);
+      return res.status(400).json({
+        success: false,
+        error: err.message || 'Invalid file payload.'
+      });
+    }
+  }
+
+  // 4. Input sanitization (escape user input values to prevent HTML injection)
+  const safeCustomerName = escapeHtml(customerName);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeInvoiceNumber = escapeHtml(invoiceNumber);
+  const safeWarrantyNumber = escapeHtml(warrantyNumber);
+  const safePurchaseDate = escapeHtml(purchaseDate);
+  const safeSignageType = escapeHtml(signageType);
+  const safeIssueDetails = escapeHtml(issueDetails);
+
+  // 5. Resend API key check
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return res.status(500).json({
@@ -90,18 +119,9 @@ export default async function handler(req: any, res: any) {
     });
   }
 
-  // 4. Send email
+  // 6. Send email
   try {
     const resend = new Resend(apiKey);
-
-    const attachments: { filename: string; content: Buffer }[] = [];
-    if (imageContent && imageFileName) {
-      const base64Data = imageContent.replace(/^data:image\/\w+;base64,/, '');
-      attachments.push({
-        filename: imageFileName,
-        content: Buffer.from(base64Data, 'base64'),
-      });
-    }
 
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'info@tgbsign.com';
     const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
@@ -114,18 +134,18 @@ export default async function handler(req: any, res: any) {
       attachments,
       html: `
         <h2>New Warranty Claim Submission</h2>
-        <p><strong>Customer Name:</strong> ${customerName}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Invoice Number:</strong> ${invoiceNumber}</p>
-        <p><strong>Warranty Number:</strong> ${warrantyNumber}</p>
-        <p><strong>Purchase Date:</strong> ${purchaseDate}</p>
-        <p><strong>Signage Type:</strong> ${signageType}</p>
+        <p><strong>Customer Name:</strong> ${safeCustomerName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>Phone:</strong> ${safePhone}</p>
+        <p><strong>Invoice Number:</strong> ${safeInvoiceNumber}</p>
+        <p><strong>Warranty Number:</strong> ${safeWarrantyNumber}</p>
+        <p><strong>Purchase Date:</strong> ${safePurchaseDate}</p>
+        <p><strong>Signage Type:</strong> ${safeSignageType}</p>
         <p><strong>Consent Given:</strong> ${consentGiven ? 'Yes' : 'No'}</p>
         <p><strong>Consent Timestamp:</strong> ${consentTimestamp}</p>
         <p><strong>Issue Details:</strong></p>
-        <p>${issueDetails}</p>
-        ${imageFileName ? `<p><strong>Attached Photo:</strong> ${imageFileName} (see attachment)</p>` : ''}
+        <p>${safeIssueDetails}</p>
+        ${imageFileName ? `<p><strong>Attached Photo:</strong> ${escapeHtml(imageFileName)} (see attachment)</p>` : ''}
       `,
     });
 
@@ -134,7 +154,7 @@ export default async function handler(req: any, res: any) {
     console.error('[warranty] Resend error:', error);
     return res.status(500).json({
       success: false,
-      error: error.message || error.toString(),
+      error: 'An internal server error occurred while submitting your claim. Please try again later.',
     });
   }
 }

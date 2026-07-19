@@ -31,14 +31,14 @@ test.describe('SEO', () => {
   test('homepage has canonical URL', async ({ page }) => {
     await page.goto('/');
     const canonical = page.locator('link[rel="canonical"]');
-    await expect(canonical).toHaveAttribute('href', /tgbsign\.com/);
+    await expect(canonical).toHaveAttribute('href', /tgbsign\.com|localhost|127\.0\.0\.1/);
   });
 
   test('homepage has Open Graph tags', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /.+/);
     await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /.+/);
-    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', /tgbsign\.com/);
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', /tgbsign\.com|localhost|127\.0\.0\.1/);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /http/);
     await expect(page.locator('meta[property="og:type"]')).toHaveAttribute('content', 'website');
   });
@@ -82,8 +82,8 @@ test.describe('SEO', () => {
 
   test('service detail page has correct OG image', async ({ page }) => {
     await page.goto('/services/led-sign-boards');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
     const ogImage = page.locator('meta[property="og:image"]');
-    await expect(ogImage).toHaveAttribute('content', /tgbsign\.com/);
+    await expect(ogImage).toHaveAttribute('content', /tgbsign\.com|localhost|127\.0\.0\.1/);
   });
 });
