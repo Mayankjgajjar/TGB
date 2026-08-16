@@ -39,7 +39,7 @@
 .selectInput:focus {
   border-color: var(--color-red);
   background-color: var(--color-bg-card-hover);
-  box-shadow: 0 0 0 2px rgba(212, 0, 0, 0.2);
+  box-shadow: 0 0 0 2px rgb(212 0 0 / 20%);
   outline: none;
 }
 

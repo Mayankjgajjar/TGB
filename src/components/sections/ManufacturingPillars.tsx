@@ -19,7 +19,7 @@ const PILLARS = [
   {
     num: '03',
     title: 'Weatherproof Materials',
-    desc: 'Marine-grade SS 316, 4mm PVDF ACP cladding, and Samsung IP67 waterproof LEDs — built for Gujarat\'s climate extremes.',
+    desc: "Marine-grade SS 316, 4mm PVDF ACP cladding, and Samsung IP67 waterproof LEDs — built for Gujarat's climate extremes.",
   },
   {
     num: '04',
@@ -32,7 +32,12 @@ export const ManufacturingPillars: React.FC = () => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
   return (
-    <section ref={ref} className={styles.section} id="why-tgb" aria-label="Why Choose TGB Enterprise">
+    <section
+      ref={ref}
+      className={styles.section}
+      id="why-tgb"
+      aria-label="Why Choose TGB Enterprise"
+    >
       <Container>
         <motion.div
           className={styles.header}

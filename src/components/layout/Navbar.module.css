@@ -6,7 +6,6 @@
   height: 72px;
   background-color: var(--color-bg-overlay);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border-subtle);
   z-index: var(--z-index-navbar);
   display: flex;
@@ -257,7 +256,7 @@
 
 .quoteBtn {
   background-color: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-technical);
   font-size: 12px;
   font-weight: 700;
@@ -271,7 +270,7 @@
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(212, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgb(212 0 0 / 30%);
   transition:
     background-color 200ms ease,
     transform 200ms ease;
@@ -401,7 +400,7 @@
   width: 100%;
   height: 46px;
   background-color: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-technical);
   font-size: 13px;
   font-weight: 700;
@@ -412,13 +411,13 @@
   cursor: pointer;
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .phoneLink {
     display: none;
   }
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .inner {
     padding: 0 20px;
   }

@@ -67,9 +67,9 @@ export const Hero: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.2 }}
           >
-            We design, fabricate, and install LED glow signs, ACP facade cladding,
-            3D acrylic and stainless steel letters, and custom neon displays.
-            Every project is built in-house at our Nikol factory.
+            We design, fabricate, and install LED glow signs, ACP facade cladding, 3D acrylic and
+            stainless steel letters, and custom neon displays. Every project is built in-house at
+            our Nikol factory.
           </motion.p>
 
           {/* Actions */}

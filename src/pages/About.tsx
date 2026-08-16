@@ -28,13 +28,11 @@ export const About: React.FC = () => {
           <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'About Us' }]} />
           <div className={styles.heroContent}>
             <SectionEyebrow>ABOUT TGB ENTERPRISE</SectionEyebrow>
-            <h1 className={styles.heroTitle}>
-              Sign Board Manufacturers in Ahmedabad
-            </h1>
+            <h1 className={styles.heroTitle}>Sign Board Manufacturers in Ahmedabad</h1>
             <p className={styles.heroDesc}>
-              In-house design, fabrication, and installation of LED signs, ACP facade cladding,
-              3D acrylic and stainless steel letters, and custom neon displays —
-              serving businesses across Gujarat and India.
+              In-house design, fabrication, and installation of LED signs, ACP facade cladding, 3D
+              acrylic and stainless steel letters, and custom neon displays — serving businesses
+              across Gujarat and India.
             </p>
           </div>
         </Container>
@@ -116,9 +114,7 @@ export const About: React.FC = () => {
           <div className={styles.valuesList}>
             {aboutContent.coreValues.items.map((val, idx) => (
               <div key={idx} className={styles.valueRow}>
-                <span className={styles.valueNum}>
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
+                <span className={styles.valueNum}>{String(idx + 1).padStart(2, '0')}</span>
                 <div className={styles.valueBody}>
                   <h3 className={styles.valueTitle}>{val.title}</h3>
                   <p className={styles.valueDesc}>{val.description}</p>
@@ -177,7 +173,9 @@ export const About: React.FC = () => {
                 {st.deliverables && st.deliverables.length > 0 && (
                   <ul className={styles.deliverablesList}>
                     {st.deliverables.map((d, di) => (
-                      <li key={di} className={styles.deliverable}>{d}</li>
+                      <li key={di} className={styles.deliverable}>
+                        {d}
+                      </li>
                     ))}
                   </ul>
                 )}

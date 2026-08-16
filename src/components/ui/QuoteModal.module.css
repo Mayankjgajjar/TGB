@@ -6,7 +6,6 @@
   bottom: 0;
   background-color: var(--color-modal-backdrop);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +25,9 @@
   box-sizing: border-box;
   max-height: 90vh;
   overflow-y: auto;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 /* Close Icon Button */
@@ -166,7 +167,7 @@
   border-color: #00a884;
   background-color: var(--color-bg-card-hover);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 168, 132, 0.15);
+  box-shadow: 0 4px 16px rgb(0 168 132 / 15%);
 }
 
 .statusDot {
@@ -174,7 +175,7 @@
   height: 6px;
   border-radius: 50%;
   background-color: #00a884;
-  box-shadow: 0 0 8px rgba(0, 168, 132, 0.8);
+  box-shadow: 0 0 8px rgb(0 168 132 / 80%);
   transition: transform var(--transition-fast);
 }
 

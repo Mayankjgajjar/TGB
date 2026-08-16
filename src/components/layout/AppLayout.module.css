@@ -60,7 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(212, 0, 0, 0.4);
+  box-shadow: 0 4px 16px rgb(212 0 0 / 40%);
   transition:
     transform 200ms ease,
     background-color 200ms ease;
@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  box-shadow: 0 4px 16px rgb(37 211 102 / 35%);
   cursor: pointer;
   transition:
     transform 200ms ease,
@@ -100,7 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: #fff;
 }
 
 .whatsappIcon {
@@ -122,13 +122,14 @@
     transform: scale(0.9);
     opacity: 0.6;
   }
+
   100% {
     transform: scale(1.5);
     opacity: 0;
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .floatingWidgetsContainer {
     bottom: 20px;
     right: 20px;

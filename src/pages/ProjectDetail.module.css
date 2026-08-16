@@ -89,7 +89,7 @@
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(10, 10, 10, 0.4) 100%);
+  background: linear-gradient(to bottom, transparent 60%, rgb(10 10 10 / 40%) 100%);
   pointer-events: none;
 }
 
@@ -133,7 +133,9 @@
   flex-direction: column;
   gap: 20px;
   box-shadow: var(--shadow-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .specItem {
@@ -196,7 +198,7 @@
 .ctaPrimary {
   display: inline-flex;
   background: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
   padding: 12px 26px;
   border-radius: var(--radius-input);
@@ -246,7 +248,7 @@
   font-family: var(--font-primary);
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 36px;

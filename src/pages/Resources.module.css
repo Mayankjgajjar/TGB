@@ -9,7 +9,9 @@
   padding-bottom: 40px;
   background-color: var(--color-bg-elevated);
   border-bottom: 1px solid var(--color-border-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .heroContent {
@@ -22,7 +24,7 @@
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 800;
   color: var(--color-text-primary);
-  margin: 12px 0 16px 0;
+  margin: 12px 0 16px;
   line-height: 1.15;
 }
 
@@ -72,7 +74,7 @@
 
 .tabBtnActive {
   background: var(--color-red) !important;
-  color: #ffffff !important;
+  color: #fff !important;
   border-color: var(--color-red) !important;
 }
 
@@ -216,7 +218,7 @@
 
 .faqCatBtnActive {
   background: var(--color-red) !important;
-  color: #ffffff !important;
+  color: #fff !important;
   border-color: var(--color-red) !important;
   font-weight: 600;
 }
@@ -233,7 +235,9 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .faqHeaderBtn {
@@ -280,7 +284,9 @@
   padding: 28px;
   margin-bottom: 24px;
   box-shadow: var(--shadow-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .specSystemBadge {
@@ -322,7 +328,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .grid3 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -332,7 +338,7 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .grid3 {
     grid-template-columns: 1fr;
   }

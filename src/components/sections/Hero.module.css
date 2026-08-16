@@ -9,7 +9,9 @@
   background-color: var(--color-bg-base);
   overflow: hidden;
   border-bottom: 1px solid var(--color-border-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 /* Full-bleed background image */
@@ -36,7 +38,7 @@
   transition: background var(--transition-fast);
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .bgOverlay {
     background: var(--hero-overlay-mobile);
   }
@@ -110,7 +112,7 @@
   align-items: center;
   gap: 8px;
   background-color: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   font-family: var(--font-technical);
   font-size: 13px;
   font-weight: 700;
@@ -141,7 +143,9 @@
   text-decoration: none;
   padding-bottom: 2px;
   border-bottom: 1px solid var(--color-border-hover);
-  transition: color 200ms ease, border-color 200ms ease;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease;
 }
 
 .secondaryLink:hover {
@@ -193,7 +197,7 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .heroSection {
     padding-top: 110px;
     padding-bottom: 56px;
@@ -228,7 +232,7 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (width <= 400px) {
   .statsRow {
     flex-wrap: wrap;
     gap: 16px;

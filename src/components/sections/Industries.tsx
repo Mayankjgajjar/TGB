@@ -52,8 +52,7 @@ const industries = [
     icon: Hotel,
     category: 'HOSPITALITY',
     title: 'Hotels & Hospitality',
-    description:
-      'Premium signage that complements architecture and elevates the guest experience.',
+    description: 'Premium signage that complements architecture and elevates the guest experience.',
   },
   {
     icon: Landmark,
@@ -66,8 +65,7 @@ const industries = [
     icon: Factory,
     category: 'INDUSTRIAL',
     title: 'Industrial & Manufacturing',
-    description:
-      'Durable indoor and outdoor signage solutions for operational environments.',
+    description: 'Durable indoor and outdoor signage solutions for operational environments.',
   },
   {
     icon: GraduationCap,

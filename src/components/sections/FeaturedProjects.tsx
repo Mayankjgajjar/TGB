@@ -87,9 +87,7 @@ export const FeaturedProjects: React.FC = () => {
               </div>
               <div className={styles.specRow}>
                 <span className={styles.specLabel}>Materials</span>
-                <span className={styles.specValue}>
-                  {heroProject.materials.join(' · ')}
-                </span>
+                <span className={styles.specValue}>{heroProject.materials.join(' · ')}</span>
               </div>
               <div className={styles.specRow}>
                 <span className={styles.specLabel}>Engineering</span>
@@ -133,7 +131,9 @@ export const FeaturedProjects: React.FC = () => {
                 </p>
                 <div className={styles.compactMaterials}>
                   {project.materials.slice(0, 2).map((mat, i) => (
-                    <span key={i} className={styles.matChip}>{mat}</span>
+                    <span key={i} className={styles.matChip}>
+                      {mat}
+                    </span>
                   ))}
                 </div>
                 <Link to={`/projects/${project.id}`} className={styles.compactLink}>

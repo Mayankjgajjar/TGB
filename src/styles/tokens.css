@@ -8,17 +8,17 @@
   /* ── 1. Color System (Brand Identity) ── */
   --color-red: #d40000;
   --color-red-hover: #c10004;
-  --color-red-muted: rgba(212, 0, 0, 0.12);
-  --color-red-border: rgba(212, 0, 0, 0.35);
+  --color-red-muted: rgb(212 0 0 / 12%);
+  --color-red-border: rgb(212 0 0 / 35%);
 
   /* Surface Hierarchy (Dark Theme) */
   --color-bg-base: #0a0a0a; /* Deep canvas */
   --color-bg-elevated: #0e0e0e; /* Hero & header background */
   --color-bg-card: #141414; /* Cards, modals, containers */
   --color-bg-card-hover: #1a1a1a; /* Card hover background */
-  --color-bg-inset: #111111; /* Inset form fields & recessed areas */
-  --color-bg-overlay: rgba(10, 10, 10, 0.96);
-  --color-modal-backdrop: rgba(0, 0, 0, 0.85);
+  --color-bg-inset: #111; /* Inset form fields & recessed areas */
+  --color-bg-overlay: rgb(10 10 10 / 96%);
+  --color-modal-backdrop: rgb(0 0 0 / 85%);
 
   /* Legacy & Semantic Color Aliases */
   --color-black: var(--color-bg-base);
@@ -26,34 +26,34 @@
   --color-charcoal-deep: var(--color-bg-base);
   --color-charcoal-surface: var(--color-bg-card);
   --color-charcoal-panel: var(--color-bg-card-hover);
-  --color-white: #ffffff;
+  --color-white: #fff;
   --color-white-muted: #a0a0a0;
-  --color-off-white: #ffffff;
+  --color-off-white: #fff;
   --color-off-white-muted: #a0a0a0;
   --color-copper: var(--color-red);
   --color-copper-light: var(--color-red-hover);
   --color-copper-dark: #a10003;
-  --color-steel: #888888;
-  --color-steel-dark: #222222;
+  --color-steel: #888;
+  --color-steel-dark: #222;
   --color-steel-deep: #1a1a1a;
 
   /* Text Colors */
-  --color-text-primary: #ffffff;
+  --color-text-primary: #fff;
   --color-text-secondary: #a0a0a0;
-  --color-text-muted: #666666;
+  --color-text-muted: #666;
   --color-text-inverse: #0a0a0a;
 
   /* Border Scale */
-  --color-border-subtle: #222222;
+  --color-border-subtle: #222;
   --color-border-hover: #383838;
   --color-border-focus: var(--color-red);
 
   /* Form & Status Colors */
   --color-error: #ff4d4f;
-  --color-error-border: rgba(255, 77, 79, 0.4);
-  --color-error-bg: rgba(255, 77, 79, 0.1);
+  --color-error-border: rgb(255 77 79 / 40%);
+  --color-error-bg: rgb(255 77 79 / 10%);
   --color-success: #52c41a;
-  --color-success-bg: rgba(82, 196, 26, 0.1);
+  --color-success-bg: rgb(82 196 26 / 10%);
 
   /* ── 2. Spacing Scale ── */
   --space-4: 4px;
@@ -108,7 +108,6 @@
   --section-inner-max-width: 1320px;
   --container-padding: 32px;
   --container-padding-mobile: 20px;
-
   --header-height: 72px;
   --header-height-mobile: 64px;
   --header-offset-desktop: 130px;
@@ -123,10 +122,10 @@
   --radius-full: 9999px;
 
   /* ── 6. Shadows ── */
-  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-medium: 0 12px 28px rgba(0, 0, 0, 0.6);
-  --shadow-elevated: 0 20px 48px rgba(0, 0, 0, 0.85);
-  --shadow-glow-red: 0 4px 14px rgba(212, 0, 0, 0.35);
+  --shadow-subtle: 0 4px 12px rgb(0 0 0 / 40%);
+  --shadow-medium: 0 12px 28px rgb(0 0 0 / 60%);
+  --shadow-elevated: 0 20px 48px rgb(0 0 0 / 85%);
+  --shadow-glow-red: 0 4px 14px rgb(212 0 0 / 35%);
 
   /* ── 7. Z-Index Hierarchy ── */
   --z-index-base: 1;
@@ -139,7 +138,6 @@
   --transition-speed-fast: 0.2s;
   --transition-speed-normal: 0.35s;
   --transition-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
-
   --transition-fast: 200ms ease;
   --transition-base: 300ms cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 500ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -147,16 +145,16 @@
   /* Hero overlay gradient */
   --hero-overlay-gradient: linear-gradient(
     90deg,
-    rgba(5, 5, 5, 0.97) 0%,
-    rgba(5, 5, 5, 0.92) 42%,
-    rgba(5, 5, 5, 0.55) 70%,
-    rgba(5, 5, 5, 0.15) 100%
+    rgb(5 5 5 / 97%) 0%,
+    rgb(5 5 5 / 92%) 42%,
+    rgb(5 5 5 / 55%) 70%,
+    rgb(5 5 5 / 15%) 100%
   );
   --hero-overlay-mobile: linear-gradient(
     180deg,
-    rgba(5, 5, 5, 0.96) 0%,
-    rgba(5, 5, 5, 0.88) 60%,
-    rgba(5, 5, 5, 0.97) 100%
+    rgb(5 5 5 / 96%) 0%,
+    rgb(5 5 5 / 88%) 60%,
+    rgb(5 5 5 / 97%) 100%
   );
 }
 
@@ -167,18 +165,18 @@
 [data-theme='light'] {
   /* Surface Hierarchy (Light Mode) */
   --color-bg-base: #f8f9fa; /* Clean architectural canvas */
-  --color-bg-elevated: #ffffff; /* Crisp white headers & surfaces */
-  --color-bg-card: #ffffff; /* Pure white cards & containers */
+  --color-bg-elevated: #fff; /* Crisp white headers & surfaces */
+  --color-bg-card: #fff; /* Pure white cards & containers */
   --color-bg-card-hover: #f1f3f5; /* Light gray card hover */
   --color-bg-inset: #eef1f4; /* Inset recessed areas */
-  --color-bg-overlay: rgba(255, 255, 255, 0.97);
-  --color-modal-backdrop: rgba(15, 23, 42, 0.65);
+  --color-bg-overlay: rgb(255 255 255 / 97%);
+  --color-modal-backdrop: rgb(15 23 42 / 65%);
 
   /* Legacy & Semantic Color Aliases */
   --color-black: #0f172a;
   --color-black-soft: #1e293b;
-  --color-charcoal-deep: #ffffff;
-  --color-charcoal-surface: #ffffff;
+  --color-charcoal-deep: #fff;
+  --color-charcoal-surface: #fff;
   --color-charcoal-panel: #f8fafc;
   --color-white: #0f172a;
   --color-white-muted: #4b5563;
@@ -195,7 +193,7 @@
   --color-text-primary: #0f172a; /* Deep slate / high-contrast readability */
   --color-text-secondary: #475569; /* Slate 600 */
   --color-text-muted: #64748b; /* Slate 500 */
-  --color-text-inverse: #ffffff;
+  --color-text-inverse: #fff;
 
   /* Border Scale */
   --color-border-subtle: #e2e8f0; /* Crisp architectural border */
@@ -204,29 +202,29 @@
 
   /* Form & Status Colors */
   --color-error: #dc2626;
-  --color-error-border: rgba(220, 38, 38, 0.35);
-  --color-error-bg: rgba(220, 38, 38, 0.08);
+  --color-error-border: rgb(220 38 38 / 35%);
+  --color-error-bg: rgb(220 38 38 / 8%);
   --color-success: #16a34a;
-  --color-success-bg: rgba(22, 163, 74, 0.08);
+  --color-success-bg: rgb(22 163 74 / 8%);
 
   /* Shadows - softened for light background */
-  --shadow-subtle: 0 2px 8px rgba(15, 23, 42, 0.06);
-  --shadow-medium: 0 8px 24px rgba(15, 23, 42, 0.08);
-  --shadow-elevated: 0 16px 40px rgba(15, 23, 42, 0.12);
-  --shadow-glow-red: 0 4px 14px rgba(212, 0, 0, 0.25);
+  --shadow-subtle: 0 2px 8px rgb(15 23 42 / 6%);
+  --shadow-medium: 0 8px 24px rgb(15 23 42 / 8%);
+  --shadow-elevated: 0 16px 40px rgb(15 23 42 / 12%);
+  --shadow-glow-red: 0 4px 14px rgb(212 0 0 / 25%);
 
   /* Hero overlay gradient for light theme — gives clear contrast against building photo */
   --hero-overlay-gradient: linear-gradient(
     90deg,
-    rgba(248, 249, 250, 0.98) 0%,
-    rgba(248, 249, 250, 0.93) 45%,
-    rgba(248, 249, 250, 0.65) 72%,
-    rgba(248, 249, 250, 0.25) 100%
+    rgb(248 249 250 / 98%) 0%,
+    rgb(248 249 250 / 93%) 45%,
+    rgb(248 249 250 / 65%) 72%,
+    rgb(248 249 250 / 25%) 100%
   );
   --hero-overlay-mobile: linear-gradient(
     180deg,
-    rgba(248, 249, 250, 0.97) 0%,
-    rgba(248, 249, 250, 0.9) 60%,
-    rgba(248, 249, 250, 0.98) 100%
+    rgb(248 249 250 / 97%) 0%,
+    rgb(248 249 250 / 90%) 60%,
+    rgb(248 249 250 / 98%) 100%
   );
 }

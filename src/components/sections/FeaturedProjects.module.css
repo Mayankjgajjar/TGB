@@ -3,7 +3,9 @@
   background-color: var(--color-bg-base);
   border-top: 1px solid var(--color-border-subtle);
   border-bottom: 1px solid var(--color-border-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 /* Left-aligned header */
@@ -35,7 +37,9 @@
   margin-bottom: 24px;
   background: var(--color-bg-card);
   box-shadow: var(--shadow-subtle);
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .heroImage {
@@ -60,9 +64,9 @@
   position: absolute;
   top: 16px;
   left: 16px;
-  background: rgba(10, 10, 10, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgb(10 10 10 / 88%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  color: #fff;
   font-family: var(--font-technical);
   font-size: 11px;
   font-weight: 700;
@@ -204,7 +208,9 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
-  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
 }
 
 .compactCard:hover {
@@ -233,9 +239,9 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(10, 10, 10, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background: rgb(10 10 10 / 85%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  color: #fff;
   font-family: var(--font-technical);
   font-size: 10px;
   font-weight: 700;
@@ -338,13 +344,13 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1024px) {
+@media (width <= 1024px) {
   .compactGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .heroProject {
     grid-template-columns: 1fr;
   }
@@ -356,11 +362,11 @@
   .heroDetails {
     border-left: none;
     border-top: 1px solid var(--color-border-subtle);
-    padding: 24px 24px;
+    padding: 24px;
   }
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .section {
     padding: 56px 0;
   }

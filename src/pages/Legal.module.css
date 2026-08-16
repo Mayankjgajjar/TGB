@@ -16,7 +16,7 @@
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 800;
   color: var(--color-text-primary);
-  margin: 12px 0 16px 0;
+  margin: 12px 0 16px;
   line-height: 1.15;
 }
 
@@ -95,7 +95,7 @@
   text-decoration: underline;
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
   .legalPage {
     padding-top: 100px;
   }

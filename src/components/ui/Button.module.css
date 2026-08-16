@@ -44,7 +44,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #fff;
   margin-right: 8px;
 }
 
@@ -64,7 +64,7 @@
 /* Variants */
 .variantPrimary {
   background-color: var(--color-red);
-  color: #ffffff;
+  color: #fff;
   border: 1px solid var(--color-red);
   box-shadow: var(--shadow-glow-red);
 }
@@ -73,17 +73,17 @@
   background-color: var(--color-red-hover);
   border-color: var(--color-red-hover);
   transform: translateY(-1.5px);
-  box-shadow: 0 6px 18px rgba(212, 0, 0, 0.4);
+  box-shadow: 0 6px 18px rgb(212 0 0 / 40%);
 }
 
 .variantSecondary {
-  background-color: rgba(255, 255, 255, 0.04);
-  color: #ffffff;
+  background-color: rgb(255 255 255 / 4%);
+  color: #fff;
   border: 1px solid var(--color-border-subtle);
 }
 
 .variantSecondary:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgb(255 255 255 / 8%);
   border-color: var(--color-border-hover);
   transform: translateY(-1.5px);
 }
@@ -97,7 +97,7 @@
 }
 
 .variantTechnical:hover {
-  color: #ffffff;
+  color: #fff;
   border-color: var(--color-border-hover);
   background-color: var(--color-bg-card-hover);
   transform: translateY(-1.5px);

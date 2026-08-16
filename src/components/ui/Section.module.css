@@ -41,7 +41,7 @@
   padding-bottom: var(--space-96);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .section {
     padding-top: var(--space-48);
     padding-bottom: var(--space-48);

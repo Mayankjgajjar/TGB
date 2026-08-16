@@ -60,7 +60,7 @@ button.card:hover {
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(10, 10, 10, 0.4) 100%);
+  background: linear-gradient(to bottom, transparent 60%, rgb(10 10 10 / 40%) 100%);
   pointer-events: none;
 }
 
@@ -73,11 +73,11 @@ button.card:hover {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #ffffff;
-  background: rgba(10, 10, 10, 0.88);
+  color: #fff;
+  background: rgb(10 10 10 / 88%);
   padding: 4px 8px;
   border-radius: var(--radius-small);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgb(255 255 255 / 12%);
 }
 
 .cardContent {
@@ -117,7 +117,7 @@ button.card:hover {
   font-size: 13.5px;
   line-height: 1.55;
   color: var(--color-text-secondary);
-  margin: 0 0 12px 0;
+  margin: 0 0 12px;
   flex-grow: 1;
 }
 

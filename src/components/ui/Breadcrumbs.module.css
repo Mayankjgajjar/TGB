@@ -30,7 +30,7 @@
   color: var(--color-text-primary);
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .row {
     font-size: 10.5px;
     gap: 6px;

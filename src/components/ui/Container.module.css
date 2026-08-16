@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .container {
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
