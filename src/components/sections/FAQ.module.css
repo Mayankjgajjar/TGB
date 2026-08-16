@@ -1,12 +1,7 @@
-/* ============================================================
-   FAQ — Section Stylesheet
-   Premium Accordion Grid
-   ============================================================ */
-
 .section {
-  background: rgb(0 0 0 / 55%);
-  padding: 64px 0;
-  position: relative;
+  background-color: #111111;
+  padding: 80px 0;
+  border-bottom: 1px solid #222222;
 }
 
 .inner {
@@ -15,35 +10,22 @@
   padding: 0 var(--space-32);
 }
 
-/* ── Section Header ── */
 .headerBlock {
-  margin-bottom: var(--space-48);
+  margin-bottom: 48px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-16);
-}
-
-.eyebrow {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--color-copper);
-  display: block;
+  gap: 12px;
 }
 
 .mainTitle {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 300;
-  color: var(--color-off-white);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  color: #ffffff;
   line-height: 1.15;
   margin: 0;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   max-width: 800px;
   text-align: center;
 }
@@ -51,14 +33,13 @@
 .subtitle {
   font-family: var(--font-primary);
   font-size: 15px;
-  color: var(--color-off-white-muted);
-  line-height: 1.65;
+  color: #a0a0a0;
+  line-height: 1.6;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 760px;
   text-align: center;
 }
 
-/* ── Two-Column Layout ── */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -71,21 +52,18 @@
   gap: 16px;
 }
 
-/* ── Accordion Card ── */
 .accordion {
-  background: var(--color-charcoal-surface);
-  border: 1px solid rgb(255 255 255 / 6%);
-  border-radius: var(--radius-card);
+  background: #161616;
+  border: 1px solid #242424;
+  border-radius: 8px;
   overflow: hidden;
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-  position: relative;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .accordion:hover {
-  border-color: rgb(255 255 255 / 12%);
-  box-shadow: 0 8px 24px rgb(0 0 0 / 30%);
+  border-color: #383838;
 }
 
 .accordionHeader {
@@ -93,7 +71,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
+  padding: 20px 24px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -105,14 +83,9 @@
   font-family: var(--font-primary);
   font-size: 15px;
   font-weight: 600;
-  color: var(--color-off-white);
+  color: #ffffff;
   line-height: 1.4;
   margin: 0;
-  transition: color 0.25s var(--transition-ease-expo);
-}
-
-.accordionHeader:hover .question {
-  color: var(--color-off-white);
 }
 
 .iconWrapper {
@@ -122,22 +95,19 @@
   flex-shrink: 0;
   width: 24px;
   height: 24px;
-  color: var(--color-steel);
-  transition:
-    transform 0.3s var(--transition-ease-expo),
-    color 0.3s var(--transition-ease-expo);
+  color: var(--color-red);
+  transition: transform 0.25s ease;
 }
 
 .accordionActive .iconWrapper {
   transform: rotate(45deg);
-  color: var(--color-copper-light);
 }
 
 .contentWrapper {
   overflow: hidden;
   transition:
-    max-height 0.35s var(--transition-ease-expo),
-    opacity 0.35s var(--transition-ease-expo);
+    max-height 0.3s ease,
+    opacity 0.3s ease;
   max-height: 0;
   opacity: 0;
 }
@@ -147,77 +117,45 @@
 }
 
 .contentInner {
-  padding: 0 24px 24px;
+  padding: 0 24px 20px;
   font-family: var(--font-primary);
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.6;
-  color: var(--color-off-white-muted);
+  color: #a0a0a0;
 }
 
 .bottomLinkBlock {
-  margin-top: 48px;
+  margin-top: 40px;
   text-align: center;
   font-family: var(--font-technical);
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: var(--color-steel);
+  font-size: 13px;
+  color: #888888;
 }
 
 .bottomLink {
-  color: var(--color-copper-light);
+  color: var(--color-red);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s var(--transition-ease-expo);
+  font-weight: 700;
   margin-left: 4px;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 0;
-  outline: none;
   font-family: inherit;
   font-size: inherit;
 }
 
 .bottomLink:hover {
-  color: var(--color-copper);
+  color: var(--color-red-hover);
 }
 
-/* ── Responsive Viewports ── */
-@media (width <= 900px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
-}
 
-@media (width <= 768px) {
   .section {
-    padding: 56px 0;
-  }
-
-  .headerBlock {
-    margin-bottom: 40px;
-  }
-
-  .accordionHeader {
-    padding: 20px;
-  }
-
-  .contentInner {
-    padding: 0 20px 20px;
-  }
-}
-
-@media (width <= 480px) {
-  .heading {
-    font-size: 1.8rem;
-  }
-
-  .question {
-    font-size: 14px;
-  }
-
-  .contentInner {
-    font-size: 13px;
+    padding: 48px 0;
   }
 }

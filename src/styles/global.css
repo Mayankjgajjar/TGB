@@ -3,12 +3,13 @@
 
 /* Global Styles & Typography resets */
 body {
-  background-color: transparent;
-  color: var(--color-off-white);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
   font-family: var(--font-primary);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   overflow-x: hidden;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 /* Typographic Defaults for consistent styling */
@@ -18,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--color-off-white);
+  color: var(--color-text-primary);
   margin-top: 0;
 }
 
@@ -53,7 +54,7 @@ h6 {
 }
 
 p {
-  color: var(--color-off-white-muted);
+  color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
 }
 
@@ -93,7 +94,7 @@ html.lenis body {
 .blueprint-line::after {
   content: '';
   position: absolute;
-  background-color: var(--color-steel-dark);
+  background-color: var(--color-border-subtle);
 }
 
 .blueprint-line-x::after {
@@ -118,7 +119,7 @@ html.lenis body {
   font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--color-steel);
+  color: var(--color-text-muted);
 }
 
 /* Serif Display Styling helper */
@@ -162,11 +163,11 @@ section[id],
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-black);
+  background: var(--color-bg-base);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-steel-dark);
+  background: var(--color-border-hover);
   border-radius: 4px;
 }
 
@@ -178,8 +179,8 @@ section[id],
 code {
   font-family: var(--font-technical);
   font-size: 0.9em;
-  color: var(--color-copper-light);
-  background: rgb(255 255 255 / 5%);
+  color: var(--color-red);
+  background: var(--color-bg-inset);
   padding: 2px 6px;
   border-radius: 3px;
 }
@@ -188,9 +189,9 @@ pre {
   font-family: var(--font-technical);
   font-size: 13px;
   line-height: 1.6;
-  color: var(--color-off-white-muted);
-  background: var(--color-charcoal-surface);
-  border: 1px solid rgb(255 255 255 / 8%);
+  color: var(--color-text-secondary);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-sharp);
   padding: 16px 20px;
   overflow-x: auto;
@@ -205,7 +206,7 @@ pre code {
 /* ── Selection Color ── */
 ::selection {
   background: var(--color-red);
-  color: var(--color-off-white);
+  color: #ffffff;
 }
 
 /* ── Section scroll anchor ── */
@@ -222,8 +223,8 @@ select:focus-visible,
 textarea:focus-visible,
 [role='button']:focus-visible,
 [tabindex='0']:focus-visible {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
-  outline-offset: var(--focus-ring-offset) !important;
+  outline: 2px solid var(--color-red) !important;
+  outline-offset: 2px !important;
 }
 
 /* ── Print Styles ── */

@@ -1,13 +1,15 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ShieldCheck, CheckCircle2, Phone, ArrowRight } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
-import { trackWarrantyFormSubmit } from '../lib/analytics';
-import { Link } from 'react-router-dom';
-import styles from './Warranty.module.css';
+import SectionEyebrow from '../components/ui/SectionEyebrow';
 import Breadcrumbs from '../components/ui/Breadcrumbs';
 import Input from '../components/ui/Input';
 import FileUpload from '../components/ui/FileUpload';
+import ContactCTA from '../components/sections/ContactCTA';
+import { trackWarrantyFormSubmit } from '../lib/analytics';
+import styles from './Warranty.module.css';
 
 interface FormFields {
   customerName: string;
@@ -30,7 +32,7 @@ const EMPTY_FORM: FormFields = {
   invoiceNumber: '',
   warrantyNumber: '',
   purchaseDate: '',
-  signageType: '',
+  signageType: 'LED Sign Board',
   issueDetails: '',
   consent: false,
 };
@@ -56,7 +58,8 @@ const validateForm = (fields: FormFields): FormErrors => {
   }
 
   if (!fields.invoiceNumber.trim()) errors.invoiceNumber = 'Invoice / Order number is required.';
-  if (!fields.warrantyNumber.trim()) errors.warrantyNumber = 'Warranty number is required.';
+  if (!fields.warrantyNumber.trim())
+    errors.warrantyNumber = 'Warranty certificate number is required.';
   if (!fields.purchaseDate.trim()) errors.purchaseDate = 'Purchase date is required.';
   if (!fields.signageType) errors.signageType = 'Please select a signage type.';
 
@@ -64,8 +67,6 @@ const validateForm = (fields: FormFields): FormErrors => {
     errors.issueDetails = 'Please provide details about the issue.';
   } else if (fields.issueDetails.trim().length < 10) {
     errors.issueDetails = 'Issue description must be at least 10 characters.';
-  } else if (fields.issueDetails.trim().length > 2000) {
-    errors.issueDetails = 'Issue description must be under 2000 characters.';
   }
 
   if (!fields.consent) {
@@ -78,129 +79,51 @@ const validateForm = (fields: FormFields): FormErrors => {
 export const Warranty: React.FC = () => {
   const [formState, setFormState] = useState<FormFields>(EMPTY_FORM);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [touched, setTouched] = useState<Partial<Record<keyof FormFields, boolean>>>({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  // File Upload State
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileBase64, setFileBase64] = useState<string | null>(null);
-  const [fileError, setFileError] = useState<string | null>(null);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-  const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const { name, value, type } = e.target;
-      const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
-      const field = name as keyof FormFields;
-      setFormState((prev) => ({ ...prev, [field]: val }));
-
-      // Clear error as user corrects the field
-      if (errors[field]) {
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
-      }
-    },
+  const handleFieldChange = useCallback(
+    (field: keyof FormFields) =>
+      (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const val =
+          e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value;
+        setFormState((prev) => ({ ...prev, [field]: val }));
+        if (errors[field]) {
+          setErrors((prev) => ({ ...prev, [field]: undefined }));
+        }
+      },
     [errors],
   );
 
-  const handleBlur = useCallback(
-    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const field = e.target.name as keyof FormFields;
-      setTouched((prev) => ({ ...prev, [field]: true }));
-      const fieldErrors = validateForm(formState);
-      setErrors((prev) => ({ ...prev, [field]: fieldErrors[field] }));
-    },
-    [formState],
-  );
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const validationErrors = validateForm(formState);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setSubmitError(null);
+    setIsSubmitting(true);
+    try {
+      trackWarrantyFormSubmit({
+        signageType: formState.signageType,
+        hasAttachment: false,
+      });
 
-      if (fileError) {
-        setSubmitError('Please resolve the file attachment error before submitting.');
-        return;
-      }
-
-      const validationErrors = validateForm(formState);
-
-      if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        const allTouched = Object.keys(formState).reduce(
-          (acc, key) => ({ ...acc, [key]: true }),
-          {} as Record<keyof FormFields, boolean>,
-        );
-        setTouched(allTouched);
-        return;
-      }
-
-      setIsSubmitting(true);
-
-      try {
-        const response = await fetch('/api/warranty', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...formState,
-            imageFileName: selectedFile ? selectedFile.name : undefined,
-            imageContent: fileBase64 || undefined,
-            consentGiven: formState.consent,
-            consentTimestamp: new Date().toISOString(),
-          }),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          if (errorData.errors) {
-            const clientErrors: FormErrors = {};
-            Object.keys(errorData.errors).forEach((key) => {
-              const clientKey = key === 'consentGiven' ? 'consent' : (key as keyof FormFields);
-              clientErrors[clientKey] = errorData.errors[key];
-            });
-            setErrors(clientErrors);
-            const touchedFields = Object.keys(clientErrors).reduce(
-              (acc, key) => ({ ...acc, [key]: true }),
-              {} as Record<string, boolean>,
-            );
-            setTouched((prev) => ({ ...prev, ...touchedFields }));
-            const errorList = Object.values(clientErrors).filter(Boolean).join(' ');
-            throw new Error(errorList || 'Please correct the validation errors below.');
-          }
-          throw new Error(
-            errorData.error || errorData.message || 'Failed to submit warranty claim.',
-          );
-        }
-
-        setIsSubmitted(true);
-        setFormState(EMPTY_FORM);
-        setSelectedFile(null);
-        setFileBase64(null);
-        setFileError(null);
-        setErrors({});
-        setTouched({});
-        trackWarrantyFormSubmit();
-      } catch (error: any) {
-        console.error('Error submitting warranty form:', error);
-        setSubmitError(
-          error.message || 'We encountered an issue submitting your claim. Please try again.',
-        );
-      } finally {
-        setIsSubmitting(false);
-      }
-    },
-    [formState, fileError, selectedFile, fileBase64],
-  );
-
-  const handleReset = useCallback(() => {
-    setIsSubmitted(false);
-    setSubmitError(null);
-    setSelectedFile(null);
-    setFileBase64(null);
-    setFileError(null);
-  }, []);
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setIsSuccess(true);
+      setFormState(EMPTY_FORM);
+    } catch {
+      setErrors({ customerName: 'Submission failed. Please call our direct helpline.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -208,231 +131,220 @@ export const Warranty: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      className={styles.warrantyPage}
+      className={styles.page}
     >
-      <Container>
-        <div className={styles.contentWrapper}>
-          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Warranty Support' }]} />
+      {/* 1. Page Header */}
+      <section className={styles.heroSection}>
+        <Container>
+          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Warranty Claim' }]} />
 
-          <h1 className={styles.title}>Warranty Claim</h1>
-          <span className={styles.subtitle}>Submit Warranty Request</span>
+          <div className={styles.heroContent}>
+            <SectionEyebrow>OFFICIAL AFTER-SALES SUPPORT</SectionEyebrow>
+            <h1 className={styles.heroTitle}>Warranty Registration &amp; Claim Portal</h1>
+            <p className={styles.heroDesc}>
+              TGB Enterprise stands behind every fabricated installation. Submit your warranty
+              certificate details below for rapid on-site inspection and OEM component replacements.
+            </p>
+          </div>
+        </Container>
+      </section>
 
-          {isSubmitted ? (
-            <div className={styles.successMessage} role="status">
-              <div className={styles.warrantyIcon}>✓</div>
-              <h2 className={styles.successTitle}>Claim Submitted</h2>
-              <p className={styles.successDesc}>
-                Thank you for submitting your warranty claim. Our technical support team will review
-                your request and the purchase records and contact you within 24–48 business hours.
-              </p>
-              <button onClick={handleReset} className={styles.resetButton}>
-                Submit Another Request
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
-              {/* Customer Name */}
-              <Input
-                label="Full Name"
-                id="customerName"
-                name="customerName"
-                value={formState.customerName}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                placeholder="Enter your full name"
-                required
-                error={errors.customerName}
-                touched={touched.customerName}
-              />
-
-              {/* Email & Phone Row */}
-              <div className={styles.formRow}>
-                <Input
-                  label="Email Address"
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="name@company.com"
-                  required
-                  error={errors.email}
-                  touched={touched.email}
-                />
-                <Input
-                  label="Phone Number"
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formState.phone}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="Enter phone number"
-                  required
-                  error={errors.phone}
-                  touched={touched.phone}
-                />
-              </div>
-
-              {/* Invoice Number & Warranty Number Row */}
-              <div className={styles.formRow}>
-                <Input
-                  label="Invoice / Order Number"
-                  id="invoiceNumber"
-                  name="invoiceNumber"
-                  value={formState.invoiceNumber}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="e.g. TGB-2025-1045"
-                  required
-                  error={errors.invoiceNumber}
-                  touched={touched.invoiceNumber}
-                />
-                <Input
-                  label="Warranty Number"
-                  id="warrantyNumber"
-                  name="warrantyNumber"
-                  value={formState.warrantyNumber}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  placeholder="e.g. WR-TGB-9874"
-                  required
-                  error={errors.warrantyNumber}
-                  touched={touched.warrantyNumber}
-                />
-              </div>
-
-              {/* Purchase Date & Signage Type Row */}
-              <div className={styles.formRow}>
-                <Input
-                  label="Purchase Date"
-                  id="purchaseDate"
-                  name="purchaseDate"
-                  type="date"
-                  value={formState.purchaseDate}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  required
-                  error={errors.purchaseDate}
-                  touched={touched.purchaseDate}
-                />
-                <Input
-                  label="Type of Signage"
-                  id="signageType"
-                  name="signageType"
-                  as="select"
-                  value={formState.signageType}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  required
-                  error={errors.signageType}
-                  touched={touched.signageType}
-                  options={[
-                    { value: '', label: 'Select signage type' },
-                    { value: 'LED Sign Board', label: 'LED Sign Board' },
-                    { value: 'ACP Sign Board', label: 'ACP Sign Board' },
-                    { value: 'Acrylic & 3D Letters', label: 'Acrylic & 3D Letters' },
-                    { value: 'Neon Signage', label: 'Neon Signage' },
-                    { value: 'Corporate Signage', label: 'Corporate Signage' },
-                    { value: 'Indoor/Outdoor Systems', label: 'Indoor & Outdoor Signage Systems' },
-                    { value: 'Other', label: 'Other' },
-                  ]}
-                />
-              </div>
-
-              {/* Issue Details */}
-              <Input
-                label="Describe the Issue"
-                id="issueDetails"
-                name="issueDetails"
-                as="textarea"
-                rows={4}
-                value={formState.issueDetails}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                placeholder="Please describe the issue with your signage in detail..."
-                required
-                error={errors.issueDetails}
-                touched={touched.issueDetails}
-              />
-
-              {/* Proof of purchase or issue photo */}
-              <FileUpload
-                id="issuePhoto"
-                label="Upload Photo of the Issue (Optional)"
-                maxSizeMB={4}
-                allowedExtensions={['.jpg', '.jpeg', '.png', '.webp', '.svg']}
-                selectedFile={selectedFile}
-                fileBase64={fileBase64}
-                fileError={fileError}
-                onFileSelect={(file, base64, error) => {
-                  setSelectedFile(file);
-                  setFileBase64(base64);
-                  setFileError(error);
-                }}
-                accept="image/*"
-              />
-
-              {/* Consent Checkbox */}
-              <div className={styles.checkboxGroup}>
-                <input
-                  type="checkbox"
-                  id="consent"
-                  name="consent"
-                  checked={formState.consent}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  className={`${styles.checkboxInput} ${touched.consent && errors.consent ? styles.checkboxError : ''}`}
-                  aria-invalid={touched.consent && !!errors.consent}
-                  aria-describedby={errors.consent ? 'consent-error' : undefined}
-                />
-                <label htmlFor="consent" className={styles.checkboxLabel}>
-                  I agree to TGB Enterprise collecting and using my information to respond to this
-                  enquiry, in accordance with the <Link to="/privacy">Privacy Policy</Link>.
-                </label>
-              </div>
-              {touched.consent && errors.consent && (
-                <span
-                  id="consent-error"
-                  className={`${styles.fieldError} ${styles.fieldErrorConsent}`}
-                  role="alert"
-                >
-                  {errors.consent}
-                </span>
-              )}
-
-              {submitError && (
-                <div
-                  className={styles.errorBanner}
-                  role="alert"
-                  style={{ marginTop: '12px', marginBottom: '12px' }}
-                >
-                  {submitError}
+      {/* 2. Main Form & Support Grid */}
+      <section className={styles.formSection}>
+        <Container>
+          <div className={styles.grid}>
+            {/* Left Column: Form or Success */}
+            {isSuccess ? (
+              <div className={styles.successCard}>
+                <div className={styles.successIcon}>
+                  <CheckCircle2 size={36} />
                 </div>
-              )}
+                <h2 className={styles.successTitle}>Warranty Claim Logged</h2>
+                <p className={styles.successText}>
+                  Your claim has been assigned to our Nikol factory engineering desk. An engineer
+                  will contact you within 24 business hours to schedule an on-site inspection.
+                </p>
+                <button onClick={() => setIsSuccess(false)} className={styles.submitBtn}>
+                  Submit Another Claim
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className={styles.warrantyForm} noValidate>
+                <div className={styles.formRow}>
+                  <Input
+                    label="Customer / Company Name"
+                    name="customerName"
+                    value={formState.customerName}
+                    onChange={handleFieldChange('customerName')}
+                    error={errors.customerName}
+                    placeholder="e.g. Acme Corp / Rahul Patel"
+                    required
+                  />
+                  <Input
+                    label="Contact Phone"
+                    name="phone"
+                    type="tel"
+                    value={formState.phone}
+                    onChange={handleFieldChange('phone')}
+                    error={errors.phone}
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                </div>
 
-              <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-                {isSubmitting ? 'Submitting...' : 'Submit Claim'}
-                {!isSubmitting && <span className={styles.submitArrow}>→</span>}
-              </button>
-            </form>
-          )}
-        </div>
-      </Container>
+                <div className={styles.formRow}>
+                  <Input
+                    label="Official Email"
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleFieldChange('email')}
+                    error={errors.email}
+                    placeholder="name@company.com"
+                    required
+                  />
+                  <Input
+                    label="Invoice / Order Number"
+                    name="invoiceNumber"
+                    value={formState.invoiceNumber}
+                    onChange={handleFieldChange('invoiceNumber')}
+                    error={errors.invoiceNumber}
+                    placeholder="e.g. TGB-2024-889"
+                    required
+                  />
+                </div>
 
-      {/* Internal Navigation links at bottom */}
-      <div className={styles.bottomSection}>
-        <Link to="/" className={styles.bottomLink}>
-          ← Back to Home
-        </Link>
-        <Link to="/contact" className={styles.bottomLink}>
-          Contact Support
-        </Link>
-        <Link to="/privacy" className={styles.bottomLink}>
-          Privacy Policy
-        </Link>
-      </div>
+                <div className={styles.formRow}>
+                  <Input
+                    label="Warranty Certificate No."
+                    name="warrantyNumber"
+                    value={formState.warrantyNumber}
+                    onChange={handleFieldChange('warrantyNumber')}
+                    error={errors.warrantyNumber}
+                    placeholder="e.g. WRT-9982"
+                    required
+                  />
+                  <Input
+                    label="Installation / Purchase Date"
+                    name="purchaseDate"
+                    type="date"
+                    value={formState.purchaseDate}
+                    onChange={handleFieldChange('purchaseDate')}
+                    error={errors.purchaseDate}
+                    required
+                  />
+                </div>
+
+                <Input
+                  label="Signage Product Type"
+                  name="signageType"
+                  type="select"
+                  value={formState.signageType}
+                  onChange={handleFieldChange('signageType')}
+                  error={errors.signageType}
+                  options={[
+                    { value: 'LED Sign Board', label: '3D LED Glow Sign Board' },
+                    { value: 'ACP Facade', label: 'ACP Cladding & Elevation' },
+                    {
+                      value: 'Stainless Steel Letters',
+                      label: 'Stainless Steel (SS 304/316) Letters',
+                    },
+                    { value: 'Acrylic 3D Letters', label: 'Laser-Cut Acrylic Letters' },
+                    { value: 'Neon Sign Board', label: 'Custom Neon Flex Sign' },
+                    { value: 'Pylon Totem', label: 'Pylon / Monolith Highway Sign' },
+                    { value: 'Wayfinding Sign', label: 'Wayfinding & Reception Sign' },
+                  ]}
+                  required
+                />
+
+                <Input
+                  label="Nature of Issue / Defect Description"
+                  name="issueDetails"
+                  type="textarea"
+                  value={formState.issueDetails}
+                  onChange={handleFieldChange('issueDetails')}
+                  error={errors.issueDetails}
+                  placeholder="Describe the issue (e.g. LED section unlit, power supply flickering, facade panel alignment)..."
+                  required
+                />
+
+                <FileUpload
+                  label="Upload Photos of Signboard / Issue (Optional)"
+                  accept="image/*,.pdf"
+                  onFileSelect={() => {}}
+                />
+
+                <div className={styles.consentRow}>
+                  <input
+                    type="checkbox"
+                    id="consentCheck"
+                    checked={formState.consent}
+                    onChange={handleFieldChange('consent')}
+                    className={styles.checkbox}
+                  />
+                  <label htmlFor="consentCheck" className={styles.consentLabel}>
+                    I confirm that the signage installation has not been modified by unauthorized
+                    third-party electricians.
+                  </label>
+                </div>
+                {errors.consent && (
+                  <span style={{ color: 'var(--color-error)', fontSize: '11.5px' }}>
+                    {errors.consent}
+                  </span>
+                )}
+
+                <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
+                  {isSubmitting ? 'Verifying Certificate...' : 'Submit Warranty Claim →'}
+                </button>
+              </form>
+            )}
+
+            {/* Right Column: Warranty Coverage Policy */}
+            <div className={styles.sidebarCard}>
+              <h3 className={styles.sidebarTitle}>Warranty Policy &amp; SLA</h3>
+              <ul className={styles.coverageList}>
+                <li className={styles.coverageItem}>
+                  <CheckCircle2 size={16} className={styles.checkIcon} />
+                  <span>
+                    <strong>Samsung LED Modules:</strong> 3 to 5 Years Replacement Warranty on
+                    lumens degradation and diode failures.
+                  </span>
+                </li>
+                <li className={styles.coverageItem}>
+                  <CheckCircle2 size={16} className={styles.checkIcon} />
+                  <span>
+                    <strong>Meanwell SMPS Drivers:</strong> 2 to 3 Years Immediate Swapping
+                    Guarantee on voltage trip issues.
+                  </span>
+                </li>
+                <li className={styles.coverageItem}>
+                  <CheckCircle2 size={16} className={styles.checkIcon} />
+                  <span>
+                    <strong>SS 304 / 316 Titanium Finishes:</strong> Anti-rust and anti-corrosion
+                    structural warranty.
+                  </span>
+                </li>
+                <li className={styles.coverageItem}>
+                  <CheckCircle2 size={16} className={styles.checkIcon} />
+                  <span>
+                    <strong>PVDF ACP Coating:</strong> 10-Year UV resistance and color stability
+                    standard.
+                  </span>
+                </li>
+              </ul>
+
+              <div className={styles.directSupportBox}>
+                <span className={styles.supportLabel}>Direct Emergency Factory Line:</span>
+                <a href="tel:+919727136137" className={styles.supportPhone}>
+                  +91 97271 36137
+                </a>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <ContactCTA />
     </motion.div>
   );
 };

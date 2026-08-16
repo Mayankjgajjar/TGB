@@ -1,8 +1,9 @@
 .section {
   position: relative;
   width: 100%;
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
+  padding-top: var(--space-64);
+  padding-bottom: var(--space-64);
+  box-sizing: border-box;
 }
 
 .dividerTop::before {
@@ -12,7 +13,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--color-steel-dark);
+  background-color: var(--color-border-subtle);
 }
 
 .dividerBottom::after {
@@ -22,55 +23,37 @@
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--color-steel-dark);
-}
-
-/* Spacer Variations */
-.spacingLarge {
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
-}
-
-.spacingExtraLarge {
-  padding-top: var(--space-xl);
-  padding-bottom: var(--space-xl);
+  background-color: var(--color-border-subtle);
 }
 
 .spacingSmall {
-  padding-top: var(--space-md);
-  padding-bottom: var(--space-md);
+  padding-top: var(--space-32);
+  padding-bottom: var(--space-32);
 }
 
-@media (width >= 768px) {
+.spacingLarge {
+  padding-top: var(--space-80);
+  padding-bottom: var(--space-80);
+}
+
+.spacingExtraLarge {
+  padding-top: var(--space-96);
+  padding-bottom: var(--space-96);
+}
+
+@media (max-width: 768px) {
   .section {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
+    padding-top: var(--space-48);
+    padding-bottom: var(--space-48);
   }
 
   .spacingLarge {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
+    padding-top: var(--space-56);
+    padding-bottom: var(--space-56);
   }
 
   .spacingExtraLarge {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
-  }
-}
-
-@media (width >= 1200px) {
-  .section {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
-  }
-
-  .spacingLarge {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
-  }
-
-  .spacingExtraLarge {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
+    padding-top: var(--space-64);
+    padding-bottom: var(--space-64);
   }
 }

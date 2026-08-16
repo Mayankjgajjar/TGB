@@ -126,6 +126,18 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: 'warranty',
+        element: <Navigate to="/claim-warranty" replace />,
+      },
+      {
+        path: 'warranty-support',
+        element: <Navigate to="/claim-warranty" replace />,
+      },
+      {
+        path: 'warranty-claim',
+        element: <Navigate to="/claim-warranty" replace />,
+      },
 
       // ── Legacy hash URL redirects → proper page routes ───────────────────────
       // Old bookmarks and backlinks to /#section are preserved via redirects.

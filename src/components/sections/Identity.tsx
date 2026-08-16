@@ -97,14 +97,14 @@ export const CompanyIntro: React.FC<{
       {React.createElement(
         headingLevel === 1 ? 'h1' : 'h2',
         { className: styles.introTitle },
-        (title || intro.headingStory).split('\n').map((line, i, arr) => (
+        (title || intro?.headingStory || '').split('\n').map((line, i, arr) => (
           <React.Fragment key={i}>
             {line}
             {i < arr.length - 1 && <br />}
           </React.Fragment>
         )),
       )}
-      <p className={styles.introSubheading}>{subtitle || intro.subheadingStory}</p>
+      <p className={styles.introSubheading}>{subtitle || intro?.subheadingStory}</p>
     </motion.div>
   );
 };
@@ -136,7 +136,7 @@ export const WhoWeAreSplit: React.FC<{
           className={styles.introImage}
           style={{
             y: yBg,
-            backgroundImage: `url(${intro.image})`,
+            backgroundImage: `url(${intro?.image || ''})`,
           }}
         >
           <div className={styles.introImageOverlay} />
@@ -151,18 +151,18 @@ export const WhoWeAreSplit: React.FC<{
         animate={isInView ? 'visible' : 'hidden'}
       >
         <div className={styles.introTextWrapper}>
-          <SectionEyebrow>{intro.eyebrowWho}</SectionEyebrow>
+          <SectionEyebrow>{intro?.eyebrowWho}</SectionEyebrow>
           <h2 className={styles.whoTitle}>
-            {intro.headingWho.split('\n').map((line: string, i: number, arr: any) => (
+            {(intro?.headingWho || '').split('\n').map((line: string, i: number, arr: any) => (
               <React.Fragment key={i}>
                 {line}
                 {i < arr.length - 1 && <br />}
               </React.Fragment>
             ))}
           </h2>
-          <p className={styles.introPara}>{intro.paragraph1}</p>
-          <p className={styles.introPara}>{intro.paragraph2}</p>
-          <p className={styles.introPara}>{intro.paragraph3}</p>
+          <p className={styles.introPara}>{intro?.paragraph1}</p>
+          <p className={styles.introPara}>{intro?.paragraph2}</p>
+          <p className={styles.introPara}>{intro?.paragraph3}</p>
         </div>
 
         {/* 2x2 Stats Grid inside Right Column */}

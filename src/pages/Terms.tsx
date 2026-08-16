@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 import styles from './Legal.module.css';
 
 export const Terms: React.FC = () => {
@@ -20,14 +20,7 @@ export const Terms: React.FC = () => {
     >
       <Container>
         <div className={styles.contentWrapper}>
-          <div className={styles.linkRow}>
-            <Link to="/" className={styles.link}>
-              ← Back to Home
-            </Link>
-            <Link to="/#contact" className={styles.link}>
-              Contact Us
-            </Link>
-          </div>
+          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Terms of Service' }]} />
           <h1 className={styles.title}>Terms & Conditions</h1>
           <span className={styles.lastUpdated}>LAST UPDATED: JULY 2026</span>
 

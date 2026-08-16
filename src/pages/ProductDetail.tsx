@@ -29,7 +29,7 @@ export const ProductDetail: React.FC = () => {
 
   // Cross-linked Related Products
   const relatedProducts: IProductDetail[] = product
-    ? product.relatedProductSlugs
+    ? (product.relatedProductSlugs || [])
         .map((s) => productsData[s])
         .filter((p): p is IProductDetail => Boolean(p))
     : [];
@@ -38,9 +38,9 @@ export const ProductDetail: React.FC = () => {
   const relatedProjects = product
     ? projectsContent.items.filter(
         (proj) =>
-          proj.relatedProductSlugs.includes(product.slug) ||
-          product.relatedProjectIds.includes(proj.id) ||
-          proj.category.toLowerCase().includes(product.name.toLowerCase().split(' ')[0]),
+          proj.relatedProductSlugs?.includes(product.slug) ||
+          product.relatedProjectIds?.includes(proj.id) ||
+          proj.category?.toLowerCase().includes(product.name?.toLowerCase().split(' ')[0] || ''),
       )
     : [];
 

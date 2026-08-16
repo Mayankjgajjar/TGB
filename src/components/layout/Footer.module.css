@@ -1,15 +1,11 @@
-/* ============================================================
-   FOOTER — Section Stylesheet
-   Luxury Apple × Architecture Studio × Luxury Industrial Brand
-   ============================================================ */
-
 .footer {
   position: relative;
   width: 100%;
-  background-color: #000;
-  border-top: 1px solid rgb(255 255 255 / 8%);
-  padding: 120px 0 60px;
-  color: var(--color-off-white-muted);
+  background-color: var(--color-bg-inset);
+  border-top: 1px solid var(--color-border-subtle);
+  padding: 80px 0 40px;
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .inner {
@@ -18,39 +14,23 @@
   padding: 0 var(--space-32);
 }
 
-/* ── 5 Column Grid ── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: 2fr repeat(3, 1fr) 1.5fr;
   gap: 40px;
-  margin-bottom: 64px;
+  margin-bottom: 56px;
 }
 
-@media (width <= 1100px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 48px 32px;
-  }
-}
-
-@media (width <= 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-}
-
-/* ── Column Styles ── */
 .colTitle {
   font-family: var(--font-technical);
   font-size: 11px;
-  font-weight: 600;
-  color: var(--color-off-white);
+  font-weight: 700;
+  color: var(--color-text-primary);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0 0 24px;
+  letter-spacing: 0.1em;
+  margin: 0 0 20px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgb(255 255 255 / 6%);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .brandCol {
@@ -59,190 +39,137 @@
   gap: 16px;
 }
 
-@media (width >= 1100px) {
-  .brandCol {
-    grid-column: span 1;
-  }
-}
-
-.brandLogoWrap {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .brandLogoImg {
-  height: 32px;
+  height: 36px;
   width: auto;
   align-self: start;
+  transition: filter var(--transition-fast);
 }
 
-.brandLogo {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--color-off-white);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.brandTagline {
-  font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-copper-light);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-.contactItalic {
-  opacity: 0.8;
-  font-size: 12px;
-  font-style: italic;
+:global([data-theme='light']) .brandLogoImg {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .brandDesc {
   font-family: var(--font-primary);
-  font-size: 12.5px;
-  line-height: 1.65;
-  color: var(--color-off-white-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .socialLinks {
   display: flex;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .socialLink {
   font-family: var(--font-technical);
-  font-size: 11px;
-  color: var(--color-steel);
+  font-size: 12px;
+  color: var(--color-text-secondary);
   text-decoration: none;
-  transition: color 0.2s var(--transition-ease-expo);
+  transition: color 0.2s ease;
 }
 
 .socialLink:hover {
-  color: var(--color-off-white);
+  color: var(--color-text-primary);
 }
 
-/* ── Navigation Lists ── */
 .linksList {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .navLink {
   font-family: var(--font-primary);
-  font-size: 13px;
-  color: var(--color-off-white-muted);
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
   text-decoration: none;
-  transition: color 0.2s var(--transition-ease-expo);
-  display: inline-block;
+  transition: color 0.2s ease;
 }
 
 .navLink:hover {
-  color: var(--color-off-white);
+  color: var(--color-text-primary);
 }
 
 .viewAllLink {
   font-family: var(--font-technical);
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--color-copper-light);
+  letter-spacing: 0.04em;
+  color: var(--color-red);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  margin-top: 12px;
-  transition: color 0.2s var(--transition-ease-expo);
+  margin-top: 8px;
 }
 
-.viewAllLink:hover {
-  color: var(--color-copper);
-}
-
-/* ── Contact Column ── */
 .contactBlock {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .contactText {
   font-family: var(--font-primary);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.5;
-  color: var(--color-off-white-muted);
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
 .contactAnchor {
-  font-family: var(--font-primary);
-  font-size: 13px;
-  color: var(--color-off-white);
+  color: var(--color-text-primary);
   text-decoration: none;
-  transition: color 0.2s var(--transition-ease-expo);
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .contactAnchor:hover {
-  color: var(--color-copper-light);
+  color: var(--color-red);
 }
 
 .startProjectBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  color: var(--color-off-white);
-  border: 1px solid rgb(255 255 255 / 15%);
-  font-family: var(--font-primary);
+  background: var(--color-red);
+  color: #ffffff;
+  font-family: var(--font-technical);
   font-size: 12px;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: var(--radius-input);
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease;
   align-self: flex-start;
   margin-top: 8px;
+  box-shadow: var(--shadow-glow-red);
+  transition: background-color 0.2s ease;
 }
 
 .startProjectBtn:hover {
-  border-color: var(--color-off-white);
-  background-color: rgb(255 255 255 / 5%);
+  background-color: var(--color-red-hover);
 }
 
-/* ── Bottom Section ── */
 .bottomSection {
-  border-top: 1px solid rgb(255 255 255 / 6%);
-  padding-top: 40px;
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 32px;
 }
 
 .seoText {
-  font-family: var(--font-primary);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.6;
-  color: var(--color-steel);
-  margin-bottom: 24px;
-  max-width: 1000px;
-}
-
-.bottomStatement {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-style: italic;
-  color: var(--color-off-white-muted);
-  text-align: center;
-  margin-bottom: 24px;
-  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
 }
 
 .bottomBar {
@@ -254,29 +181,43 @@
 }
 
 .copyright {
-  font-family: var(--font-technical);
-  font-size: 11px;
-  color: var(--color-steel);
+  font-size: 12px;
+  color: var(--color-text-muted);
 }
 
 .legalLinks {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .legalLink {
-  font-family: var(--font-technical);
-  font-size: 11px;
-  color: var(--color-steel);
+  font-size: 12px;
+  color: var(--color-text-muted);
   text-decoration: none;
-  transition: color 0.2s var(--transition-ease-expo);
+  transition: color 0.2s ease;
 }
 
 .legalLink:hover {
-  color: var(--color-off-white-muted);
+  color: var(--color-text-primary);
 }
 
-@media (width <= 768px) {
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer {
+    padding: 48px 0 24px;
+  }
+
   .bottomBar {
     flex-direction: column;
     align-items: flex-start;

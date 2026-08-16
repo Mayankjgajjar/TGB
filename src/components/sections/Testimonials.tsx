@@ -2,116 +2,100 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Testimonials.module.css';
 import SectionEyebrow from '../ui/SectionEyebrow';
+import Container from '../ui/Container';
+import useScrollReveal from '../../hooks/useScrollReveal';
 
 const testimonials = [
   {
     client: 'Rajesh Patel',
-    industry: 'Apex Hub',
+    company: 'Apex Hub',
+    role: 'Director',
     review:
-      '"Exceptional service and top-notch quality! TGB Enterprise designed and installed our LED sign board in Ahmedabad. The finish is premium, and it has drastically improved our storefront visibility."',
-    rating: '★★★★★',
+      'Exceptional service and top-notch quality! TGB Enterprise designed and installed our LED sign board. The finish is premium, and it has drastically improved our storefront visibility.',
   },
   {
     client: 'Amit Shah',
-    industry: 'The Gold Palace',
+    company: 'The Gold Palace',
+    role: 'Owner',
     review:
-      '"Highly professional sign board manufacturer Ahmedabad. The 3D gold letter signage they made for our Nikol showroom looks extremely luxurious. Excellent communication and on-time delivery."',
-    rating: '★★★★★',
+      'Highly professional sign board manufacturer in Ahmedabad. The 3D gold letter signage they made for our Nikol showroom looks extremely luxurious. Excellent communication and on-time delivery.',
   },
   {
     client: 'Neha Gupta',
-    industry: 'Glow & Co.',
+    company: 'Glow & Co.',
+    role: 'Studio Founder',
     review:
-      '"Superb craftsmanship! The custom neon sign board they designed for our studio is perfect. The team is very skilled and the installation was clean. Highly recommend TGB!"',
-    rating: '★★★★★',
+      'Superb craftsmanship! The custom neon sign board they designed for our studio is perfect. The team is very skilled and the installation was clean. Highly recommend TGB.',
   },
   {
     client: 'Sanjay Mehta',
-    industry: 'Infra Projects',
+    company: 'INFRA CORP India',
+    role: 'Projects Head',
     review:
-      '"We hired TGB Enterprise for the INFRA CORP facade branding. They did an outstanding job with the ACP board installation. Their structural engineering and wind-load calculations were highly professional."',
-    rating: '★★★★★',
+      'We hired TGB Enterprise for the INFRA CORP facade branding. They did an outstanding job with the ACP board installation. Their structural engineering and wind-load calculations were highly professional.',
   },
   {
     client: 'Vikram Rathod',
-    industry: 'City Plaza Manager',
+    company: 'City Plaza',
+    role: 'General Manager',
     review:
-      '"Great experience working with Mayank and Ankit. They provide excellent after-sales support and premium materials. Easily the best sign board company in Nikol, Ahmedabad."',
-    rating: '★★★★★',
+      'Great experience working with Mayank and Ankit. They provide excellent after-sales support and premium materials. Easily the best sign board company in Nikol, Ahmedabad.',
   },
 ];
-
-import useScrollReveal from '../../hooks/useScrollReveal';
 
 export const Testimonials: React.FC = () => {
   const { ref, isRevealed, shouldReduceMotion } = useScrollReveal();
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
-    visible: (index: number) => ({
+  const fadeUp = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    visible: (delay: number = 0) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: shouldReduceMotion ? 0 : 0.72,
+        duration: shouldReduceMotion ? 0 : 0.65,
         ease: [0.16, 1, 0.3, 1],
-        delay: shouldReduceMotion ? 0 : index * 0.08,
+        delay: shouldReduceMotion ? 0 : delay,
       },
     }),
   };
 
-  const headerVariants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: shouldReduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
   return (
     <section ref={ref} className={styles.section} id="testimonials">
-      <div className={styles.inner}>
-        {/* ── Section Header ── */}
+      <Container>
+        {/* Header — left-aligned */}
         <motion.div
-          className={styles.headerBlock}
+          className={styles.header}
           initial="hidden"
           animate={isRevealed ? 'visible' : 'hidden'}
-          variants={headerVariants}
+          variants={fadeUp}
+          custom={0}
         >
           <SectionEyebrow>CLIENT EXPERIENCES</SectionEyebrow>
-          <h2 className={styles.heading}>Trusted by Businesses Across India.</h2>
-          <p className={styles.subheading}>
-            Every project is built on collaboration, craftsmanship, and long-term relationships.
-            Here's what our clients have to say about working with TGB Enterprise.
-          </p>
+          <h2 className={styles.heading}>What Our Clients Say.</h2>
         </motion.div>
 
-        {/* ── Testimonial Grid ── */}
-        <motion.div
-          className={styles.grid}
-          initial="hidden"
-          animate={isRevealed ? 'visible' : 'hidden'}
-        >
+        {/* Quote grid — 2 columns */}
+        <div className={styles.grid}>
           {testimonials.map((t, idx) => (
-            <motion.div
+            <motion.blockquote
               key={idx}
-              className={styles.card}
-              variants={cardVariants}
-              custom={idx}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02, transition: { duration: 0.25 } }}
+              className={styles.quote}
+              initial="hidden"
+              animate={isRevealed ? 'visible' : 'hidden'}
+              variants={fadeUp}
+              custom={0.1 + idx * 0.07}
             >
-              <div className={styles.quoteSymbol}>”</div>
-              <div className={styles.rating}>{t.rating}</div>
-              <p className={styles.reviewText}>{t.review}</p>
-
-              <div className={styles.clientMeta}>
+              <p className={styles.quoteText}>"{t.review}"</p>
+              <footer className={styles.quoteMeta}>
                 <span className={styles.clientName}>{t.client}</span>
-                <span className={styles.clientIndustry}>{t.industry}</span>
-              </div>
-            </motion.div>
+                <span className={styles.clientDetails}>
+                  {t.role}, {t.company}
+                </span>
+              </footer>
+            </motion.blockquote>
           ))}
-        </motion.div>
-      </div>
+        </div>
+      </Container>
     </section>
   );
 };

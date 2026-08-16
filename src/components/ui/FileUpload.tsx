@@ -1,33 +1,40 @@
 import React, { useRef, useState, useCallback } from 'react';
 import styles from './FileUpload.module.css';
 
-interface FileUploadProps {
-  id: string;
-  label: string;
-  maxSizeMB: number;
-  allowedExtensions: string[]; // e.g. ['.jpg', '.png', '.pdf']
-  selectedFile: File | null;
-  fileBase64: string | null;
-  fileError: string | null;
-  onFileSelect: (file: File | null, base64: string | null, error: string | null) => void;
+export interface FileUploadProps {
+  id?: string;
+  label?: string;
+  maxSizeMB?: number;
+  allowedExtensions?: string[];
+  selectedFile?: File | null;
+  fileBase64?: string | null;
+  fileError?: string | null;
+  onFileSelect?: (file: File | null, base64: string | null, error: string | null) => void;
   accept?: string;
   helperText?: string;
 }
 
 export const FileUpload: React.FC<FileUploadProps> = ({
-  id,
-  label,
-  maxSizeMB,
-  allowedExtensions,
-  selectedFile,
-  fileBase64,
-  fileError,
+  id = 'file-upload-input',
+  label = 'Upload Attachment',
+  maxSizeMB = 10,
+  allowedExtensions = ['.jpg', '.jpeg', '.png', '.pdf', '.webp', '.ai', '.cdr'],
+  selectedFile: externalSelectedFile,
+  fileError: externalFileError,
   onFileSelect,
-  accept = 'image/*',
+  accept = 'image/*,.pdf,.ai,.cdr',
   helperText,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragActive, setIsDragActive] = useState(false);
+  const [internalFile, setInternalFile] = useState<File | null>(null);
+  const [internalError, setInternalError] = useState<string | null>(null);
+
+  const activeFile = externalSelectedFile !== undefined ? externalSelectedFile : internalFile;
+  const activeError = externalFileError !== undefined ? externalFileError : internalError;
+
+  const extensionsList = Array.isArray(allowedExtensions) ? allowedExtensions : [];
+  const extString = extensionsList.length > 0 ? extensionsList.join(', ') : 'PDF, JPG, PNG';
 
   const processFile = useCallback(
     (file: File) => {
@@ -35,126 +42,130 @@ export const FileUpload: React.FC<FileUploadProps> = ({
       const maxSizeBytes = maxSizeMB * 1024 * 1024;
       if (file.size > maxSizeBytes) {
         const errorMsg = `File is too large. Please select a file under ${maxSizeMB}MB.`;
-        onFileSelect(null, null, errorMsg);
+        setInternalFile(null);
+        setInternalError(errorMsg);
+        onFileSelect?.(null, null, errorMsg);
         return;
       }
 
       // 2. Validate extension
-      const fileExt = '.' + file.name.split('.').pop()?.toLowerCase();
-      const isAllowedExt = allowedExtensions.some((ext) => ext.toLowerCase() === fileExt);
-      if (allowedExtensions.length > 0 && !isAllowedExt) {
-        const errorMsg = `Invalid file format. Allowed types: ${allowedExtensions.join(', ')}.`;
-        onFileSelect(null, null, errorMsg);
+      const fileExt = '.' + (file.name.split('.').pop()?.toLowerCase() || '');
+      const isAllowedExt =
+        extensionsList.length === 0 || extensionsList.some((ext) => ext.toLowerCase() === fileExt);
+
+      if (!isAllowedExt) {
+        const errorMsg = `Invalid file format. Allowed types: ${extString}.`;
+        setInternalFile(null);
+        setInternalError(errorMsg);
+        onFileSelect?.(null, null, errorMsg);
         return;
       }
 
       // 3. Convert to base64
+      setInternalFile(file);
+      setInternalError(null);
+
       const reader = new FileReader();
       reader.onloadend = () => {
-        onFileSelect(file, reader.result as string, null);
+        onFileSelect?.(file, reader.result as string, null);
       };
       reader.onerror = () => {
-        onFileSelect(null, null, 'Error reading file content.');
+        const err = 'Error reading file content.';
+        setInternalError(err);
+        onFileSelect?.(null, null, err);
       };
       reader.readAsDataURL(file);
     },
-    [maxSizeMB, allowedExtensions, onFileSelect],
+    [maxSizeMB, extensionsList, extString, onFileSelect],
   );
 
-  const handleFileChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) {
-        processFile(file);
-      }
-    },
-    [processFile],
-  );
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processFile(file);
+    }
+  };
 
-  const handleRemoveFile = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      onFileSelect(null, null, null);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-    },
-    [onFileSelect],
-  );
-
-  const handleDrag = useCallback((e: React.DragEvent) => {
+  const handleDragEnter = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
-      setIsDragActive(true);
-    } else if (e.type === 'dragleave') {
-      setIsDragActive(false);
+    setIsDragActive(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      processFile(file);
     }
-  }, []);
+  };
 
-  const handleDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setIsDragActive(false);
+  const handleRemoveFile = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setInternalFile(null);
+    setInternalError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    onFileSelect?.(null, null, null);
+  };
 
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        processFile(e.dataTransfer.files[0]);
-      }
-    },
-    [processFile],
-  );
+  const handleClickDropzone = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
-    <div className={styles.fileInputGroup}>
-      <label className={styles.fieldLabel} htmlFor={id}>
+    <div className={styles.fileUploadContainer}>
+      <label htmlFor={id} className={styles.label}>
         {label}
       </label>
 
-      {selectedFile ? (
-        <div className={styles.previewContainer}>
-          {fileBase64 && selectedFile.type.startsWith('image/') ? (
-            <img
-              src={fileBase64}
-              alt="Preview of upload"
-              className={styles.previewImage}
-              loading="lazy"
-            />
-          ) : (
-            <div className={styles.documentPlaceholderIcon} aria-hidden="true">
-              📄
-            </div>
-          )}
-          <div className={styles.previewInfo}>
-            <span className={styles.previewName}>{selectedFile.name}</span>
-            <span className={styles.previewSize}>
-              {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+      {activeFile ? (
+        <div className={styles.fileSelectedBox}>
+          <div className={styles.fileInfo}>
+            <span className={styles.fileName}>{activeFile.name}</span>
+            <span className={styles.fileSize}>
+              ({(activeFile.size / (1024 * 1024)).toFixed(2)} MB)
             </span>
           </div>
           <button
             type="button"
             onClick={handleRemoveFile}
-            className={styles.removeFileBtn}
+            className={styles.removeBtn}
             aria-label="Remove uploaded file"
           >
-            Remove
+            ✕
           </button>
         </div>
       ) : (
         <div
-          className={`${styles.fileInputWrapper} ${isDragActive ? styles.dragActive : ''}`}
-          onDragEnter={handleDrag}
-          onDragOver={handleDrag}
-          onDragLeave={handleDrag}
+          className={`${styles.dropzone} ${isDragActive ? styles.dropzoneActive : ''} ${activeError ? styles.dropzoneError : ''}`}
+          onClick={handleClickDropzone}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
           <div className={styles.uploadIcon} aria-hidden="true">
             ↑
           </div>
-          <span className={styles.uploadText}>Select or drag a file here</span>
+          <span className={styles.uploadText}>Select or drag a design file / photo here</span>
           <span className={styles.uploadLimit}>
-            {helperText || `Max file size: ${maxSizeMB}MB (${allowedExtensions.join(', ')})`}
+            {helperText || `Max file size: ${maxSizeMB}MB (${extString})`}
           </span>
           <input
             id={id}
@@ -167,20 +178,10 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         </div>
       )}
 
-      {fileError && (
-        <div className={styles.fileErrorContainer}>
-          <span className={styles.fieldError} role="alert">
-            {fileError}
-          </span>
-          <button
-            type="button"
-            onClick={handleRemoveFile}
-            className={styles.clearErrorBtn}
-            aria-label="Clear file upload error"
-          >
-            Clear
-          </button>
-        </div>
+      {activeError && (
+        <span className={styles.errorText} role="alert">
+          {activeError}
+        </span>
       )}
     </div>
   );

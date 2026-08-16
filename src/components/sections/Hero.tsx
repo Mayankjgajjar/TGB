@@ -1,77 +1,116 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
-import { EASE_EXPO } from '../../animations/variants';
-import Button from '../ui/Button';
+import { ArrowRight, PhoneCall } from 'lucide-react';
 import Container from '../ui/Container';
-import { homeContent } from '../../content/home';
-import useScrollReveal from '../../hooks/useScrollReveal';
+import { useQuoteModal } from '../../context/QuoteContext';
 import styles from './Hero.module.css';
 
-// Hoisted outside component — recreating on every render is wasteful
-const textContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1.0, ease: EASE_EXPO },
-  },
-};
+const STATS = [
+  { value: '100+', label: 'Projects Delivered' },
+  { value: '5+', label: 'Cities Served' },
+  { value: '10 Yrs', label: 'Manufacturing' },
+  { value: 'Pan India', label: 'Service Area' },
+];
 
 export const Hero: React.FC = () => {
-  const { title, ctaLabel } = homeContent.hero;
-  const { ref, isRevealed } = useScrollReveal();
+  const { openModal } = useQuoteModal();
+
+  const handleScrollToProducts = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const section = document.getElementById('products-showcase');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section ref={ref} className={styles.heroSection} aria-label="Hero">
-      {/* Hero Content Container */}
-      <div className={styles.contentContainer}>
-        <Container>
-          <motion.div
-            className={styles.presentationPanel}
-            initial="hidden"
-            animate={isRevealed ? 'visible' : 'hidden'}
-            variants={textContainer}
-          >
-            <motion.h1 variants={fadeUp} className={styles.headline}>
-              {title.split('\n').map((line, idx, arr) => (
-                <React.Fragment key={idx}>
-                  {line}
-                  {idx < arr.length - 1 && <br />}
-                </React.Fragment>
-              ))}
-            </motion.h1>
-
-            <motion.span variants={fadeUp} className={styles.tagline}>
-              Ahmedabad's Trusted Signage Manufacturer.
-            </motion.span>
-
-            <motion.div variants={fadeUp} className={styles.ctasRow}>
-              <Button to="/services" variant="primary" size="large" showTechnicalDot>
-                {ctaLabel}
-              </Button>
-              <Button
-                to="/gallery"
-                variant="secondary"
-                size="large"
-                icon={<ArrowUpRight size={14} />}
-              >
-                View Gallery
-              </Button>
-            </motion.div>
-          </motion.div>
-        </Container>
+    <section className={styles.heroSection} aria-label="Hero Banner">
+      {/* Background Architectural Visual */}
+      <div className={styles.bgContainer}>
+        <img
+          src="/assets/images/hero-building.webp"
+          alt="Architectural commercial building with custom illuminated signage by TGB Enterprise"
+          className={styles.bgImage}
+        />
+        <div className={styles.bgOverlay} />
       </div>
+
+      <Container>
+        <div className={styles.contentWrapper}>
+          {/* Location Badge */}
+          <motion.div
+            className={styles.eyebrow}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <span className={styles.eyebrowDot} />
+            Direct Factory · Nikol, Ahmedabad · Pan-India Delivery
+          </motion.div>
+
+          {/* Headline — larger, more confident */}
+          <motion.h1
+            className={styles.headline}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+          >
+            Sign Board Makers
+            <br />
+            in Ahmedabad.
+          </motion.h1>
+
+          {/* Specific subtitle — not generic boilerplate */}
+          <motion.p
+            className={styles.subtitle}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.2 }}
+          >
+            We design, fabricate, and install LED glow signs, ACP facade cladding,
+            3D acrylic and stainless steel letters, and custom neon displays.
+            Every project is built in-house at our Nikol factory.
+          </motion.p>
+
+          {/* Actions */}
+          <motion.div
+            className={styles.ctaRow}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <button onClick={() => openModal()} className={styles.primaryBtn}>
+              Get a Free Quote <ArrowRight size={15} />
+            </button>
+
+            <a
+              href="#products-showcase"
+              onClick={handleScrollToProducts}
+              className={styles.secondaryLink}
+            >
+              View Our Products
+            </a>
+          </motion.div>
+
+          {/* Horizontal stat row — replaces proof badges */}
+          <motion.div
+            className={styles.statsRow}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.45 }}
+          >
+            {STATS.map((stat, i) => (
+              <React.Fragment key={i}>
+                <div className={styles.statItem}>
+                  <span className={styles.statValue}>{stat.value}</span>
+                  <span className={styles.statLabel}>{stat.label}</span>
+                </div>
+                {i < STATS.length - 1 && <span className={styles.statDivider} aria-hidden="true" />}
+              </React.Fragment>
+            ))}
+          </motion.div>
+        </div>
+      </Container>
     </section>
   );
 };

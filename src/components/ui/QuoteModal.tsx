@@ -7,7 +7,7 @@ import { trackQuoteModalOpen, trackQuoteSubmit } from '../../lib/analytics';
 import styles from './QuoteModal.module.css';
 
 export const QuoteModal: React.FC = () => {
-  const { isModalOpen, closeModal } = useQuoteModal();
+  const { isModalOpen, modalData, closeModal } = useQuoteModal();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
   // Prevent background scroll when open
@@ -53,13 +53,11 @@ export const QuoteModal: React.FC = () => {
       const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
 
       if (e.shiftKey) {
-        // Shift + Tab -> Wrap to last element if on first
         if (document.activeElement === firstElement) {
           lastElement.focus();
           e.preventDefault();
         }
       } else {
-        // Tab -> Wrap to first element if on last
         if (document.activeElement === lastElement) {
           firstElement.focus();
           e.preventDefault();
@@ -76,6 +74,11 @@ export const QuoteModal: React.FC = () => {
       closeModal();
     }
   };
+
+  const productTitle = modalData?.product ? ` for ${modalData.product}` : '';
+  const whatsappMessage = modalData?.product
+    ? `Hi TGB Enterprise! I'm interested in receiving a quote and specifications for *${modalData.product}*.`
+    : "Hi TGB Enterprise! I'd like to know more about your signage services and get a quote.";
 
   return (
     <AnimatePresence>
@@ -106,22 +109,27 @@ export const QuoteModal: React.FC = () => {
             </button>
 
             {/* Technical Header Tag */}
-            <span className={styles.portalTag}>SECURE PORTAL // SPECIFICATION REQUEST</span>
+            <span className={styles.portalTag}>
+              {modalData?.product
+                ? `PRODUCT INQUIRY // ${modalData.product.toUpperCase()}`
+                : 'SECURE PORTAL // SPECIFICATION REQUEST'}
+            </span>
 
-            {/* Premium Serif Display Title */}
+            {/* Title */}
             <h2 id="quote-modal-title" className={styles.title}>
-              Acquire Quote Specification
+              Acquire Quote Specification{productTitle}
             </h2>
 
             {/* Muted Narrative Copy */}
             <p className={styles.description}>
-              Select your preferred path of engagement. Customize project scope within our
-              interactive builder workspace, or link directly with a design engineer.
+              {modalData?.product
+                ? `Connect with our technical design engineers to discuss custom dimensions, material finishes, and fast factory turnaround for ${modalData.product}.`
+                : 'Select your preferred path of engagement. Customize project scope within our interactive builder workspace, or link directly with a design engineer.'}
             </p>
 
             {/* Symmetrical Outline Button Stack */}
             <div className={styles.actionStack}>
-              {/* Action 1: Launch Builder (Outline with Red Hover border) */}
+              {/* Action 1: Start Consultation */}
               <Link
                 to="/contact"
                 onClick={() => {
@@ -134,14 +142,14 @@ export const QuoteModal: React.FC = () => {
                   <span className={styles.optionIcon}>
                     <Compass size={16} />
                   </span>
-                  <span>Start Consultation</span>
+                  <span>Start Consultation Form</span>
                 </div>
                 <ArrowRight size={16} className={styles.arrow} />
               </Link>
 
-              {/* Action 2: WhatsApp Desk (Outline with Green Hover border) */}
+              {/* Action 2: WhatsApp Desk */}
               <a
-                href="https://wa.me/919727136137?text=Hi%20TGB%20Enterprise!%20I'd%20like%20to%20know%20more%20about%20your%20signage%20services%20and%20get%20a%20quote."
+                href={`https://api.whatsapp.com/send?phone=919727136137&text=${encodeURIComponent(whatsappMessage)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackQuoteSubmit('whatsapp')}
@@ -156,7 +164,7 @@ export const QuoteModal: React.FC = () => {
                 <div className={styles.statusDot} />
               </a>
 
-              {/* Action 3: Hotline Call (Outline with White Hover border) */}
+              {/* Action 3: Hotline Call */}
               <a
                 href="tel:+919727136137"
                 onClick={() => trackQuoteSubmit('hotline')}
@@ -166,17 +174,17 @@ export const QuoteModal: React.FC = () => {
                   <span className={styles.optionIcon}>
                     <Phone size={16} />
                   </span>
-                  <span>Dial Hotline Support</span>
+                  <span>Dial Direct Factory Hotline (+91 97271 36137)</span>
                 </div>
               </a>
             </div>
 
-            {/* Redesigned Bottom Time Indicator */}
+            {/* Bottom Time Indicator */}
             <div className={styles.footerInfo}>
               <span className={styles.clockIcon}>
                 <Clock size={12} />
               </span>
-              <span>RESPONSE TARGET: &lt; 3 HOURS</span>
+              <span>RESPONSE TARGET: &lt; 3 HOURS • DIRECT FACTORY ESTIMATE</span>
             </div>
           </motion.div>
         </div>

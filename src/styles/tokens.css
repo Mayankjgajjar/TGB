@@ -1,113 +1,232 @@
-:root {
-  /* Color System - Exact Brand Identity (Rich Black & Pure Brand Red) */
-  --color-black: #0a0a0a;
-  --color-black-soft: #141414;
-  --color-red: #d40000;
-  --color-red-hover: #c10004; /* slightly darker for hover states */
-  --color-white: #fff;
-  --color-white-muted: #b8b8b8;
+:root,
+[data-theme='dark'] {
+  /* ============================================================
+     TGB ENTERPRISE DESIGN SYSTEM TOKENS — DARK MODE (DEFAULT)
+     Consistent Modern Architectural B2B Manufacturer Theme
+     ============================================================ */
 
-  /* Legacy Compatibility Mapping (keeps existing pages unified automatically) */
-  --color-charcoal-deep: var(--color-black);
-  --color-charcoal-surface: var(--color-black-soft);
-  --color-charcoal-panel: #1a1a1a;
-  --color-off-white: var(--color-white);
-  --color-off-white-muted: var(--color-white-muted);
+  /* ── 1. Color System (Brand Identity) ── */
+  --color-red: #d40000;
+  --color-red-hover: #c10004;
+  --color-red-muted: rgba(212, 0, 0, 0.12);
+  --color-red-border: rgba(212, 0, 0, 0.35);
+
+  /* Surface Hierarchy (Dark Theme) */
+  --color-bg-base: #0a0a0a; /* Deep canvas */
+  --color-bg-elevated: #0e0e0e; /* Hero & header background */
+  --color-bg-card: #141414; /* Cards, modals, containers */
+  --color-bg-card-hover: #1a1a1a; /* Card hover background */
+  --color-bg-inset: #111111; /* Inset form fields & recessed areas */
+  --color-bg-overlay: rgba(10, 10, 10, 0.96);
+  --color-modal-backdrop: rgba(0, 0, 0, 0.85);
+
+  /* Legacy & Semantic Color Aliases */
+  --color-black: var(--color-bg-base);
+  --color-black-soft: var(--color-bg-card);
+  --color-charcoal-deep: var(--color-bg-base);
+  --color-charcoal-surface: var(--color-bg-card);
+  --color-charcoal-panel: var(--color-bg-card-hover);
+  --color-white: #ffffff;
+  --color-white-muted: #a0a0a0;
+  --color-off-white: #ffffff;
+  --color-off-white-muted: #a0a0a0;
   --color-copper: var(--color-red);
   --color-copper-light: var(--color-red-hover);
   --color-copper-dark: #a10003;
-  --color-steel: #8e8d89; /* Neutral gray labels */
-  --color-steel-dark: #2a2a2a; /* Soft borders */
-  --color-steel-deep: #161616; /* Deeper border shades */
+  --color-steel: #888888;
+  --color-steel-dark: #222222;
+  --color-steel-deep: #1a1a1a;
 
-  /* Spacing Grid (Based on modular architectural scale) */
-  --space-unit: 8px;
-  --space-4: calc(var(--space-unit) * 0.5); /* 4px */
-  --space-8: var(--space-unit); /* 8px */
-  --space-12: calc(var(--space-unit) * 1.5); /* 12px */
-  --space-16: calc(var(--space-unit) * 2); /* 16px */
-  --space-24: calc(var(--space-unit) * 3); /* 24px */
-  --space-32: calc(var(--space-unit) * 4); /* 32px */
-  --space-40: calc(var(--space-unit) * 5); /* 40px */
-  --space-48: calc(var(--space-unit) * 6); /* 48px */
-  --space-64: calc(var(--space-unit) * 8); /* 64px */
-  --space-96: calc(var(--space-unit) * 12); /* 96px */
+  /* Text Colors */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #666666;
+  --color-text-inverse: #0a0a0a;
 
-  /* Typography Scale (Redesigned to Clean Modern Industrial Sans-Serif) */
+  /* Border Scale */
+  --color-border-subtle: #222222;
+  --color-border-hover: #383838;
+  --color-border-focus: var(--color-red);
+
+  /* Form & Status Colors */
+  --color-error: #ff4d4f;
+  --color-error-border: rgba(255, 77, 79, 0.4);
+  --color-error-bg: rgba(255, 77, 79, 0.1);
+  --color-success: #52c41a;
+  --color-success-bg: rgba(82, 196, 26, 0.1);
+
+  /* ── 2. Spacing Scale ── */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+
+  /* Aliases */
+  --space-xs: var(--space-8);
+  --space-sm: var(--space-16);
+  --space-md: var(--space-24);
+  --space-lg: var(--space-48);
+  --space-xl: var(--space-96);
+
+  /* ── 3. Typography Hierarchy ── */
   --font-display: 'Montserrat', sans-serif;
   --font-body: 'Google Sans', 'Google Sans Text', 'Roboto', sans-serif;
   --font-primary: var(--font-body);
   --font-technical: var(--font-display);
 
-  /* Font Scale Custom Properties */
-  --lh-h1: 1.1;
-  --lh-body: 1.6;
-
   /* Font Sizes */
-  --font-size-xs: 0.75rem; /* 12px (Monospace labels, sub-meta) */
-  --font-size-sm: 0.875rem; /* 14px (Secondary body, small captions) */
-  --font-size-base: 1rem; /* 16px (Primary body copy) */
-  --font-size-md: 1.25rem; /* 20px (Lead paragraphs, sub-headings) */
-  --font-size-lg: 1.75rem; /* 28px (H3 or small titles) */
-  --font-size-xl: 2.5rem; /* 40px (H2 and main editorial section headers) */
-  --font-size-2xl: 3.5rem; /* 56px (Large Display headers) */
-  --font-size-3xl: 5rem; /* 80px (Special layouts & statement text) */
-  --font-size-display: clamp(4rem, 8vw, 8rem); /* Hero display headers */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-md: 1.125rem; /* 18px */
+  --font-size-lg: 1.35rem; /* 21.6px */
+  --font-size-xl: 1.75rem; /* 28px */
+  --font-size-2xl: 2.25rem; /* 36px */
+  --font-size-3xl: 3rem; /* 48px */
+  --font-size-display: clamp(2.4rem, 4.5vw, 3.8rem);
 
   /* Line Heights */
-  --line-height-tight: 1.1;
-  --line-height-snug: 1.3;
-  --line-height-normal: 1.65;
+  --lh-tight: 1.15;
+  --lh-snug: 1.3;
+  --lh-normal: 1.6;
+  --lh-h1: var(--lh-tight);
+  --lh-body: var(--lh-normal);
 
-  /* Layout Widths */
+  /* ── 4. Layout Dimensions ── */
   --container-max-width: 1440px;
   --section-inner-max-width: 1320px;
+  --container-padding: 32px;
+  --container-padding-mobile: 20px;
 
-  /* Radius (Standardized system) */
-  --radius-sharp: 8px;
-  --radius-card: 12px;
+  --header-height: 72px;
+  --header-height-mobile: 64px;
+  --header-offset-desktop: 130px;
+  --header-offset-mobile: 100px;
+
+  /* ── 5. Border Radius System ── */
   --radius-small: 4px;
   --radius-input: 6px;
+  --radius-sharp: 8px;
+  --radius-card: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
 
-  /* Shadows (Minimal depth, dark focus) */
-  --shadow-medium: 0 12px 32px rgb(0 0 0 / 60%);
-  --shadow-elevated: 0 16px 40px rgb(0 0 0 / 50%);
+  /* ── 6. Shadows ── */
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 12px 28px rgba(0, 0, 0, 0.6);
+  --shadow-elevated: 0 20px 48px rgba(0, 0, 0, 0.85);
+  --shadow-glow-red: 0 4px 14px rgba(212, 0, 0, 0.35);
 
-  /* Z-Index Hierarchy */
+  /* ── 7. Z-Index Hierarchy ── */
+  --z-index-base: 1;
+  --z-index-dropdown: 500;
   --z-index-navbar: 1000;
+  --z-index-floating: 2000;
   --z-index-modal: 3000;
 
-  /* Header Clearance offsets */
-  --header-height: 80px;
-  --header-height-mobile: 64px;
-  --header-offset-desktop: calc(var(--header-height) + var(--space-48));
-  --header-offset-mobile: calc(var(--header-height-mobile) + var(--space-32));
-
-  /* Focus Ring */
-  --focus-ring-color: var(--color-copper-light);
-  --focus-ring-width: 2px;
-  --focus-ring-offset: 4px;
-
-  /* Form States */
-  --color-error: rgb(220 80 80 / 90%);
-  --color-error-border: rgb(200 50 50 / 70%);
-  --color-error-bg: rgb(220 80 80 / 10%);
-
-  /* Transition Easing (Premium Ease Curves) */
+  /* ── 8. Transitions & Motion ── */
   --transition-speed-fast: 0.2s;
-  --transition-speed-normal: 0.4s;
-  --transition-speed-slow: 0.7s;
-  --transition-ease-expo: cubic-bezier(0.16, 1, 0.3, 1); /* easeOutExpo */
+  --transition-speed-normal: 0.35s;
+  --transition-ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Standard Layout Spacing Scale */
-  --space-xs: var(--space-8); /* 8px */
-  --space-sm: var(--space-16); /* 16px */
-  --space-md: var(--space-24); /* 24px */
-  --space-lg: var(--space-48); /* 48px */
-  --space-xl: var(--space-96); /* 96px */
+  --transition-fast: 200ms ease;
+  --transition-base: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Motion System transition tokens */
-  --transition-fast: var(--transition-speed-fast) var(--transition-ease-expo);
-  --transition-base: var(--transition-speed-normal) var(--transition-ease-expo);
-  --transition-slow: var(--transition-speed-slow) var(--transition-ease-expo);
+  /* Hero overlay gradient */
+  --hero-overlay-gradient: linear-gradient(
+    90deg,
+    rgba(5, 5, 5, 0.97) 0%,
+    rgba(5, 5, 5, 0.92) 42%,
+    rgba(5, 5, 5, 0.55) 70%,
+    rgba(5, 5, 5, 0.15) 100%
+  );
+  --hero-overlay-mobile: linear-gradient(
+    180deg,
+    rgba(5, 5, 5, 0.96) 0%,
+    rgba(5, 5, 5, 0.88) 60%,
+    rgba(5, 5, 5, 0.97) 100%
+  );
+}
+
+/* ============================================================
+   TGB ENTERPRISE DESIGN SYSTEM TOKENS — LIGHT MODE
+   Clean Architectural Editorial Lighting System
+   ============================================================ */
+[data-theme='light'] {
+  /* Surface Hierarchy (Light Mode) */
+  --color-bg-base: #f8f9fa; /* Clean architectural canvas */
+  --color-bg-elevated: #ffffff; /* Crisp white headers & surfaces */
+  --color-bg-card: #ffffff; /* Pure white cards & containers */
+  --color-bg-card-hover: #f1f3f5; /* Light gray card hover */
+  --color-bg-inset: #eef1f4; /* Inset recessed areas */
+  --color-bg-overlay: rgba(255, 255, 255, 0.97);
+  --color-modal-backdrop: rgba(15, 23, 42, 0.65);
+
+  /* Legacy & Semantic Color Aliases */
+  --color-black: #0f172a;
+  --color-black-soft: #1e293b;
+  --color-charcoal-deep: #ffffff;
+  --color-charcoal-surface: #ffffff;
+  --color-charcoal-panel: #f8fafc;
+  --color-white: #0f172a;
+  --color-white-muted: #4b5563;
+  --color-off-white: #0f172a;
+  --color-off-white-muted: #4b5563;
+  --color-copper: var(--color-red);
+  --color-copper-light: var(--color-red-hover);
+  --color-copper-dark: #a10003;
+  --color-steel: #64748b;
+  --color-steel-dark: #e2e8f0;
+  --color-steel-deep: #f1f5f9;
+
+  /* Text Colors */
+  --color-text-primary: #0f172a; /* Deep slate / high-contrast readability */
+  --color-text-secondary: #475569; /* Slate 600 */
+  --color-text-muted: #64748b; /* Slate 500 */
+  --color-text-inverse: #ffffff;
+
+  /* Border Scale */
+  --color-border-subtle: #e2e8f0; /* Crisp architectural border */
+  --color-border-hover: #cbd5e1; /* Stronger border on hover */
+  --color-border-focus: var(--color-red);
+
+  /* Form & Status Colors */
+  --color-error: #dc2626;
+  --color-error-border: rgba(220, 38, 38, 0.35);
+  --color-error-bg: rgba(220, 38, 38, 0.08);
+  --color-success: #16a34a;
+  --color-success-bg: rgba(22, 163, 74, 0.08);
+
+  /* Shadows - softened for light background */
+  --shadow-subtle: 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-medium: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-elevated: 0 16px 40px rgba(15, 23, 42, 0.12);
+  --shadow-glow-red: 0 4px 14px rgba(212, 0, 0, 0.25);
+
+  /* Hero overlay gradient for light theme — gives clear contrast against building photo */
+  --hero-overlay-gradient: linear-gradient(
+    90deg,
+    rgba(248, 249, 250, 0.98) 0%,
+    rgba(248, 249, 250, 0.93) 45%,
+    rgba(248, 249, 250, 0.65) 72%,
+    rgba(248, 249, 250, 0.25) 100%
+  );
+  --hero-overlay-mobile: linear-gradient(
+    180deg,
+    rgba(248, 249, 250, 0.97) 0%,
+    rgba(248, 249, 250, 0.9) 60%,
+    rgba(248, 249, 250, 0.98) 100%
+  );
 }

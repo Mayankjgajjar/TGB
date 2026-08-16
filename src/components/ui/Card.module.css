@@ -1,7 +1,7 @@
 .card {
   position: relative;
-  background: var(--color-black);
-  border: 1px solid rgb(255 255 255 / 8%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
   display: flex;
   flex-direction: column;
@@ -12,220 +12,149 @@
   box-sizing: border-box;
   text-align: left;
   outline: none;
+  box-shadow: var(--shadow-subtle);
   transition:
-    border-color var(--transition-base),
-    background-color var(--transition-base),
-    box-shadow var(--transition-base),
-    transform var(--transition-base);
-}
-
-/* Base interactive styling */
-a.card,
-button.card {
-  cursor: pointer;
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 a.card:hover,
 button.card:hover {
-  border-color: rgb(255 255 255 / 20%);
-  background-color: #111;
-  transform: translateY(-4px);
+  border-color: var(--color-border-hover);
+  background-color: var(--color-bg-card-hover);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-medium);
 }
 
-/* Card variants by content structure */
 .hasImage {
   padding: 0;
 }
 
 .noImage {
-  padding: var(--space-md) var(--space-md);
+  padding: 24px;
 }
 
-/* Image Thumbnail section */
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 240px;
+  height: 220px;
   overflow: hidden;
   flex-shrink: 0;
-  border-bottom: 1px solid rgb(255 255 255 / 8%);
-  z-index: 0;
+  background-color: var(--color-bg-inset);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8) contrast(1.02);
-  transition:
-    transform var(--transition-slow),
-    filter var(--transition-base);
+  transition: transform 400ms ease;
 }
 
 .card:hover .image {
   transform: scale(1.04);
-  filter: brightness(0.92) contrast(1.04);
 }
 
 .imageOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 40%, rgb(10 10 10 / 90%) 100%);
+  background: linear-gradient(to bottom, transparent 60%, rgba(10, 10, 10, 0.4) 100%);
   pointer-events: none;
 }
 
-/* Floating category badge over image */
 .imageBadge {
   position: absolute;
-  bottom: 12px;
-  left: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  top: 12px;
+  left: 12px;
   font-family: var(--font-technical);
-  font-size: 9.5px;
-  font-weight: 500;
-  letter-spacing: 1.8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 75%);
-  background: rgb(10 10 10 / 65%);
-  padding: 6px 10px;
+  color: #ffffff;
+  background: rgba(10, 10, 10, 0.88);
+  padding: 4px 8px;
   border-radius: var(--radius-small);
-  border: 1px solid rgb(255 255 255 / 10%);
-  backdrop-filter: blur(8px);
-  transition:
-    color var(--transition-base),
-    border-color var(--transition-base);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.card:hover .imageBadge {
-  color: var(--color-off-white);
-  border-color: rgb(255 255 255 / 20%);
-}
-
-/* Content Panel below Image */
 .cardContent {
-  padding: var(--space-md);
+  padding: 22px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: var(--space-xs);
+  gap: 8px;
   box-sizing: border-box;
 }
 
-/* Icon (for icon cards) */
 .iconWrapper {
-  margin-bottom: var(--space-xs);
-  color: var(--color-off-white);
-  opacity: 0.5;
-  transition: opacity var(--transition-base);
+  color: var(--color-red);
+  margin-bottom: 8px;
 }
 
-.card:hover .iconWrapper {
-  opacity: 1;
-}
-
-.icon {
-  width: 40px;
-  height: 40px;
-}
-
-/* Category Eyebrow text */
 .categoryEyebrow {
   font-family: var(--font-technical);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgb(255 255 255 / 40%);
-  margin-bottom: var(--space-4);
-  display: block;
+  color: var(--color-red);
 }
 
-/* Title text */
 .title {
   font-family: var(--font-display);
-  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 700;
   line-height: 1.25;
-  color: var(--color-off-white);
+  color: var(--color-text-primary);
   margin: 0;
-  letter-spacing: -0.01em;
-  transition: color var(--transition-base);
 }
 
-.card:hover .title {
-  color: var(--color-off-white);
-}
-
-/* Description body */
 .description {
   font-family: var(--font-primary);
   font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--color-off-white-muted);
-  margin: 0 0 var(--space-sm) 0;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin: 0 0 12px 0;
   flex-grow: 1;
 }
 
-@media (width <= 767px) {
-  .description {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
-/* Footer Badge Pill */
 .footerPill {
   font-family: var(--font-technical);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: rgb(255 255 255 / 55%);
-  padding: 8px 12px;
-  border: 1px solid rgb(255 255 255 / 10%);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-red);
+  background: var(--color-red-muted);
+  border: 1px solid var(--color-red-border);
+  padding: 4px 10px;
   border-radius: var(--radius-small);
   display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: auto;
   align-self: flex-start;
-  transition:
-    border-color var(--transition-base),
-    color var(--transition-base);
+  margin-top: auto;
 }
 
-.card:hover .footerPill {
-  border-color: var(--color-copper);
-  color: var(--color-off-white);
-}
-
-/* Link Style CTA */
 .footerLink {
   font-family: var(--font-technical);
-  font-size: 9.5px;
-  color: var(--color-steel);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-primary);
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.04em;
   margin-top: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: color var(--transition-base);
+  transition: color var(--transition-fast);
 }
 
 .card:hover .footerLink {
-  color: var(--color-copper-light);
+  color: var(--color-red);
 }
 
 .arrow {
-  transition: transform var(--transition-base);
+  transition: transform var(--transition-fast);
   display: inline-block;
 }
 

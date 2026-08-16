@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Filter, ArrowRight } from 'lucide-react';
 import { pageTransition } from '../animations/variants';
 import Container from '../components/ui/Container';
-import Section from '../components/ui/Section';
 import SectionEyebrow from '../components/ui/SectionEyebrow';
-import Grid from '../components/ui/Grid';
-import Card from '../components/ui/Card';
-import OptimizedImage from '../components/ui/OptimizedImage';
+import Breadcrumbs from '../components/ui/Breadcrumbs';
 import ContactCTA from '../components/sections/ContactCTA';
-import useScrollReveal from '../hooks/useScrollReveal';
-import { galleryContent } from '../content/gallery';
-import { projectsContent, ProjectDetails } from '../content/projects';
-import { productsData } from '../content/products';
-import servicesOverviewStyles from '../components/sections/ServicesOverview.module.css';
-import styles from './Gallery.module.css';
-import { Filter, ArrowRight } from 'lucide-react';
 import FAQ from '../components/sections/FAQ';
+import { projectsContent, ProjectDetails } from '../content/projects';
+import styles from './Gallery.module.css';
 
 export const Gallery: React.FC = () => {
-  const { hero, faq } = galleryContent;
   const projects: ProjectDetails[] = projectsContent.items;
 
   // Faceted Filtering State
-  const [filterType, setFilterType] = useState<string>('All');
   const [selectedProductType, setSelectedProductType] = useState<string>('All');
   const [selectedIndustry, setSelectedIndustry] = useState<string>('All');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Filter projects based on selected filters
   const filteredProjects = projects.filter((p) => {
@@ -43,292 +38,110 @@ export const Gallery: React.FC = () => {
       animate="animate"
       exit="exit"
       variants={pageTransition}
-      className="page"
+      className={styles.page}
     >
-      {/* ── Gallery Introduction ── */}
-      <div className={styles.page} style={{ paddingTop: '140px' }}>
+      {/* 1. Page Header & Filter Controls */}
+      <section className={styles.heroSection}>
         <Container>
-          <div className={servicesOverviewStyles.headerBlock}>
+          <Breadcrumbs items={[{ label: 'Home', to: '/' }, { label: 'Project Portfolio' }]} />
+
+          <div className={styles.heroContent}>
             <SectionEyebrow>PROJECT PORTFOLIO &amp; WORKS</SectionEyebrow>
-            <h1 className={servicesOverviewStyles.mainTitle}>
-              Identity Landmarks &amp; Installations
-            </h1>
-            <p className={servicesOverviewStyles.subtitle}>
-              Browse our portfolio of engineered signage installations, facade cladding projects,
-              and custom metalwork executed across India.
+            <h1 className={styles.heroTitle}>Architectural Landmarks &amp; Custom Installations</h1>
+            <p className={styles.heroDesc}>
+              Explore our portfolio of engineered signage installations, ACP facade cladding, 3D
+              metal letters, and neon displays manufactured and installed across India.
             </p>
+          </div>
 
-            {/* Faceted Filter Bar */}
-            <div
-              style={{
-                marginTop: '32px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '16px',
-                alignItems: 'center',
-              }}
-            >
-              <div
-                style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}
-              >
-                <span
-                  style={{
-                    fontSize: '11px',
-                    fontFamily: 'var(--font-technical)',
-                    color: 'var(--color-secondary)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    textTransform: 'uppercase',
-                  }}
+          {/* Faceted Filter Pills */}
+          <div className={styles.filterBarWrapper}>
+            {/* Product Type Filter */}
+            <div className={styles.filterRow}>
+              <span className={styles.filterLabel}>
+                <Filter size={12} /> Signage Type:
+              </span>
+              {productTypesList.map((pt) => (
+                <button
+                  key={pt}
+                  onClick={() => setSelectedProductType(pt)}
+                  className={`${styles.filterPill} ${selectedProductType === pt ? styles.filterPillActive : ''}`}
                 >
-                  <Filter size={12} /> Product Type:
-                </span>
-                {productTypesList.map((pt) => (
-                  <button
-                    key={pt}
-                    onClick={() => setSelectedProductType(pt)}
-                    style={{
-                      padding: '4px 12px',
-                      borderRadius: '16px',
-                      fontSize: '12px',
-                      border: '1px solid var(--color-outline-variant)',
-                      background:
-                        selectedProductType === pt
-                          ? 'var(--color-primary-container)'
-                          : 'var(--color-surface-container-high)',
-                      color:
-                        selectedProductType === pt
-                          ? 'var(--color-on-primary)'
-                          : 'var(--color-on-surface)',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {pt}
-                  </button>
-                ))}
-              </div>
+                  {pt}
+                </button>
+              ))}
+            </div>
 
-              <div
-                style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}
-              >
-                <span
-                  style={{
-                    fontSize: '11px',
-                    fontFamily: 'var(--font-technical)',
-                    color: 'var(--color-secondary)',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    textTransform: 'uppercase',
-                  }}
+            {/* Industry Filter */}
+            <div className={styles.filterRow}>
+              <span className={styles.filterLabel}>
+                <Filter size={12} /> Industry:
+              </span>
+              {industriesList.map((ind) => (
+                <button
+                  key={ind}
+                  onClick={() => setSelectedIndustry(ind)}
+                  className={`${styles.filterPill} ${selectedIndustry === ind ? styles.filterPillActive : ''}`}
                 >
-                  <Filter size={12} /> Industry:
-                </span>
-                {industriesList.map((ind) => (
-                  <button
-                    key={ind}
-                    onClick={() => setSelectedIndustry(ind)}
-                    style={{
-                      padding: '4px 12px',
-                      borderRadius: '16px',
-                      fontSize: '12px',
-                      border: '1px solid var(--color-outline-variant)',
-                      background:
-                        selectedIndustry === ind
-                          ? 'var(--color-primary-container)'
-                          : 'var(--color-surface-container-high)',
-                      color:
-                        selectedIndustry === ind
-                          ? 'var(--color-on-primary)'
-                          : 'var(--color-on-surface)',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {ind}
-                  </button>
-                ))}
-              </div>
+                  {ind}
+                </button>
+              ))}
             </div>
           </div>
+        </Container>
+      </section>
 
-          {/* ── Featured Projects Portfolio Cards ── */}
-          <div style={{ marginTop: '40px' }}>
-            <Grid cols={2} gap="normal">
-              {filteredProjects.map((proj) => (
-                <div
-                  key={proj.id}
-                  className={styles.featuredCard}
-                  style={{
-                    background: 'var(--color-surface-container-low)',
-                    borderRadius: 'var(--radius-lg)',
-                    overflow: 'hidden',
-                    border: '1px solid var(--color-outline-variant)',
-                    position: 'relative',
-                  }}
-                >
-                  <Link to={`/projects/${proj.id}`}>
-                    <OptimizedImage
-                      src={proj.imagePath}
-                      alt={proj.name}
-                      className={styles.featuredCardImage}
-                      loading="lazy"
-                    />
-                  </Link>
-                  <div style={{ padding: '24px' }}>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: '8px',
-                      }}
-                    >
-                      <span className={styles.featuredCardCategory}>{proj.category}</span>
-                      <span
-                        style={{
-                          fontSize: '11px',
-                          color: 'var(--color-secondary)',
-                          fontFamily: 'var(--font-technical)',
-                        }}
-                      >
-                        {proj.location} • {proj.year}
-                      </span>
-                    </div>
+      {/* 2. Projects Showcase Grid */}
+      <section className={styles.projectsSection}>
+        <Container>
+          <span className={styles.countLabel}>
+            Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
+            {selectedProductType !== 'All' && ` for "${selectedProductType}"`}
+            {selectedIndustry !== 'All' && ` in "${selectedIndustry}"`}
+          </span>
 
-                    <Link
-                      to={`/projects/${proj.id}`}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      <h3
-                        className={styles.featuredCardTitle}
-                        style={{ fontSize: '1.4rem', fontWeight: 600, margin: '4px 0 12px' }}
-                      >
-                        {proj.name}
-                      </h3>
-                    </Link>
+          <div className={styles.grid}>
+            {filteredProjects.map((proj) => (
+              <Link key={proj.id} to={`/projects/${proj.id}`} className={styles.projectCard}>
+                <div className={styles.imageWrapper}>
+                  <span className={styles.categoryBadge}>{proj.category}</span>
+                  <img
+                    src={proj.imagePath}
+                    alt={`${proj.name} - ${proj.location}`}
+                    className={styles.image}
+                    loading="lazy"
+                  />
+                </div>
 
-                    <p
-                      style={{
-                        fontSize: '0.9rem',
-                        color: 'var(--color-secondary)',
-                        lineHeight: 1.5,
-                        marginBottom: '16px',
-                      }}
-                    >
-                      {proj.description}
-                    </p>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{proj.name}</h3>
+                  <div className={styles.locationMeta}>
+                    {proj.location} • {proj.year}
+                  </div>
+                  <p className={styles.cardDesc}>{proj.description}</p>
 
-                    {/* Bi-Directional Cross-Linking: Related Products Used */}
-                    <div
-                      style={{
-                        paddingTop: '12px',
-                        borderTop: '1px dashed var(--color-outline-variant)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        flexWrap: 'wrap',
-                        gap: '8px',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          gap: '6px',
-                          flexWrap: 'wrap',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontSize: '10px',
-                            color: 'var(--color-secondary)',
-                            textTransform: 'uppercase',
-                            fontFamily: 'var(--font-technical)',
-                          }}
-                        >
-                          Products Used:
-                        </span>
-                        {proj.relatedProductSlugs.map((slug) => {
-                          const prod = productsData[slug];
-                          return (
-                            <Link
-                              key={slug}
-                              to={`/products/${slug}`}
-                              style={{
-                                fontSize: '11px',
-                                padding: '2px 8px',
-                                background: 'rgba(227, 27, 35, 0.1)',
-                                color: 'var(--color-primary)',
-                                borderRadius: '4px',
-                                textDecoration: 'none',
-                                fontWeight: 500,
-                              }}
-                            >
-                              {prod ? prod.name : slug}
-                            </Link>
-                          );
-                        })}
-                      </div>
-
-                      <Link
-                        to={`/projects/${proj.id}`}
-                        style={{
-                          fontSize: '12px',
-                          fontWeight: 600,
-                          color: 'var(--color-on-surface)',
-                          textDecoration: 'none',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                        }}
-                      >
-                        View Case Study <ArrowRight size={12} />
-                      </Link>
-                    </div>
+                  <div className={styles.cardFooter}>
+                    <span className={styles.scopeTag}>
+                      {proj.materials?.[0] || proj.productType}
+                    </span>
+                    <span className={styles.viewLink}>
+                      Case Study <ArrowRight size={13} />
+                    </span>
                   </div>
                 </div>
-              ))}
-            </Grid>
+              </Link>
+            ))}
           </div>
         </Container>
-      </div>
+      </section>
 
-      {/* ── Browse by Product Category ── */}
-      <Section spacing="large">
-        <Container>
-          <div className={servicesOverviewStyles.headerBlock}>
-            <SectionEyebrow>BROWSE BY PRODUCT</SectionEyebrow>
-            <h2 className={servicesOverviewStyles.mainTitle}>
-              Explore Manufacturing Product Lines
-            </h2>
-            <p className={servicesOverviewStyles.subtitle}>
-              Each product represents a dedicated fabrication line in our Vatva facility with
-              certified material specifications.
-            </p>
-          </div>
+      {/* 3. Project FAQs */}
+      <FAQ
+        title="Project Execution & Delivery FAQs"
+        subtitle="Answers to common client questions regarding site surveying, fabrication lead times, installation logistics, and structural safety."
+      />
 
-          <Grid cols={3} gap="normal">
-            {Object.values(productsData)
-              .slice(0, 6)
-              .map((prod) => (
-                <Card
-                  key={prod.slug}
-                  category={prod.category}
-                  title={prod.name}
-                  description={prod.shortDescription}
-                  footerPill="View Product Details ➔"
-                  to={`/products/${prod.slug}`}
-                />
-              ))}
-          </Grid>
-        </Container>
-      </Section>
-
-      {/* FAQ */}
-      <FAQ title={faq.title} subtitle={faq.subtitle} items={faq.items} />
-
-      {/* Contact CTA */}
+      {/* 4. Consultation CTA */}
       <ContactCTA />
     </motion.div>
   );

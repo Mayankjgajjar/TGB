@@ -2,16 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Breadcrumbs.module.css';
 
-interface BreadcrumbItem {
+export interface BreadcrumbItem {
   label: string;
   to?: string;
 }
 
-interface BreadcrumbsProps {
-  items: BreadcrumbItem[];
+export interface BreadcrumbsProps {
+  items?: BreadcrumbItem[];
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items = [] }) => {
+  if (!items || !Array.isArray(items) || items.length === 0) {
+    return null;
+  }
+
   return (
     <div className={styles.row}>
       {items.map((crumb, idx) => (

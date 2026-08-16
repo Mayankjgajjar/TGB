@@ -7,7 +7,7 @@ function extractSearchableString<T>(item: T, key: string): string {
   if (!item) return '';
 
   // Handle dot notation for nested objects (e.g., 'overview.description')
-  const keys = key.split('.');
+  const keys = (key || '').split('.');
   let current: any = item;
   for (const k of keys) {
     if (current && typeof current === 'object' && k in current) {
@@ -31,19 +31,25 @@ function extractSearchableString<T>(item: T, key: string): string {
 /**
  * Reusable search hook across Products, Gallery, and Resources.
  */
-export function useSearch<T>(items: T[], query: string, searchKeys: string[]): T[] {
+export function useSearch<T>(items: T[] = [], query: string = '', searchKeys: string[] = []): T[] {
   return useMemo(() => {
-    const trimmed = query.trim().toLowerCase();
+    if (!items || !Array.isArray(items)) return [];
+    const trimmed = (query || '').trim().toLowerCase();
     if (!trimmed) return items;
 
-    const terms = trimmed.split(/\s+/);
+    const terms = trimmed.split(/\s+/).filter(Boolean);
+    if (!terms.length) return items;
 
     return items.filter((item) => {
       // Concatenate text from all searchable keys
-      const combinedText = searchKeys.map((key) => extractSearchableString(item, key)).join(' ');
+      const combinedText = (searchKeys || [])
+        .map((key) => extractSearchableString(item, key))
+        .join(' ');
 
       // Item matches if all query terms appear in the item's combined text
       return terms.every((term) => combinedText.includes(term));
     });
   }, [items, query, searchKeys]);
 }
+
+export default useSearch;

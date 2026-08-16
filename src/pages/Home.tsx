@@ -2,31 +2,43 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { pageTransition } from '../animations/variants';
 import Hero from '../components/sections/Hero';
-import Identity from '../components/sections/Identity';
+import ProductionTicker from '../components/sections/ProductionTicker';
+import ProductCatalogGrid from '../components/sections/ProductCatalogGrid';
+import ManufacturingPillars from '../components/sections/ManufacturingPillars';
+import FeaturedProjects from '../components/sections/FeaturedProjects';
 import Industries from '../components/sections/Industries';
 import Testimonials from '../components/sections/Testimonials';
-import FeaturedProjects from '../components/sections/FeaturedProjects';
+import FAQ from '../components/sections/FAQ';
 import ContactCTA from '../components/sections/ContactCTA';
 
 export const Home: React.FC = () => {
   return (
     <motion.div initial="initial" animate="animate" exit="exit" variants={pageTransition}>
-      {/* Full-screen video hero with primary CTAs */}
+      {/* 1. Clean High-Impact Hero Banner */}
       <Hero />
 
-      {/* About Preview + Why Choose TGB (hiding Leadership and Services from Homepage) */}
-      <Identity showAbout={true} showTrust={true} showLeadership={false} showServices={false} />
+      {/* 2. Factory Capabilities Ticker Bar */}
+      <ProductionTicker />
 
-      {/* Featured case studies — 4 project cards */}
+      {/* 3. Product Range Showcase (Clean 3-Column Cards) */}
+      <ProductCatalogGrid />
+
+      {/* 4. The 4 Manufacturing Excellence Pillars */}
+      <ManufacturingPillars />
+
+      {/* 5. Landmark Projects & Client Installations */}
       <FeaturedProjects />
 
-      {/* Industries overview — who we serve */}
+      {/* 6. Industry Specific Solutions */}
       <Industries />
 
-      {/* Client testimonials — social proof */}
+      {/* 7. Client Testimonials */}
       <Testimonials />
 
-      {/* Lead generation form and contact details */}
+      {/* 8. Procurement FAQs */}
+      <FAQ />
+
+      {/* 9. Direct Quote & Contact Consultation */}
       <ContactCTA />
     </motion.div>
   );

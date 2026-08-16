@@ -1,14 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/logos/logo-emblem.svg" />
     <link rel="apple-touch-icon" href="/assets/logos/tgb-logo.svg" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#E30005" />
+    <meta name="theme-color" content="#0a0a0a" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="%VITE_SITE_URL%" />
+
+    <!-- Theme Initialization Script to prevent FOUC -->
+    <script>
+      (function() {
+        try {
+          var storedTheme = localStorage.getItem('tgb-theme-preference');
+          if (storedTheme === 'dark' || storedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', storedTheme);
+            document.documentElement.style.colorScheme = storedTheme;
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.colorScheme = 'light';
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
 
     <!-- Preconnect analytics origins -->
     <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -28,8 +47,8 @@
     <!-- Open Graph defaults (overridden per-page by AppLayout) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TGB Enterprise" />
-<meta property="og:url" content="%VITE_SITE_URL%" />
-<meta property="og:image" content="%VITE_SITE_URL%/assets/images/hero-poster.png" />
+    <meta property="og:url" content="%VITE_SITE_URL%" />
+    <meta property="og:image" content="%VITE_SITE_URL%/assets/images/hero-poster.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
   </head>
@@ -38,4 +57,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

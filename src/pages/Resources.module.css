@@ -1,66 +1,123 @@
-/* Resources Page Module Styles */
+.page {
+  min-height: 100vh;
+  background-color: var(--color-bg-base);
+  transition: background-color var(--transition-fast);
+}
 
+.heroSection {
+  padding-top: 130px;
+  padding-bottom: 40px;
+  background-color: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border-subtle);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.heroContent {
+  max-width: 820px;
+  margin-top: 20px;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin: 12px 0 16px 0;
+  line-height: 1.15;
+}
+
+.heroDesc {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Tabs */
 .tabsWrapper {
   display: flex;
-  gap: 12px;
-  margin-top: 36px;
-  border-bottom: 1px solid var(--color-outline-variant);
+  gap: 10px;
+  margin-top: 32px;
+  border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: 16px;
   overflow-x: auto;
 }
 
 .tabBtn {
-  background: var(--color-surface-container-high);
-  color: var(--color-on-surface);
-  border: 1px solid var(--color-outline-variant);
-  padding: 10px 20px;
-  border-radius: var(--radius-lg);
-  font-family: var(--font-primary);
-  font-size: 13px;
-  font-weight: 500;
+  background: var(--color-bg-card);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+  padding: 10px 18px;
+  border-radius: var(--radius-input);
+  font-family: var(--font-technical);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--transition-fast);
 }
 
 .tabBtn:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+  background: var(--color-bg-card-hover);
 }
 
 .tabBtnActive {
-  background: var(--color-primary-container);
-  color: var(--color-on-primary);
-  border-color: var(--color-primary);
+  background: var(--color-red) !important;
+  color: #ffffff !important;
+  border-color: var(--color-red) !important;
 }
 
+/* Main Content Section */
+.contentSection {
+  padding: 64px 0;
+  background-color: var(--color-bg-base);
+  transition: background-color var(--transition-fast);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* Download Card */
 .downloadCard {
-  background: var(--color-surface-container-low);
-  border: 1px solid var(--color-outline-variant);
-  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: var(--shadow-subtle);
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .downloadCard:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-primary);
+  transform: translateY(-3px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-medium);
 }
 
 .downloadIconWrap {
   width: 44px;
   height: 44px;
-  background: rgb(227 27 35 / 10%);
-  color: var(--color-primary);
-  border-radius: var(--radius-lg);
+  background: var(--color-red-muted);
+  color: var(--color-red);
+  border-radius: var(--radius-input);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,23 +126,26 @@
 
 .downloadCategory {
   font-family: var(--font-technical);
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-red);
 }
 
 .downloadTitle {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
   margin: 6px 0 10px;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 .downloadDesc {
-  font-size: 0.85rem;
-  color: var(--color-secondary);
-  line-height: 1.5;
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
   margin-bottom: 20px;
   flex-grow: 1;
 }
@@ -95,55 +155,34 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-  border-top: 1px solid var(--color-outline-variant);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
 .fileInfo {
   font-family: var(--font-technical);
   font-size: 11px;
-  color: var(--color-secondary);
+  color: var(--color-text-muted);
 }
 
 .downloadLink {
-  color: var(--color-primary);
-  font-weight: 600;
+  color: var(--color-red);
+  font-family: var(--font-technical);
+  font-weight: 700;
   font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  gap: 4px;
+  transition: color var(--transition-fast);
 }
 
 .downloadLink:hover {
-  text-decoration: underline;
+  color: var(--color-red-hover);
 }
 
-.articleCard {
-  background: var(--color-surface-container-low);
-  border: 1px solid var(--color-outline-variant);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.articleImage {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.faqWrapper {
-  width: 100%;
-}
-
-.faqSearchInput {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--color-surface-container-high);
-  color: var(--color-on-surface);
-  border: 1px solid var(--color-outline-variant);
-  border-radius: var(--radius-lg);
-  font-size: 14px;
-}
-
+/* FAQ Layout */
 .faqGrid {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -158,34 +197,43 @@
 
 .faqCatBtn {
   text-align: left;
-  background: none;
-  border: 1px solid transparent;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   padding: 12px 16px;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-input);
   font-size: 13px;
-  color: var(--color-secondary);
+  color: var(--color-text-secondary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--transition-fast);
+}
+
+.faqCatBtn:hover {
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
+  background: var(--color-bg-card-hover);
 }
 
 .faqCatBtnActive {
-  background: var(--color-surface-container-high);
-  color: var(--color-on-surface);
-  border-color: var(--color-outline-variant);
+  background: var(--color-red) !important;
+  color: #ffffff !important;
+  border-color: var(--color-red) !important;
   font-weight: 600;
 }
 
 .faqAccordionCol {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .faqItemCard {
-  background: var(--color-surface-container-low);
-  border: 1px solid var(--color-outline-variant);
-  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
   overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .faqHeaderBtn {
@@ -197,45 +245,59 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  color: var(--color-on-surface);
+  color: var(--color-text-primary);
   text-align: left;
 }
 
 .faqQuestionText {
-  font-size: 1.05rem;
+  font-family: var(--font-primary);
+  font-size: 14.5px;
   font-weight: 600;
 }
 
 .faqChevron {
-  transition: transform 0.2s ease;
-  color: var(--color-secondary);
+  transition: transform var(--transition-fast);
+  color: var(--color-text-muted);
 }
 
 .faqChevronRotated {
   transform: rotate(180deg);
+  color: var(--color-red);
 }
 
 .faqAnswerText {
   padding: 0 24px 20px;
-  font-size: 0.95rem;
-  color: var(--color-secondary);
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
+/* Technical Specs Box */
 .specBox {
-  background: var(--color-surface-container-low);
-  border: 1px solid var(--color-outline-variant);
-  border-radius: var(--radius-lg);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
   padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-subtle);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .specSystemBadge {
   font-family: var(--font-technical);
-  font-size: 10px;
-  color: var(--color-primary);
+  font-size: 11px;
+  color: var(--color-red);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.08em;
   font-weight: 700;
+}
+
+.specTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 6px 0 16px;
 }
 
 .specPointList {
@@ -243,7 +305,7 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
 }
 
@@ -251,17 +313,32 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.88rem;
-  color: var(--color-on-surface);
+  font-size: 13.5px;
+  color: var(--color-text-secondary);
 }
 
 .specCheckIcon {
-  color: var(--color-primary);
+  color: var(--color-red);
   flex-shrink: 0;
 }
 
-@media (width <= 850px) {
+@media (max-width: 1024px) {
+  .grid3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .faqGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+
+  .heroSection {
+    padding-top: 100px;
+    padding-bottom: 32px;
   }
 }

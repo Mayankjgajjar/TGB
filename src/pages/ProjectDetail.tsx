@@ -32,8 +32,8 @@ export const ProjectDetail: React.FC = () => {
     );
   }
 
-  const dimensionString = `${project.dimensions.width} × ${project.dimensions.height}${project.dimensions.depth ? ` × ${project.dimensions.depth}` : ''}`;
-  const materialsString = project.materials.join(', ');
+  const dimensionString = `${project.dimensions?.width || ''} × ${project.dimensions?.height || ''}${project.dimensions?.depth ? ` × ${project.dimensions.depth}` : ''}`;
+  const materialsString = Array.isArray(project.materials) ? project.materials.join(', ') : '';
 
   return (
     <motion.div
@@ -138,8 +138,8 @@ export const ProjectDetail: React.FC = () => {
             <Link to="/contact" className={styles.ctaPrimary}>
               Request Quote →
             </Link>
-            <Link to="/services" className={styles.ctaSecondary}>
-              View Services
+            <Link to="/products" className={styles.ctaSecondary}>
+              View Products
             </Link>
             <Link to="/gallery" className={styles.ctaSecondary}>
               More Projects
