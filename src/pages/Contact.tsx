@@ -9,6 +9,7 @@ import Input from '../components/ui/Input';
 import FileUpload from '../components/ui/FileUpload';
 import FAQ from '../components/sections/FAQ';
 import { trackContactFormSubmit } from '../lib/analytics';
+import { captureError } from '../lib/telemetry';
 import { getEnvVar } from '../lib/env';
 import styles from './Contact.module.css';
 
@@ -43,6 +44,12 @@ export const Contact: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // File Upload State
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -63,13 +70,40 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
 
     const newErrors: FormErrors = {};
-    if (!formState.firstName.trim()) newErrors.firstName = 'First name is required.';
-    if (!formState.phone.trim()) newErrors.phone = 'Phone number is required.';
-    if (!formState.email.trim()) newErrors.email = 'Email address is required.';
-    if (!formState.message.trim()) newErrors.message = 'Please provide details about your project.';
-    if (!formState.consent) newErrors.consent = 'Consent is required to submit your enquiry.';
+    if (!formState.firstName.trim()) {
+      newErrors.firstName = 'First name is required.';
+    } else if (formState.firstName.trim().length < 2) {
+      newErrors.firstName = 'First name must be at least 2 characters.';
+    }
+
+    if (!formState.lastName.trim()) {
+      newErrors.lastName = 'Last name is required.';
+    }
+
+    if (!formState.phone.trim()) {
+      newErrors.phone = 'Phone number is required.';
+    } else if (!/^[+\d][\d\s\-().]{7,19}$/.test(formState.phone.trim())) {
+      newErrors.phone = 'Enter a valid phone number.';
+    }
+
+    if (!formState.email.trim()) {
+      newErrors.email = 'Email address is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email.trim())) {
+      newErrors.email = 'Invalid email address.';
+    }
+
+    if (!formState.message.trim()) {
+      newErrors.message = 'Please provide details about your project.';
+    } else if (formState.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters.';
+    }
+
+    if (!formState.consent) {
+      newErrors.consent = 'Consent is required to submit your enquiry.';
+    }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -78,17 +112,57 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
     try {
-      trackContactFormSubmit({
-        signageType: formState.signageType,
-        hasAttachment: false,
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+          phone: formState.phone,
+          email: formState.email,
+          company: formState.company || undefined,
+          location: formState.location || undefined,
+          signage: formState.signageType,
+          message: formState.message,
+          consentGiven: formState.consent,
+          consentTimestamp: new Date().toISOString(),
+          attachmentFileName: selectedFile?.name || undefined,
+          attachmentContent: fileBase64 || undefined,
+        }),
       });
 
-      // Simulate API submission
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        if (errorData.errors) {
+          const clientErrors: FormErrors = {};
+          Object.keys(errorData.errors).forEach((key) => {
+            const clientKey = key === 'consentGiven' ? 'consent' : (key as keyof ContactFormFields);
+            clientErrors[clientKey] = errorData.errors[key];
+          });
+          setErrors(clientErrors);
+          const errorList = Object.values(clientErrors).filter(Boolean).join(' ');
+          throw new Error(errorList || 'Please correct the validation errors below.');
+        }
+        throw new Error(errorData.error || errorData.message || 'Failed to submit enquiry.');
+      }
+
       setIsSuccess(true);
       setFormState(EMPTY_FORM);
-    } catch {
-      setErrors({ firstName: 'Submission failed. Please call our direct helpline.' });
+      setSelectedFile(null);
+      setFileBase64(null);
+      setFileError(null);
+      setErrors({});
+      trackContactFormSubmit({
+        signageType: formState.signageType,
+        hasAttachment: !!selectedFile,
+      });
+    } catch (error: any) {
+      captureError(error, { context: 'ContactPage' });
+      setSubmitError(
+        error.message || 'Submission failed. Please call our direct helpline at +91 97271 36137.',
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -164,6 +238,7 @@ export const Contact: React.FC = () => {
                     onChange={handleFieldChange('lastName')}
                     error={errors.lastName}
                     placeholder="e.g. Patel"
+                    required
                   />
                 </div>
 
@@ -259,9 +334,36 @@ export const Contact: React.FC = () => {
                 />
 
                 <FileUpload
+                  id="contactAttachment"
                   label="Upload Design File / Site Photos (Optional)"
-                  accept="image/*,.pdf,.ai,.cdr"
-                  onFileSelect={() => {}}
+                  maxSizeMB={50}
+                  allowedExtensions={[
+                    '.jpg',
+                    '.jpeg',
+                    '.png',
+                    '.webp',
+                    '.pdf',
+                    '.zip',
+                    '.dwg',
+                    '.dxf',
+                    '.ai',
+                    '.eps',
+                    '.psd',
+                    '.cdr',
+                    '.doc',
+                    '.docx',
+                    '.txt',
+                  ]}
+                  selectedFile={selectedFile}
+                  fileBase64={fileBase64}
+                  fileError={fileError}
+                  onFileSelect={(file, base64, error) => {
+                    setSelectedFile(file);
+                    setFileBase64(base64);
+                    setFileError(error);
+                  }}
+                  accept="image/*,application/pdf,application/zip,application/x-zip-compressed,application/octet-stream,text/plain,.dwg,.dxf,.ai,.eps,.psd,.cdr,.doc,.docx"
+                  helperText="Max file size: 50MB (Images, PDFs, ZIPs, CAD/Design drawings)"
                 />
 
                 <div className={styles.consentRow}>
@@ -281,6 +383,23 @@ export const Contact: React.FC = () => {
                   <span style={{ color: 'var(--color-error)', fontSize: '11.5px' }}>
                     {errors.consent}
                   </span>
+                )}
+
+                {submitError && (
+                  <div
+                    style={{
+                      padding: '12px 16px',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                      borderRadius: '8px',
+                      color: '#f87171',
+                      fontSize: '13px',
+                      lineHeight: '1.5',
+                    }}
+                    role="alert"
+                  >
+                    {submitError}
+                  </div>
                 )}
 
                 <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>

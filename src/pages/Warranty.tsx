@@ -9,6 +9,7 @@ import Input from '../components/ui/Input';
 import FileUpload from '../components/ui/FileUpload';
 import ContactCTA from '../components/sections/ContactCTA';
 import { trackWarrantyFormSubmit } from '../lib/analytics';
+import { captureError } from '../lib/telemetry';
 import styles from './Warranty.module.css';
 
 interface FormFields {
@@ -81,6 +82,12 @@ export const Warranty: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // File Upload State
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileBase64, setFileBase64] = useState<string | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -101,6 +108,7 @@ export const Warranty: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
     const validationErrors = validateForm(formState);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -109,17 +117,57 @@ export const Warranty: React.FC = () => {
 
     setIsSubmitting(true);
     try {
-      trackWarrantyFormSubmit({
-        signageType: formState.signageType,
-        hasAttachment: false,
+      const response = await fetch('/api/warranty', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          customerName: formState.customerName,
+          email: formState.email,
+          phone: formState.phone,
+          invoiceNumber: formState.invoiceNumber,
+          warrantyNumber: formState.warrantyNumber,
+          purchaseDate: formState.purchaseDate,
+          signageType: formState.signageType,
+          issueDetails: formState.issueDetails,
+          consentGiven: formState.consent,
+          consentTimestamp: new Date().toISOString(),
+          imageFileName: selectedFile?.name || undefined,
+          imageContent: fileBase64 || undefined,
+        }),
       });
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        if (errorData.errors) {
+          const clientErrors: FormErrors = {};
+          Object.keys(errorData.errors).forEach((key) => {
+            const clientKey = key === 'consentGiven' ? 'consent' : (key as keyof FormFields);
+            clientErrors[clientKey] = errorData.errors[key];
+          });
+          setErrors(clientErrors);
+          const errorList = Object.values(clientErrors).filter(Boolean).join(' ');
+          throw new Error(errorList || 'Please correct the validation errors below.');
+        }
+        throw new Error(errorData.error || errorData.message || 'Failed to submit warranty claim.');
+      }
+
       setIsSuccess(true);
       setFormState(EMPTY_FORM);
-    } catch {
-      setErrors({ customerName: 'Submission failed. Please call our direct helpline.' });
+      setSelectedFile(null);
+      setFileBase64(null);
+      setFileError(null);
+      setErrors({});
+      trackWarrantyFormSubmit({
+        signageType: formState.signageType,
+        hasAttachment: !!selectedFile,
+      });
+    } catch (error: any) {
+      captureError(error, { context: 'WarrantyForm' });
+      setSubmitError(
+        error.message || 'Submission failed. Please call our direct helpline at +91 97271 36137.',
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -269,9 +317,20 @@ export const Warranty: React.FC = () => {
                 />
 
                 <FileUpload
+                  id="warrantyAttachment"
                   label="Upload Photos of Signboard / Issue (Optional)"
-                  accept="image/*,.pdf"
-                  onFileSelect={() => {}}
+                  maxSizeMB={4}
+                  allowedExtensions={['.jpg', '.jpeg', '.png', '.webp', '.svg']}
+                  selectedFile={selectedFile}
+                  fileBase64={fileBase64}
+                  fileError={fileError}
+                  onFileSelect={(file, base64, error) => {
+                    setSelectedFile(file);
+                    setFileBase64(base64);
+                    setFileError(error);
+                  }}
+                  accept="image/*"
+                  helperText="Max file size: 4MB (JPG, PNG, WebP, SVG photos)"
                 />
 
                 <div className={styles.consentRow}>
@@ -293,8 +352,25 @@ export const Warranty: React.FC = () => {
                   </span>
                 )}
 
+                {submitError && (
+                  <div
+                    style={{
+                      padding: '12px 16px',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                      borderRadius: '8px',
+                      color: '#f87171',
+                      fontSize: '13px',
+                      lineHeight: '1.5',
+                    }}
+                    role="alert"
+                  >
+                    {submitError}
+                  </div>
+                )}
+
                 <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
-                  {isSubmitting ? 'Verifying Certificate...' : 'Submit Warranty Claim →'}
+                  {isSubmitting ? 'Submitting Claim...' : 'Submit Warranty Claim →'}
                 </button>
               </form>
             )}

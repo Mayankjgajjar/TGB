@@ -149,12 +149,12 @@ export default async function handler(req: any, res: any) {
     const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
     const toEmail = process.env.RESEND_TO_EMAIL || 'tgbsign@proton.me';
 
-    await Promise.all([
+    const [businessEmailResult, customerEmailResult] = await Promise.all([
       // Notification to business
       resend.emails.send({
         from: `${fromName} <${fromEmail}>`,
         to: toEmail,
-        subject: 'New Website Inquiry',
+        subject: `New Website Inquiry - ${safeFirstName} ${safeLastName}`,
         attachments,
         html: `
           <h2>New Contact Form Submission</h2>
@@ -190,12 +190,25 @@ export default async function handler(req: any, res: any) {
       }),
     ]);
 
-    return res.status(200).json({ success: true });
+    if (businessEmailResult.error) {
+      console.error('[contact] Business Resend API error:', businessEmailResult.error);
+      return res.status(502).json({
+        success: false,
+        error: businessEmailResult.error.message || 'Failed to deliver notification email via Resend.',
+      });
+    }
+
+    if (customerEmailResult.error) {
+      console.warn('[contact] Customer auto-reply error (non-fatal):', customerEmailResult.error);
+    }
+
+    return res.status(200).json({ success: true, data: businessEmailResult.data });
   } catch (error: any) {
-    console.error('[contact] Resend error:', error);
+    console.error('[contact] Resend exception:', error);
     return res.status(500).json({
       success: false,
       error:
+        error?.message ||
         'An internal server error occurred while sending your message. Please try again later.',
     });
   }

@@ -125,10 +125,10 @@ export default async function handler(req: any, res: any) {
     const fromName = process.env.RESEND_FROM_NAME || 'TGB Sign';
     const toEmail = process.env.RESEND_TO_EMAIL || 'tgbsign@proton.me';
 
-    await resend.emails.send({
+    const sendResult = await resend.emails.send({
       from: `${fromName} <${fromEmail}>`,
       to: toEmail,
-      subject: 'New Warranty Claim Submission',
+      subject: `New Warranty Claim Submission - ${safeWarrantyNumber}`,
       attachments,
       html: `
         <h2>New Warranty Claim Submission</h2>
@@ -147,12 +147,21 @@ export default async function handler(req: any, res: any) {
       `,
     });
 
-    return res.status(200).json({ success: true });
+    if (sendResult.error) {
+      console.error('[warranty] Resend API error:', sendResult.error);
+      return res.status(502).json({
+        success: false,
+        error: sendResult.error.message || 'Failed to dispatch email via Resend.',
+      });
+    }
+
+    return res.status(200).json({ success: true, data: sendResult.data });
   } catch (error: any) {
-    console.error('[warranty] Resend error:', error);
+    console.error('[warranty] Resend exception:', error);
     return res.status(500).json({
       success: false,
       error:
+        error?.message ||
         'An internal server error occurred while submitting your claim. Please try again later.',
     });
   }
