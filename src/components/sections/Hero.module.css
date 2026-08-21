@@ -51,32 +51,6 @@
   max-width: 660px;
 }
 
-/* Location badge */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--color-red-muted);
-  border: 1px solid var(--color-red-border);
-  color: var(--color-red);
-  font-family: var(--font-technical);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 4px;
-  margin-bottom: var(--space-24);
-}
-
-.eyebrowDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-red);
-  flex-shrink: 0;
-}
-
 /* Large, confident headline */
 .headline {
   font-family: var(--font-display);

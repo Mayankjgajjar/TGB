@@ -37,23 +37,12 @@ export const Hero: React.FC = () => {
 
       <Container>
         <div className={styles.contentWrapper}>
-          {/* Location Badge */}
-          <motion.div
-            className={styles.eyebrow}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <span className={styles.eyebrowDot} />
-            Direct Factory · Nikol, Ahmedabad · Pan-India Delivery
-          </motion.div>
-
           {/* Headline — larger, more confident */}
           <motion.h1
             className={styles.headline}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 }}
+            transition={{ duration: 0.55 }}
           >
             Sign Board Makers
             <br />
