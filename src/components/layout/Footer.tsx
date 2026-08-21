@@ -171,7 +171,7 @@ export const Footer: React.FC = () => {
               <p className={`${styles.contactText} ${styles.contactItalic}`}>
                 Proudly serving Ahmedabad and businesses across Gujarat and India.
               </p>
-              <button onClick={openModal} className={styles.startProjectBtn}>
+              <button onClick={() => openModal()} className={styles.startProjectBtn}>
                 REQUEST A CONSULTATION →
               </button>
             </div>
