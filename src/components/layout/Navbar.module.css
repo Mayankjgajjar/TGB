@@ -45,10 +45,7 @@
   transition: filter var(--transition-fast);
 }
 
-/* Light mode logo text adaptation: inverts white letters to black while preserving red brand mark */
-:global([data-theme='light']) .logoImage {
-  filter: invert(1) hue-rotate(180deg);
-}
+/* Light mode: logo uses separate SVG with dark letters — no filter needed */
 
 /* Center Desktop Navigation */
 .nav {

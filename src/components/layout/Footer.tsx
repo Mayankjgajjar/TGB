@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../ui/Container';
 import { useQuoteModal } from '../../context/QuoteContext';
+import { useTheme } from '../../context/ThemeContext';
 import { getEnvVar } from '../../lib/env';
 import styles from './Footer.module.css';
 
 export const Footer: React.FC = () => {
   const { openModal } = useQuoteModal();
+  const { theme } = useTheme();
 
   return (
     <footer className={styles.footer}>
@@ -16,7 +18,7 @@ export const Footer: React.FC = () => {
           <div className={styles.brandCol}>
             <div className={styles.brandLogoWrap}>
               <img
-                src="/assets/logos/tgb-logo.svg"
+                src={theme === 'light' ? '/assets/logos/tgb-logo-light.svg' : '/assets/logos/tgb-logo.svg'}
                 alt="TGB Enterprise - Premium Signage & Branding Solutions in Ahmedabad"
                 loading="lazy"
                 className={styles.brandLogoImg}

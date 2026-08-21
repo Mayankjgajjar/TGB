@@ -48,9 +48,7 @@
   transition: filter var(--transition-fast);
 }
 
-:global([data-theme='light']) .brandLogoImg {
-  filter: invert(1) hue-rotate(180deg);
-}
+/* Light mode: logo uses separate SVG with dark letters — no filter needed */
 
 .brandDesc {
   font-family: var(--font-primary);
