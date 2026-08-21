@@ -189,10 +189,57 @@
   gap: 24px;
 }
 
+.mapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.mapHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-bottom: none;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.mapLabel {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.openMapsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  text-decoration: none;
+  transition: gap var(--transition-fast);
+}
+
+.openMapsLink:hover {
+  gap: 8px;
+}
+
 .mapBox {
   width: 100%;
-  height: 220px;
-  border-radius: var(--radius-card);
+  height: 260px;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
   overflow: hidden;
   border: 1px solid var(--color-border-subtle);
   box-shadow: var(--shadow-subtle);
@@ -266,14 +313,30 @@
 }
 
 .infoLink {
-  color: var(--color-text-primary);
+  color: var(--color-red);
   text-decoration: none;
   font-weight: 600;
+  font-size: 14px;
   transition: color var(--transition-fast);
 }
 
 .infoLink:hover {
+  color: var(--color-red-hover);
+  text-decoration: underline;
+}
+
+.infoAddressLink {
+  font-size: 14px;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.infoAddressLink:hover {
   color: var(--color-red);
+  text-decoration: underline;
 }
 
 .directWhatsappBanner {

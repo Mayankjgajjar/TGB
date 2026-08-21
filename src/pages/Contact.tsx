@@ -439,14 +439,30 @@ export const Contact: React.FC = () => {
               </div>
 
               {/* Map Container */}
-              <div className={styles.mapBox}>
-                <iframe
-                  title="TGB Enterprise Nikol Workshop Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.189725895744!2d72.67566167603816!3d23.045839215162453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e87189a6bfa9f%3A0x6a0c0a87679ebecb!2sShukan%20Shopping%20Center!5e0!3m2!1sen!2sin!4v1709900000000!5m2!1sen!2sin"
-                  className={styles.mapIframe}
-                  loading="lazy"
-                  allowFullScreen
-                />
+              <div className={styles.mapSection}>
+                <div className={styles.mapHeader}>
+                  <span className={styles.mapLabel}>Visit Our Studio</span>
+                  <a
+                    href="https://www.google.com/maps/place/Shukan+Shopping+Center/@23.0458392,72.6756617,17z"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.openMapsLink}
+                  >
+                    Open in Maps
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M10 2L2 10M10 2H5M10 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
+                <div className={styles.mapBox}>
+                  <iframe
+                    title="TGB Enterprise Nikol Workshop Map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.189725895744!2d72.67566167603816!3d23.045839215162453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e87189a6bfa9f%3A0x6a0c0a87679ebecb!2sShukan%20Shopping%20Center!5e0!3m2!1sen!2sin!4v1709900000000!5m2!1sen!2sin"
+                    className={styles.mapIframe}
+                    loading="lazy"
+                    allowFullScreen
+                  />
+                </div>
               </div>
 
               {/* Contact Details Box */}
@@ -457,10 +473,15 @@ export const Contact: React.FC = () => {
                   </div>
                   <div className={styles.infoBody}>
                     <span className={styles.infoLabel}>Workshop &amp; Office</span>
-                    <span className={styles.infoValue}>
+                    <a
+                      href="https://www.google.com/maps/place/Shukan+Shopping+Center/@23.0458392,72.6756617,17z"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.infoAddressLink}
+                    >
                       Shop No. 7/1, 1st Floor, Shukan Shopping Centre, opp. Chanakya School, Sukan
                       Cross Rd, Nikol, Ahmedabad, Gujarat 382345
-                    </span>
+                    </a>
                   </div>
                 </div>
 
