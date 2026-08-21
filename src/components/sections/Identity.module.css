@@ -520,8 +520,8 @@
 /* Individual service card */
 .serviceCard {
   position: relative;
-  background: var(--color-black); /* Level 2 Solid */
-  border: 1px solid rgb(255 255 255 / 8%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
   padding: 28px 24px 24px;
   display: flex;
@@ -534,8 +534,8 @@
 
 .serviceCard:hover {
   transform: scale(1.005);
-  border-color: rgb(255 255 255 / 20%); /* Subtle highlight */
-  background: #111; /* Level 3 Solid */
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-card-hover);
   box-shadow: var(--shadow-elevated);
 }
 
@@ -547,9 +547,9 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sharp);
-  background-color: rgb(255 255 255 / 4%);
-  border: 1px solid rgb(255 255 255 / 8%);
-  color: rgb(244 241 234 / 38%);
+  background-color: var(--color-bg-inset);
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
   transition:
     background-color 320ms var(--transition-ease-expo),
     border-color 320ms var(--transition-ease-expo),
@@ -559,9 +559,9 @@
 
 /* Icon box syncs with card border on hover */
 .serviceCard:hover .serviceIcon {
-  background-color: rgb(255 255 255 / 6%);
-  border-color: rgb(255 255 255 / 35%); /* Pure white border */
-  color: var(--color-off-white); /* Pure white icon */
+  background-color: var(--color-bg-card-hover);
+  border-color: var(--color-border-hover);
+  color: var(--color-text-primary);
 }
 
 /* Service number (top-right corner) */
@@ -641,8 +641,8 @@
 /* Individual Feature Card */
 .featureCard {
   position: relative;
-  background: var(--color-black); /* Level 2 Solid */
-  border: 1px solid rgb(255 255 255 / 8%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
   padding: 32px 24px;
   display: flex;
@@ -656,8 +656,8 @@
 }
 
 .featureCard:hover {
-  border-color: rgb(255 255 255 / 20%); /* Subtle highlight */
-  background: #111; /* Level 3 Solid */
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-card-hover);
   box-shadow: var(--shadow-elevated);
 }
 
@@ -919,16 +919,18 @@
 
 /* ---- Base card — separated, rounded ---- */
 .standardCard {
-  background-color: #0d0d0d;
-  border: 1px solid rgb(255 255 255 / 7%);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
   position: relative;
   padding: 32px 28px 28px;
   overflow: hidden;
+  box-shadow: var(--shadow-subtle);
   transition:
     transform 350ms var(--transition-ease-expo),
     border-color 350ms ease,
-    background-color 350ms ease;
+    background-color 350ms ease,
+    box-shadow 350ms ease;
   cursor: default;
   display: flex;
   flex-direction: column;
@@ -957,8 +959,9 @@
 
 .standardCard:hover {
   transform: translateY(-6px);
-  border-color: rgb(244 241 234 / 22%);
-  background-color: #111;
+  border-color: var(--color-border-hover);
+  background-color: var(--color-bg-card-hover);
+  box-shadow: var(--shadow-elevated);
 }
 
 /* Ghost number — each card positions it differently */

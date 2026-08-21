@@ -4,10 +4,15 @@
    ============================================================ */
 
 .section {
-  background: rgb(0 0 0 / 55%);
-  padding: 64px 0;
+  background-color: var(--color-bg-base);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 80px 0;
   position: relative;
   overflow: hidden;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .inner {
@@ -31,19 +36,17 @@
   font-weight: 600;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--color-copper);
+  color: var(--color-red);
   display: block;
 }
 
 .mainTitle {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 300;
-  color: var(--color-off-white);
+  font-weight: 800;
+  color: var(--color-text-primary);
   line-height: 1.15;
   margin: 0;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
   max-width: 800px;
   text-align: center;
 }
@@ -51,7 +54,7 @@
 .subtitle {
   font-family: var(--font-primary);
   font-size: 15px;
-  color: var(--color-off-white-muted);
+  color: var(--color-text-secondary);
   line-height: 1.65;
   margin: 0 auto;
   max-width: 800px;
@@ -65,7 +68,7 @@
   font-family: var(--font-primary);
   font-size: 15px;
   line-height: 1.75;
-  color: rgb(255 255 255 / 65%);
+  color: var(--color-text-secondary);
 }
 
 /* ── Card Grid — 5 columns ── */
@@ -79,14 +82,15 @@
 /* ── Individual Card ── */
 .card {
   position: relative;
-  background: var(--color-black);
-  border: 1px solid rgb(255 255 255 / 8%);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   cursor: default;
+  box-shadow: var(--shadow-subtle);
   transition:
     border-color 400ms var(--transition-ease-expo),
     background-color 400ms var(--transition-ease-expo),
@@ -94,21 +98,22 @@
 }
 
 .card:hover {
-  border-color: rgb(255 255 255 / 20%);
-  background: #111;
+  border-color: var(--color-border-hover);
+  background: var(--color-bg-card-hover);
   box-shadow: var(--shadow-elevated);
 }
 
 /* ── Icon ── */
 .cardIconWrapper {
   margin-bottom: 20px;
-  color: var(--color-off-white);
-  opacity: 0.5;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
   transition: opacity 400ms var(--transition-ease-expo);
 }
 
 .card:hover .cardIconWrapper {
   opacity: 1;
+  color: var(--color-red);
 }
 
 .cardIcon {
@@ -123,7 +128,7 @@
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-copper);
+  color: var(--color-red);
   margin-bottom: 4px;
   display: block;
 }
@@ -134,7 +139,7 @@
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: rgb(255 255 255 / 35%);
+  color: var(--color-text-muted);
   margin-bottom: 12px;
   display: block;
 }

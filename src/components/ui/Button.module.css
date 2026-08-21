@@ -77,13 +77,13 @@
 }
 
 .variantSecondary {
-  background-color: rgb(255 255 255 / 4%);
-  color: #fff;
+  background-color: var(--color-bg-inset);
+  color: var(--color-text-primary);
   border: 1px solid var(--color-border-subtle);
 }
 
 .variantSecondary:hover {
-  background-color: rgb(255 255 255 / 8%);
+  background-color: var(--color-bg-card-hover);
   border-color: var(--color-border-hover);
   transform: translateY(-1.5px);
 }
@@ -97,7 +97,7 @@
 }
 
 .variantTechnical:hover {
-  color: #fff;
+  color: var(--color-text-primary);
   border-color: var(--color-border-hover);
   background-color: var(--color-bg-card-hover);
   transform: translateY(-1.5px);

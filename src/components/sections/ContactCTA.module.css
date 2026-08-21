@@ -1,8 +1,11 @@
 .section {
   position: relative;
-  background-color: #0d0d0d;
+  background-color: var(--color-bg-base);
   padding: 80px 0;
-  border-top: 1px solid #222;
+  border-top: 1px solid var(--color-border-subtle);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .container {
@@ -26,7 +29,7 @@
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 800;
-  color: #fff;
+  color: var(--color-text-primary);
   line-height: 1.15;
   margin: 0;
   text-align: center;
@@ -35,7 +38,7 @@
 .subheading {
   font-family: var(--font-primary);
   font-size: 15px;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
   line-height: 1.6;
   margin: 0 auto;
   max-width: 760px;
@@ -53,15 +56,19 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: #141414;
-  border: 1px solid #242424;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 10px;
   padding: 32px;
+  box-shadow: var(--shadow-subtle);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .formIntro {
   font-size: 14px;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
   line-height: 1.5;
 }
 
@@ -89,21 +96,24 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
 }
 
 .textInput,
 .textareaInput,
 .selectInput {
-  background-color: #1a1a1a;
-  border: 1px solid #282828;
+  background-color: var(--color-bg-inset);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 6px;
-  color: #fff;
+  color: var(--color-text-primary);
   padding: 12px 14px;
   font-family: var(--font-primary);
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color var(--transition-fast),
+    color var(--transition-fast);
   width: 100%;
   box-sizing: border-box;
 }
@@ -128,7 +138,7 @@
 .selectWrapper::after {
   content: '▼';
   font-size: 9px;
-  color: #888;
+  color: var(--color-text-muted);
   position: absolute;
   right: 14px;
   top: 50%;
@@ -192,11 +202,11 @@
   gap: 8px;
   margin-top: 8px;
   font-size: 13px;
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .phoneLink {
-  color: #fff;
+  color: var(--color-text-primary);
   text-decoration: none;
   font-weight: 700;
 }
@@ -207,8 +217,8 @@
 
 /* Success Message */
 .successMessage {
-  background-color: #141414;
-  border: 1px solid #242424;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
   border-radius: 10px;
   padding: 40px;
   text-align: center;
@@ -222,19 +232,19 @@
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .successDesc {
   font-size: 14px;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
   line-height: 1.6;
 }
 
 .resetButton {
   background: transparent;
-  border: 1px solid #444;
-  color: #fff;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
   padding: 8px 20px;
   border-radius: 6px;
   font-size: 13px;
@@ -252,13 +262,13 @@
   font-family: var(--font-display);
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   margin: 0 0 8px;
 }
 
 .studioSubtitle {
   font-size: 14px;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
   line-height: 1.5;
   margin: 0;
 }
@@ -269,7 +279,7 @@
   height: 220px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #282828;
+  border: 1px solid var(--color-border-subtle);
 }
 
 .mapIframe {
@@ -314,23 +324,23 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #888;
+  color: var(--color-text-muted);
   margin-bottom: 2px;
 }
 
 .infoValue {
   font-size: 14px;
-  color: #fff;
+  color: var(--color-text-primary);
   font-weight: 500;
 }
 
 .infoSubValue {
   font-size: 13px;
-  color: #888;
+  color: var(--color-text-muted);
 }
 
 .infoLink {
-  color: #fff;
+  color: var(--color-text-primary);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -354,7 +364,7 @@
 
 .checkboxLabel {
   font-size: 13px;
-  color: #a0a0a0;
+  color: var(--color-text-secondary);
   line-height: 1.4;
 }
 
