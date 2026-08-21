@@ -123,8 +123,7 @@
 /* ── Statistics Strip — horizontal ── */
 .statsStrip {
   background-color: var(--color-bg-inset);
-  padding: 40px 0;
-  border-top: 1px solid var(--color-border-subtle);
+  padding: 36px 0;
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
     background-color var(--transition-fast),
@@ -231,7 +230,7 @@
 
 /* ── Core Values — numbered list (spec sheet style) ── */
 .valuesSection {
-  padding: 72px 0;
+  padding: 64px 0;
   background-color: var(--color-bg-elevated);
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
@@ -368,7 +367,7 @@
 
 /* ── Manufacturing Process ── */
 .processSection {
-  padding: 72px 0;
+  padding: 64px 0;
   border-bottom: 1px solid var(--color-border-subtle);
   background-color: var(--color-bg-base);
   transition:

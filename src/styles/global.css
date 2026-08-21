@@ -28,31 +28,31 @@ h6 {
 h1,
 h2 {
   font-family: var(--font-display);
-  font-weight: 700; /* Bold/confident display headlines */
-  line-height: var(--line-height-tight);
-  letter-spacing: -0.015em;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 h3 {
   font-family: var(--font-display);
-  font-weight: 500; /* Medium for secondary titles */
-  line-height: var(--line-height-snug);
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 h4 {
-  font-family: var(--font-primary);
-  font-weight: 500; /* Medium body subheaders */
-  line-height: var(--line-height-snug);
-  letter-spacing: 0.2px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 h5,
 h6 {
   font-family: var(--font-primary);
   font-weight: 600;
-  line-height: var(--line-height-snug);
-  letter-spacing: 0.5px;
+  line-height: 1.3;
+  letter-spacing: 0;
 }
 
 p {
@@ -131,32 +131,12 @@ html.lenis body {
   line-height: var(--line-height-tight);
 }
 
-/* Fixed Header Scroll Offset (ensures text doesn't load behind header) */
+/* Fixed Header Scroll Offset — matches actual 72px navbar height + 8px breathing */
 section[id],
 [id='about'],
 [id='services-overview'],
 [id='home'] {
-  scroll-margin-top: 130px; /* Floating navbar height + safety margin + breathing space */
-}
-
-/* ============================================================
-   SECTION HEADER COMPOSITION UTILITY
-   Minimal — eyebrow is handled by SectionEyebrow component
-   ============================================================ */
-
-/* ── Shared Page Layout (top padding for floating navbar clearance) ── */
-.page {
-  padding-top: var(--header-offset-desktop);
-  padding-bottom: 96px;
-  min-height: 80vh;
-  box-sizing: border-box;
-}
-
-@media (width <= 900px) {
-  .page {
-    padding-top: var(--header-offset-mobile);
-    padding-bottom: 64px;
-  }
+  scroll-margin-top: 80px;
 }
 
 /* ── Scrollbar Styling ── */

@@ -1,5 +1,5 @@
 .section {
-  padding: 64px 0;
+  padding: 72px 0;
   background-color: var(--color-bg-elevated);
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
@@ -8,7 +8,7 @@
 }
 
 .header {
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .title {
