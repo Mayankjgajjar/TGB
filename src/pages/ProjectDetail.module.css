@@ -1,6 +1,6 @@
 .page {
-  padding-top: 130px;
-  padding-bottom: 96px;
+  padding-top: 96px;
+  padding-bottom: 64px;
   min-height: 80vh;
   box-sizing: border-box;
   background: var(--color-bg-base);
@@ -16,7 +16,7 @@
   font-weight: 700;
   color: var(--color-text-secondary);
   text-decoration: none;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   transition: color var(--transition-fast);
   text-transform: uppercase;
   letter-spacing: 0.05em;

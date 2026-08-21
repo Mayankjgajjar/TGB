@@ -5,8 +5,8 @@
 }
 
 .heroSection {
-  padding-top: 130px;
-  padding-bottom: 40px;
+  padding-top: 96px;
+  padding-bottom: 32px;
   background-color: var(--color-bg-elevated);
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
@@ -16,7 +16,7 @@
 
 .heroContent {
   max-width: 820px;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 
 .heroTitle {
@@ -24,7 +24,7 @@
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 800;
   color: var(--color-text-primary);
-  margin: 12px 0 16px;
+  margin: 10px 0 14px;
   line-height: 1.15;
 }
 
@@ -38,10 +38,10 @@
 
 /* Filter & Search Bar */
 .filterBarWrapper {
-  margin-top: 32px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .searchBox {

@@ -110,8 +110,8 @@
   --container-padding-mobile: 20px;
   --header-height: 72px;
   --header-height-mobile: 64px;
-  --header-offset-desktop: 130px;
-  --header-offset-mobile: 100px;
+  --header-offset-desktop: 96px;
+  --header-offset-mobile: 80px;
 
   /* ── 5. Border Radius System ── */
   --radius-small: 4px;

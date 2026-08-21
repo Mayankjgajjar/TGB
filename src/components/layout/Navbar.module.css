@@ -66,6 +66,7 @@
 }
 
 .navLink {
+  position: relative;
   font-family: var(--font-primary);
   font-size: 14px;
   font-weight: 500;

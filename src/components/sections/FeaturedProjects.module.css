@@ -1,7 +1,6 @@
 .section {
   padding: 80px 0;
   background-color: var(--color-bg-base);
-  border-top: 1px solid var(--color-border-subtle);
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
     background-color var(--transition-fast),

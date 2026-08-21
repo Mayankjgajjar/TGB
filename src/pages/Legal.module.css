@@ -1,6 +1,6 @@
 .legalPage {
-  padding-top: 130px;
-  padding-bottom: 80px;
+  padding-top: 96px;
+  padding-bottom: 64px;
   min-height: 80vh;
   box-sizing: border-box;
   background-color: var(--color-bg-base);
@@ -16,7 +16,7 @@
   font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 800;
   color: var(--color-text-primary);
-  margin: 12px 0 16px;
+  margin: 10px 0 14px;
   line-height: 1.15;
 }
 

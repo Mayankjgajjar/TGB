@@ -1,17 +1,11 @@
 .page {
-  padding-top: var(--header-offset-desktop);
   min-height: 80vh;
-}
-
-@media (width <= 900px) {
-  .page {
-    padding-top: var(--header-offset-mobile);
-  }
+  background-color: var(--color-bg-base);
 }
 
 /* ── Hero Section ── */
 .heroSection {
-  padding: 64px 0 56px;
+  padding: 96px 0 36px;
   border-bottom: 1px solid var(--color-border-subtle);
   background-color: var(--color-bg-base);
   transition:
@@ -23,8 +17,8 @@
   max-width: 720px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 14px;
 }
 
 .heroTitle {
@@ -48,7 +42,7 @@
 
 /* ── Shared Section Wrapper ── */
 .section {
-  padding: 72px 0;
+  padding: 64px 0;
   border-bottom: 1px solid var(--color-border-subtle);
   transition:
     background-color var(--transition-fast),
@@ -57,10 +51,10 @@
 
 .sectionHeader {
   max-width: 680px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .sectionTitle {
@@ -84,7 +78,7 @@
 .storyGrid {
   display: grid;
   grid-template-columns: 45fr 55fr;
-  gap: 56px;
+  gap: 40px;
   align-items: start;
 }
 
