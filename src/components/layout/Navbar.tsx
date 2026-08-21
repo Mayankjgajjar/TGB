@@ -91,7 +91,11 @@ export const Navbar: React.FC = () => {
           {/* Brand Logo */}
           <NavLink to="/" className={styles.logoLink} onClick={handleMobileClose}>
             <img
-              src={theme === 'light' ? '/assets/logos/tgb-logo-light.svg' : '/assets/logos/tgb-logo.svg'}
+              src={
+                theme === 'light'
+                  ? '/assets/logos/tgb-logo-light.svg'
+                  : '/assets/logos/tgb-logo.svg'
+              }
               alt="TGB Enterprise - Sign Board Manufacturer"
               className={styles.logoImage}
             />

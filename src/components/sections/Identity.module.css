@@ -308,8 +308,12 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .clientItem {
@@ -914,10 +918,22 @@
   opacity: 0.5;
 }
 
-.standardCard:nth-child(1) .cardBgNumber { bottom: -10px; right: 12px; }
-.standardCard:nth-child(2) .cardBgNumber { bottom: -10px; left: 12px; }
-.standardCard:nth-child(3) .cardBgNumber { top: -8px; right: 12px; }
-.standardCard:nth-child(4) .cardBgNumber { top: -8px; left: 12px; }
+.standardCard:nth-child(1) .cardBgNumber {
+  bottom: -10px;
+  right: 12px;
+}
+.standardCard:nth-child(2) .cardBgNumber {
+  bottom: -10px;
+  left: 12px;
+}
+.standardCard:nth-child(3) .cardBgNumber {
+  top: -8px;
+  right: 12px;
+}
+.standardCard:nth-child(4) .cardBgNumber {
+  top: -8px;
+  left: 12px;
+}
 
 .standardCard:hover .cardBgNumber {
   opacity: 0.8;

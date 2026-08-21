@@ -18,7 +18,11 @@ export const Footer: React.FC = () => {
           <div className={styles.brandCol}>
             <div className={styles.brandLogoWrap}>
               <img
-                src={theme === 'light' ? '/assets/logos/tgb-logo-light.svg' : '/assets/logos/tgb-logo.svg'}
+                src={
+                  theme === 'light'
+                    ? '/assets/logos/tgb-logo-light.svg'
+                    : '/assets/logos/tgb-logo.svg'
+                }
                 alt="TGB Enterprise - Premium Signage & Branding Solutions in Ahmedabad"
                 loading="lazy"
                 className={styles.brandLogoImg}

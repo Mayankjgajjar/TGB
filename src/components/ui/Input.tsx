@@ -86,7 +86,11 @@ export const Input = React.forwardRef<
         )}
 
         {hasError && (
-          <span id={fieldId ? `${fieldId}-error` : undefined} className={styles.fieldError} role="alert">
+          <span
+            id={fieldId ? `${fieldId}-error` : undefined}
+            className={styles.fieldError}
+            role="alert"
+          >
             {error}
           </span>
         )}
