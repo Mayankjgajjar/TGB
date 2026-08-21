@@ -223,6 +223,7 @@ export const Contact: React.FC = () => {
 
                 <div className={styles.formRow}>
                   <Input
+                    id="contact-firstName"
                     label="First Name"
                     name="firstName"
                     value={formState.firstName}
@@ -232,6 +233,7 @@ export const Contact: React.FC = () => {
                     required
                   />
                   <Input
+                    id="contact-lastName"
                     label="Last Name"
                     name="lastName"
                     value={formState.lastName}
@@ -244,6 +246,7 @@ export const Contact: React.FC = () => {
 
                 <div className={styles.formRow}>
                   <Input
+                    id="contact-phone"
                     label="Phone Number"
                     name="phone"
                     type="tel"
@@ -254,6 +257,7 @@ export const Contact: React.FC = () => {
                     required
                   />
                   <Input
+                    id="contact-email"
                     label="Business Email"
                     name="email"
                     type="email"
@@ -267,6 +271,7 @@ export const Contact: React.FC = () => {
 
                 <div className={styles.formRow}>
                   <Input
+                    id="contact-company"
                     label="Company / Brand Name"
                     name="company"
                     value={formState.company}
@@ -274,6 +279,7 @@ export const Contact: React.FC = () => {
                     placeholder="e.g. Acme Retail Pvt Ltd"
                   />
                   <Input
+                    id="contact-location"
                     label="Site / Installation City"
                     name="location"
                     value={formState.location}
@@ -283,9 +289,10 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <Input
+                  id="contact-signageType"
                   label="Signage Product Type"
                   name="signageType"
-                  type="select"
+                  as="select"
                   value={formState.signageType}
                   onChange={handleFieldChange('signageType')}
                   options={[
@@ -323,9 +330,11 @@ export const Contact: React.FC = () => {
                 />
 
                 <Input
+                  id="contact-message"
                   label="Project Requirements & Approximate Dimensions"
                   name="message"
-                  type="textarea"
+                  as="textarea"
+                  rows={4}
                   value={formState.message}
                   onChange={handleFieldChange('message')}
                   error={errors.message}

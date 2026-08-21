@@ -10,7 +10,7 @@ export interface InputProps extends React.InputHTMLAttributes<
   HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 > {
   label: string;
-  id: string;
+  id?: string;
   as?: 'input' | 'textarea' | 'select';
   error?: string;
   touched?: boolean;
@@ -26,7 +26,8 @@ export const Input = React.forwardRef<
     { label, id, as = 'input', error, touched, options, className = '', required, ...props },
     ref,
   ) => {
-    const hasError = !!(touched && error);
+    const fieldId = id || (props.name ? `field-${props.name}` : undefined);
+    const hasError = !!error;
 
     const getFieldClass = () => {
       let baseClass = styles.textInput;
@@ -40,28 +41,28 @@ export const Input = React.forwardRef<
 
     return (
       <div className={styles.inputGroup}>
-        <label htmlFor={id} className={styles.fieldLabel}>
+        <label htmlFor={fieldId} className={styles.fieldLabel}>
           {label} {required && '*'}
         </label>
 
         {as === 'textarea' ? (
           <textarea
-            id={id}
+            id={fieldId}
             ref={ref as React.Ref<HTMLTextAreaElement>}
             className={fieldClass}
             aria-invalid={hasError}
-            aria-describedby={hasError ? `${id}-error` : undefined}
+            aria-describedby={hasError && fieldId ? `${fieldId}-error` : undefined}
             required={required}
             {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
           />
         ) : as === 'select' ? (
           <div className={styles.selectWrapper}>
             <select
-              id={id}
+              id={fieldId}
               ref={ref as React.Ref<HTMLSelectElement>}
               className={fieldClass}
               aria-invalid={hasError}
-              aria-describedby={hasError ? `${id}-error` : undefined}
+              aria-describedby={hasError && fieldId ? `${fieldId}-error` : undefined}
               required={required}
               {...(props as React.SelectHTMLAttributes<HTMLSelectElement>)}
             >
@@ -74,18 +75,18 @@ export const Input = React.forwardRef<
           </div>
         ) : (
           <input
-            id={id}
+            id={fieldId}
             ref={ref as React.Ref<HTMLInputElement>}
             className={fieldClass}
             aria-invalid={hasError}
-            aria-describedby={hasError ? `${id}-error` : undefined}
+            aria-describedby={hasError && fieldId ? `${fieldId}-error` : undefined}
             required={required}
             {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
           />
         )}
 
         {hasError && (
-          <span id={`${id}-error`} className={styles.fieldError} role="alert">
+          <span id={fieldId ? `${fieldId}-error` : undefined} className={styles.fieldError} role="alert">
             {error}
           </span>
         )}

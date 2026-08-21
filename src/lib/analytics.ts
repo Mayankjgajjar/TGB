@@ -33,13 +33,13 @@ export function trackQuoteSubmit(serviceType?: string): void {
 }
 
 /** Fired when the Contact form is successfully submitted */
-export function trackContactFormSubmit(): void {
-  trackEvent('contact_form_submit');
+export function trackContactFormSubmit(params?: Record<string, unknown>): void {
+  trackEvent('contact_form_submit', params);
 }
 
 /** Fired when the Warranty claim form is successfully submitted */
-export function trackWarrantyFormSubmit(): void {
-  trackEvent('warranty_form_submit');
+export function trackWarrantyFormSubmit(params?: Record<string, unknown>): void {
+  trackEvent('warranty_form_submit', params);
 }
 
 /** Fired when the WhatsApp FAB is clicked */
