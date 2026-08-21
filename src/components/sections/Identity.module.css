@@ -311,6 +311,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -922,14 +923,17 @@
   bottom: -10px;
   right: 12px;
 }
+
 .standardCard:nth-child(2) .cardBgNumber {
   bottom: -10px;
   left: 12px;
 }
+
 .standardCard:nth-child(3) .cardBgNumber {
   top: -8px;
   right: 12px;
 }
+
 .standardCard:nth-child(4) .cardBgNumber {
   top: -8px;
   left: 12px;
